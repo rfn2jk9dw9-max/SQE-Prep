@@ -515,7 +515,7 @@ const QUESTION_BANK = [{"question_text": "An architect enters into a contract wi
 // ══════════════════════════════════════════════════════════
 const PROGRESS_API = 'https://bidouillecode.dev/solicitor/progress.php';
 
-async async function fetchSessions() {
+async function fetchSessions() {
   try {
     const r = await fetch(PROGRESS_API);
     if (r.ok) return await r.json();
