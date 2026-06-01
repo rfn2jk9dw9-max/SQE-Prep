@@ -535,12 +535,12 @@ async function saveSession(data) {
 
 function renderDashboard(sessions) {
   const loading = document.getElementById('dash-loading');
-  const cnt     = document.getElementById('dash-content');
+  const cnt = document.getElementById('dash-content');
   loading.style.display = 'none';
   cnt.style.display = 'block';
 
   if (!sessions || sessions.length === 0) {
-    cnt.innerHTML = '<div id="dash-empty">No sessions yet — complete your first exam to see scores here.</div>';
+    cnt.innerHTML = '<div id="dash-empty">No sessions yet.</div>';
     return;
   }
 
@@ -548,72 +548,77 @@ function renderDashboard(sessions) {
   const avg  = Math.round(sorted.reduce((s,x) => s + x.percentage, 0) / sorted.length);
   const best = Math.max(...sorted.map(x => x.percentage));
   const trend = sorted.length >= 2 ? sorted[0].percentage - sorted[1].percentage : null;
-  const trendStr = trend === null ? "" : (trend >= 0 ? " ▲"+trend+"%" : " ▼"+Math.abs(trend)+"%");
-  const trendCol = trend === null ? "" : trend >= 0 ? "color:#16a34a" : "color:#dc2626";
+  const trendStr = trend === null ? '' : (trend >= 0 ? ' ▲'+trend+'%' : ' ▼'+Math.abs(trend)+'%');
+  const trendCol = trend === null ? '' : trend >= 0 ? 'color:#16a34a' : 'color:#dc2626';
 
-  // ── Progress graph (SVG line chart) ──────────────────────
-  const chartSessions = [...sorted].reverse().slice(-10);
+  // SVG progress graph
+  const chartData = [...sorted].reverse().slice(-10);
   const W = 340, H = 80, pad = 10;
-  const pts = chartSessions.map((s,i) => {
-    const x = pad + (i / Math.max(chartSessions.length - 1, 1)) * (W - pad*2);
-    const y = H - pad - ((s.percentage / 100) * (H - pad*2));
-    return [x, y, s.percentage];
+  const pts = chartData.map((s,i) => {
+    const x = pad + (i / Math.max(chartData.length-1, 1)) * (W - pad*2);
+    const y = H - pad - (s.percentage/100) * (H - pad*2);
+    return {x, y, pct: s.percentage};
   });
-  const polyline = pts.map(p => p[0]+","+p[1]).join(" ");
-  const dots = pts.map(p => "<circle cx='"+p[0]+"' cy='"+p[1]+"' r='3' fill='#3b82f6' title='"+p[2]+"%'/>").join("");
-  const passY = H - pad - (0.6 * (H - pad*2));
-  const svgChart = "<svg viewBox='0 0 "+W+" "+H+"' style='width:100%;margin:8px 0 4px'>"+
-    "<line x1='"+pad+"' y1='"+passY+"' x2='"+(W-pad)+"' y2='"+passY+"' stroke='#ef4444' stroke-dasharray='4' stroke-width='1'/>"+
-    "<polyline points='"+polyline+"' fill='none' stroke='#3b82f6' stroke-width='2'/>"+
-    dots+"</svg>";
+  const polyline = pts.map(p => p.x+','+p.y).join(' ');
+  const passY = H - pad - 0.6*(H - pad*2);
+  let svg = '<svg viewBox="0 0 '+W+' '+H+'" style="width:100%;margin:8px 0 4px">';
+  svg += '<line x1="'+pad+'" y1="'+passY+'" x2="'+(W-pad)+'" y2="'+passY+'" stroke="#ef4444" stroke-dasharray="4" stroke-width="1"/>';
+  if (pts.length > 1) svg += '<polyline points="'+polyline+'" fill="none" stroke="#3b82f6" stroke-width="2"/>';
+  pts.forEach(p => { svg += '<circle cx="'+p.x+'" cy="'+p.y+'" r="3" fill="#3b82f6"/>'; });
+  svg += '</svg>';
 
-  // ── Session rows with delete + subject breakdown ──────────
-  const rows = sorted.map((s,i) => {
-    const d   = new Date(s.datetime);
-    const lbl = d.toLocaleDateString("en-GB",{day:"numeric",month:"short"}) + " " +
-                d.toLocaleTimeString("en-GB",{hour:"2-digit",minute:"2-digit"});
+  // Session rows
+  let rows = '';
+  sorted.forEach((s, i) => {
+    const d = new Date(s.datetime);
+    const lbl = d.toLocaleDateString('en-GB',{day:'numeric',month:'short'})+' '+d.toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'});
     const pass = s.percentage >= 60;
-    const rowId = "subj-"+i;
+    const rowId = 'subj-row-'+i;
 
-    // Per-subject breakdown
-    let subjHtml = "";
+    let subjHtml = '';
     if (s.subjects && Object.keys(s.subjects).length > 0) {
-      subjHtml = "<div id='"+rowId+"' style='display:none;padding:6px 8px 6px 16px;background:#f8fafc;border-top:1px solid #e2e8f0'>";
+      subjHtml = '<div id="'+rowId+'" style="display:none;padding:6px 12px;background:#f8fafc;border-top:1px solid #e2e8f0">';
       for (const [subj, data] of Object.entries(s.subjects)) {
-        const pct = data.total > 0 ? Math.round((data.correct / data.total) * 100) : 0;
-        const col = pct >= 60 ? "#16a34a" : "#dc2626";
-        subjHtml += "<div style='display:flex;justify-content:space-between;font-size:0.78rem;padding:2px 0'>"+
-          "<span>"+subj+"</span><span style='color:"+col+";font-weight:600'>"+data.correct+"/"+data.total+" ("+pct+"%)</span></div>";
+        const pct = data.total > 0 ? Math.round(data.correct/data.total*100) : 0;
+        const col = pct >= 60 ? '#16a34a' : '#dc2626';
+        subjHtml += '<div style="display:flex;justify-content:space-between;font-size:0.78rem;padding:2px 0"><span>'+subj+'</span><span style="color:'+col+';font-weight:600">'+data.correct+'/'+data.total+' ('+pct+'%)</span></div>';
       }
-      subjHtml += "</div>";
+      subjHtml += '</div>';
     }
 
-    return "<div class='dash-row' style='cursor:pointer;flex-wrap:wrap' onclick="document.getElementById('"+rowId+"')&&(document.getElementById('"+rowId+"').style.display=document.getElementById('"+rowId+"').style.display==='none'?'block':'none')">"+
-      "<span class='dash-date'>"+lbl+"</span>"+
-      "<span class='dash-paper "+s.paper+"'>"+s.paper+"</span>"+
-      "<div class='dash-bar-wrap'><div class='dash-bar-fill "+(pass?"":"low")+"' style='width:"+s.percentage+"%'></div></div>"+
-      "<span class='dash-pct "+(pass?"pass":"fail")+"'>"+s.percentage+"%</span>"+
-      "<button onclick="event.stopPropagation();deleteSession('"+s.datetime+"')" style='background:none;border:none;color:#94a3b8;cursor:pointer;font-size:0.85rem;padding:0 4px' title='Delete'>✕</button>"+
-      "</div>"+subjHtml;
-  }).join("");
+    rows += '<div class="dash-row" style="cursor:pointer;flex-wrap:wrap" data-rowid="'+rowId+'">'
+      +'<span class="dash-date">'+lbl+'</span>'
+      +'<span class="dash-paper '+s.paper+'">'+s.paper+'</span>'
+      +'<div class="dash-bar-wrap"><div class="dash-bar-fill '+(pass?'':'low')+'" style="width:'+s.percentage+'%"></div></div>'
+      +'<span class="dash-pct '+(pass?'pass':'fail')+'">'+s.percentage+'%</span>'
+      +'<button class="dash-del" data-dt="'+s.datetime+'" title="Delete">✕</button>'
+      +'</div>'+subjHtml;
+  });
 
-  cnt.innerHTML =
-    "<div class='dash-stats'>"+
-    "<div class='dash-stat'><div class='val'>"+sorted.length+"</div><div class='lbl'>Sessions</div></div>"+
-    "<div class='dash-stat'><div class='val'>"+avg+"%<span style='font-size:0.9rem;"+trendCol+"'>"+trendStr+"</span></div><div class='lbl'>Average</div></div>"+
-    "<div class='dash-stat'><div class='val'>"+best+"%</div><div class='lbl'>Best</div></div>"+
-    "</div>"+
-    svgChart+
-    "<div class='dash-hist'>"+rows+"</div>";
-}
+  cnt.innerHTML = '<div class="dash-stats">'
+    +'<div class="dash-stat"><div class="val">'+sorted.length+'</div><div class="lbl">Sessions</div></div>'
+    +'<div class="dash-stat"><div class="val">'+avg+'%<span style="font-size:0.9rem;'+trendCol+'">'+trendStr+'</span></div><div class="lbl">Average</div></div>'
+    +'<div class="dash-stat"><div class="val">'+best+'%</div><div class="lbl">Best</div></div>'
+    +'</div>'+svg+'<div class="dash-hist">'+rows+'</div>';
 
-async function deleteSession(dt) {
-  if (!confirm("Delete this session?")) return;
-  try {
-    await lsDeleteProgress(dt);
-    const sessions = await lsGetProgress();
-    renderDashboard(sessions);
-  } catch(e) { alert("Could not delete session."); }
+  // Attach event listeners after rendering
+  cnt.querySelectorAll('.dash-row').forEach(row => {
+    row.addEventListener('click', function(e) {
+      if (e.target.classList.contains('dash-del')) return;
+      const id = this.dataset.rowid;
+      const el = document.getElementById(id);
+      if (el) el.style.display = el.style.display === 'none' ? 'block' : 'none';
+    });
+  });
+  cnt.querySelectorAll('.dash-del').forEach(btn => {
+    btn.addEventListener('click', async function(e) {
+      e.stopPropagation();
+      if (!confirm('Delete this session?')) return;
+      await lsDeleteProgress(this.dataset.dt);
+      const sessions = await lsGetProgress();
+      renderDashboard(sessions);
+    });
+  });
 }
 // Load dashboard on page start
 fetchSessions().then(renderDashboard);
