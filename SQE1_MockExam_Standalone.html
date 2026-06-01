@@ -515,6 +515,19 @@ const QUESTION_BANK = [{"question_text": "An architect enters into a contract wi
 // ══════════════════════════════════════════════════════════
 const PROGRESS_API = 'https://bidouillecode.dev/solicitor/progress.php';
 
+async function lsGetProgress(){
+  try{const r=await fetch(PROGRESS_API);if(r.ok)return await r.json();}catch(e){}
+  try{return JSON.parse(localStorage.getItem('sqe1_progress_v1')||'[]');}catch(e){return[];}
+}
+async function lsSaveProgress(s){
+  try{await fetch(PROGRESS_API,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(s)});}catch(e){}
+  try{const a=JSON.parse(localStorage.getItem('sqe1_progress_v1')||'[]');a.push(s);localStorage.setItem('sqe1_progress_v1',JSON.stringify(a));}catch(e){}
+}
+async function lsDeleteProgress(dt){
+  try{await fetch(PROGRESS_API,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({delete_datetime:dt})});}catch(e){}
+  try{const a=JSON.parse(localStorage.getItem('sqe1_progress_v1')||'[]').filter(s=>s.datetime!==dt);localStorage.setItem('sqe1_progress_v1',JSON.stringify(a));}catch(e){}
+}
+
 async function fetchSessions() {
   try {
     const r = await fetch(PROGRESS_API);
