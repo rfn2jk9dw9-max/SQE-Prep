@@ -9,6 +9,7 @@ Usage: python3 update_site.py
 """
 
 import sys, os, json, subprocess, re
+from ftplib import FTP, all_errors as FTP_ERRORS
 from pathlib import Path
 
 SCRIPT_DIR  = Path('/Users/ghitab/Documents/Claude/Projects/Mission solicitor')
@@ -43,63 +44,38 @@ def main():
     print(f"\n[2/4] Rebuilding standalone HTML...")
     html = MOCK_SRC.read_text(encoding='utf-8')
 
-    SHIM = f"""// ── STANDALONE MODE ──────────────────────────────────────
-const EMBEDDED_QUESTIONS = {json.dumps(questions)};
-const PROGRESS_API = 'https://bidouillecode.dev/solicitor/progress.php';
-async function lsGetProgress(){{
-  try{{const r=await fetch(PROGRESS_API);if(r.ok)return await r.json();}}catch(e){{}}
-  try{{return JSON.parse(localStorage.getItem('sqe1_progress_v1')||'[]');}}catch(e){{return[];}}
-}}
-async function lsSaveProgress(s){{
-  try{{await fetch(PROGRESS_API,{{method:'POST',headers:{{'Content-Type':'application/json'}},body:JSON.stringify(s)}});}}catch(e){{}}
-  try{{const a=JSON.parse(localStorage.getItem('sqe1_progress_v1')||'[]');a.push(s);localStorage.setItem('sqe1_progress_v1',JSON.stringify(a));}}catch(e){{}}
-}}
-async function lsDeleteProgress(dt){{
-  try{{await fetch(PROGRESS_API,{{method:'POST',headers:{{'Content-Type':'application/json'}},body:JSON.stringify({{delete_datetime:dt}})}});}}catch(e){{}}
-  try{{const a=JSON.parse(localStorage.getItem('sqe1_progress_v1')||'[]').filter(s=>s.datetime!==dt);localStorage.setItem('sqe1_progress_v1',JSON.stringify(a));}}catch(e){{}}
-}}
-// ─────────────────────────────────────────────────────────
-"""
+    # Replace the embedded question bank directly (safe even if already updated)
+    qbank_js = json.dumps(questions, ensure_ascii=False).replace("</script>", "<\\/script>")
+    html, n = re.subn(
+        r'const QUESTION_BANK = \[.*?\];',
+        f'const QUESTION_BANK = {qbank_js};',
+        html,
+        count=1,
+        flags=re.DOTALL
+    )
+    if n:
+        print(f"  ✓ QUESTION_BANK replaced ({len(questions)} questions)")
+    else:
+        print(f"  ⚠ QUESTION_BANK pattern not found — standalone may already be current")
 
-    replacements = [
-        ("const API = 'http://127.0.0.1:4321';",
-         SHIM + "const API = 'http://127.0.0.1:4321'; // unused in standalone"),
-
-        ("const res = await fetch(`${API}/api/questions`);\n    if (!res.ok) throw new Error(`HTTP ${res.status}`);\n    const data = await res.json();\n    if (!Array.isArray(data) || data.length === 0)\n      throw new Error('Empty question bank returned');\n    QUESTION_BANK = data;",
-         "const data = EMBEDDED_QUESTIONS;\n    if (!Array.isArray(data) || data.length === 0)\n      throw new Error('Empty question bank returned');\n    QUESTION_BANK = data;"),
-
-        ("const pr = await fetch(`${API}/api/progress`);\n      if (pr.ok) SESSION_HISTORY = await pr.json();",
-         "SESSION_HISTORY = await lsGetProgress();"),
-
-        ("const res=await fetch(`${API}/api/progress`,{\n      method:'POST',headers:{'Content-Type':'application/json'},\n      body:JSON.stringify(result)\n    });\n    if (!res.ok) console.warn('Save progress HTTP',res.status);\n    else SESSION_HISTORY.push(result);  // keep in-memory history current for next session",
-         "await lsSaveProgress(result);\n    SESSION_HISTORY.push(result);"),
-
-        ("const res=await fetch(`${API}/api/progress`);\n    if (!res.ok) throw new Error(`HTTP ${res.status}`);\n    const sessions=await res.json();\n    renderDashboard(sessions);",
-         "const sessions=await lsGetProgress();\n    renderDashboard(sessions);"),
-
-        ("const res = await fetch(`${API}/api/progress/delete`, {\n      method: 'POST',\n      headers: {'Content-Type':'application/json'},\n      body: JSON.stringify({datetime: dt})\n    });\n    if (!res.ok) throw new Error('HTTP ' + res.status);",
-         "await lsDeleteProgress(dt);"),
-
-        ('<h2>Connecting to SQE1 Server…</h2>\n    <p>Parsing you',
-         '<h2>Loading questions…</h2>\n    <p>Setting you'),
-
-        ('Setting your question bank from the Tests folder.',
-         f'Preparing your {len(questions)} questions.'),
-
-        ('<h2>⚠ SQE1 Server Not Running</h2>\n    <p>The local SQE1 server is not running.<br>\n    Please open Cowork to restart it, then refresh this page.<br><br>\n    <small style="color:#999">Trying http://127.0.0.1:4321</small></p>',
-         '<h2>⚠ Could not load questions</h2>\n    <p>Please try refreshing the page.</p>'),
-    ]
-
-    ok = 0
-    for old, new in replacements:
-        if old in html:
-            html = html.replace(old, new, 1)
-            ok += 1
-        else:
-            print(f"  ⚠ Pattern not found (may already be replaced): {old[:50].strip()}")
+    # Ensure deleteSession is correctly async (guard against regression)
+    broken = (
+        'function deleteSession(dt) {\n  if (!confirm("Delete this session?")) return;\n  try {\n'
+        '    await lsDeleteProgress(dt);\n    const sessions = await lsGetProgress();\n    renderDashboard(sessions);\n'
+        '  } catch(e) { alert("Could not delete session."); }\n}'
+    )
+    fixed = (
+        'async function deleteSession(dt) {\n  if (!confirm("Delete this session?")) return;\n  try {\n'
+        '    await fetch(PROGRESS_API, {method:\'POST\',headers:{\'Content-Type\':\'application/json\'},body:JSON.stringify({delete_datetime:dt})});\n'
+        '    const sessions = await fetchSessions();\n    renderDashboard(sessions);\n'
+        '  } catch(e) { alert("Could not delete session."); }\n}'
+    )
+    if broken in html:
+        html = html.replace(broken, fixed, 1)
+        print(f"  ✓ deleteSession async regression fixed")
 
     STANDALONE.write_text(html, encoding='utf-8')
-    print(f"  ✓ Standalone HTML rebuilt ({len(html):,} chars, {ok}/{len(replacements)} replacements)")
+    print(f"  ✓ Standalone HTML written ({len(html):,} chars)")
 
     # ── 2b. Inject personal mistake notes into revision guide ─
     print(f"\n[2b/4] Injecting personal mistake notes into revision guide...")
@@ -120,6 +96,28 @@ async function lsDeleteProgress(dt){{
             print(f"  ⚠ Could not inject personal notes: {e}")
     else:
         print(f"  ⚠ SQE1_HighYield_Standalone.html not found")
+
+    # ── 2c. Upload progress.php to Hostinger via FTP ──────────
+    print(f"\n[2c/4] Uploading progress.php to Hostinger...")
+    php_file = SCRIPT_DIR / "progress.php"
+    if php_file.exists():
+        try:
+            ftp = FTP()
+            ftp.connect('82.112.243.57', 21, timeout=15)
+            ftp.login('u256011742.solicitor', '#Patience13#')
+            # Navigate to the solicitor subdirectory
+            try:
+                ftp.cwd('solicitor')
+            except Exception:
+                pass  # already there or doesn't exist
+            with open(php_file, 'rb') as f:
+                ftp.storbinary('STOR progress.php', f)
+            ftp.quit()
+            print(f"  ✓ progress.php uploaded to Hostinger")
+        except FTP_ERRORS as e:
+            print(f"  ⚠ FTP upload failed: {e}")
+    else:
+        print(f"  ⚠ progress.php not found")
 
     # ── 3. Stage & commit ─────────────────────────────────────
     print(f"\n[3/4] Committing to git...")

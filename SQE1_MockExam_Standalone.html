@@ -607,11 +607,11 @@ function renderDashboard(sessions) {
     "<div class='dash-hist'>"+rows+"</div>";
 }
 
-async function deleteSession(dt) {
+async async function deleteSession(dt) {
   if (!confirm("Delete this session?")) return;
   try {
-    await lsDeleteProgress(dt);
-    const sessions = await lsGetProgress();
+    await fetch(PROGRESS_API, {method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({delete_datetime:dt})});
+    const sessions = await fetchSessions();
     renderDashboard(sessions);
   } catch(e) { alert("Could not delete session."); }
 }
