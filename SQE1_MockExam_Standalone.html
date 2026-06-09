@@ -593,7 +593,7 @@ function renderDashboard(sessions) {
       "<span class='dash-paper "+s.paper+"'>"+s.paper+"</span>"+
       "<div class='dash-bar-wrap'><div class='dash-bar-fill "+(pass?"":"low")+"' style='width:"+s.percentage+"%'></div></div>"+
       "<span class='dash-pct "+(pass?"pass":"fail")+"'>"+s.percentage+"%</span>"+
-      "<button onclick="event.stopPropagation();deleteSession('"+s.datetime+"')" style='background:none;border:none;color:#94a3b8;cursor:pointer;font-size:0.85rem;padding:0 4px' title='Delete'>✕</button>"+
+      "<button onclick=\"event.stopPropagation();deleteSession('"+s.datetime+"')\" style='background:none;border:none;color:#94a3b8;cursor:pointer;font-size:0.85rem;padding:0 4px' title='Delete'>✕</button>"+
       "</div>"+subjHtml;
   }).join("");
 
