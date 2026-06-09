@@ -588,7 +588,7 @@ function renderDashboard(sessions) {
       subjHtml += "</div>";
     }
 
-    return "<div class='dash-row' style='cursor:pointer;flex-wrap:wrap' onclick="document.getElementById('"+rowId+"')&&(document.getElementById('"+rowId+"').style.display=document.getElementById('"+rowId+"').style.display==='none'?'block':'none')">"+
+    return "<div class='dash-row' style='cursor:pointer;flex-wrap:wrap' onclick=\"document.getElementById('"+rowId+"')&&(document.getElementById('"+rowId+"').style.display=document.getElementById('"+rowId+"').style.display==='none'?'block':'none')\">"+
       "<span class='dash-date'>"+lbl+"</span>"+
       "<span class='dash-paper "+s.paper+"'>"+s.paper+"</span>"+
       "<div class='dash-bar-wrap'><div class='dash-bar-fill "+(pass?"":"low")+"' style='width:"+s.percentage+"%'></div></div>"+
