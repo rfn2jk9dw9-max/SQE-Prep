@@ -12,10 +12,27 @@ import sys, os, json, subprocess, re
 from ftplib import FTP, all_errors as FTP_ERRORS
 from pathlib import Path
 
-SCRIPT_DIR  = Path('/Users/ghitab/Documents/Claude/Projects/Mission solicitor')
-TESTS_DIR   = Path.home() / "Library/Mobile Documents/com~apple~CloudDocs/GB LEX/Formation Solicitor/Tests"
-MOCK_SRC    = SCRIPT_DIR / "SQE1_MockExam.html"
-STANDALONE  = SCRIPT_DIR / "SQE1_MockExam_Standalone.html"
+# ── Path resolution ───────────────────────────────────────────
+# Supports running on the user's Mac OR inside the Cowork sandbox.
+# The sandbox mounts iCloud at a different path, so we probe both.
+_ICLOUD_CANDIDATES = [
+    Path.home() / "Library/Mobile Documents/com~apple~CloudDocs/GB LEX/Formation Solicitor/Tests",
+    Path("/sessions/inspiring-serene-euler/mnt/Formation Solicitor/Tests"),
+]
+
+_SCRIPT_CANDIDATES = [
+    Path('/Users/ghitab/Documents/Claude/Projects/Mission solicitor'),
+    Path('/sessions/inspiring-serene-euler/mnt/Mission solicitor'),
+]
+
+SCRIPT_DIR = next((p for p in _SCRIPT_CANDIDATES if p.exists()), _SCRIPT_CANDIDATES[0])
+TESTS_DIR  = next((p for p in _ICLOUD_CANDIDATES if p.exists()), _ICLOUD_CANDIDATES[0])
+
+# In sandbox, git operations always fail (lock-file permissions).
+IN_SANDBOX = str(Path.home()).startswith('/sessions/')
+
+MOCK_SRC   = SCRIPT_DIR / "SQE1_MockExam.html"
+STANDALONE = SCRIPT_DIR / "SQE1_MockExam_Standalone.html"
 
 def run(cmd, **kw):
     result = subprocess.run(cmd, shell=True, capture_output=True, text=True, **kw)
@@ -83,8 +100,7 @@ def main():
     if hy_standalone.exists():
         try:
             from extract_mistakes import get_personal_notes, inject_personal_notes
-            TESTS_DIR_PATH = Path.home() / "Library/Mobile Documents/com~apple~CloudDocs/GB LEX/Formation Solicitor/Tests"
-            by_chapter = get_personal_notes(TESTS_DIR_PATH, SCRIPT_DIR / "progress.json")
+            by_chapter = get_personal_notes(TESTS_DIR, SCRIPT_DIR / "progress.json")
             if by_chapter:
                 hy_html = hy_standalone.read_text(encoding='utf-8')
                 hy_html = inject_personal_notes(hy_html, by_chapter)
@@ -99,40 +115,56 @@ def main():
 
     # ── 2c. Upload progress.php to Hostinger via FTP ──────────
     print(f"\n[2c/4] Uploading progress.php to Hostinger...")
-    php_file = SCRIPT_DIR / "progress.php"
-    if php_file.exists():
-        try:
-            ftp = FTP()
-            ftp.connect('82.112.243.57', 21, timeout=15)
-            ftp.login('u256011742.solicitor', '#Patience13#')
-            # Navigate to the solicitor subdirectory
-            try:
-                ftp.cwd('solicitor')
-            except Exception:
-                pass  # already there or doesn't exist
-            with open(php_file, 'rb') as f:
-                ftp.storbinary('STOR progress.php', f)
-            ftp.quit()
-            print(f"  ✓ progress.php uploaded to Hostinger")
-        except FTP_ERRORS as e:
-            print(f"  ⚠ FTP upload failed: {e}")
+    if IN_SANDBOX:
+        print(f"  ℹ Skipped in sandbox (no outbound FTP). Run locally to upload.")
     else:
-        print(f"  ⚠ progress.php not found")
+        php_file = SCRIPT_DIR / "progress.php"
+        if php_file.exists():
+            try:
+                ftp = FTP()
+                ftp.connect('82.112.243.57', 21, timeout=15)
+                ftp.login('u256011742.solicitor', '#Patience13#')
+                try:
+                    ftp.cwd('solicitor')
+                except Exception:
+                    pass
+                with open(php_file, 'rb') as f:
+                    ftp.storbinary('STOR progress.php', f)
+                ftp.quit()
+                print(f"  ✓ progress.php uploaded to Hostinger")
+            except FTP_ERRORS as e:
+                print(f"  ⚠ FTP upload failed: {e}")
+        else:
+            print(f"  ⚠ progress.php not found")
 
     # ── 3. Stage & commit ─────────────────────────────────────
     print(f"\n[3/4] Committing to git...")
-    os.chdir(SCRIPT_DIR)
-    run("git add SQE1_MockExam_Standalone.html index.html SQE1_HighYield_Standalone.html progress.php")
-    run(f'git commit -m "Update: {len(questions)} questions embedded"')
-
-    # ── 4. Push to GitHub ─────────────────────────────────────
-    print(f"\n[4/4] Pushing to GitHub...")
-    code = run("git push origin main")
-    if code == 0:
-        print(f"\n✓ Done! Site updated at:")
-        print(f"  https://rfn2jk9dw9-max.github.io/SQE-Prep/")
+    if IN_SANDBOX:
+        print(f"  ℹ Skipped in sandbox (git lock-file restriction).")
+        print(f"  → Run locally: git add SQE1_MockExam_Standalone.html SQE1_HighYield_Standalone.html && git commit -m 'Update: {len(questions)} questions' && git push origin main")
     else:
-        print(f"\n✗ Push failed — check your GitHub credentials.")
+        os.chdir(SCRIPT_DIR)
+        # Clear any stale lock files before committing
+        for lock in ['.git/HEAD.lock', '.git/index.lock', '.git/objects/maintenance.lock',
+                     '.git/refs/remotes/origin/main.lock']:
+            lock_path = SCRIPT_DIR / lock
+            if lock_path.exists():
+                lock_path.unlink(missing_ok=True)
+        run("git add SQE1_MockExam_Standalone.html index.html SQE1_HighYield_Standalone.html progress.php")
+        run(f'git commit -m "Update: {len(questions)} questions embedded"')
+
+        # ── 4. Push to GitHub ──────────────────────────────────
+        print(f"\n[4/4] Pushing to GitHub...")
+        # Pull first to avoid non-fast-forward rejection
+        run("git stash")
+        run("git pull origin main --rebase")
+        run("git stash pop")
+        code = run("git push origin main")
+        if code == 0:
+            print(f"\n✓ Done! Site updated at:")
+            print(f"  https://rfn2jk9dw9-max.github.io/SQE-Prep/")
+        else:
+            print(f"\n✗ Push failed — check your GitHub credentials.")
 
     print("=" * 55)
 
