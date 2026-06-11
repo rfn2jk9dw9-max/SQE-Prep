@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>COLP Revision Programme · SQE1</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;
+  background:linear-gradient(135deg,#0c1024 0%,#1e3a5f 100%);
+  min-height:100dvh;padding:20px;color:#fff}
+.header{max-width:700px;margin:0 auto 20px;text-align:center}
+.header h1{font-size:22px;font-weight:900;letter-spacing:-0.5px}
+.header h1 em{font-style:normal;color:#a78bfa}
+.header p{font-size:12px;color:rgba(255,255,255,.45);margin-top:6px}
+.stats{max-width:700px;margin:0 auto 16px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.stat{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);
+  border-radius:10px;padding:8px 16px;text-align:center}
+.stat-n{font-size:20px;font-weight:800;color:#a78bfa}
+.stat-l{font-size:10px;color:rgba(255,255,255,.45);margin-top:2px}
+.progress-bar-wrap{max-width:700px;margin:0 auto 8px;
+  background:rgba(255,255,255,.08);border-radius:99px;height:8px}
+.progress-bar-fill{height:8px;border-radius:99px;
+  background:linear-gradient(90deg,#7c3aed,#a78bfa);transition:width .4s ease}
+.progress-label{max-width:700px;margin:0 auto 20px;
+  font-size:12px;color:rgba(255,255,255,.45);text-align:center}
+.filters{max-width:700px;margin:0 auto 16px;display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
+.filter-btn{padding:6px 14px;border-radius:99px;border:1px solid rgba(255,255,255,.2);
+  background:rgba(255,255,255,.06);color:rgba(255,255,255,.7);
+  font-size:12px;cursor:pointer;transition:all .15s}
+.filter-btn.active{background:#7c3aed;border-color:#7c3aed;color:#fff}
+.section-date{max-width:700px;margin:0 auto 8px;
+  font-size:11px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;
+  color:rgba(255,255,255,.35);padding:0 4px}
+.cards{max-width:700px;margin:0 auto;display:flex;flex-direction:column;gap:8px;margin-bottom:8px}
+.card{border-radius:12px;padding:12px 14px;cursor:pointer;
+  transition:transform .12s;border:1px solid rgba(255,255,255,.08)}
+.card:hover{transform:translateY(-1px)}
+.card-head{display:flex;align-items:center;gap:8px}
+.card-code{font-size:11px;font-weight:700;letter-spacing:.4px;
+  background:rgba(0,0,0,.25);border-radius:6px;padding:2px 7px;
+  white-space:nowrap;flex-shrink:0}
+.card-title{font-size:13px;font-weight:600;flex:1;line-height:1.3}
+.card-check{width:20px;height:20px;border-radius:50%;border:2px solid rgba(255,255,255,.3);
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:11px}
+.badge{font-size:10px;font-weight:700;letter-spacing:.4px;padding:2px 7px;
+  border-radius:99px;flex-shrink:0;white-space:nowrap}
+.card-sub{font-size:11px;color:rgba(255,255,255,.4);margin-top:5px;padding-left:2px;display:flex;align-items:center;gap:12px}
+.card-link{font-size:11px;font-weight:600;color:rgba(167,139,250,.8);text-decoration:none;
+  display:inline-flex;align-items:center;gap:3px;white-space:nowrap}
+.card-link:hover{color:#a78bfa}
+/* status colours */
+.s-done{background:rgba(16,185,129,.1);border-color:rgba(16,185,129,.25)}
+.s-done .card-check{background:#10b981;border-color:#10b981;color:#fff}
+.s-done .badge{background:#10b981;color:#fff}
+.s-today{background:rgba(250,204,21,.10);border-color:rgba(250,204,21,.4)}
+.s-today .badge{background:#fbbf24;color:#000}
+.s-overdue{background:rgba(239,68,68,.10);border-color:rgba(239,68,68,.3)}
+.s-overdue .badge{background:#ef4444;color:#fff}
+.s-upcoming{background:rgba(99,102,241,.07);border-color:rgba(99,102,241,.18)}
+.s-upcoming .badge{background:rgba(99,102,241,.3);color:#c7d2fe}
+.s-nodate{background:rgba(255,255,255,.03);border-color:rgba(255,255,255,.07)}
+.s-nodate .badge{background:rgba(255,255,255,.1);color:rgba(255,255,255,.45)}
+.back{display:block;text-align:center;text-decoration:none;
+  color:rgba(255,255,255,.35);font-size:13px;max-width:700px;
+  margin:20px auto 0;padding-bottom:20px}
+.back:hover{color:#fff}
+.empty{text-align:center;color:rgba(255,255,255,.35);padding:40px;font-size:14px;
+  max-width:700px;margin:0 auto}
+.reset-btn{display:inline-block;margin-top:24px;padding:6px 14px;border-radius:99px;
+  border:1px solid rgba(255,255,255,.15);background:none;color:rgba(255,255,255,.4);
+  font-size:11px;cursor:pointer;max-width:700px}
+.reset-btn:hover{border-color:rgba(239,68,68,.5);color:#ef4444}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>COLP Revision <em>Programme</em></h1>
+  <p>Spread across all free days · 14-day gap · No Saturdays · No COLP days · Ends 14 Dec 2026</p>
+</div>
+
+<div class="stats" id="stats"></div>
+<div class="progress-bar-wrap"><div class="progress-bar-fill" id="pbFill" style="width:0%"></div></div>
+<div class="progress-label" id="pbLabel">Loading…</div>
+
+<div class="filters" id="filters">
+  <button class="filter-btn active" data-filter="all">All</button>
+  <button class="filter-btn" data-filter="overdue">Overdue</button>
+  <button class="filter-btn" data-filter="today">Today</button>
+  <button class="filter-btn" data-filter="upcoming">Upcoming</button>
+  <button class="filter-btn" data-filter="done">Done</button>
+  <button class="filter-btn" data-filter="nodate">No slot</button>
+</div>
+
+<div id="root"></div>
+
+<div style="max-width:700px;margin:0 auto;text-align:center">
+  <button class="reset-btn" id="resetBtn">Reset all progress</button>
+</div>
+<a href="index.html" class="back">← Back to home</a>
+
+<script>
+// ── COLP assignment dates ──────────────────────────────────────────────────
+const SEED_DATES = {
+  'CONT1.1':  '2026-03-16', 'TORT2.1':  '2026-03-17',
+  'COND3.1':  '2026-03-18', 'LAND4.1':  '2026-03-19',
+  'CRML5.1':  '2026-03-23', 'TRUS6.1':  '2026-03-24',
+  'COND3.2':  '2026-03-25', 'BUS7.1':   '2026-03-26',
+  'DISP8.1':  '2026-03-30', 'CRMP9.1':  '2026-03-31',
+  'CONT1.2':  '2026-04-01', 'TORT2.2':  '2026-04-02',
+  'COND3.3':  '2026-04-06', 'LAND4.2':  '2026-04-07',
+  'CRML5.2':  '2026-04-08', 'TRUS6.2':  '2026-04-09',
+  'LAND4.3':  '2026-04-13', 'BUS7.2':   '2026-04-14',
+  'DISP8.2':  '2026-04-15', 'CRMP9.2':  '2026-04-16',
+  'SERV10.1': '2026-04-20', 'BUS7.3':   '2026-04-21',
+  'COND3.4':  '2026-04-22', 'DISP8.3':  '2026-04-23',
+  'SYS11.1':  '2026-04-27', 'PROP12.1': '2026-04-28',
+  'LAND4.4':  '2026-04-29', 'BUS7.4':   '2026-04-30',
+  'DISP8.4':  '2026-05-04', 'CRMP9.3':  '2026-05-05',
+  'CONT1.3':  '2026-05-06', 'TORT2.3':  '2026-05-07',
+  'PROP12.2': '2026-05-11', 'LAND4.5':  '2026-05-12',
+  'CRML5.3':  '2026-05-13', 'TRUS6.3':  '2026-05-14',
+  'WILL13.1': '2026-05-18', 'BUS7.5':   '2026-05-19',
+  'DISP8.5':  '2026-05-20', 'CRMP9.4':  '2026-05-21',
+  'SERV10.2': '2026-05-25', 'BUS7.6':   '2026-05-26',
+  'PROP12.3': '2026-05-27', 'DISP8.6':  '2026-05-28',
+  'SYS11.2':  '2026-06-01', 'PROP12.4': '2026-06-02',
+  'WILL13.2': '2026-06-03', 'BUS7.7':   '2026-06-04',
+  'DISP8.7':  '2026-06-08', 'CRMP9.5':  '2026-06-09',
+  'CONT1.4':  '2026-06-10', 'TORT2.4':  '2026-06-11',
+  'PROP12.5': '2026-06-15', 'LAND4.6':  '2026-06-16',
+  'CRML5.4':  '2026-06-17', 'TRUS6.4':  '2026-06-22',
+  'WILL13.3': '2026-06-23', 'BUS7.8':   '2026-06-24',
+  'DISP8.8':  '2026-07-06', 'CRMP9.6':  '2026-07-07',
+  'SERV10.3': '2026-07-08', 'BUS7.9':   '2026-07-13',
+  'PROP12.6': '2026-07-14', 'DISP8.9':  '2026-07-15',
+  'SYS11.3':  '2026-07-20', 'PROP12.7': '2026-07-21',
+  'WILL13.4': '2026-07-22', 'BUS7.10':  '2026-07-27',
+  'DISP8.10': '2026-07-28', 'CRMP9.7':  '2026-07-29',
+  'CONT1.5':  '2026-08-10', 'TORT2.5':  '2026-08-11',
+  'PROP12.8': '2026-08-12', 'WILL13.5': '2026-08-17',
+  'CRML5.5':  '2026-08-18', 'TRUS6.5':  '2026-08-19',
+  'WILL13.6': '2026-08-24', 'BUS7.11':  '2026-08-25',
+  'DISP8.11': '2026-08-26', 'CRMP9.8':  '2026-08-31',
+  'SERV10.4': '2026-09-01', 'BUS7.12':  '2026-09-02',
+  'PROP12.9': '2026-09-07', 'DISP8.12': '2026-09-08',
+  'SYS11.4':  '2026-09-09', 'PROP12.10':'2026-09-14',
+  'WILL13.7': '2026-09-15', 'BUS7.13':  '2026-09-16',
+  'DISP8.13': '2026-09-21', 'CRMP9.9':  '2026-09-22',
+  'SYS11.5':  '2026-09-23', 'BUS7.14':  '2026-10-05',
+  'PROP12.11':'2026-10-06', 'DISP8.14': '2026-10-07',
+  'SYS11.6':  '2026-10-12', 'PROP12.12':'2026-10-13',
+  'WILL13.8': '2026-10-14', 'BUS7.15':  '2026-10-19',
+  'DISP8.15': '2026-10-20', 'CRMP9.10': '2026-10-21',
+  'SERV10.5': '2026-10-26', 'BUS7.16':  '2026-10-27',
+  'PROP12.13':'2026-10-28', 'DISP8.16': '2026-11-02',
+  'SYS11.7':  '2026-11-03', 'PROP12.14':'2026-11-04',
+  'WILL13.9': '2026-11-09', 'BUS7.17':  '2026-11-10',
+  'DISP8.17': '2026-11-11', 'CRMP9.11': '2026-11-16',
+  'SYS11.8':  '2026-11-17', 'BUS7.18':  '2026-11-18',
+  'PROP12.15':'2026-11-30', 'CRMP9.12': '2026-12-02',
+  'BUS7.19':  '2026-12-07', 'WILL13.10':'2026-12-09',
+  'BUS7.20':  '2026-12-10',
+};
+
+// Extra COLP busy days (no module assignment but COLP event present)
+const EXTRA_BUSY = [
+  '2026-04-17','2026-05-10','2026-06-14','2026-07-01',
+  '2026-08-09','2026-09-30','2026-10-04','2026-11-24',
+  '2026-11-29','2026-12-01','2026-12-15',
+];
+const COLP_BUSY = new Set([...Object.values(SEED_DATES), ...EXTRA_BUSY]);
+const MIN_GAP   = 14;
+const SCHED_END = '2026-12-14';
+// Modules taught after this date can't get a slot before Dec 14
+const DEFAULT_DONE = ['CONT1.1','CONT1.2','CONT1.3'];
+
+// ── Canvas assignment URLs ─────────────────────────────────────────────────
+const BASE = 'https://collegalpractice.instructure.com/courses/1153/assignments/';
+const CANVAS_URLS = {
+  'CONT1.1':29948,'CONT1.2':29949,'CONT1.3':29950,'CONT1.4':29951,'CONT1.5':29952,
+  'TORT2.1':30037,'TORT2.2':30038,'TORT2.3':30039,'TORT2.4':30041,'TORT2.5':30042,
+  'COND3.1':29944,'COND3.2':29945,'COND3.3':29946,'COND3.4':29947,
+  'LAND4.1':29987,'LAND4.2':29988,'LAND4.3':29989,'LAND4.4':29990,'LAND4.5':29991,'LAND4.6':29992,
+  'CRML5.1':29953,'CRML5.2':29954,'CRML5.3':29955,'CRML5.4':29956,'CRML5.5':29957,
+  'TRUS6.1':30043,'TRUS6.2':30044,'TRUS6.3':30045,'TRUS6.4':30046,'TRUS6.5':30047,
+  'BUS7.1':29934,'BUS7.2':29936,'BUS7.3':29937,'BUS7.4':29938,'BUS7.5':29939,
+  'BUS7.6':29940,'BUS7.7':29941,'BUS7.8':29942,'BUS7.9':29943,'BUS7.10':29924,
+  'BUS7.11':29925,'BUS7.12':29926,'BUS7.13':29927,'BUS7.14':29928,'BUS7.15':29929,
+  'BUS7.16':29930,'BUS7.17':29931,'BUS7.18':29932,'BUS7.19':29933,'BUS7.20':29935,
+  'DISP8.1':29978,'DISP8.2':29979,'DISP8.3':29980,'DISP8.4':29981,'DISP8.5':29982,
+  'DISP8.6':29983,'DISP8.7':29984,'DISP8.8':29985,'DISP8.9':29986,'DISP8.10':29970,
+  'DISP8.11':29971,'DISP8.12':29972,'DISP8.13':29973,'DISP8.14':29974,'DISP8.15':29975,
+  'DISP8.16':29976,'DISP8.17':29977,
+  'CRMP9.1':29961,'CRMP9.2':29962,'CRMP9.3':29963,'CRMP9.4':29964,'CRMP9.5':29965,
+  'CRMP9.6':29966,'CRMP9.7':29967,'CRMP9.8':29968,'CRMP9.9':29969,'CRMP9.10':29958,
+  'CRMP9.11':29959,'CRMP9.12':29960,
+  'SERV10.1':30008,'SERV10.2':30009,'SERV10.3':30010,'SERV10.4':30011,'SERV10.5':30012,
+  'SYS11.1':30028,'SYS11.2':30029,'SYS11.3':30030,'SYS11.4':30031,'SYS11.5':30032,
+  'SYS11.6':30033,'SYS11.7':30034,'SYS11.8':30035,
+  'PROP12.1':29999,'PROP12.2':30000,'PROP12.3':30001,'PROP12.4':30002,'PROP12.5':30003,
+  'PROP12.6':30004,'PROP12.7':30005,'PROP12.8':30006,'PROP12.9':30007,'PROP12.10':29993,
+  'PROP12.11':29994,'PROP12.12':29995,'PROP12.13':29996,'PROP12.14':29997,'PROP12.15':29998,
+  'WILL13.1':30049,'WILL13.2':30050,'WILL13.3':30051,'WILL13.4':30052,'WILL13.5':30053,
+  'WILL13.6':30054,'WILL13.7':30055,'WILL13.8':30056,'WILL13.9':30057,'WILL13.10':30048,
+};
+
+// ── Module list (teaching order) ───────────────────────────────────────────
+const MODULES = [
+  {code:'CONT1.1',  title:'Formation'},
+  {code:'TORT2.1',  title:'Negligence'},
+  {code:'COND3.1',  title:'Overview of Principles and Codes Part 1'},
+  {code:'LAND4.1',  title:'Nature of land'},
+  {code:'CRML5.1',  title:'Understanding and analysing criminal liability'},
+  {code:'TRUS6.1',  title:'Creation and requirements of express trusts'},
+  {code:'COND3.2',  title:'Overview of Principles and Codes Part 2'},
+  {code:'BUS7.1',   title:'Business organisations'},
+  {code:'DISP8.1',  title:'Options for dispute resolution'},
+  {code:'CRMP9.1',  title:'At the police station – rights and processes'},
+  {code:'CONT1.2',  title:'Contract terms'},
+  {code:'TORT2.2',  title:'Defences'},
+  {code:'COND3.3',  title:'Code of Conduct for Solicitors, RELs and RFLs'},
+  {code:'LAND4.2',  title:'Title to land'},
+  {code:'CRML5.2',  title:'Understanding fault and blame'},
+  {code:'TRUS6.2',  title:'Beneficial entitlement'},
+  {code:'LAND4.3',  title:'Methods to protect and enforce third party interest'},
+  {code:'BUS7.2',   title:'Partnership agreement'},
+  {code:'DISP8.2',  title:'Building a claim'},
+  {code:'CRMP9.2',  title:'At the police station – interviews and advice'},
+  {code:'SERV10.1', title:'The regulatory role of the SRA'},
+  {code:'BUS7.3',   title:"Partners' responsibilities and liability"},
+  {code:'COND3.4',  title:'Code of Conduct for firms'},
+  {code:'DISP8.3',  title:'Pre-action conduct'},
+  {code:'SYS11.1',  title:'The courts'},
+  {code:'PROP12.1', title:'Introduction to conveyancing'},
+  {code:'LAND4.4',  title:'Co-ownership and trusts'},
+  {code:'BUS7.4',   title:'Incorporation of a company'},
+  {code:'DISP8.4',  title:'Commencing court proceedings'},
+  {code:'CRMP9.3',  title:'First appearance and bail'},
+  {code:'CONT1.3',  title:'Vitiating factors'},
+  {code:'TORT2.3',  title:"Occupiers' liability"},
+  {code:'PROP12.2', title:'Taxation – property'},
+  {code:'LAND4.5',  title:'Proprietary rights'},
+  {code:'CRML5.3',  title:'Defences and their impact on criminal liability'},
+  {code:'TRUS6.3',  title:'Special types of trusts'},
+  {code:'WILL13.1', title:'Validity of wills and codicils'},
+  {code:'BUS7.5',   title:'Shareholder rights'},
+  {code:'DISP8.5',  title:'Service of proceedings'},
+  {code:'CRMP9.4',  title:'Early trial procedures'},
+  {code:'SERV10.2', title:'The Equality Act 2010'},
+  {code:'BUS7.6',   title:"Directors' appointment and removal"},
+  {code:'PROP12.3', title:'Preparing the contract of sale'},
+  {code:'DISP8.6',  title:'Responding to a claim'},
+  {code:'SYS11.2',  title:'Primary legislation – structure of an Act of Parliament'},
+  {code:'PROP12.4', title:'Investigation of a registered and unregistered freehold title'},
+  {code:'WILL13.2', title:'Alterations, amendments and revocation of wills'},
+  {code:'BUS7.7',   title:"Directors' duties"},
+  {code:'DISP8.7',  title:'Statements of case'},
+  {code:'CRMP9.5',  title:'Trials and trial procedure'},
+  {code:'CONT1.4',  title:'Termination'},
+  {code:'TORT2.4',  title:'Pure economic loss and product liability'},
+  {code:'PROP12.5', title:'Pre-contract searches and enquiries'},
+  {code:'LAND4.6',  title:'Leases'},
+  {code:'CRML5.4',  title:'Criminal liability for others and incomplete acts'},
+  {code:'TRUS6.4',  title:'Trustees and fiduciary obligations'},
+  {code:'WILL13.3', title:'Personal representatives and interpretations of wills'},
+  {code:'BUS7.8',   title:'Company decision-making'},
+  {code:'DISP8.8',  title:'Interim applications'},
+  {code:'CRMP9.6',  title:'Evidence and proof'},
+  {code:'SERV10.3', title:'Money laundering'},
+  {code:'BUS7.9',   title:'Share funding'},
+  {code:'PROP12.6', title:'Core principles of planning law'},
+  {code:'DISP8.9',  title:'Case management'},
+  {code:'SYS11.3',  title:'Core institutions of the state and how they interrelate'},
+  {code:'PROP12.7', title:'Finance and acting for a lender'},
+  {code:'WILL13.4', title:'Intestacy and assets passing outside the estate'},
+  {code:'BUS7.10',  title:'Debt and security'},
+  {code:'DISP8.10', title:'Evidence'},
+  {code:'CRMP9.7',  title:'Hearsay and opinion evidence'},
+  {code:'CONT1.5',  title:'Remedies'},
+  {code:'TORT2.5',  title:'Nuisance'},
+  {code:'PROP12.8', title:'Preparation for and exchange of contracts'},
+  {code:'WILL13.5', title:'Grants of representation'},
+  {code:'CRML5.5',  title:'Bringing concepts together – offences of dishonesty'},
+  {code:'TRUS6.5',  title:'Liability of trustees'},
+  {code:'WILL13.6', title:'Administration of estates'},
+  {code:'BUS7.11',  title:'Dividends and other uses of profits'},
+  {code:'DISP8.11', title:'Disclosure – an overview'},
+  {code:'CRMP9.8',  title:'Character evidence and fairness'},
+  {code:'SERV10.4', title:'Financial services'},
+  {code:'BUS7.12',  title:'Accounts and requirements'},
+  {code:'PROP12.9', title:'Pre-completion, completion and post-completion'},
+  {code:'DISP8.12', title:'Electronic disclosure'},
+  {code:'SYS11.4',  title:'Legitimacy, separation of powers and the rule of law'},
+  {code:'PROP12.10',title:'Remedies for delayed completion'},
+  {code:'WILL13.7', title:'Claims against the estate'},
+  {code:'BUS7.13',  title:'Corporate insolvency and liquidation'},
+  {code:'DISP8.13', title:'Privilege'},
+  {code:'CRMP9.9',  title:'Preparing for trial'},
+  {code:'SYS11.5',  title:'Public order law'},
+  {code:'BUS7.14',  title:'Clawback and distribution of assets'},
+  {code:'PROP12.11',title:'Structure and content of a lease – termination of a lease'},
+  {code:'DISP8.14', title:'Trial'},
+  {code:'SYS11.6',  title:'Judicial review'},
+  {code:'PROP12.12',title:'Leasehold covenants and remedies for breach'},
+  {code:'WILL13.8', title:'Estate taxation'},
+  {code:'BUS7.15',  title:'Bankruptcy'},
+  {code:'DISP8.15', title:'Costs'},
+  {code:'CRMP9.10', title:'Sentencing'},
+  {code:'SERV10.5', title:'Funding options for legal services'},
+  {code:'BUS7.16',  title:'Income tax'},
+  {code:'PROP12.13',title:'Procedural steps for the grant of a lease or underlease'},
+  {code:'DISP8.16', title:'Discontinuance and settlement'},
+  {code:'SYS11.7',  title:'Human Rights Act 1998 and the European Convention on Human Rights'},
+  {code:'PROP12.14',title:'Procedural steps for assignment of a lease, licence to assign and underlet'},
+  {code:'WILL13.9', title:'Solicitors accounts – client money'},
+  {code:'BUS7.17',  title:'Corporation tax'},
+  {code:'DISP8.17', title:'Appeals and enforcement'},
+  {code:'CRMP9.11', title:'Appeals'},
+  {code:'SYS11.8',  title:'The place of EU law in the UK constitution'},
+  {code:'BUS7.18',  title:'Capital gains tax'},
+  {code:'PROP12.15',title:'Security of tenure under a business lease'},
+  {code:'CRMP9.12', title:'Trials of minors'},
+  {code:'BUS7.19',  title:'Value added tax'},
+  {code:'WILL13.10',title:'Solicitors accounts – other requirements'},
+  {code:'BUS7.20',  title:'Inheritance tax'},
+];
+
+// ── Helpers ────────────────────────────────────────────────────────────────
+function parseDate(s){ const[y,m,d]=s.split('-').map(Number); return new Date(y,m-1,d); }
+function toYMD(d){ return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'); }
+function fmtDate(s){
+  if(!s) return '—';
+  return parseDate(s).toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'});
+}
+function fmtShort(s){
+  if(!s) return '—';
+  return parseDate(s).toLocaleDateString('en-GB',{weekday:'short',day:'numeric',month:'short'});
+}
+function todayYMD(){ return toYMD(new Date()); }
+function isFreeDay(s){
+  const d = parseDate(s);
+  return d.getDay() !== 6 && !COLP_BUSY.has(s);
+}
+
+// ── Subject accent colours ─────────────────────────────────────────────────
+const SUBJECT_COLOUR = {
+  CONT:'#60a5fa', TORT:'#f87171', COND:'#34d399', LAND:'#fb923c',
+  CRML:'#f472b6', TRUS:'#a78bfa', BUS:'#fbbf24',  DISP:'#38bdf8',
+  CRMP:'#fb7185', SERV:'#4ade80', SYS:'#e879f9',  PROP:'#f59e0b',
+  WILL:'#86efac',
+};
+function codeColour(code){
+  return SUBJECT_COLOUR[code.match(/^[A-Z]+/)?.[0]] || '#fff';
+}
+
+// ── Persistence ────────────────────────────────────────────────────────────
+const STORE_KEY = 'sqe1_colp_rev_v3';
+function loadDone(){
+  try {
+    const raw = localStorage.getItem(STORE_KEY);
+    if(raw) return new Set(JSON.parse(raw));
+  } catch {}
+  // First time: pre-seed 1.1-1.3 as done
+  return new Set(DEFAULT_DONE);
+}
+function saveDone(s){ localStorage.setItem(STORE_KEY, JSON.stringify([...s])); }
+let done = loadDone();
+
+// ── Core: build spread schedule ────────────────────────────────────────────
+// Returns {code: revDate | null}
+function buildSchedule(doneSet) {
+  const TODAY = todayYMD();
+
+  // All free days from today to SCHED_END
+  const freeDays = [];
+  {
+    let d = parseDate(TODAY);
+    const end = parseDate(SCHED_END);
+    while(toYMD(d) <= SCHED_END) {
+      if(isFreeDay(toYMD(d))) freeDays.push(toYMD(d));
+      d.setDate(d.getDate() + 1);
+    }
+  }
+
+  // Pending modules: not done, has a COLP date
+  // Compute earliest eligible = colp + MIN_GAP, clamped to today, snapped to free day
+  const pending = [];
+  const nodateMap = {}; // code -> null (past deadline)
+
+  MODULES.forEach(m => {
+    if(!SEED_DATES[m.code]) return;
+    if(doneSet.has(m.code)) return;
+
+    let e = parseDate(SEED_DATES[m.code]);
+    e.setDate(e.getDate() + MIN_GAP);
+    // clamp to today
+    const todayD = parseDate(TODAY);
+    if(e < todayD) e = new Date(todayD);
+    // snap to next free day
+    let safety = 0;
+    while(safety++ < 120) {
+      if(toYMD(e) > SCHED_END) { nodateMap[m.code] = null; return; }
+      if(isFreeDay(toYMD(e))) break;
+      e.setDate(e.getDate() + 1);
+    }
+    if(toYMD(e) > SCHED_END) { nodateMap[m.code] = null; return; }
+    pending.push({ code: m.code, earliest: toYMD(e) });
+  });
+
+  // Sort by earliest eligible
+  pending.sort((a,b) => a.earliest.localeCompare(b.earliest));
+
+  // Greedy spread algorithm:
+  // Iterate free days; maintain queue of eligible modules;
+  // Each day assign ceil(remaining/freeRemaining) modules
+  const assignment = {};
+  const queue = []; // eligible but not yet assigned, in earliest order
+  let pIdx = 0; // pointer into pending
+
+  for(let fi = 0; fi < freeDays.length; fi++) {
+    const day = freeDays[fi];
+    // Drain newly eligible modules into queue
+    while(pIdx < pending.length && pending[pIdx].earliest <= day) {
+      queue.push(pending[pIdx++]);
+    }
+    if(queue.length === 0) continue;
+
+    // How many to assign today?
+    const freeRemaining = freeDays.length - fi;
+    const totalRemaining = queue.length + (pending.length - pIdx);
+    const perDay = Math.ceil(totalRemaining / freeRemaining);
+    const toAssign = Math.min(perDay, queue.length);
+
+    for(let i = 0; i < toAssign; i++) {
+      assignment[queue.shift().code] = day;
+    }
+  }
+
+  // Modules still in queue after all free days exhausted → no slot
+  queue.forEach(m => { assignment[m.code] = null; });
+  // Modules beyond deadline
+  Object.assign(assignment, nodateMap);
+
+  return assignment;
+}
+
+// ── Render ─────────────────────────────────────────────────────────────────
+let activeFilter = 'all';
+
+function getStatus(code, revDate) {
+  if(done.has(code)) return 'done';
+  if(revDate === null || revDate === undefined) return 'nodate';
+  const t = todayYMD();
+  if(revDate < t) return 'overdue';
+  if(revDate === t) return 'today';
+  return 'upcoming';
+}
+
+function render() {
+  const assignment = buildSchedule(done);
+  const TODAY = todayYMD();
+
+  // Build enriched list
+  const items = MODULES.map(m => ({
+    ...m,
+    colpDate: SEED_DATES[m.code] || null,
+    revDate: done.has(m.code) ? null : (assignment[m.code] ?? null),
+    status: getStatus(m.code, assignment[m.code]),
+  }));
+
+  // Stats
+  const totalModules = MODULES.length;
+  const doneCount = items.filter(i=>i.status==='done').length;
+  const overdueCount = items.filter(i=>i.status==='overdue').length;
+  const todayCount = items.filter(i=>i.status==='today').length;
+  const pct = Math.round(doneCount/totalModules*100);
+
+  // Free days count
+  const freeDays = [];
+  { let d = parseDate(TODAY); while(toYMD(d)<=SCHED_END){if(isFreeDay(toYMD(d)))freeDays.push(toYMD(d));d.setDate(d.getDate()+1);} }
+
+  document.getElementById('pbFill').style.width = pct+'%';
+  document.getElementById('pbLabel').textContent =
+    doneCount+' of '+totalModules+' topics revised ('+pct+'%)';
+
+  document.getElementById('stats').innerHTML =
+    '<div class="stat"><div class="stat-n">'+freeDays.length+'</div><div class="stat-l">Free days left</div></div>'+
+    (overdueCount ? '<div class="stat" style="border-color:rgba(239,68,68,.4)"><div class="stat-n" style="color:#ef4444">'+overdueCount+'</div><div class="stat-l">Overdue</div></div>' : '')+
+    (todayCount ? '<div class="stat" style="border-color:rgba(250,204,21,.4)"><div class="stat-n" style="color:#fbbf24">'+todayCount+'</div><div class="stat-l">Today</div></div>' : '')+
+    '<div class="stat"><div class="stat-n">'+doneCount+'</div><div class="stat-l">Done</div></div>';
+
+  // Update filter button counts
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    const f = btn.dataset.filter;
+    const cnt = f==='all' ? totalModules : items.filter(i=>i.status===f).length;
+    btn.textContent = f==='all' ? 'All' :
+      f==='overdue' ? 'Overdue'+(cnt?' ('+cnt+')':'') :
+      f==='today'   ? 'Today'+(cnt?' ('+cnt+')':'') :
+      f==='upcoming'? 'Upcoming'+(cnt?' ('+cnt+')':'') :
+      f==='done'    ? 'Done'+(cnt?' ('+cnt+')':'') :
+      'No slot'+(cnt?' ('+cnt+')':'');
+  });
+
+  // Filter
+  const filtered = items.filter(i =>
+    activeFilter==='all' ? true : i.status===activeFilter
+  );
+
+  const root = document.getElementById('root');
+  root.innerHTML = '';
+
+  if(!filtered.length) {
+    root.innerHTML = '<div class="empty">No items in this category.</div>';
+    return;
+  }
+
+  // Group by revDate (for upcoming/today/overdue), or just flat for done/nodate
+  const groupByDate = ['overdue','today','upcoming','all'].includes(activeFilter);
+
+  if(groupByDate) {
+    // Sort: overdue by revDate asc, today first, upcoming asc, done/nodate last
+    const sorted = [...filtered].sort((a,b) => {
+      const order = {overdue:0, today:1, upcoming:2, done:3, nodate:4};
+      if(order[a.status] !== order[b.status]) return order[a.status]-order[b.status];
+      if(a.revDate && b.revDate) return a.revDate.localeCompare(b.revDate);
+      if(a.colpDate && b.colpDate) return a.colpDate.localeCompare(b.colpDate);
+      return 0;
+    });
+
+    // Group by date bucket
+    let lastDate = null;
+    let cardsEl = null;
+
+    sorted.forEach(item => {
+      const bucket = item.revDate || (item.status==='done' ? 'done' : 'nodate');
+      if(bucket !== lastDate) {
+        const section = document.createElement('div');
+        const label =
+          item.status==='done' ? '✓ Completed' :
+          item.status==='nodate' ? '— No slot before 14 Dec 2026' :
+          item.revDate===TODAY ? '📅 Today – '+fmtDate(item.revDate) :
+          item.status==='overdue' ? '⚠ Overdue – '+fmtDate(item.revDate) :
+          fmtShort(item.revDate);
+        section.innerHTML = '<div class="section-date">'+label+'</div>';
+        cardsEl = document.createElement('div');
+        cardsEl.className = 'cards';
+        section.appendChild(cardsEl);
+        root.appendChild(section);
+        lastDate = bucket;
+      }
+      cardsEl.appendChild(makeCard(item));
+    });
+  } else {
+    const cardsEl = document.createElement('div');
+    cardsEl.className = 'cards';
+    filtered.forEach(item => cardsEl.appendChild(makeCard(item)));
+    root.appendChild(cardsEl);
+  }
+}
+
+function makeCard(item) {
+  const s = item.status;
+  const colour = codeColour(item.code);
+  const badgeText = {
+    done:     '✓ Done',
+    today:    '📅 Today',
+    overdue:  '⚠ Overdue',
+    upcoming: fmtDate(item.revDate),
+    nodate:   'After 14 Dec',
+  }[s];
+
+  const el = document.createElement('div');
+  el.className = 'card s-'+s;
+  el.innerHTML =
+    '<div class="card-head">'+
+      '<span class="card-code" style="color:'+colour+'">'+item.code+'</span>'+
+      '<span class="card-title">'+item.title+'</span>'+
+      '<span class="card-check">'+(s==='done'?'✓':'')+'</span>'+
+      '<span class="badge">'+badgeText+'</span>'+
+    '</div>'+
+    '<div class="card-sub">'+
+      '<span>📚 COLP: '+fmtDate(item.colpDate)+'</span>'+
+      (CANVAS_URLS[item.code]
+        ? '<a class="card-link" href="'+BASE+CANVAS_URLS[item.code]+'" target="_blank" rel="noopener">↗ Open on COLP</a>'
+        : '')+
+    '</div>';
+  el.addEventListener('click', e => {
+    if(e.target.closest('a')) return; // don't toggle when clicking the COLP link
+    if(done.has(item.code)) done.delete(item.code);
+    else done.add(item.code);
+    saveDone(done);
+    render();
+  });
+  return el;
+}
+
+// ── Filters ────────────────────────────────────────────────────────────────
+document.getElementById('filters').addEventListener('click', e => {
+  const btn = e.target.closest('[data-filter]');
+  if(!btn) return;
+  activeFilter = btn.dataset.filter;
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  render();
+});
+
+// ── Reset ──────────────────────────────────────────────────────────────────
+document.getElementById('resetBtn').addEventListener('click', () => {
+  if(confirm('Reset all progress? This will restore CONT1.1–1.3 as done and clear all other marks.')) {
+    done = new Set(DEFAULT_DONE);
+    saveDone(done);
+    render();
+  }
+});
+
+render();
+</script>
+</body>
+</html>
