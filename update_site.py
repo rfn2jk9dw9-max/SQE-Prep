@@ -15,18 +15,38 @@ from pathlib import Path
 # ── Path resolution ───────────────────────────────────────────
 # Supports running on the user's Mac OR inside the Cowork sandbox.
 # The sandbox mounts iCloud at a different path, so we probe both.
+def _find_session_mounts():
+    """Dynamically find any active Cowork session mount paths."""
+    sessions_root = Path('/sessions')
+    icloud_paths, script_paths = [], []
+    if sessions_root.exists():
+        try:
+            for session in sessions_root.iterdir():
+                mnt = session / 'mnt'
+                icloud_paths.append(mnt / 'Formation Solicitor' / 'Tests')
+                script_paths.append(mnt / 'Mission solicitor')
+        except PermissionError:
+            pass
+    return icloud_paths, script_paths
+
+_dyn_icloud, _dyn_script = _find_session_mounts()
+
 _ICLOUD_CANDIDATES = [
     Path.home() / "Library/Mobile Documents/com~apple~CloudDocs/GB LEX/Formation Solicitor/Tests",
-    Path("/sessions/inspiring-serene-euler/mnt/Formation Solicitor/Tests"),
-]
+] + _dyn_icloud
 
 _SCRIPT_CANDIDATES = [
     Path('/Users/ghitab/Documents/Claude/Projects/Mission solicitor'),
-    Path('/sessions/inspiring-serene-euler/mnt/Mission solicitor'),
-]
+] + _dyn_script
 
-SCRIPT_DIR = next((p for p in _SCRIPT_CANDIDATES if p.exists()), _SCRIPT_CANDIDATES[0])
-TESTS_DIR  = next((p for p in _ICLOUD_CANDIDATES if p.exists()), _ICLOUD_CANDIDATES[0])
+def _safe_exists(p):
+    try:
+        return p.exists()
+    except PermissionError:
+        return False
+
+SCRIPT_DIR = next((p for p in _SCRIPT_CANDIDATES if _safe_exists(p)), _SCRIPT_CANDIDATES[0])
+TESTS_DIR  = next((p for p in _ICLOUD_CANDIDATES if _safe_exists(p)), _ICLOUD_CANDIDATES[0])
 
 # In sandbox, git operations always fail (lock-file permissions).
 IN_SANDBOX = str(Path.home()).startswith('/sessions/')
