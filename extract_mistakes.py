@@ -6,6 +6,8 @@ Pulls wrong answers from:
   1. Local progress.json (mock exam sessions run via local server)
   2. Hostinger API (mock exam sessions run via GitHub Pages)
   3. Canvas PDFs in the Tests folder (SLK Taster tests)
+  4. H5P PDFs in the Tests folder (BUS, CONT, LAND, etc. — user's wrong
+     selections marked with WRONG_CHAR U+E894)
 
 Maps each wrong answer to a revision guide chapter and returns
 a dict of {chapter_id: [note_strings]} for injection into the HTML.
@@ -321,6 +323,61 @@ def inject_personal_notes(html: str, by_chapter: dict[str, list[str]]) -> str:
     return html
 
 
+# ── H5P PDF wrong-answer extraction ──────────────────────────────────────────
+
+def load_h5p_wrong_answers(tests_dir: Path) -> list[dict]:
+    """
+    Parse ALL H5P PDFs (BUS, CONT, LAND, etc.) in tests_dir — including
+    duplicate re-sits — and return wrong answers where the user's selection
+    (WRONG_CHAR U+E894) differs from the correct answer (CORRECT_CHAR U+E90C).
+
+    No deduplication is applied here: if the user sat the same test twice and
+    got a question wrong both times, two entries are returned (they'll be
+    deduped later by map_wrong_answers_to_chapters via the seen-set).
+    """
+    sys.path.insert(0, str(SCRIPT_DIR))
+    try:
+        from parse_questions import parse_pdf, subject_from_filename
+    except ImportError as e:
+        print(f"  ⚠ Could not import parser: {e}")
+        return []
+
+    wrong = []
+    pdf_paths = sorted(Path(tests_dir).glob("*.pdf"))
+
+    for pdf_path in pdf_paths:
+        if pdf_path.stem.upper().startswith("SLK"):
+            continue   # SLK Canvas PDFs handled separately
+
+        subject, paper = subject_from_filename(pdf_path.name)
+        source = pdf_path.stem
+
+        try:
+            questions = parse_pdf(str(pdf_path), subject, paper)
+        except Exception as e:
+            print(f"  ⚠ Could not parse {pdf_path.name}: {e}")
+            continue
+
+        for q in questions:
+            uidx = q.get("user_wrong_index")
+            cidx = q.get("correct_index")
+            if uidx is None or cidx is None or uidx == cidx:
+                continue   # correct or no user answer detected
+
+            opts = q.get("options", [])
+            user_ans    = opts[uidx] if uidx < len(opts) else "?"
+            correct_ans = opts[cidx] if cidx < len(opts) else "?"
+
+            wrong.append({
+                "source":        source,
+                "questionText":  q["question_text"],
+                "userAnswer":    user_ans,
+                "correctAnswer": correct_ans,
+            })
+
+    return wrong
+
+
 # ── Public entry point ────────────────────────────────────────────────────────
 
 def get_personal_notes(tests_dir: Path, progress_file: Path) -> dict[str, list[str]]:
@@ -342,6 +399,11 @@ def get_personal_notes(tests_dir: Path, progress_file: Path) -> dict[str, list[s
     canvas = load_canvas_wrong_answers(tests_dir)
     print(f"  Canvas PDFs: {len(canvas)} wrong answers")
     wrong.extend(canvas)
+
+    # 4. H5P PDFs (BUS, CONT, LAND, etc. — user's wrong selections in PDF)
+    h5p = load_h5p_wrong_answers(tests_dir)
+    print(f"  H5P PDFs: {len(h5p)} wrong answers")
+    wrong.extend(h5p)
 
     print(f"  Total wrong answers: {len(wrong)}")
 

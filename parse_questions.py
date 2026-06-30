@@ -378,6 +378,20 @@ def _extract_page_stubs(page, orphan_qtxts=None):
                 except Exception:
                     pass
 
+        # ── User-answer detection (wrong-answer tracking) ──────────────────────
+        # WRONG_CHAR (U+E894) appears in the user's selected option when they
+        # chose incorrectly.  We scan each option cell's full-width crop for it.
+        # uidx is None when the user was correct (no WRONG_CHAR present).
+        uidx = None
+        for idx, cb in enumerate(opt_cells):
+            try:
+                raw_chk = page.crop(cb).extract_text() or ""
+                if WRONG_CHAR in raw_chk:
+                    uidx = idx
+                    break
+            except Exception:
+                pass
+
         # Pad to 5 with empty strings (continuation expected from next page)
         while len(options) < 5:
             options.append("")
@@ -395,7 +409,7 @@ def _extract_page_stubs(page, orphan_qtxts=None):
             and not last_cell_near_bottom
         )
         stubs.append({"qtxt": question_text, "opts": options,
-                      "cidx": cidx, "complete": complete})
+                      "cidx": cidx, "uidx": uidx, "complete": complete})
 
     return stubs
 
@@ -420,7 +434,8 @@ def _apply_continuation(pending, page, cont_cells):
             if cleaned in seen_texts:
                 continue
             seen_texts.add(cleaned)
-            has_cor = CORRECT_CHAR in raw
+            has_cor  = CORRECT_CHAR in raw
+            has_wrong = WRONG_CHAR in raw
 
             # Detect a split-cell continuation: the text starts with a
             # lowercase letter AND the last filled option ended without a
@@ -447,17 +462,23 @@ def _apply_continuation(pending, page, cont_cells):
                 ).strip()
                 if has_cor:
                     pending["cidx"] = last_filled_idx
+                if has_wrong and pending.get("uidx") is None:
+                    pending["uidx"] = last_filled_idx
             elif empty:
                 # Fill next empty slot (options C/D/E entirely on next page)
                 idx = empty[0]
                 pending["opts"][idx] = cleaned
                 if has_cor:
                     pending["cidx"] = idx
+                if has_wrong and pending.get("uidx") is None:
+                    pending["uidx"] = idx
             else:
                 # Append to last option (option E was split mid-sentence)
                 pending["opts"][-1] = (pending["opts"][-1] + " " + cleaned).strip()
                 if has_cor:
                     pending["cidx"] = len(pending["opts"]) - 1
+                if has_wrong and pending.get("uidx") is None:
+                    pending["uidx"] = len(pending["opts"]) - 1
         except Exception:
             pass
 
@@ -474,7 +495,7 @@ def _apply_continuation(pending, page, cont_cells):
 # ── PDF entry point ───────────────────────────────────────────────────────────
 
 def _make_q(stub, subject, paper, source):
-    return {
+    q = {
         "question_text": stub["qtxt"],
         "options":       stub["opts"],
         "correct_index": stub["cidx"],
@@ -482,6 +503,9 @@ def _make_q(stub, subject, paper, source):
         "paper":         paper,
         "source":        source,
     }
+    if stub.get("uidx") is not None:
+        q["user_wrong_index"] = stub["uidx"]
+    return q
 
 
 def parse_pdf(pdf_path, subject, paper):
@@ -791,10 +815,38 @@ def apply_overrides(questions, script_dir=None):
     return questions
 
 
+def _topic_key(stem):
+    """
+    Return a canonical key for deduplication.
+    e.g. 'COND3.2: Overview...' and 'COND3.2_ Overview...' → 'cond3.2'
+    Matches the topic code prefix (letters + digits + dot/digit) at the start.
+    """
+    m = re.match(r'^([A-Za-z]+\d+(?:\.\d+)?)', stem)
+    return m.group(1).lower() if m else stem.lower()
+
+
 def parse_all(tests_dir):
+    all_pdfs = sorted(Path(tests_dir).glob("*.pdf"))
+    _dbg(f"Found {len(all_pdfs)} PDF files")
+
+    # Deduplicate: for each topic code, keep the most recently modified file.
+    seen = {}   # topic_key → Path
+    for p in all_pdfs:
+        key = _topic_key(p.stem)
+        if key not in seen:
+            seen[key] = p
+        else:
+            existing = seen[key]
+            if p.stat().st_mtime > existing.stat().st_mtime:
+                _dbg(f"  [dedup] replacing {existing.name} → {p.name}")
+                seen[key] = p
+            else:
+                _dbg(f"  [dedup] keeping   {existing.name} (skipping {p.name})")
+
+    pdfs = sorted(seen.values())
+    _dbg(f"After dedup: {len(pdfs)} unique topics")
+
     all_q = []
-    pdfs  = sorted(Path(tests_dir).glob("*.pdf"))
-    _dbg(f"Found {len(pdfs)} PDF files")
     for p in pdfs:
         subject, paper = subject_from_filename(p.name)
         if p.stem.upper().startswith("SLK"):
