@@ -1,0 +1,101 @@
+{
+  "_comment": "Manual corrections for questions where the H5P source material has a wrong correct answer. Each entry matches by source filename prefix + first 60 chars of question text. Set correct_index to the 0-based index (0=A, 1=B, 2=C, 3=D, 4=E) of the actually-correct option.",
+  "overrides": [
+    {
+      "source_prefix": "CRMP9.1",
+      "question_prefix": "A police officer arrests a suspect, having seen him as a part",
+      "correct_index": 2,
+      "note": "PACE s.24: officer needs reasonable grounds to SUSPECT (not believe) + reasonable grounds to believe arrest necessary. H5P answer E ('offence about to be committed') is wrong — this was an ongoing/past offence."
+    },
+    {
+      "source_prefix": "CRMP9.1",
+      "question_prefix": "A solicitor is attending a police station to represent a clie",
+      "correct_index": 0,
+      "note": "Solicitor arriving at police station should CONSULT THE CUSTODY RECORD — the official document recording all decisions made about the detainee. H5P answer E ('ask custody officer if treated well') is wrong."
+    },
+    {
+      "source_prefix": "COND3.2",
+      "question_prefix": "A solicitor is a partner at a small law firm specialising in",
+      "correct_index": 1,
+      "note": "Backdating letters and altering evidence dates is DISHONEST conduct in breach of SRA Principle 4. H5P answer E ('no implications as admitted and court not acted') is wrong — admission afterwards does not undo the dishonesty."
+    },
+    {
+      "source_prefix": "CRML5.2",
+      "question_prefix": "During a rally, the defendant fires off a gun. The shot shat",
+      "correct_index": 0,
+      "note": "Aggravated criminal damage s.1(2) CDA 1971: subjective recklessness as to endangering life BY the damage suffices — life does not need to actually be in danger. H5P answer E ('shot missed so no danger') is wrong."
+    },
+    {
+      "source_prefix": "LAND4.3",
+      "question_prefix": "A development company has entered into a contract with a land",
+      "correct_index": 0,
+      "note": "An option to purchase land is an estate contract, registrable as a CLASS C(iv) LAND CHARGE under LCA 1972 against unregistered title. H5P answer E ('no protectable interest') is wrong — the option itself creates an equitable interest."
+    },
+    {
+      "source_prefix": "LAND4.2",
+      "question_prefix": "A lawyer is acting for a client who is purchasing a leasehold",
+      "correct_index": 0,
+      "note": "LRA 2002 s.4: leases with MORE THAN 7 YEARS to run trigger compulsory first registration on assignment. H5P answer E ('21 years') reflects the pre-LRA 2002 rule which is no longer in force."
+    },
+    {
+      "source_prefix": "CRMP9.2",
+      "question_prefix": "A suspect is being interviewed in relation to a violent assau",
+      "correct_index": 0,
+      "note": "PACE Code C para 6.9: a solicitor CANNOT be excluded from interview merely for advising their client not to answer questions — that is legitimate legal advice and NOT obstruction. H5P answer E ('can remove') is wrong."
+    },
+    {
+      "source_prefix": "WILL13.1",
+      "question_prefix": "A testator urgently needs to find a second witness to attest",
+      "correct_index": 1,
+      "note": "Under s.15 Wills Act 1837, if a BENEFICIARY'S SPOUSE witnesses the will, the gift to that beneficiary is void. The sibling is the primary beneficiary, so their spouse cannot safely witness. The ILLITERATE NIECE can witness by making a mark — being illiterate does not disqualify a witness."
+    },
+    {
+      "source_prefix": "PROP12.2",
+      "question_prefix": "A VAT registered development company built a factory unit 2 y",
+      "correct_index": 0,
+      "note": "The SALE of a NEW COMMERCIAL BUILDING (within 3 years of first completion) by a VAT-registered developer is STANDARD RATED at 20% VAT. H5P answer E ('construction services are zero rated') confuses construction services with the sale of a completed commercial building."
+    },
+    {
+      "source_prefix": "PROP12.2",
+      "question_prefix": "A couple are buying a new residential property on a housing d",
+      "correct_index": 3,
+      "note": "New residential dwellings are ZERO RATED under VATA 1994 Sch 8 Group 5 — the correct reason is that it is a residential property (zero-rated), NOT because the buyers are unregistered for VAT. H5P answer E gives wrong reasoning."
+    },
+    {
+      "source_prefix": "COND3.3",
+      "question_prefix": "An in-house solicitor is advising the employer, X Plc, in re",
+      "correct_index": 1,
+      "note": "Solicitor's duty to the court is paramount. Must tell client duties to court outweigh obligations to them; if client refuses to disclose, solicitor must cease to act. H5P answer E ('refuse to confirm or deny') is wrong — that approach itself misleads the court."
+    },
+    {
+      "source_prefix": "COND3.3",
+      "question_prefix": "A solicitor in a sole practice has been found with a small am",
+      "correct_index": 3,
+      "note": "A criminal caution for Class A drugs undermines public trust and confidence in the profession, breaching SRA Principle 2. H5P answer E ('no breach, happened at house party') is wrong — private conduct can still breach SRA Principles."
+    },
+    {
+      "source_prefix": "SYS11.1",
+      "question_prefix": "Two neighbours had an argument. One neighbour got very angry",
+      "correct_index": 2,
+      "note": "Murder is an INDICTABLE-ONLY offence (Schedule 1 MCA 1980). Magistrates' Court has NO jurisdiction over murder — it must be tried on indictment in the Crown Court. H5P answer B (Magistrates' Court) is wrong. Correct answer is C (Crown Court). Note: option D in the parsed bank is a parser merge of 'Crown Court' + 'Court of Appeal (Criminal Division)' — two separate options that got joined at a page boundary."
+    },
+    {
+      "source_prefix": "SYS11.1",
+      "question_prefix": "A contractual dispute between two roommates is worth a large",
+      "correct_index": 1,
+      "note": "Large, complicated contract claim heard at first instance in the High Court (King's Bench Division). Bank index 0=County Court (H5P wrong answer), index 1=High Court KBD (correct), index 2=parser merge of KBD+Chancery. Correct answer is index 1."
+    },
+    {
+      "source_prefix": "SYS11.1",
+      "question_prefix": "A defendant's trial is at the Crown Court. In one of the sub",
+      "correct_index": 1,
+      "note": "Obiter dicta are never binding on any court. Crown Court is bound by CoA Criminal Division on ratio only. Option A is a parser error (two answers merged). Correct answer is B (index 1)."
+    },
+    {
+      "source_prefix": "TRUS6.2",
+      "question_prefix": "A man included the following clause in his will: “I leave the",
+      "correct_index": 2,
+      "note": "Saunders v Vautier requires ALL beneficiaries to be adults (18+). One son is 17 — a minor cannot invoke Saunders v Vautier. H5P answer E ('with mother's agreement the sons can break the trust') is wrong because the 17-year-old is also a beneficiary and is not yet an adult."
+    }
+  ]
+}
