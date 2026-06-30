@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """
-sync_progress.py — Push corrected local progress.json to the Hostinger server.
+sync_progress.py — Sync local progress.json corrections to the Hostinger server.
 
-The server uses INSERT IGNORE so stale entries won't auto-update.
-This script: fetches server sessions → deletes any that differ from local → re-inserts corrected.
+SAFE MODE (default): only updates sessions that exist in BOTH local and server
+and have a score discrepancy. Never deletes server-only sessions.
 
 Run from Terminal:
     cd "/Users/ghitab/Documents/Claude/Projects/Mission solicitor"
@@ -33,53 +33,59 @@ def main():
     server_by_dt = {s['datetime']: s for s in server_sessions}
     local_by_dt  = {s['datetime']: s for s in local_sessions}
 
-    updated = deleted = inserted = 0
+    updated = inserted = 0
 
-    # Delete server sessions that differ from local (or are absent locally)
-    for dt, srv in server_by_dt.items():
-        if dt not in local_by_dt:
-            print(f"  Deleting server-only session {dt}")
-            api('POST', {'delete_datetime': dt})
-            deleted += 1
-        else:
-            loc = local_by_dt[dt]
-            loc_correct = sum(1 for q in loc.get('questions', []) if q.get('isCorrect'))
-            loc_pct = round((loc_correct / len(loc['questions']) * 100)) if loc.get('questions') else loc.get('percentage', 0)
-            if abs(srv.get('percentage', 0) - loc.get('percentage', loc_pct)) > 0.5 or \
-               srv.get('correct', 0) != loc.get('correct', loc_correct):
-                print(f"  Stale session {dt}: server={srv.get('correct')}/{srv.get('totalQ')} local={loc.get('correct', loc_correct)}/{len(loc.get('questions',[]))}, deleting")
+    # SAFE: only touch sessions that exist in BOTH and have wrong scores
+    for dt, loc in local_by_dt.items():
+        qs = loc.get('questions', [])
+        loc_correct = sum(1 for q in qs if q.get('isCorrect'))
+        total = len(qs)
+        loc_pct = round(loc_correct / total * 100) if total else loc.get('percentage', 0)
+
+        if dt in server_by_dt:
+            srv = server_by_dt[dt]
+            if abs(srv.get('percentage', 0) - loc_pct) > 0.5 or srv.get('correct', 0) != loc_correct:
+                print(f"  Correcting {dt}: server={srv.get('correct')}/{srv.get('totalQ')} → local={loc_correct}/{total}")
                 api('POST', {'delete_datetime': dt})
-                deleted += 1
-
-    # Re-fetch to see what's left
-    server_sessions = api('GET')
-    server_dts = {s['datetime'] for s in server_sessions}
-
-    # Insert any local session not on server
-    for s in local_sessions:
-        dt = s['datetime']
-        qs = s.get('questions', [])
-        correct = sum(1 for q in qs if q.get('isCorrect'))
-        total   = len(qs)
-        pct     = round(correct / total * 100) if total else s.get('percentage', 0)
-
-        if dt not in server_dts:
+                payload = {
+                    'datetime':     dt,
+                    'paper':        loc.get('paper', srv.get('paper', 'FLK1')),
+                    'percentage':   loc_pct,
+                    'correct':      loc_correct,
+                    'totalQ':       total,
+                    'durationMode': loc.get('durationMode', srv.get('durationMode', 0)),
+                    'subjects':     loc.get('subjects', srv.get('subjects', {})),
+                    'questions':    qs,
+                }
+                api('POST', payload)
+                updated += 1
+            else:
+                print(f"  OK {dt}: {loc_correct}/{total} matches server")
+        else:
+            # Local session not yet on server — insert it
             payload = {
-                'datetime':    dt,
-                'paper':       s.get('paper', 'FLK1'),
-                'percentage':  pct,
-                'correct':     correct,
-                'totalQ':      total,
-                'durationMode': s.get('durationMode', 0),
-                'subjects':    s.get('subjects', {}),
-                'questions':   qs,
+                'datetime':     dt,
+                'paper':        loc.get('paper', 'FLK1'),
+                'percentage':   loc_pct,
+                'correct':      loc_correct,
+                'totalQ':       total,
+                'durationMode': loc.get('durationMode', 0),
+                'subjects':     loc.get('subjects', {}),
+                'questions':    qs,
             }
-            print(f"  Inserting {dt}: {correct}/{total} = {pct}%")
+            print(f"  Inserting {dt}: {loc_correct}/{total} = {loc_pct}%")
             api('POST', payload)
             inserted += 1
 
-    print(f"\nDone — deleted {deleted}, inserted {inserted} sessions.")
-    print("Dashboard will now show corrected scores.")
+    # Report server-only sessions (preserved, not touched)
+    server_only = [dt for dt in server_by_dt if dt not in local_by_dt]
+    if server_only:
+        print(f"\n  Server-only sessions (preserved): {len(server_only)}")
+        for dt in server_only:
+            s = server_by_dt[dt]
+            print(f"    {dt}: {s.get('correct')}/{s.get('totalQ')}")
+
+    print(f"\nDone — {updated} corrected, {inserted} inserted, {len(server_only)} server-only sessions preserved.")
 
 if __name__ == '__main__':
     main()

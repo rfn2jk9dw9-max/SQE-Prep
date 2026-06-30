@@ -2414,7 +2414,10 @@ function renderFlash(){
     + '  <button class="flash-nav-btn flash-btn-again" onclick="markCard(false)">↩ Again</button>'
     + '  <button class="flash-nav-btn flash-btn-know" onclick="markCard(true)">✓ Got it</button>'
     + '</div>'
-    + '<div class="flash-nav-row"><button class="flash-nav-btn flash-btn-skip" onclick="skipCard()">Skip →</button></div>';
+    + '<div class="flash-nav-row">'
+    + '  <button class="flash-nav-btn flash-btn-skip" onclick="prevCard()"'+(FL.idx===0?' disabled style="opacity:.35;cursor:default"':'')+'>← Prev</button>'
+    + '  <button class="flash-nav-btn flash-btn-skip" onclick="nextCard()">Next →</button>'
+    + '</div>';
 }
 
 function flipCard(wrap){
@@ -2430,7 +2433,9 @@ function markCard(knew){
   renderFlash();
 }
 
+function nextCard(){ FL.idx++; renderFlash(); }
 function skipCard(){ FL.idx++; renderFlash(); }
+function prevCard(){ if(FL.idx > 0){ FL.idx--; renderFlash(); } }
 
 function reviewAgain(){
   FL.deck = [...FL.again];
