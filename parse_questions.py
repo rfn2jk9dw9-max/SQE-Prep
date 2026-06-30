@@ -447,11 +447,15 @@ def _apply_continuation(pending, page, cont_cells):
                  if pending["opts"][i]),
                 None,
             )
+            # A cell is a split-page continuation of the previous option when
+            # the previous option text doesn't end with sentence-ending punctuation
+            # (it was cut at a page boundary mid-sentence).
+            # We no longer require the continuation to start lowercase — proper
+            # nouns like "Ombudsman" can begin a continuation fragment.
             is_split_continuation = (
                 last_filled_idx is not None
                 and cleaned
-                and cleaned[0].islower()
-                and pending["opts"][last_filled_idx][-1:] not in {'.', '?', '!'}
+                and pending["opts"][last_filled_idx][-1:] not in {'.', '?', '!', '"', '”'}
             )
 
             empty = [i for i, o in enumerate(pending["opts"]) if not o]
