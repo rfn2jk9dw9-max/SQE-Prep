@@ -1,0 +1,8 @@
+secrets.json
+.DS_Store
+__pycache__/
+*.pyc
+progress.json
+questions.json
+autoupdate.log
+update_log.txt

@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SQE1 Revision Schedule · Ghita Bennis</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f5f5f7;color:#1d1d1f}
+
+header{background:#1d1d1f;color:#fff;padding:20px 28px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
+header h1{font-size:1.25rem;font-weight:700;letter-spacing:-0.3px}
+header p{font-size:.8rem;opacity:.5;margin-top:2px}
+.exam-badge{background:#ff3b30;color:#fff;padding:5px 13px;border-radius:20px;font-size:.75rem;font-weight:700;white-space:nowrap}
+
+.stats-row{display:flex;gap:0;background:#fff;border-bottom:1px solid #e5e5ea;overflow-x:auto}
+.stat{flex:1;min-width:90px;padding:14px 16px;text-align:center;border-right:1px solid #e5e5ea}
+.stat:last-child{border-right:none}
+.stat-num{font-size:1.5rem;font-weight:800;display:block;line-height:1}
+.stat-lbl{font-size:.7rem;color:#888;margin-top:3px;display:block;white-space:nowrap}
+.stat-num.green{color:#34c759}
+.stat-num.orange{color:#ff9500}
+.stat-num.blue{color:#007aff}
+.stat-num.grey{color:#aeaeb2}
+
+.progress-wrap{background:#fff;border-bottom:1px solid #e5e5ea;padding:12px 28px}
+.prog-label{font-size:.75rem;color:#888;margin-bottom:6px;display:flex;justify-content:space-between}
+.prog-bar{height:7px;background:#e5e5ea;border-radius:4px;overflow:hidden}
+.prog-fill{height:100%;background:linear-gradient(90deg,#34c759,#30d158);border-radius:4px;transition:width .5s}
+
+.filter-row{display:flex;gap:6px;padding:12px 28px;background:#fff;border-bottom:1px solid #e5e5ea;flex-wrap:wrap;align-items:center}
+.filter-row span{font-size:.75rem;color:#aaa;margin-right:2px}
+.fb{padding:5px 13px;border-radius:14px;border:1px solid #d1d1d6;background:#fff;font-size:.77rem;cursor:pointer;transition:all .15s;font-family:inherit}
+.fb.active{background:#1d1d1f;color:#fff;border-color:#1d1d1f}
+.fb:hover:not(.active){background:#f5f5f7}
+
+.alert{margin:20px 28px;padding:14px 18px;border-radius:12px}
+.alert-orange{background:#fff3cd;border:1.5px solid #ff9500}
+.alert-orange h3{font-size:.85rem;font-weight:700;color:#b45309;margin-bottom:5px}
+.alert-orange p{font-size:.78rem;color:#78350f;line-height:1.5}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.chip{background:#fff;border:1px solid #ff9500;border-radius:14px;padding:3px 10px;font-size:.73rem;color:#b45309;font-weight:500}
+
+.alert-blue{background:#dbeafe;border:1.5px solid #007aff}
+.alert-blue h3{font-size:.85rem;font-weight:700;color:#1d4ed8;margin-bottom:4px}
+.alert-blue p{font-size:.78rem;color:#1e40af;line-height:1.5}
+
+.main{padding:20px 28px 40px;max-width:900px;margin:0 auto}
+
+.subject-block{margin-bottom:24px}
+.subj-hdr{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.subj-name{font-size:.88rem;font-weight:700;color:#1d1d1f}
+.subj-tag{font-size:.68rem;color:#888;background:#f0f0f5;padding:2px 8px;border-radius:8px}
+.subj-pill{font-size:.68rem;font-weight:600;padding:2px 8px;border-radius:8px}
+.pill-flk1{background:#ede9fe;color:#6d28d9}
+.pill-flk2{background:#fce7f3;color:#9d174d}
+
+.card{background:#fff;border-radius:10px;padding:13px 16px;display:flex;align-items:center;gap:13px;border:1.5px solid transparent;transition:all .15s;cursor:pointer;margin-bottom:6px}
+.card:hover{transform:translateY(-1px);box-shadow:0 4px 12px rgba(0,0,0,.07)}
+.card.done{border-color:#34c759;background:#f0fdf4}
+.card.overdue{border-color:#ff9500;background:#fffbf0}
+.card.soon{border-color:#007aff;background:#f0f7ff}
+.card.upcoming{border-color:#e5e5ea}
+.card.future{border-color:#e5e5ea;opacity:.6}
+.card.hidden{display:none}
+
+.circle{width:24px;height:24px;border-radius:50%;border:2px solid #d1d1d6;flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all .2s}
+.card.done .circle{background:#34c759;border-color:#34c759;color:#fff;font-size:12px;font-weight:700}
+.card.done .circle::after{content:'✓'}
+.card.overdue .circle{border-color:#ff9500}
+.card.soon .circle{border-color:#007aff}
+
+.card-info{flex:1;min-width:0}
+.card-title{font-size:.85rem;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.card.done .card-title{color:#34c759}
+.card-meta{font-size:.72rem;color:#aaa;margin-top:2px}
+
+.badge{font-size:.68rem;font-weight:700;padding:3px 9px;border-radius:9px;flex-shrink:0}
+.bdg-done{background:#d1fae5;color:#15803d}
+.bdg-overdue{background:#fff3cd;color:#b45309}
+.bdg-soon{background:#dbeafe;color:#1d4ed8}
+.bdg-upcoming{background:#f0f0f5;color:#666}
+.bdg-future{background:#f5f5f7;color:#aaa}
+
+.note{font-size:.72rem;color:#bbb;text-align:center;padding:20px 0 10px}
+</style>
+</head>
+<body>
+
+<header>
+  <div>
+    <h1>SQE1 Revision Schedule</h1>
+    <p>COLP 2025/26 · Ghita Bennis · Target: 15 December 2026</p>
+  </div>
+  <div class="exam-badge">114 chapters</div>
+</header>
+
+<div class="stats-row">
+  <div class="stat"><span class="stat-num green" id="cDone">0</span><span class="stat-lbl">Revised</span></div>
+  <div class="stat"><span class="stat-num orange" id="cOverdue">0</span><span class="stat-lbl">Overdue</span></div>
+  <div class="stat"><span class="stat-num blue" id="cSoon">0</span><span class="stat-lbl">This week</span></div>
+  <div class="stat"><span class="stat-num grey" id="cFuture">0</span><span class="stat-lbl">Scheduled</span></div>
+</div>
+
+<div class="progress-wrap">
+  <div class="prog-label"><span id="progTxt">0 / 114 chapters</span><span id="progPct">0%</span></div>
+  <div class="prog-bar"><div class="prog-fill" id="progFill" style="width:0%"></div></div>
+</div>
+
+<div class="filter-row">
+  <span>Show:</span>
+  <button class="fb active" data-f="all">All</button>
+  <button class="fb" data-f="done">✅ Revised</button>
+  <button class="fb" data-f="overdue">⚠️ Overdue</button>
+  <button class="fb" data-f="soon">📅 This week</button>
+  <button class="fb" data-f="future">🔮 Future</button>
+</div>
+
+<div style="padding:0 28px">
+  <div id="alertOverdue" class="alert alert-orange" style="display:none;margin:16px 0 0">
+    <h3>⚠️ Catch-up needed — <span id="overdueCount">0</span> overdue sessions</h3>
+    <p>These chapters passed their scheduled date. Aim to cover one or two per day alongside your current sessions.</p>
+    <div class="chips" id="overdueChips"></div>
+  </div>
+  <div id="alertSoon" class="alert alert-blue" style="display:none;margin:16px 0 0">
+    <h3>📅 Up next this week</h3>
+    <p id="soonText"></p>
+  </div>
+</div>
+
+<div class="main" id="main"></div>
+<p class="note">Click a chapter to mark it revised · Progress saves in your browser</p>
+
+<script>
+const TODAY = new Date('2026-06-10');
+const TOTAL = 114;
+
+const SCHEDULE = [
+  // Already done
+  {s:"Contract Law",ch:"1.1",t:"Formation",date:"2026-05-15",flk:"FLK1"},
+  {s:"Contract Law",ch:"1.2",t:"Terms",date:"2026-05-16",flk:"FLK1"},
+  {s:"Contract Law",ch:"1.3",t:"Vitiating Factors",date:"2026-05-22",flk:"FLK1"},
+  // Remaining Contract Law
+  {s:"Contract Law",ch:"1.4",t:"Termination",date:"2026-06-10",flk:"FLK1"},
+  {s:"Contract Law",ch:"1.5",t:"Remedies",date:"2026-06-11",flk:"FLK1"},
+  // Tort
+  {s:"Tort",ch:"2.1",t:"Negligence",date:"2026-06-12",flk:"FLK1"},
+  {s:"Tort",ch:"2.2",t:"Defences",date:"2026-06-15",flk:"FLK1"},
+  {s:"Tort",ch:"2.3",t:"Occupiers' Liability",date:"2026-06-16",flk:"FLK1"},
+  {s:"Tort",ch:"2.4",t:"Pure Economic Loss & Product Liability",date:"2026-06-18",flk:"FLK1"},
+  {s:"Tort",ch:"2.5",t:"Nuisance",date:"2026-06-19",flk:"FLK1"},
+  // Conduct & Ethics
+  {s:"Conduct & Ethics",ch:"3.1",t:"Overview of the Principles and Codes – Part 1",date:"2026-06-22",flk:"FLK2"},
+  {s:"Conduct & Ethics",ch:"3.2",t:"Overview of the Principles and Codes – Part 2",date:"2026-06-23",flk:"FLK2"},
+  {s:"Conduct & Ethics",ch:"3.3",t:"Code of Conduct for Solicitors, RELs and RFLs",date:"2026-06-24",flk:"FLK2"},
+  {s:"Conduct & Ethics",ch:"3.4",t:"Code of Conduct for Firms",date:"2026-06-26",flk:"FLK2"},
+  // Land Law
+  {s:"Land Law",ch:"4.1",t:"Nature of Land",date:"2026-06-29",flk:"FLK2"},
+  {s:"Land Law",ch:"4.2",t:"Title to Land",date:"2026-06-30",flk:"FLK2"},
+  {s:"Land Law",ch:"4.3",t:"Methods to Protect and Enforce Third-Party Interests",date:"2026-07-01",flk:"FLK2"},
+  {s:"Land Law",ch:"4.4",t:"Co-ownership and Trusts",date:"2026-07-03",flk:"FLK2"},
+  {s:"Land Law",ch:"4.5",t:"Proprietary Rights",date:"2026-07-06",flk:"FLK2"},
+  {s:"Land Law",ch:"4.6",t:"Leases",date:"2026-07-07",flk:"FLK2"},
+  // Criminal Law
+  {s:"Criminal Law",ch:"5.1",t:"Understanding and Analysing Criminal Liability",date:"2026-07-08",flk:"FLK1"},
+  {s:"Criminal Law",ch:"5.2",t:"Understanding Fault and Blame",date:"2026-07-09",flk:"FLK1"},
+  {s:"Criminal Law",ch:"5.3",t:"Defences and Their Impact on Criminal Liability",date:"2026-07-10",flk:"FLK1"},
+  {s:"Criminal Law",ch:"5.4",t:"Criminal Liability for Acts of Others & Inchoate Offences",date:"2026-07-13",flk:"FLK1"},
+  {s:"Criminal Law",ch:"5.5",t:"Dishonesty Offences",date:"2026-07-14",flk:"FLK1"},
+  // Trusts Law
+  {s:"Trusts Law",ch:"6.1",t:"Creation and Requirements of an Express Trust",date:"2026-07-15",flk:"FLK2"},
+  {s:"Trusts Law",ch:"6.2",t:"Beneficial Entitlement",date:"2026-07-16",flk:"FLK2"},
+  {s:"Trusts Law",ch:"6.3",t:"Special Types of Trusts",date:"2026-07-17",flk:"FLK2"},
+  {s:"Trusts Law",ch:"6.4",t:"Trustees and Fiduciary Obligations",date:"2026-07-20",flk:"FLK2"},
+  {s:"Trusts Law",ch:"6.5",t:"Liability of Trustees",date:"2026-07-21",flk:"FLK2"},
+  // Business Law & Tax
+  {s:"Business Law & Tax",ch:"7.1",t:"Business Organisations",date:"2026-07-22",flk:"FLK2"},
+  {s:"Business Law & Tax",ch:"7.2",t:"The Partnership Agreement",date:"2026-07-23",flk:"FLK2"},
+  {s:"Business Law & Tax",ch:"7.3",t:"Partners' Responsibilities and Liability",date:"2026-07-24",flk:"FLK2"},
+  {s:"Business Law & Tax",ch:"7.4",t:"Incorporation of a Company and Formation of LLPs",date:"2026-07-27",flk:"FLK2"},
+  {s:"Business Law & Tax",ch:"7.5",t:"Shareholders' Rights",date:"2026-07-28",flk:"FLK2"},
+  {s:"Business Law & Tax",ch:"7.6",t:"Directors' Appointment and Removal",date:"2026-07-29",flk:"FLK2"},
+  {s:"Business Law & Tax",ch:"7.7",t:"Directors' Duties",date:"2026-07-30",flk:"FLK2"},
+  {s:"Business Law & Tax",ch:"7.8",t:"Company Decision-Making",date:"2026-07-31",flk:"FLK2"},
+  {s:"Business Law & Tax",ch:"7.9",t:"Share Funding",date:"2026-08-03",flk:"FLK2"},
+  {s:"Business Law & Tax",ch:"7.10",t:"Debt and Security",date:"2026-08-04",flk:"FLK2"},
+  {s:"Business Law & Tax",ch:"7.11",t:"Dividends and Other Uses of Profits",date:"2026-08-05",flk:"FLK2"},
+  {s:"Business Law & Tax",ch:"7.12",t:"Accounts and Requirements",date:"2026-08-06",flk:"FLK2"},
+  {s:"Business Law & Tax",ch:"7.13",t:"Corporate Insolvency and Liquidation",date:"2026-08-07",flk:"FLK2"},
+  {s:"Business Law & Tax",ch:"7.14",t:"Claw-Back and Distribution of Assets",date:"2026-08-10",flk:"FLK2"},
+  {s:"Business Law & Tax",ch:"7.15",t:"Bankruptcy",date:"2026-08-11",flk:"FLK2"},
+  {s:"Business Law & Tax",ch:"7.16",t:"Income Tax in England and Wales",date:"2026-08-12",flk:"FLK2"},
+  // Dispute Resolution
+  {s:"Dispute Resolution",ch:"8.1",t:"Options for Dispute Resolution",date:"2026-08-13",flk:"FLK2"},
+  {s:"Dispute Resolution",ch:"8.2",t:"Building a Claim",date:"2026-08-14",flk:"FLK2"},
+  {s:"Dispute Resolution",ch:"8.3",t:"Pre-Action Conduct",date:"2026-08-17",flk:"FLK2"},
+  {s:"Dispute Resolution",ch:"8.4",t:"Commencing Court Proceedings",date:"2026-08-18",flk:"FLK2"},
+  {s:"Dispute Resolution",ch:"8.5",t:"Service of Proceedings",date:"2026-08-19",flk:"FLK2"},
+  {s:"Dispute Resolution",ch:"8.6",t:"Responding to a Claim",date:"2026-08-20",flk:"FLK2"},
+  {s:"Dispute Resolution",ch:"8.7",t:"Statements of Case",date:"2026-08-21",flk:"FLK2"},
+  {s:"Dispute Resolution",ch:"8.8",t:"Interim Applications",date:"2026-08-24",flk:"FLK2"},
+  {s:"Dispute Resolution",ch:"8.9",t:"Case Management",date:"2026-08-25",flk:"FLK2"},
+  {s:"Dispute Resolution",ch:"8.10",t:"Evidence",date:"2026-08-26",flk:"FLK2"},
+  {s:"Dispute Resolution",ch:"8.11",t:"Disclosure (An Overview)",date:"2026-08-27",flk:"FLK2"},
+  {s:"Dispute Resolution",ch:"8.12",t:"Electronic Disclosure",date:"2026-08-28",flk:"FLK2"},
+  {s:"Dispute Resolution",ch:"8.13",t:"Privilege",date:"2026-08-31",flk:"FLK2"},
+  {s:"Dispute Resolution",ch:"8.14",t:"Trial",date:"2026-09-01",flk:"FLK2"},
+  {s:"Dispute Resolution",ch:"8.15",t:"Costs",date:"2026-09-02",flk:"FLK2"},
+  {s:"Dispute Resolution",ch:"8.16",t:"Discontinuance and Settlement",date:"2026-09-03",flk:"FLK2"},
+  {s:"Dispute Resolution",ch:"8.17",t:"Appeals and Enforcement",date:"2026-09-04",flk:"FLK2"},
+  // Criminal Practice
+  {s:"Criminal Practice",ch:"9.1",t:"At the Police Station – Rights and Processes",date:"2026-09-07",flk:"FLK1"},
+  {s:"Criminal Practice",ch:"9.2",t:"At the Police Station – Interviews and Advice",date:"2026-09-08",flk:"FLK1"},
+  {s:"Criminal Practice",ch:"9.3",t:"First Appearance and Bail",date:"2026-09-09",flk:"FLK1"},
+  {s:"Criminal Practice",ch:"9.4",t:"Early Trial Procedures",date:"2026-09-10",flk:"FLK1"},
+  {s:"Criminal Practice",ch:"9.5",t:"Trials and Trial Procedures",date:"2026-09-11",flk:"FLK1"},
+  {s:"Criminal Practice",ch:"9.6",t:"Evidence and Proof",date:"2026-09-14",flk:"FLK1"},
+  {s:"Criminal Practice",ch:"9.7",t:"Hearsay and Opinion Evidence",date:"2026-09-15",flk:"FLK1"},
+  {s:"Criminal Practice",ch:"9.8",t:"Character Evidence and Fairness",date:"2026-09-16",flk:"FLK1"},
+  {s:"Criminal Practice",ch:"9.9",t:"Preparing for Trial",date:"2026-09-17",flk:"FLK1"},
+  {s:"Criminal Practice",ch:"9.10",t:"Sentencing",date:"2026-09-18",flk:"FLK1"},
+  {s:"Criminal Practice",ch:"9.11",t:"Appeals",date:"2026-09-21",flk:"FLK1"},
+  {s:"Criminal Practice",ch:"9.12",t:"Trials of Minors",date:"2026-09-22",flk:"FLK1"},
+  {s:"Criminal Practice",ch:"9.13",t:"Conduct Issues in Criminal Litigation",date:"2026-09-23",flk:"FLK1"},
+  // Legal Services
+  {s:"Legal Services",ch:"10.1",t:"The Regulatory Role of the SRA",date:"2026-09-24",flk:"FLK2"},
+  {s:"Legal Services",ch:"10.2",t:"The Equality Act 2010",date:"2026-09-25",flk:"FLK2"},
+  {s:"Legal Services",ch:"10.3",t:"Money Laundering",date:"2026-09-28",flk:"FLK2"},
+  {s:"Legal Services",ch:"10.4",t:"Financial Services",date:"2026-09-29",flk:"FLK2"},
+  {s:"Legal Services",ch:"10.5",t:"Funding Options for Legal Services",date:"2026-09-30",flk:"FLK2"},
+  // Legal System
+  {s:"Legal System",ch:"11.1",t:"The Courts",date:"2026-10-01",flk:"FLK1"},
+  {s:"Legal System",ch:"11.2",t:"Primary Legislation: The Structure of an Act of Parliament",date:"2026-10-02",flk:"FLK1"},
+  {s:"Legal System",ch:"11.3",t:"Core Institutions of the State",date:"2026-10-05",flk:"FLK1"},
+  {s:"Legal System",ch:"11.4",t:"Legitimacy, Separation of Powers and the Rule of Law",date:"2026-10-06",flk:"FLK1"},
+  {s:"Legal System",ch:"11.5",t:"Public Order Law",date:"2026-10-07",flk:"FLK1"},
+  {s:"Legal System",ch:"11.6",t:"Judicial Review",date:"2026-10-08",flk:"FLK1"},
+  {s:"Legal System",ch:"11.7",t:"Human Rights Act 1998 and the ECHR",date:"2026-10-09",flk:"FLK1"},
+  {s:"Legal System",ch:"11.8",t:"The Place of EU Law in the UK Constitution",date:"2026-10-12",flk:"FLK1"},
+  // Property Practice
+  {s:"Property Practice",ch:"12.1",t:"Introduction to Conveyancing",date:"2026-10-13",flk:"FLK2"},
+  {s:"Property Practice",ch:"12.2",t:"Taxation – Property",date:"2026-10-14",flk:"FLK2"},
+  {s:"Property Practice",ch:"12.3",t:"Preparing the Contract of Sale",date:"2026-10-15",flk:"FLK2"},
+  {s:"Property Practice",ch:"12.4",t:"Investigation of a Registered and Unregistered Freehold Title",date:"2026-10-16",flk:"FLK2"},
+  {s:"Property Practice",ch:"12.5",t:"Pre-Contract Searches and Enquiries",date:"2026-10-19",flk:"FLK2"},
+  {s:"Property Practice",ch:"12.6",t:"Core Principles of Planning Law",date:"2026-10-20",flk:"FLK2"},
+  {s:"Property Practice",ch:"12.7",t:"Finance and Acting for a Lender",date:"2026-10-21",flk:"FLK2"},
+  {s:"Property Practice",ch:"12.8",t:"Preparation for and Exchange of Contracts",date:"2026-10-22",flk:"FLK2"},
+  {s:"Property Practice",ch:"12.9",t:"Pre-Completion, Completion and Post-Completion",date:"2026-10-23",flk:"FLK2"},
+  {s:"Property Practice",ch:"12.10",t:"Remedies for Delayed Completion",date:"2026-10-26",flk:"FLK2"},
+  {s:"Property Practice",ch:"12.11",t:"Structure and Content of a Lease",date:"2026-10-27",flk:"FLK2"},
+  {s:"Property Practice",ch:"12.12",t:"Leasehold Covenants and Remedies for Breach",date:"2026-10-28",flk:"FLK2"},
+  {s:"Property Practice",ch:"12.13",t:"Procedural Steps for the Grant of a Lease",date:"2026-10-29",flk:"FLK2"},
+  {s:"Property Practice",ch:"12.14",t:"Procedural Steps for the Assignment of a Lease",date:"2026-10-30",flk:"FLK2"},
+  {s:"Property Practice",ch:"12.15",t:"Security of Tenure under a Business Lease",date:"2026-11-02",flk:"FLK2"},
+  // Wills & Estates
+  {s:"Wills & Estates",ch:"13.1",t:"Validity of Wills and Codicils",date:"2026-11-03",flk:"FLK2"},
+  {s:"Wills & Estates",ch:"13.2",t:"Alterations, Amendments and Revocation of Wills",date:"2026-11-04",flk:"FLK2"},
+  {s:"Wills & Estates",ch:"13.3",t:"Personal Representatives and Interpretation of Wills",date:"2026-11-05",flk:"FLK2"},
+  {s:"Wills & Estates",ch:"13.4",t:"Intestacy and Property Passing Outside the Estate",date:"2026-11-06",flk:"FLK2"},
+  {s:"Wills & Estates",ch:"13.5",t:"Grants of Representation",date:"2026-11-09",flk:"FLK2"},
+  {s:"Wills & Estates",ch:"13.6",t:"Administration of Estates",date:"2026-11-10",flk:"FLK2"},
+  {s:"Wills & Estates",ch:"13.7",t:"Claims Against the Estate",date:"2026-11-11",flk:"FLK2"},
+  {s:"Wills & Estates",ch:"13.8",t:"Inheritance Tax, Income Tax and Capital Gains Tax",date:"2026-11-12",flk:"FLK2"},
+  // Solicitors' Accounts (inside WILL13)
+  {s:"Solicitors' Accounts",ch:"13.9",t:"Client Money",date:"2026-11-13",flk:"FLK2"},
+  {s:"Solicitors' Accounts",ch:"13.10",t:"Accounting Records and Entries",date:"2026-11-16",flk:"FLK2"},
+];
+
+const DEFAULT_DONE = new Set(['1.1','1.2','1.3']);
+
+function loadDone(){
+  try{const v=JSON.parse(localStorage.getItem('sqe1_done2'));if(v)return new Set(v);}catch(e){}
+  return new Set(DEFAULT_DONE);
+}
+function saveDone(d){try{localStorage.setItem('sqe1_done2',JSON.stringify([...d]));}catch(e){}}
+
+let done = loadDone();
+let filt = 'all';
+
+function status(item){
+  if(done.has(item.ch)) return 'done';
+  const d=new Date(item.date), diff=(d-TODAY)/864e5;
+  if(diff<0) return 'overdue';
+  if(diff<=7) return 'soon';
+  return 'future';
+}
+
+function fmtDate(s){
+  return new Date(s).toLocaleDateString('en-GB',{day:'numeric',month:'short'});
+}
+
+function render(){
+  let cD=0,cO=0,cS=0,cF=0;
+  SCHEDULE.forEach(i=>{
+    const st=status(i);
+    if(st==='done')cD++;
+    else if(st==='overdue')cO++;
+    else if(st==='soon')cS++;
+    else cF++;
+  });
+
+  document.getElementById('cDone').textContent=cD;
+  document.getElementById('cOverdue').textContent=cO;
+  document.getElementById('cSoon').textContent=cS;
+  document.getElementById('cFuture').textContent=cF;
+
+  const pct=Math.round(cD/TOTAL*100);
+  document.getElementById('progFill').style.width=pct+'%';
+  document.getElementById('progTxt').textContent=`${cD} / ${TOTAL} chapters revised`;
+  document.getElementById('progPct').textContent=pct+'%';
+
+  // Overdue alert
+  const overdue=SCHEDULE.filter(i=>status(i)==='overdue');
+  const aO=document.getElementById('alertOverdue');
+  if(overdue.length){
+    aO.style.display='block';
+    document.getElementById('overdueCount').textContent=overdue.length;
+    document.getElementById('overdueChips').innerHTML=overdue.map(i=>`<span class="chip">${i.ch} ${i.t}</span>`).join('');
+  } else aO.style.display='none';
+
+  // Soon alert
+  const soon=SCHEDULE.filter(i=>status(i)==='soon');
+  const aS=document.getElementById('alertSoon');
+  if(soon.length){
+    aS.style.display='block';
+    document.getElementById('soonText').textContent=soon.map(i=>`${fmtDate(i.date)}: ${i.ch} ${i.t}`).join(' · ');
+  } else aS.style.display='none';
+
+  // Group by subject (preserve order)
+  const subjects=[], seen={};
+  SCHEDULE.forEach(i=>{if(!seen[i.s]){subjects.push(i.s);seen[i.s]=true;}});
+
+  const main=document.getElementById('main');
+  main.innerHTML='';
+
+  const FLK_MAP={
+    'Contract Law':'FLK1','Tort':'FLK1','Criminal Law':'FLK1','Criminal Practice':'FLK1','Legal System':'FLK1',
+    'Conduct & Ethics':'FLK2','Land Law':'FLK2','Trusts Law':'FLK2','Business Law & Tax':'FLK2',
+    'Dispute Resolution':'FLK2','Legal Services':'FLK2','Property Practice':'FLK2',
+    'Wills & Estates':'FLK2','Solicitors\' Accounts':'FLK2'
+  };
+
+  subjects.forEach(subj=>{
+    const items=SCHEDULE.filter(i=>i.s===subj);
+    const doneCount=items.filter(i=>done.has(i.ch)).length;
+    const flk=FLK_MAP[subj]||'';
+
+    const block=document.createElement('div');
+    block.className='subject-block';
+
+    const hdr=document.createElement('div');
+    hdr.className='subj-hdr';
+    hdr.innerHTML=`<div class="subj-name">${subj}</div>
+      <div class="subj-tag">${doneCount}/${items.length}</div>
+      <div class="subj-pill ${flk==='FLK1'?'pill-flk1':'pill-flk2'}">${flk}</div>`;
+    block.appendChild(hdr);
+
+    items.forEach(item=>{
+      const st=status(item);
+      const card=document.createElement('div');
+      card.className='card '+st;
+      if(filt!=='all'){
+        const show=(filt==='future')
+          ? (st==='future'||st==='upcoming')
+          : st===filt;
+        if(!show) card.classList.add('hidden');
+      }
+
+      const badgeClass={done:'bdg-done',overdue:'bdg-overdue',soon:'bdg-soon',future:'bdg-future'}[st]||'bdg-future';
+      const badgeTxt={done:'✅ Revised',overdue:'⚠️ Overdue',soon:'📅 This week',future:'Scheduled'}[st];
+
+      card.innerHTML=`<div class="circle"></div>
+        <div class="card-info">
+          <div class="card-title">${item.ch} — ${item.t}</div>
+          <div class="card-meta">Scheduled ${fmtDate(item.date)}</div>
+        </div>
+        <div class="badge ${badgeClass}">${badgeTxt}</div>`;
+
+      card.addEventListener('click',()=>{
+        done.has(item.ch)?done.delete(item.ch):done.add(item.ch);
+        saveDone(done); render();
+      });
+      block.appendChild(card);
+    });
+
+    main.appendChild(block);
+  });
+}
+
+document.querySelectorAll('.fb').forEach(b=>{
+  b.addEventListener('click',()=>{
+    filt=b.dataset.f;
+    document.querySelectorAll('.fb').forEach(x=>x.classList.remove('active'));
+    b.classList.add('active');
+    render();
+  });
+});
+
+render();
+</script>
+</body>
+</html>

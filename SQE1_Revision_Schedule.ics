@@ -1,0 +1,959 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Ghita SQE1 Revision//EN
+CALSCALE:GREGORIAN
+X-WR-CALNAME:SQE1 Revision Schedule
+X-WR-TIMEZONE:Europe/London
+BEGIN:VEVENT
+UID:5f6e454c-1748-4960-95ad-66dbdce77984
+DTSTART:20260515T090000
+DTEND:20260515T103000
+SUMMARY:SQE1 Revision - Contract Law: 1.2 Consideration & Promissory Estoppel
+DESCRIPTION:Subject: Contract Law (FLK1)\nChapter: 1.2 Consideration & Promissory Estoppel\nDuration: 90 min\n\nOpen revision guide: http://127.0.0.1:4321/guide
+END:VEVENT
+BEGIN:VEVENT
+UID:2b7307dc-7a1d-4b78-bac6-cff72ca446bc
+DTSTART:20260515T110000
+DTEND:20260515T113000
+SUMMARY:SQE1 Mock - FLK1 (30 min)
+DESCRIPTION:30-minute timed mock session\nPaper: FLK1\n\nOpen mock exam: http://127.0.0.1:4321/test\nSelect FLK1 and 30 min duration
+END:VEVENT
+BEGIN:VEVENT
+UID:27c09d9d-0b07-41b3-95d1-fdc2050d83cf
+DTSTART:20260516T090000
+DTEND:20260516T103000
+SUMMARY:SQE1 Revision - Contract Law: 1.3 Intention to Create Legal Relations & Capacity
+DESCRIPTION:Subject: Contract Law (FLK1)\nChapter: 1.3 Intention to Create Legal Relations & Capacity\nDuration: 90 min\n\nOpen revision guide: http://127.0.0.1:4321/guide
+END:VEVENT
+BEGIN:VEVENT
+UID:9b11a8d8-274c-4803-8b60-1fe1731a4407
+DTSTART:20260516T110000
+DTEND:20260516T113000
+SUMMARY:SQE1 Mock - FLK2 (30 min)
+DESCRIPTION:30-minute timed mock session\nPaper: FLK2\n\nOpen mock exam: http://127.0.0.1:4321/test\nSelect FLK2 and 30 min duration
+END:VEVENT
+BEGIN:VEVENT
+UID:59599095-86b6-42d2-9e5e-4dd162da8efd
+DTSTART:20260522T090000
+DTEND:20260522T103000
+SUMMARY:SQE1 Revision - Contract Law: 1.4 Terms of the Contract
+DESCRIPTION:Subject: Contract Law (FLK1)\nChapter: 1.4 Terms of the Contract\nDuration: 90 min\n\nOpen revision guide: http://127.0.0.1:4321/guide
+END:VEVENT
+BEGIN:VEVENT
+UID:06e8d2e4-d331-4065-a9ae-7174a0d45bf1
+DTSTART:20260522T110000
+DTEND:20260522T113000
+SUMMARY:SQE1 Mock - FLK1 (30 min)
+DESCRIPTION:30-minute timed mock session\nPaper: FLK1\n\nOpen mock exam: http://127.0.0.1:4321/test\nSelect FLK1 and 30 min duration
+END:VEVENT
+BEGIN:VEVENT
+UID:b464b225-47b3-4106-ace6-6b480a6701f2
+DTSTART:20260523T090000
+DTEND:20260523T103000
+SUMMARY:SQE1 Revision - Contract Law: 1.5 Exclusion Clauses & Unfair Terms
+DESCRIPTION:Subject: Contract Law (FLK1)\nChapter: 1.5 Exclusion Clauses & Unfair Terms\nDuration: 90 min\n\nOpen revision guide: http://127.0.0.1:4321/guide
+END:VEVENT
+BEGIN:VEVENT
+UID:5e9f6f18-bd82-410a-9226-45ea1e23b252
+DTSTART:20260523T110000
+DTEND:20260523T113000
+SUMMARY:SQE1 Mock - FLK2 (30 min)
+DESCRIPTION:30-minute timed mock session\nPaper: FLK2\n\nOpen mock exam: http://127.0.0.1:4321/test\nSelect FLK2 and 30 min duration
+END:VEVENT
+BEGIN:VEVENT
+UID:d22da73c-040e-405c-beb5-fc729bb3fde1
+DTSTART:20260529T090000
+DTEND:20260529T103000
+SUMMARY:SQE1 Revision - Contract Law: 1.6 Misrepresentation
+DESCRIPTION:Subject: Contract Law (FLK1)\nChapter: 1.6 Misrepresentation\nDuration: 90 min\n\nOpen revision guide: http://127.0.0.1:4321/guide
+END:VEVENT
+BEGIN:VEVENT
+UID:92dddf97-bbe0-444e-89ce-ffdc0b07a216
+DTSTART:20260529T110000
+DTEND:20260529T113000
+SUMMARY:SQE1 Mock - FLK1 (30 min)
+DESCRIPTION:30-minute timed mock session\nPaper: FLK1\n\nOpen mock exam: http://127.0.0.1:4321/test\nSelect FLK1 and 30 min duration
+END:VEVENT
+BEGIN:VEVENT
+UID:57cbc8c7-88b2-4973-afe0-d602ee92048f
+DTSTART:20260530T090000
+DTEND:20260530T103000
+SUMMARY:SQE1 Revision - Contract Law: 1.7 Duress, Undue Influence & Illegality
+DESCRIPTION:Subject: Contract Law (FLK1)\nChapter: 1.7 Duress, Undue Influence & Illegality\nDuration: 90 min\n\nOpen revision guide: http://127.0.0.1:4321/guide
+END:VEVENT
+BEGIN:VEVENT
+UID:a4e025fc-dcfd-43f2-8cb8-a742fd0ec19b
+DTSTART:20260530T110000
+DTEND:20260530T113000
+SUMMARY:SQE1 Mock - FLK2 (30 min)
+DESCRIPTION:30-minute timed mock session\nPaper: FLK2\n\nOpen mock exam: http://127.0.0.1:4321/test\nSelect FLK2 and 30 min duration
+END:VEVENT
+BEGIN:VEVENT
+UID:c4740ccf-0be5-44d7-8fdb-6060e21d286c
+DTSTART:20260605T090000
+DTEND:20260605T103000
+SUMMARY:SQE1 Revision - Contract Law: 1.8 Discharge & Breach
+DESCRIPTION:Subject: Contract Law (FLK1)\nChapter: 1.8 Discharge & Breach\nDuration: 90 min\n\nOpen revision guide: http://127.0.0.1:4321/guide
+END:VEVENT
+BEGIN:VEVENT
+UID:3c7f7902-d961-4e1e-a5d6-181d2494d9f9
+DTSTART:20260605T110000
+DTEND:20260605T113000
+SUMMARY:SQE1 Mock - FLK1 (30 min)
+DESCRIPTION:30-minute timed mock session\nPaper: FLK1\n\nOpen mock exam: http://127.0.0.1:4321/test\nSelect FLK1 and 30 min duration
+END:VEVENT
+BEGIN:VEVENT
+UID:3684375c-68eb-468b-a0e3-fa741e5bb6bf
+DTSTART:20260606T090000
+DTEND:20260606T103000
+SUMMARY:SQE1 Revision - Tort: 2.1 Negligence — Duty of Care & Breach
+DESCRIPTION:Subject: Tort (FLK1)\nChapter: 2.1 Negligence — Duty of Care & Breach\nDuration: 90 min\n\nOpen revision guide: http://127.0.0.1:4321/guide
+END:VEVENT
+BEGIN:VEVENT
+UID:dd465198-41a1-4883-bc1b-ef5c36921702
+DTSTART:20260606T110000
+DTEND:20260606T113000
+SUMMARY:SQE1 Mock - FLK2 (30 min)
+DESCRIPTION:30-minute timed mock session\nPaper: FLK2\n\nOpen mock exam: http://127.0.0.1:4321/test\nSelect FLK2 and 30 min duration
+END:VEVENT
+BEGIN:VEVENT
+UID:98276b92-9e8e-4d70-b68d-85c5ecf80213
+DTSTART:20260612T090000
+DTEND:20260612T103000
+SUMMARY:SQE1 Revision - Tort: 2.2 Negligence — Causation & Damage
+DESCRIPTION:Subject: Tort (FLK1)\nChapter: 2.2 Negligence — Causation & Damage\nDuration: 90 min\n\nOpen revision guide: http://127.0.0.1:4321/guide
+END:VEVENT
+BEGIN:VEVENT
+UID:4ccc6f21-57a7-4299-bb1d-2073821796ca
+DTSTART:20260612T110000
+DTEND:20260612T113000
+SUMMARY:SQE1 Mock - FLK1 (30 min)
+DESCRIPTION:30-minute timed mock session\nPaper: FLK1\n\nOpen mock exam: http://127.0.0.1:4321/test\nSelect FLK1 and 30 min duration
+END:VEVENT
+BEGIN:VEVENT
+UID:f3c81670-8544-425b-b829-848cc71c091b
+DTSTART:20260613T090000
+DTEND:20260613T103000
+SUMMARY:SQE1 Revision - Tort: 2.3 Occupiers' Liability
+DESCRIPTION:Subject: Tort (FLK1)\nChapter: 2.3 Occupiers' Liability\nDuration: 90 min\n\nOpen revision guide: http://127.0.0.1:4321/guide
+END:VEVENT
+BEGIN:VEVENT
+UID:21a2983d-7036-4bc4-88bc-237ac686c2af
+DTSTART:20260613T110000
+DTEND:20260613T113000
+SUMMARY:SQE1 Mock - FLK2 (30 min)
+DESCRIPTION:30-minute timed mock session\nPaper: FLK2\n\nOpen mock exam: http://127.0.0.1:4321/test\nSelect FLK2 and 30 min duration
+END:VEVENT
+BEGIN:VEVENT
+UID:affd2b00-04c2-495e-ae8e-ce2f7a50e7ce
+DTSTART:20260618T090000
+DTEND:20260618T103000
+SUMMARY:SQE1 Revision - Contract Law: 1.9 Remedies for Breach
+DESCRIPTION:Subject: Contract Law (FLK1)\nChapter: 1.9 Remedies for Breach\nDuration: 90 min\n\nOpen revision guide: http://127.0.0.1:4321/guide
+END:VEVENT
+BEGIN:VEVENT
+UID:1cfe7b30-c8f5-4174-b615-d0be12044f6c
+DTSTART:20260618T110000
+DTEND:20260618T113000
+SUMMARY:SQE1 Mock - FLK1 (30 min)
+DESCRIPTION:30-minute timed mock session\nPaper: FLK1\n\nOpen mock exam: http://127.0.0.1:4321/test\nSelect FLK1 and 30 min duration
+END:VEVENT
+BEGIN:VEVENT
+UID:80987b4f-151a-46c7-8b6a-8cba413ed141
+DTSTART:20260619T090000
+DTEND:20260619T103000
+SUMMARY:SQE1 Revision - Conduct & Ethics: 3.1 SRA Principles & Code of Conduct
+DESCRIPTION:Subject: Conduct & Ethics (BOTH)\nChapter: 3.1 SRA Principles & Code of Conduct\nDuration: 90 min\n\nOpen revision guide: http://127.0.0.1:4321/guide
+END:VEVENT
+BEGIN:VEVENT
+UID:f2b10a08-d7aa-498b-bfe5-970707fc9c2d
+DTSTART:20260619T110000
+DTEND:20260619T113000
+SUMMARY:SQE1 Mock - FLK2 (30 min)
+DESCRIPTION:30-minute timed mock session\nPaper: FLK2\n\nOpen mock exam: http://127.0.0.1:4321/test\nSelect FLK2 and 30 min duration
+END:VEVENT
+BEGIN:VEVENT
+UID:10a7fa0e-5419-4d56-b0a6-f5d5b395a7b9
+DTSTART:20260620T090000
+DTEND:20260620T103000
+SUMMARY:SQE1 Revision - Conduct & Ethics: 3.6 Complaints & Regulation
+DESCRIPTION:Subject: Conduct & Ethics (BOTH)\nChapter: 3.6 Complaints & Regulation\nDuration: 90 min\n\nOpen revision guide: http://127.0.0.1:4321/guide
+END:VEVENT
+BEGIN:VEVENT
+UID:277b89e4-1fce-41ca-bb28-17f6aec2c3d2
+DTSTART:20260620T110000
+DTEND:20260620T113000
+SUMMARY:SQE1 Mock - FLK1 (30 min)
+DESCRIPTION:30-minute timed mock session\nPaper: FLK1\n\nOpen mock exam: http://127.0.0.1:4321/test\nSelect FLK1 and 30 min duration
+END:VEVENT
+BEGIN:VEVENT
+UID:d0f69a6f-d075-4413-a326-f02553b9af9a
+DTSTART:20260625T090000
+DTEND:20260625T103000
+SUMMARY:SQE1 Revision - Conduct & Ethics: 3.3 Conflicts of Interest
+DESCRIPTION:Subject: Conduct & Ethics (BOTH)\nChapter: 3.3 Conflicts of Interest\nDuration: 90 min\n\nOpen revision guide: http://127.0.0.1:4321/guide
+END:VEVENT
+BEGIN:VEVENT
+UID:1a9877d8-a8a6-45ca-9667-8818aa69f0f5
+DTSTART:20260625T110000
+DTEND:20260625T113000
+SUMMARY:SQE1 Mock - FLK2 (30 min)
+DESCRIPTION:30-minute timed mock session\nPaper: FLK2\n\nOpen mock exam: http://127.0.0.1:4321/test\nSelect FLK2 and 30 min duration
+END:VEVENT
+BEGIN:VEVENT
+UID:e0dd02b4-c51c-48b8-91cd-d6898c2580d8
+DTSTART:20260626T090000
+DTEND:20260626T103000
+SUMMARY:SQE1 Revision - Land Law: 4.1 Estates & Interests in Land
+DESCRIPTION:Subject: Land Law (FLK2)\nChapter: 4.1 Estates & Interests in Land\nDuration: 90 min\n\nOpen revision guide: http://127.0.0.1:4321/guide
+END:VEVENT
+BEGIN:VEVENT
+UID:2c8e739c-aa1d-4359-a9cd-2f8c11515692
+DTSTART:20260626T110000
+DTEND:20260626T113000
+SUMMARY:SQE1 Mock - FLK1 (30 min)
+DESCRIPTION:30-minute timed mock session\nPaper: FLK1\n\nOpen mock exam: http://127.0.0.1:4321/test\nSelect FLK1 and 30 min duration
+END:VEVENT
+BEGIN:VEVENT
+UID:da01f515-880c-45b1-b0ab-bcb6a19f763d
+DTSTART:20260627T090000
+DTEND:20260627T103000
+SUMMARY:SQE1 Revision - Land Law: 4.3 Adverse Possession
+DESCRIPTION:Subject: Land Law (FLK2)\nChapter: 4.3 Adverse Possession\nDuration: 90 min\n\nOpen revision guide: http://127.0.0.1:4321/guide
+END:VEVENT
+BEGIN:VEVENT
+UID:81c49514-8d98-4168-a221-6af3f76169ab
+DTSTART:20260627T110000
+DTEND:20260627T113000
+SUMMARY:SQE1 Mock - FLK2 (30 min)
+DESCRIPTION:30-minute timed mock session\nPaper: FLK2\n\nOpen mock exam: http://127.0.0.1:4321/test\nSelect FLK2 and 30 min duration
+END:VEVENT
+BEGIN:VEVENT
+UID:a9311c52-53c2-48fc-9cdc-068497b67dfd
+DTSTART:20260630T090000
+DTEND:20260630T103000
+SUMMARY:SQE1 Revision - Land Law: 4.4 Co-ownership & Trusts of Land
+DESCRIPTION:Subject: Land Law (FLK2)\nChapter: 4.4 Co-ownership & Trusts of Land\nDuration: 90 min\n\nOpen revision guide: http://127.0.0.1:4321/guide
+END:VEVENT
+BEGIN:VEVENT
+UID:d8bc5012-cd24-4df3-b969-67355b8302eb
+DTSTART:20260630T110000
+DTEND:20260630T113000
+SUMMARY:SQE1 Mock - FLK1 (30 min)
+DESCRIPTION:30-minute timed mock session\nPaper: FLK1\n\nOpen mock exam: http://127.0.0.1:4321/test\nSelect FLK1 and 30 min duration
+END:VEVENT
+BEGIN:VEVENT
+UID:3e1f50c4-4342-418e-a93f-eebebb9941dd
+DTSTART:20260701T090000
+DTEND:20260701T103000
+SUMMARY:SQE1 Revision - Land Law: 4.6 Leases — Covenants & Remedies
+DESCRIPTION:Subject: Land Law (FLK2)\nChapter: 4.6 Leases — Covenants & Remedies\nDuration: 90 min\n\nOpen revision guide: http://127.0.0.1:4321/guide
+END:VEVENT
+BEGIN:VEVENT
+UID:c62fcfca-e444-407e-a4bd-c2fa0babc50d
+DTSTART:20260701T110000
+DTEND:20260701T113000
+SUMMARY:SQE1 Mock - FLK2 (30 min)
+DESCRIPTION:30-minute timed mock session\nPaper: FLK2\n\nOpen mock exam: http://127.0.0.1:4321/test\nSelect FLK2 and 30 min duration
+END:VEVENT
+BEGIN:VEVENT
+UID:13edcdfe-fa9f-46e0-874a-0bf987382893
+DTSTART:20260702T090000
+DTEND:20260702T103000
+SUMMARY:SQE1 Revision - Land Law: 4.7 Easements & Covenants
+DESCRIPTION:Subject: Land Law (FLK2)\nChapter: 4.7 Easements & Covenants\nDuration: 90 min\n\nOpen revision guide: http://127.0.0.1:4321/guide
+END:VEVENT
+BEGIN:VEVENT
+UID:a91b2c49-8cc6-4d08-aa51-15106de81908
+DTSTART:20260702T110000
+DTEND:20260702T113000
+SUMMARY:SQE1 Mock - FLK1 (30 min)
+DESCRIPTION:30-minute timed mock session\nPaper: FLK1\n\nOpen mock exam: http://127.0.0.1:4321/test\nSelect FLK1 and 30 min duration
+END:VEVENT
+BEGIN:VEVENT
+UID:f0b2d7d8-b903-4447-b855-a50032bd7107
+DTSTART:20260703T090000
+DTEND:20260703T103000
+SUMMARY:SQE1 Revision - Land Law: 4.8 Mortgages
+DESCRIPTION:Subject: Land Law (FLK2)\nChapter: 4.8 Mortgages\nDuration: 90 min\n\nOpen revision guide: http://127.0.0.1:4321/guide
+END:VEVENT
+BEGIN:VEVENT
+UID:bfb83971-5149-400a-b776-e33dfce962c7
+DTSTART:20260703T110000
+DTEND:20260703T113000
+SUMMARY:SQE1 Mock - FLK2 (30 min)
+DESCRIPTION:30-minute timed mock session\nPaper: FLK2\n\nOpen mock exam: http://127.0.0.1:4321/test\nSelect FLK2 and 30 min duration
+END:VEVENT
+BEGIN:VEVENT
+UID:3c2fde4e-a4f9-469d-a6ca-ad36971d2654
+DTSTART:20260704T090000
+DTEND:20260704T103000
+SUMMARY:SQE1 Revision - Criminal Law: 5.1 Actus Reus & Mens Rea
+DESCRIPTION:Subject: Criminal Law (FLK2)\nChapter: 5.1 Actus Reus & Mens Rea\nDuration: 90 min\n\nOpen revision guide: http://127.0.0.1:4321/guide
+END:VEVENT
+BEGIN:VEVENT
+UID:7e27b395-c006-4de0-b88f-ea32b57d1aa8
+DTSTART:20260704T110000
+DTEND:20260704T113000
+SUMMARY:SQE1 Mock - FLK1 (30 min)
+DESCRIPTION:30-minute timed mock session\nPaper: FLK1\n\nOpen mock exam: http://127.0.0.1:4321/test\nSelect FLK1 and 30 min duration
+END:VEVENT
+BEGIN:VEVENT
+UID:c003eb29-d8cf-4575-99bc-c5d17f1b3c73
+DTSTART:20260709T090000
+DTEND:20260709T103000
+SUMMARY:SQE1 Revision - Conduct & Ethics: 3.5 Financial Crime & Money Laundering
+DESCRIPTION:Subject: Conduct & Ethics (BOTH)\nChapter: 3.5 Financial Crime & Money Laundering\nDuration: 90 min\n\nOpen revision guide: http://127.0.0.1:4321/guide
+END:VEVENT
+BEGIN:VEVENT
+UID:5222f40b-fc7c-4f8a-ac28-15b8759d8776
+DTSTART:20260709T110000
+DTEND:20260709T113000
+SUMMARY:SQE1 Mock - FLK2 (30 min)
+DESCRIPTION:30-minute timed mock session\nPaper: FLK2\n\nOpen mock exam: http://127.0.0.1:4321/test\nSelect FLK2 and 30 min duration
+END:VEVENT
+BEGIN:VEVENT
+UID:21cce23f-8b96-4381-a9b4-44ba99378799
+DTSTART:20260710T090000
+DTEND:20260710T103000
+SUMMARY:SQE1 Revision - Criminal Law: 5.5 Defences
+DESCRIPTION:Subject: Criminal Law (FLK2)\nChapter: 5.5 Defences\nDuration: 90 min\n\nOpen revision guide: http://127.0.0.1:4321/guide
+END:VEVENT
+BEGIN:VEVENT
+UID:5733ea7c-6f61-4fbd-a67d-b4a60acbca22
+DTSTART:20260710T110000
+DTEND:20260710T113000
+SUMMARY:SQE1 Mock - FLK1 (30 min)
+DESCRIPTION:30-minute timed mock session\nPaper: FLK1\n\nOpen mock exam: http://127.0.0.1:4321/test\nSelect FLK1 and 30 min duration
+END:VEVENT
+BEGIN:VEVENT
+UID:d2ce48cf-c24e-4413-863e-5181eee1f31e
+DTSTART:20260711T090000
+DTEND:20260711T103000
+SUMMARY:SQE1 Revision - Criminal Law: 5.6 Inchoate Offences & Accessorial Liability
+DESCRIPTION:Subject: Criminal Law (FLK2)\nChapter: 5.6 Inchoate Offences & Accessorial Liability\nDuration: 90 min\n\nOpen revision guide: http://127.0.0.1:4321/guide
+END:VEVENT
+BEGIN:VEVENT
+UID:1f107e91-27b6-4e84-afa1-877786147323
+DTSTART:20260711T110000
+DTEND:20260711T113000
+SUMMARY:SQE1 Mock - FLK2 (30 min)
+DESCRIPTION:30-minute timed mock session\nPaper: FLK2\n\nOpen mock exam: http://127.0.0.1:4321/test\nSelect FLK2 and 30 min duration
+END:VEVENT
+BEGIN:VEVENT
+UID:3b7e3cc9-5b29-404b-a4b7-2e47ad93325d
+DTSTART:20260716T090000
+DTEND:20260716T103000
+SUMMARY:SQE1 Revision - Trusts Law: 6.2 Resulting & Constructive Trusts
+DESCRIPTION:Subject: Trusts Law (FLK2)\nChapter: 6.2 Resulting & Constructive Trusts\nDuration: 90 min\n\nOpen revision guide: http://127.0.0.1:4321/guide
+END:VEVENT
+BEGIN:VEVENT
+UID:42da4507-fc50-4f53-8f66-dc424a5bf199
+DTSTART:20260716T110000
+DTEND:20260716T113000
+SUMMARY:SQE1 Mock - FLK1 (30 min)
+DESCRIPTION:30-minute timed mock session\nPaper: FLK1\n\nOpen mock exam: http://127.0.0.1:4321/test\nSelect FLK1 and 30 min duration
+END:VEVENT
+BEGIN:VEVENT
+UID:3f344001-a7a0-40eb-b42d-b95a73092167
+DTSTART:20260717T090000
+DTEND:20260717T103000
+SUMMARY:SQE1 Revision - Trusts Law: 6.3 Trustees — Duties & Powers
+DESCRIPTION:Subject: Trusts Law (FLK2)\nChapter: 6.3 Trustees — Duties & Powers\nDuration: 90 min\n\nOpen revision guide: http://127.0.0.1:4321/guide
+END:VEVENT
+BEGIN:VEVENT
+UID:c1760503-7d63-4e89-8c70-3f38a3f58fa5
+DTSTART:20260717T110000
+DTEND:20260717T113000
+SUMMARY:SQE1 Mock - FLK2 (30 min)
+DESCRIPTION:30-minute timed mock session\nPaper: FLK2\n\nOpen mock exam: http://127.0.0.1:4321/test\nSelect FLK2 and 30 min duration
+END:VEVENT
+BEGIN:VEVENT
+UID:ba18864e-d580-45c9-9c57-b48234bdd5a4
+DTSTART:20260718T090000
+DTEND:20260718T103000
+SUMMARY:SQE1 Revision - Business Law & Tax: 7.2 Partnership
+DESCRIPTION:Subject: Business Law & Tax (FLK1)\nChapter: 7.2 Partnership\nDuration: 90 min\n\nOpen revision guide: http://127.0.0.1:4321/guide
+END:VEVENT
+BEGIN:VEVENT
+UID:eefecad6-8ab6-492a-9f14-56a9dfbe78df
+DTSTART:20260718T110000
+DTEND:20260718T113000
+SUMMARY:SQE1 Mock - FLK1 (30 min)
+DESCRIPTION:30-minute timed mock session\nPaper: FLK1\n\nOpen mock exam: http://127.0.0.1:4321/test\nSelect FLK1 and 30 min duration
+END:VEVENT
+BEGIN:VEVENT
+UID:412a1c7b-3881-492e-b2fc-ac0601bb0e86
+DTSTART:20260723T090000
+DTEND:20260723T103000
+SUMMARY:SQE1 Revision - Conduct & Ethics: 3.2 Confidentiality & Legal Privilege
+DESCRIPTION:Subject: Conduct & Ethics (BOTH)\nChapter: 3.2 Confidentiality & Legal Privilege\nDuration: 90 min\n\nOpen revision guide: http://127.0.0.1:4321/guide
+END:VEVENT
+BEGIN:VEVENT
+UID:acc61e67-d331-455c-a5af-84e6b09d8344
+DTSTART:20260723T110000
+DTEND:20260723T113000
+SUMMARY:SQE1 Mock - FLK2 (30 min)
+DESCRIPTION:30-minute timed mock session\nPaper: FLK2\n\nOpen mock exam: http://127.0.0.1:4321/test\nSelect FLK2 and 30 min duration
+END:VEVENT
+BEGIN:VEVENT
+UID:9699abc5-794d-43e7-995f-3c2c6b66edf2
+DTSTART:20260724T090000
+DTEND:20260724T103000
+SUMMARY:SQE1 Revision - Business Law & Tax: 7.3 Company Formation
+DESCRIPTION:Subject: Business Law & Tax (FLK1)\nChapter: 7.3 Company Formation\nDuration: 90 min\n\nOpen revision guide: http://127.0.0.1:4321/guide
+END:VEVENT
+BEGIN:VEVENT
+UID:41f99ec4-46c4-4067-9e9f-5b6130ea7729
+DTSTART:20260724T110000
+DTEND:20260724T113000
+SUMMARY:SQE1 Mock - FLK1 (30 min)
+DESCRIPTION:30-minute timed mock session\nPaper: FLK1\n\nOpen mock exam: http://127.0.0.1:4321/test\nSelect FLK1 and 30 min duration
+END:VEVENT
+BEGIN:VEVENT
+UID:30c840dd-a8a6-41ab-ae21-160485115aa3
+DTSTART:20260725T090000
+DTEND:20260725T103000
+SUMMARY:SQE1 Revision - Business Law & Tax: 7.4 Company Constitution & Management
+DESCRIPTION:Subject: Business Law & Tax (FLK1)\nChapter: 7.4 Company Constitution & Management\nDuration: 90 min\n\nOpen revision guide: http://127.0.0.1:4321/guide
+END:VEVENT
+BEGIN:VEVENT
+UID:ca6da6e7-0fb1-4da9-9504-e696e9fcbd01
+DTSTART:20260725T110000
+DTEND:20260725T113000
+SUMMARY:SQE1 Mock - FLK2 (30 min)
+DESCRIPTION:30-minute timed mock session\nPaper: FLK2\n\nOpen mock exam: http://127.0.0.1:4321/test\nSelect FLK2 and 30 min duration
+END:VEVENT
+BEGIN:VEVENT
+UID:b2ab886f-d9fd-490c-8136-41fd7e7b27ae
+DTSTART:20260730T090000
+DTEND:20260730T103000
+SUMMARY:SQE1 Revision - Business Law & Tax: 7.5 Shares & Finance
+DESCRIPTION:Subject: Business Law & Tax (FLK1)\nChapter: 7.5 Shares & Finance\nDuration: 90 min\n\nOpen revision guide: http://127.0.0.1:4321/guide
+END:VEVENT
+BEGIN:VEVENT
+UID:c10e89ea-6645-4e9d-92b9-612e91557afe
+DTSTART:20260730T110000
+DTEND:20260730T113000
+SUMMARY:SQE1 Mock - FLK1 (30 min)
+DESCRIPTION:30-minute timed mock session\nPaper: FLK1\n\nOpen mock exam: http://127.0.0.1:4321/test\nSelect FLK1 and 30 min duration
+END:VEVENT
+BEGIN:VEVENT
+UID:6d21c30d-10b2-4593-8f05-910a1dd1cf02
+DTSTART:20260731T090000
+DTEND:20260731T103000
+SUMMARY:SQE1 Revision - Business Law & Tax: 7.6 Insolvency
+DESCRIPTION:Subject: Business Law & Tax (FLK1)\nChapter: 7.6 Insolvency\nDuration: 90 min\n\nOpen revision guide: http://127.0.0.1:4321/guide
+END:VEVENT
+BEGIN:VEVENT
+UID:21516dd9-c594-4629-9eeb-22a4a770376a
+DTSTART:20260731T110000
+DTEND:20260731T113000
+SUMMARY:SQE1 Mock - FLK2 (30 min)
+DESCRIPTION:30-minute timed mock session\nPaper: FLK2\n\nOpen mock exam: http://127.0.0.1:4321/test\nSelect FLK2 and 30 min duration
+END:VEVENT
+BEGIN:VEVENT
+UID:12fb2fc6-b032-4392-9f7f-534352e2e224
+DTSTART:20260801T090000
+DTEND:20260801T103000
+SUMMARY:SQE1 Revision - Business Law & Tax: 7.7 Taxation
+DESCRIPTION:Subject: Business Law & Tax (FLK1)\nChapter: 7.7 Taxation\nDuration: 90 min\n\nOpen revision guide: http://127.0.0.1:4321/guide
+END:VEVENT
+BEGIN:VEVENT
+UID:55ce0c4f-1e3a-4227-984b-49d030190ccf
+DTSTART:20260801T110000
+DTEND:20260801T113000
+SUMMARY:SQE1 Mock - FLK1 (30 min)
+DESCRIPTION:30-minute timed mock session\nPaper: FLK1\n\nOpen mock exam: http://127.0.0.1:4321/test\nSelect FLK1 and 30 min duration
+END:VEVENT
+BEGIN:VEVENT
+UID:0d2bef46-bc96-4892-a4ef-2d8143b68d18
+DTSTART:20260803T090000
+DTEND:20260803T103000
+SUMMARY:SQE1 Revision - Dispute Resolution: 8.1 Civil Procedure — Pre-Action
+DESCRIPTION:Subject: Dispute Resolution (FLK1)\nChapter: 8.1 Civil Procedure — Pre-Action\nDuration: 90 min\n\nOpen revision guide: http://127.0.0.1:4321/guide
+END:VEVENT
+BEGIN:VEVENT
+UID:03e449ca-fd0b-45c2-8c25-09027986f35f
+DTSTART:20260803T110000
+DTEND:20260803T113000
+SUMMARY:SQE1 Mock - FLK2 (30 min)
+DESCRIPTION:30-minute timed mock session\nPaper: FLK2\n\nOpen mock exam: http://127.0.0.1:4321/test\nSelect FLK2 and 30 min duration
+END:VEVENT
+BEGIN:VEVENT
+UID:097bc704-c010-4216-8b49-812e80dfdb4f
+DTSTART:20260804T090000
+DTEND:20260804T103000
+SUMMARY:SQE1 Revision - Dispute Resolution: 8.2 Starting a Claim
+DESCRIPTION:Subject: Dispute Resolution (FLK1)\nChapter: 8.2 Starting a Claim\nDuration: 90 min\n\nOpen revision guide: http://127.0.0.1:4321/guide
+END:VEVENT
+BEGIN:VEVENT
+UID:6df924a4-2a6f-474a-b550-324f7c35526e
+DTSTART:20260804T110000
+DTEND:20260804T113000
+SUMMARY:SQE1 Mock - FLK1 (30 min)
+DESCRIPTION:30-minute timed mock session\nPaper: FLK1\n\nOpen mock exam: http://127.0.0.1:4321/test\nSelect FLK1 and 30 min duration
+END:VEVENT
+BEGIN:VEVENT
+UID:3293f141-dded-4a03-90bf-72568d730fcd
+DTSTART:20260805T090000
+DTEND:20260805T103000
+SUMMARY:SQE1 Revision - Dispute Resolution: 8.3 Interim Remedies & Case Management
+DESCRIPTION:Subject: Dispute Resolution (FLK1)\nChapter: 8.3 Interim Remedies & Case Management\nDuration: 90 min\n\nOpen revision guide: http://127.0.0.1:4321/guide
+END:VEVENT
+BEGIN:VEVENT
+UID:f38e8254-c654-4283-88f4-bdcb2b676202
+DTSTART:20260805T110000
+DTEND:20260805T113000
+SUMMARY:SQE1 Mock - FLK2 (30 min)
+DESCRIPTION:30-minute timed mock session\nPaper: FLK2\n\nOpen mock exam: http://127.0.0.1:4321/test\nSelect FLK2 and 30 min duration
+END:VEVENT
+BEGIN:VEVENT
+UID:9d393117-7c8d-49a6-8c95-0d165b0bc2c9
+DTSTART:20260806T090000
+DTEND:20260806T103000
+SUMMARY:SQE1 Revision - Dispute Resolution: 8.4 Disclosure & Evidence
+DESCRIPTION:Subject: Dispute Resolution (FLK1)\nChapter: 8.4 Disclosure & Evidence\nDuration: 90 min\n\nOpen revision guide: http://127.0.0.1:4321/guide
+END:VEVENT
+BEGIN:VEVENT
+UID:05837ff8-bd9b-4900-86df-042ec7eb2cc1
+DTSTART:20260806T110000
+DTEND:20260806T113000
+SUMMARY:SQE1 Mock - FLK1 (30 min)
+DESCRIPTION:30-minute timed mock session\nPaper: FLK1\n\nOpen mock exam: http://127.0.0.1:4321/test\nSelect FLK1 and 30 min duration
+END:VEVENT
+BEGIN:VEVENT
+UID:9ce6c367-ba62-44d8-9adb-8d879d574091
+DTSTART:20260807T090000
+DTEND:20260807T103000
+SUMMARY:SQE1 Revision - Dispute Resolution: 8.5 Trial & Judgment
+DESCRIPTION:Subject: Dispute Resolution (FLK1)\nChapter: 8.5 Trial & Judgment\nDuration: 90 min\n\nOpen revision guide: http://127.0.0.1:4321/guide
+END:VEVENT
+BEGIN:VEVENT
+UID:eeaab9fc-40e4-49f5-8abb-7e2868632e0f
+DTSTART:20260807T110000
+DTEND:20260807T113000
+SUMMARY:SQE1 Mock - FLK2 (30 min)
+DESCRIPTION:30-minute timed mock session\nPaper: FLK2\n\nOpen mock exam: http://127.0.0.1:4321/test\nSelect FLK2 and 30 min duration
+END:VEVENT
+BEGIN:VEVENT
+UID:92ae455c-4f83-49c3-9677-e93c6ef5f57a
+DTSTART:20260808T090000
+DTEND:20260808T103000
+SUMMARY:SQE1 Revision - Dispute Resolution: 8.6 Appeals & Enforcement
+DESCRIPTION:Subject: Dispute Resolution (FLK1)\nChapter: 8.6 Appeals & Enforcement\nDuration: 90 min\n\nOpen revision guide: http://127.0.0.1:4321/guide
+END:VEVENT
+BEGIN:VEVENT
+UID:7e156feb-b51e-4a67-8203-8307141d446f
+DTSTART:20260808T110000
+DTEND:20260808T113000
+SUMMARY:SQE1 Mock - FLK1 (30 min)
+DESCRIPTION:30-minute timed mock session\nPaper: FLK1\n\nOpen mock exam: http://127.0.0.1:4321/test\nSelect FLK1 and 30 min duration
+END:VEVENT
+BEGIN:VEVENT
+UID:71b32c06-7eec-41a6-9865-619732f1d3ab
+DTSTART:20260813T090000
+DTEND:20260813T103000
+SUMMARY:SQE1 Revision - Tort: 2.4 Nuisance & Rylands v Fletcher
+DESCRIPTION:Subject: Tort (FLK1)\nChapter: 2.4 Nuisance & Rylands v Fletcher\nDuration: 90 min\n\nOpen revision guide: http://127.0.0.1:4321/guide
+END:VEVENT
+BEGIN:VEVENT
+UID:1cfe0a7b-5799-4836-b9e6-2d4cb6c0459c
+DTSTART:20260813T110000
+DTEND:20260813T113000
+SUMMARY:SQE1 Mock - FLK2 (30 min)
+DESCRIPTION:30-minute timed mock session\nPaper: FLK2\n\nOpen mock exam: http://127.0.0.1:4321/test\nSelect FLK2 and 30 min duration
+END:VEVENT
+BEGIN:VEVENT
+UID:5ecfa44f-5375-438e-ab79-306d166cdb07
+DTSTART:20260814T090000
+DTEND:20260814T103000
+SUMMARY:SQE1 Revision - Criminal Practice: 9.1 Police Powers & PACE
+DESCRIPTION:Subject: Criminal Practice (FLK2)\nChapter: 9.1 Police Powers & PACE\nDuration: 90 min\n\nOpen revision guide: http://127.0.0.1:4321/guide
+END:VEVENT
+BEGIN:VEVENT
+UID:c61855a8-978d-4eeb-9227-78b998f02701
+DTSTART:20260814T110000
+DTEND:20260814T113000
+SUMMARY:SQE1 Mock - FLK1 (30 min)
+DESCRIPTION:30-minute timed mock session\nPaper: FLK1\n\nOpen mock exam: http://127.0.0.1:4321/test\nSelect FLK1 and 30 min duration
+END:VEVENT
+BEGIN:VEVENT
+UID:e0265977-2e24-4f61-a118-397d2eb219d8
+DTSTART:20260815T090000
+DTEND:20260815T103000
+SUMMARY:SQE1 Revision - Criminal Practice: 9.2 Bail
+DESCRIPTION:Subject: Criminal Practice (FLK2)\nChapter: 9.2 Bail\nDuration: 90 min\n\nOpen revision guide: http://127.0.0.1:4321/guide
+END:VEVENT
+BEGIN:VEVENT
+UID:59bc8467-ec8e-478c-b0f0-7bd89656d6a4
+DTSTART:20260815T110000
+DTEND:20260815T113000
+SUMMARY:SQE1 Mock - FLK2 (30 min)
+DESCRIPTION:30-minute timed mock session\nPaper: FLK2\n\nOpen mock exam: http://127.0.0.1:4321/test\nSelect FLK2 and 30 min duration
+END:VEVENT
+BEGIN:VEVENT
+UID:c4ae92c0-d911-4984-8913-0831f6f9bab2
+DTSTART:20260820T090000
+DTEND:20260820T103000
+SUMMARY:SQE1 Revision - Criminal Law: 5.3 Property Offences
+DESCRIPTION:Subject: Criminal Law (FLK2)\nChapter: 5.3 Property Offences\nDuration: 90 min\n\nOpen revision guide: http://127.0.0.1:4321/guide
+END:VEVENT
+BEGIN:VEVENT
+UID:81278519-0097-4f07-b0ed-e6101d08ed30
+DTSTART:20260820T110000
+DTEND:20260820T113000
+SUMMARY:SQE1 Mock - FLK1 (30 min)
+DESCRIPTION:30-minute timed mock session\nPaper: FLK1\n\nOpen mock exam: http://127.0.0.1:4321/test\nSelect FLK1 and 30 min duration
+END:VEVENT
+BEGIN:VEVENT
+UID:a7a61006-c98a-4a69-91dd-4f2d27ed69eb
+DTSTART:20260821T090000
+DTEND:20260821T103000
+SUMMARY:SQE1 Revision - Criminal Law: 5.4 Fraud & Computer Misuse
+DESCRIPTION:Subject: Criminal Law (FLK2)\nChapter: 5.4 Fraud & Computer Misuse\nDuration: 90 min\n\nOpen revision guide: http://127.0.0.1:4321/guide
+END:VEVENT
+BEGIN:VEVENT
+UID:71f9d3e3-7c8e-45cb-82b8-4021ae19583e
+DTSTART:20260821T110000
+DTEND:20260821T113000
+SUMMARY:SQE1 Mock - FLK2 (30 min)
+DESCRIPTION:30-minute timed mock session\nPaper: FLK2\n\nOpen mock exam: http://127.0.0.1:4321/test\nSelect FLK2 and 30 min duration
+END:VEVENT
+BEGIN:VEVENT
+UID:3a726c23-3f84-441f-9ce1-4d42e390d440
+DTSTART:20260822T090000
+DTEND:20260822T103000
+SUMMARY:SQE1 Revision - Trusts Law: 6.5 Breach of Trust & Remedies
+DESCRIPTION:Subject: Trusts Law (FLK2)\nChapter: 6.5 Breach of Trust & Remedies\nDuration: 90 min\n\nOpen revision guide: http://127.0.0.1:4321/guide
+END:VEVENT
+BEGIN:VEVENT
+UID:02e23de6-cbe3-45f5-9d50-c2bc258854d8
+DTSTART:20260822T110000
+DTEND:20260822T113000
+SUMMARY:SQE1 Mock - FLK1 (30 min)
+DESCRIPTION:30-minute timed mock session\nPaper: FLK1\n\nOpen mock exam: http://127.0.0.1:4321/test\nSelect FLK1 and 30 min duration
+END:VEVENT
+BEGIN:VEVENT
+UID:9ab8b396-a135-47e7-ab31-597c78b24b2b
+DTSTART:20260827T090000
+DTEND:20260827T103000
+SUMMARY:SQE1 Revision - Criminal Practice: 9.4 Magistrates & Crown Court Trial
+DESCRIPTION:Subject: Criminal Practice (FLK2)\nChapter: 9.4 Magistrates & Crown Court Trial\nDuration: 90 min\n\nOpen revision guide: http://127.0.0.1:4321/guide
+END:VEVENT
+BEGIN:VEVENT
+UID:c38ad25c-1d9c-4b4b-a39f-2887936f5aef
+DTSTART:20260827T110000
+DTEND:20260827T113000
+SUMMARY:SQE1 Mock - FLK2 (30 min)
+DESCRIPTION:30-minute timed mock session\nPaper: FLK2\n\nOpen mock exam: http://127.0.0.1:4321/test\nSelect FLK2 and 30 min duration
+END:VEVENT
+BEGIN:VEVENT
+UID:161fdeff-8239-4db3-a083-ec3b693f2238
+DTSTART:20260828T090000
+DTEND:20260828T103000
+SUMMARY:SQE1 Revision - Legal Services: 10.1 Funding — Legal Aid & CFAs
+DESCRIPTION:Subject: Legal Services (FLK1)\nChapter: 10.1 Funding — Legal Aid & CFAs\nDuration: 90 min\n\nOpen revision guide: http://127.0.0.1:4321/guide
+END:VEVENT
+BEGIN:VEVENT
+UID:f3a8fe87-2e88-4969-9cf0-ba96a76058e7
+DTSTART:20260828T110000
+DTEND:20260828T113000
+SUMMARY:SQE1 Mock - FLK1 (30 min)
+DESCRIPTION:30-minute timed mock session\nPaper: FLK1\n\nOpen mock exam: http://127.0.0.1:4321/test\nSelect FLK1 and 30 min duration
+END:VEVENT
+BEGIN:VEVENT
+UID:bd27be0f-8dd5-41b5-ad0f-d6801ce767fb
+DTSTART:20260829T090000
+DTEND:20260829T103000
+SUMMARY:SQE1 Revision - Legal Services: 10.2 Consumer Credit & Client Care
+DESCRIPTION:Subject: Legal Services (FLK1)\nChapter: 10.2 Consumer Credit & Client Care\nDuration: 90 min\n\nOpen revision guide: http://127.0.0.1:4321/guide
+END:VEVENT
+BEGIN:VEVENT
+UID:f820728c-dafa-4c5a-bd8f-2013fd046a77
+DTSTART:20260829T110000
+DTEND:20260829T113000
+SUMMARY:SQE1 Mock - FLK2 (30 min)
+DESCRIPTION:30-minute timed mock session\nPaper: FLK2\n\nOpen mock exam: http://127.0.0.1:4321/test\nSelect FLK2 and 30 min duration
+END:VEVENT
+BEGIN:VEVENT
+UID:0eba8fd3-5fc0-4c0f-af47-fabd709dcf31
+DTSTART:20260903T090000
+DTEND:20260903T103000
+SUMMARY:SQE1 Revision - Legal Services: 10.3 Financial Services & Regulation
+DESCRIPTION:Subject: Legal Services (FLK1)\nChapter: 10.3 Financial Services & Regulation\nDuration: 90 min\n\nOpen revision guide: http://127.0.0.1:4321/guide
+END:VEVENT
+BEGIN:VEVENT
+UID:bdff390d-2dee-4179-9a70-2fe1051bdce4
+DTSTART:20260903T110000
+DTEND:20260903T113000
+SUMMARY:SQE1 Mock - FLK1 (30 min)
+DESCRIPTION:30-minute timed mock session\nPaper: FLK1\n\nOpen mock exam: http://127.0.0.1:4321/test\nSelect FLK1 and 30 min duration
+END:VEVENT
+BEGIN:VEVENT
+UID:60fcef1f-cf4a-4dc9-8d97-57442ee03c51
+DTSTART:20260904T090000
+DTEND:20260904T103000
+SUMMARY:SQE1 Revision - Legal System: 11.1 Sources of Law & Court Hierarchy
+DESCRIPTION:Subject: Legal System (FLK1)\nChapter: 11.1 Sources of Law & Court Hierarchy\nDuration: 90 min\n\nOpen revision guide: http://127.0.0.1:4321/guide
+END:VEVENT
+BEGIN:VEVENT
+UID:16a042d1-a384-422e-97da-4d4a62c1b3f7
+DTSTART:20260904T110000
+DTEND:20260904T113000
+SUMMARY:SQE1 Mock - FLK2 (30 min)
+DESCRIPTION:30-minute timed mock session\nPaper: FLK2\n\nOpen mock exam: http://127.0.0.1:4321/test\nSelect FLK2 and 30 min duration
+END:VEVENT
+BEGIN:VEVENT
+UID:07e17000-c266-4a71-a301-4968a520a0ff
+DTSTART:20260905T090000
+DTEND:20260905T103000
+SUMMARY:SQE1 Revision - Legal System: 11.2 Statutory Interpretation
+DESCRIPTION:Subject: Legal System (FLK1)\nChapter: 11.2 Statutory Interpretation\nDuration: 90 min\n\nOpen revision guide: http://127.0.0.1:4321/guide
+END:VEVENT
+BEGIN:VEVENT
+UID:90c7343e-8f40-4ba5-a637-ddf47f45e5e6
+DTSTART:20260905T110000
+DTEND:20260905T113000
+SUMMARY:SQE1 Mock - FLK1 (30 min)
+DESCRIPTION:30-minute timed mock session\nPaper: FLK1\n\nOpen mock exam: http://127.0.0.1:4321/test\nSelect FLK1 and 30 min duration
+END:VEVENT
+BEGIN:VEVENT
+UID:cc11e391-ff47-467b-b06c-af71d9f46208
+DTSTART:20260910T090000
+DTEND:20260910T103000
+SUMMARY:SQE1 Revision - Legal System: 11.5 EU Law
+DESCRIPTION:Subject: Legal System (FLK1)\nChapter: 11.5 EU Law\nDuration: 90 min\n\nOpen revision guide: http://127.0.0.1:4321/guide
+END:VEVENT
+BEGIN:VEVENT
+UID:532787a2-e5ef-42e8-9fec-9e047136ebbd
+DTSTART:20260910T110000
+DTEND:20260910T113000
+SUMMARY:SQE1 Mock - FLK2 (30 min)
+DESCRIPTION:30-minute timed mock session\nPaper: FLK2\n\nOpen mock exam: http://127.0.0.1:4321/test\nSelect FLK2 and 30 min duration
+END:VEVENT
+BEGIN:VEVENT
+UID:5bcf6396-9094-4844-8922-75d300647686
+DTSTART:20260911T090000
+DTEND:20260911T103000
+SUMMARY:SQE1 Revision - Property Practice: 12.1 Conveyancing — Pre-Contract
+DESCRIPTION:Subject: Property Practice (FLK2)\nChapter: 12.1 Conveyancing — Pre-Contract\nDuration: 90 min\n\nOpen revision guide: http://127.0.0.1:4321/guide
+END:VEVENT
+BEGIN:VEVENT
+UID:4aade8da-d9e7-4357-8cb8-e48fbd236016
+DTSTART:20260911T110000
+DTEND:20260911T113000
+SUMMARY:SQE1 Mock - FLK1 (30 min)
+DESCRIPTION:30-minute timed mock session\nPaper: FLK1\n\nOpen mock exam: http://127.0.0.1:4321/test\nSelect FLK1 and 30 min duration
+END:VEVENT
+BEGIN:VEVENT
+UID:7a482e77-a4b2-4547-9c44-c88e56d2cad1
+DTSTART:20260912T090000
+DTEND:20260912T103000
+SUMMARY:SQE1 Revision - Property Practice: 12.2 Conveyancing — Exchange to Completion
+DESCRIPTION:Subject: Property Practice (FLK2)\nChapter: 12.2 Conveyancing — Exchange to Completion\nDuration: 90 min\n\nOpen revision guide: http://127.0.0.1:4321/guide
+END:VEVENT
+BEGIN:VEVENT
+UID:dbc2e430-04d7-4333-867a-627a7837f324
+DTSTART:20260912T110000
+DTEND:20260912T113000
+SUMMARY:SQE1 Mock - FLK2 (30 min)
+DESCRIPTION:30-minute timed mock session\nPaper: FLK2\n\nOpen mock exam: http://127.0.0.1:4321/test\nSelect FLK2 and 30 min duration
+END:VEVENT
+BEGIN:VEVENT
+UID:b8ee1575-2588-4583-9f98-47200696846d
+DTSTART:20260917T090000
+DTEND:20260917T103000
+SUMMARY:SQE1 Revision - Property Practice: 12.4 SDLT & VAT
+DESCRIPTION:Subject: Property Practice (FLK2)\nChapter: 12.4 SDLT & VAT\nDuration: 90 min\n\nOpen revision guide: http://127.0.0.1:4321/guide
+END:VEVENT
+BEGIN:VEVENT
+UID:4d5fb194-cb75-401d-9a1e-644014596c8c
+DTSTART:20260917T110000
+DTEND:20260917T113000
+SUMMARY:SQE1 Mock - FLK1 (30 min)
+DESCRIPTION:30-minute timed mock session\nPaper: FLK1\n\nOpen mock exam: http://127.0.0.1:4321/test\nSelect FLK1 and 30 min duration
+END:VEVENT
+BEGIN:VEVENT
+UID:6e2e30ce-05a7-4ad4-b767-b466e3840c9a
+DTSTART:20260918T090000
+DTEND:20260918T103000
+SUMMARY:SQE1 Revision - Wills & Estates: 13.1 Making a Valid Will
+DESCRIPTION:Subject: Wills & Estates (FLK2)\nChapter: 13.1 Making a Valid Will\nDuration: 90 min\n\nOpen revision guide: http://127.0.0.1:4321/guide
+END:VEVENT
+BEGIN:VEVENT
+UID:1e8ad53b-1133-4d57-b534-b3102dc95b47
+DTSTART:20260918T110000
+DTEND:20260918T113000
+SUMMARY:SQE1 Mock - FLK2 (30 min)
+DESCRIPTION:30-minute timed mock session\nPaper: FLK2\n\nOpen mock exam: http://127.0.0.1:4321/test\nSelect FLK2 and 30 min duration
+END:VEVENT
+BEGIN:VEVENT
+UID:e1dc24e1-30cd-4655-8cd3-c8c6dee8e400
+DTSTART:20260919T090000
+DTEND:20260919T103000
+SUMMARY:SQE1 Revision - Wills & Estates: 13.2 Intestacy
+DESCRIPTION:Subject: Wills & Estates (FLK2)\nChapter: 13.2 Intestacy\nDuration: 90 min\n\nOpen revision guide: http://127.0.0.1:4321/guide
+END:VEVENT
+BEGIN:VEVENT
+UID:e7c7fa3f-8d92-4293-93ac-14c7f13b625e
+DTSTART:20260919T110000
+DTEND:20260919T113000
+SUMMARY:SQE1 Mock - FLK1 (30 min)
+DESCRIPTION:30-minute timed mock session\nPaper: FLK1\n\nOpen mock exam: http://127.0.0.1:4321/test\nSelect FLK1 and 30 min duration
+END:VEVENT
+BEGIN:VEVENT
+UID:171fddf7-b406-461b-93f2-29b76c1ad4e7
+DTSTART:20260924T090000
+DTEND:20260924T103000
+SUMMARY:SQE1 Revision - Criminal Practice: 9.3 Disclosure & Trial Preparation
+DESCRIPTION:Subject: Criminal Practice (FLK2)\nChapter: 9.3 Disclosure & Trial Preparation\nDuration: 90 min\n\nOpen revision guide: http://127.0.0.1:4321/guide
+END:VEVENT
+BEGIN:VEVENT
+UID:3df8410e-8c1b-40ce-b8e6-89c9c23e0e4d
+DTSTART:20260924T110000
+DTEND:20260924T113000
+SUMMARY:SQE1 Mock - FLK2 (30 min)
+DESCRIPTION:30-minute timed mock session\nPaper: FLK2\n\nOpen mock exam: http://127.0.0.1:4321/test\nSelect FLK2 and 30 min duration
+END:VEVENT
+BEGIN:VEVENT
+UID:d3bded43-8e39-482b-b52b-308b651fdb0b
+DTSTART:20260925T090000
+DTEND:20260925T103000
+SUMMARY:SQE1 Revision - Wills & Estates: 13.3 Probate & Administration
+DESCRIPTION:Subject: Wills & Estates (FLK2)\nChapter: 13.3 Probate & Administration\nDuration: 90 min\n\nOpen revision guide: http://127.0.0.1:4321/guide
+END:VEVENT
+BEGIN:VEVENT
+UID:f880ca65-3a15-42b4-a4bb-c027c1a2684f
+DTSTART:20260925T110000
+DTEND:20260925T113000
+SUMMARY:SQE1 Mock - FLK1 (30 min)
+DESCRIPTION:30-minute timed mock session\nPaper: FLK1\n\nOpen mock exam: http://127.0.0.1:4321/test\nSelect FLK1 and 30 min duration
+END:VEVENT
+BEGIN:VEVENT
+UID:92c27081-2e63-4c83-9e6e-0c9333a0bfe3
+DTSTART:20260926T090000
+DTEND:20260926T103000
+SUMMARY:SQE1 Revision - Wills & Estates: 13.4 Inheritance Tax
+DESCRIPTION:Subject: Wills & Estates (FLK2)\nChapter: 13.4 Inheritance Tax\nDuration: 90 min\n\nOpen revision guide: http://127.0.0.1:4321/guide
+END:VEVENT
+BEGIN:VEVENT
+UID:e8c3842e-8c43-4ab6-b8f1-1528ac5acee7
+DTSTART:20260926T110000
+DTEND:20260926T113000
+SUMMARY:SQE1 Mock - FLK2 (30 min)
+DESCRIPTION:30-minute timed mock session\nPaper: FLK2\n\nOpen mock exam: http://127.0.0.1:4321/test\nSelect FLK2 and 30 min duration
+END:VEVENT
+BEGIN:VEVENT
+UID:ba9126cd-7b80-4467-8dbb-84cb00225f90
+DTSTART:20260929T090000
+DTEND:20260929T103000
+SUMMARY:SQE1 Revision - Solicitors' Accounts: SAR.1 Client Money & Office Money
+DESCRIPTION:Subject: Solicitors' Accounts (FLK2)\nChapter: SAR.1 Client Money & Office Money\nDuration: 90 min\n\nOpen revision guide: http://127.0.0.1:4321/guide
+END:VEVENT
+BEGIN:VEVENT
+UID:4eff607e-75f9-4427-838c-59ee3022ffe8
+DTSTART:20260929T110000
+DTEND:20260929T113000
+SUMMARY:SQE1 Mock - FLK1 (30 min)
+DESCRIPTION:30-minute timed mock session\nPaper: FLK1\n\nOpen mock exam: http://127.0.0.1:4321/test\nSelect FLK1 and 30 min duration
+END:VEVENT
+BEGIN:VEVENT
+UID:8c6625f5-fa5a-40f3-8364-df2c078f92f9
+DTSTART:20260930T090000
+DTEND:20260930T103000
+SUMMARY:SQE1 Revision - Solicitors' Accounts: SAR.3 Transfers & Receipts
+DESCRIPTION:Subject: Solicitors' Accounts (FLK2)\nChapter: SAR.3 Transfers & Receipts\nDuration: 90 min\n\nOpen revision guide: http://127.0.0.1:4321/guide
+END:VEVENT
+BEGIN:VEVENT
+UID:16c59758-b11f-416b-9ba7-5e77c7c60319
+DTSTART:20260930T110000
+DTEND:20260930T113000
+SUMMARY:SQE1 Mock - FLK2 (30 min)
+DESCRIPTION:30-minute timed mock session\nPaper: FLK2\n\nOpen mock exam: http://127.0.0.1:4321/test\nSelect FLK2 and 30 min duration
+END:VEVENT
+BEGIN:VEVENT
+UID:8a2a2d1a-2dfc-48eb-af4e-dd64d271876c
+DTSTART:20261022T090000
+DTEND:20261022T103000
+SUMMARY:SQE1 Revision - Contract Law: 1.1 Offer & Acceptance
+DESCRIPTION:Subject: Contract Law (FLK1)\nChapter: 1.1 Offer & Acceptance\nDuration: 90 min\n\nOpen revision guide: http://127.0.0.1:4321/guide
+END:VEVENT
+BEGIN:VEVENT
+UID:aca089a0-3427-464b-9b0f-4d7b2fccf033
+DTSTART:20261022T110000
+DTEND:20261022T113000
+SUMMARY:SQE1 Mock - FLK1 (30 min)
+DESCRIPTION:30-minute timed mock session\nPaper: FLK1\n\nOpen mock exam: http://127.0.0.1:4321/test\nSelect FLK1 and 30 min duration
+END:VEVENT
+BEGIN:VEVENT
+UID:5d726ef4-b01e-48c2-b3f4-17717f3ac552
+DTSTART:20261023T090000
+DTEND:20261023T103000
+SUMMARY:SQE1 Revision - Criminal Practice: 9.5 Sentencing
+DESCRIPTION:Subject: Criminal Practice (FLK2)\nChapter: 9.5 Sentencing\nDuration: 90 min\n\nOpen revision guide: http://127.0.0.1:4321/guide
+END:VEVENT
+BEGIN:VEVENT
+UID:58699b43-293d-47cf-9d59-320d8b2a64e2
+DTSTART:20261023T110000
+DTEND:20261023T113000
+SUMMARY:SQE1 Mock - FLK2 (30 min)
+DESCRIPTION:30-minute timed mock session\nPaper: FLK2\n\nOpen mock exam: http://127.0.0.1:4321/test\nSelect FLK2 and 30 min duration
+END:VEVENT
+BEGIN:VEVENT
+UID:7c2486e2-b954-415f-ac2c-a32a8423d0b3
+DTSTART:20261029T090000
+DTEND:20261029T103000
+SUMMARY:SQE1 Revision - Business Law & Tax: 7.1 Business Organisations
+DESCRIPTION:Subject: Business Law & Tax (FLK1)\nChapter: 7.1 Business Organisations\nDuration: 90 min\n\nOpen revision guide: http://127.0.0.1:4321/guide
+END:VEVENT
+BEGIN:VEVENT
+UID:3327eac3-45a2-4523-abc7-1b6cd3f50f2c
+DTSTART:20261029T110000
+DTEND:20261029T113000
+SUMMARY:SQE1 Mock - FLK1 (30 min)
+DESCRIPTION:30-minute timed mock session\nPaper: FLK1\n\nOpen mock exam: http://127.0.0.1:4321/test\nSelect FLK1 and 30 min duration
+END:VEVENT
+BEGIN:VEVENT
+UID:4c7d7c03-5de7-492c-9a76-6a6e3837793d
+DTSTART:20261105T090000
+DTEND:20261105T103000
+SUMMARY:SQE1 Revision - Legal System: 11.4 Human Rights Act
+DESCRIPTION:Subject: Legal System (FLK1)\nChapter: 11.4 Human Rights Act\nDuration: 90 min\n\nOpen revision guide: http://127.0.0.1:4321/guide
+END:VEVENT
+BEGIN:VEVENT
+UID:dd69a56a-e36f-4b9a-ab7d-825f12c55a98
+DTSTART:20261105T110000
+DTEND:20261105T113000
+SUMMARY:SQE1 Mock - FLK2 (30 min)
+DESCRIPTION:30-minute timed mock session\nPaper: FLK2\n\nOpen mock exam: http://127.0.0.1:4321/test\nSelect FLK2 and 30 min duration
+END:VEVENT
+BEGIN:VEVENT
+UID:0d95758b-6d2f-4de8-8040-e5f27d88821a
+DTSTART:20261119T090000
+DTEND:20261119T103000
+SUMMARY:SQE1 Revision - Criminal Practice: 9.6 Appeals
+DESCRIPTION:Subject: Criminal Practice (FLK2)\nChapter: 9.6 Appeals\nDuration: 90 min\n\nOpen revision guide: http://127.0.0.1:4321/guide
+END:VEVENT
+BEGIN:VEVENT
+UID:68836180-b716-47dd-84bd-467bf66e27bf
+DTSTART:20261119T110000
+DTEND:20261119T113000
+SUMMARY:SQE1 Mock - FLK1 (30 min)
+DESCRIPTION:30-minute timed mock session\nPaper: FLK1\n\nOpen mock exam: http://127.0.0.1:4321/test\nSelect FLK1 and 30 min duration
+END:VEVENT
+BEGIN:VEVENT
+UID:34152d97-9b72-4981-87dd-d06ad1f8b748
+DTSTART:20261211T090000
+DTEND:20261211T103000
+SUMMARY:SQE1 Revision - Solicitors' Accounts: SAR.2 Client Account Rules
+DESCRIPTION:Subject: Solicitors' Accounts (FLK2)\nChapter: SAR.2 Client Account Rules\nDuration: 90 min\n\nOpen revision guide: http://127.0.0.1:4321/guide
+END:VEVENT
+BEGIN:VEVENT
+UID:58873f73-afaf-43e5-a9f8-04208b3a881b
+DTSTART:20261211T110000
+DTEND:20261211T113000
+SUMMARY:SQE1 Mock - FLK2 (30 min)
+DESCRIPTION:30-minute timed mock session\nPaper: FLK2\n\nOpen mock exam: http://127.0.0.1:4321/test\nSelect FLK2 and 30 min duration
+END:VEVENT
+END:VCALENDAR

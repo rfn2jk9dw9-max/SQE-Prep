@@ -106,6 +106,83 @@ def _cell_has_colored_bg(page, cell_bbox):
 
 # ── Page-level helpers ───────────────────────────────────────────────────────
 
+def _bands_in_region(page, y0, y1, x0, x1):
+    """
+    Build option-row bands from H5P row-separator rects.
+
+    H5P draws a thin (≈0.8pt) light-grey filled rect between answer rows.
+    pdfplumber's table finder is unreliable here: the ✓/✗ icon's vector
+    graphics create spurious cell boundaries that (a) split the correct-answer
+    row so the glyph lands in the *previous* option's cell, and (b) merge two
+    adjacent options into one cell.  Deriving rows directly from the separator
+    rects avoids both failure modes.
+
+    Returns a list of (x0, top, x1, bottom) bands between y0 and y1, or []
+    if no separators are found (caller should fall back to table cells).
+    """
+    min_w = 0.5 * (x1 - x0)
+    seps = []
+    for r in page.rects:
+        try:
+            if not r.get("fill"):
+                continue
+            if (r["bottom"] - r["top"]) > 3:
+                continue
+            if (r["x1"] - r["x0"]) < min_w:
+                continue
+            if r["top"] < y0 - 2 or r["bottom"] > y1 + 2:
+                continue
+            seps.append((r["top"], r["bottom"]))
+        except Exception:
+            pass
+    if not seps:
+        return []
+    # Merge separator segments drawn per-column (same y, different x ranges)
+    seps.sort()
+    merged = []
+    for top, bot in seps:
+        if merged and abs(top - merged[-1][0]) < 1.5:
+            merged[-1][1] = max(merged[-1][1], bot)
+        else:
+            merged.append([top, bot])
+    # Bands between consecutive boundaries.  The region start y0 opens the
+    # first band (the separator under the header may sit slightly ABOVE
+    # header_bottom, in which case the sliver band is skipped); each
+    # separator closes one band and opens the next; y1 closes the last.
+    starts = [y0] + [b for _, b in merged]
+    ends   = [t for t, _ in merged] + [y1]
+    bands = []
+    for band_top, band_bot in zip(starts, ends):
+        if band_bot - band_top >= 6:   # skip degenerate slivers
+            bands.append((x0, band_top, x1, band_bot))
+    return bands
+
+
+def _char_row_index(page, opt_cells, char, col_x0=None, col_x1=None):
+    """
+    Find the option row containing a marker glyph by scanning page.chars
+    directly and assigning by the glyph's vertical CENTER (crop-intersection
+    can leak a glyph into an adjacent row).  Optional x-range restricts the
+    search to one column (e.g. the "Correct" column).
+    """
+    try:
+        for c in page.chars:
+            if c["text"] != char:
+                continue
+            cx = (c["x0"] + c["x1"]) / 2
+            if col_x0 is not None and cx < col_x0 - 2:
+                continue
+            if col_x1 is not None and cx > col_x1 + 2:
+                continue
+            cy = (c["top"] + c["bottom"]) / 2
+            for idx, cb in enumerate(opt_cells):
+                if cb[1] <= cy <= cb[3]:
+                    return idx
+    except Exception:
+        pass
+    return None
+
+
 def _visible_cells(page):
     """All table cells whose bounding box lies within (or very near) the page.
 
@@ -205,8 +282,11 @@ def _extract_orphan_qtxts(page):
         if has_answers:
             continue
 
-        # Only consider tables that overflow the page bottom
-        if not any(cb[3] > ph for cb in cells):
+        # Only consider tables that overflow (or nearly reach) the page bottom
+        # — question text stranded at the foot of a page has its Answers
+        # section on the next page even when the table doesn't overflow.
+        overflows = any(cb[3] > ph for cb in cells)
+        if not overflows and not any(cb[3] > ph - 40 for cb in cells):
             continue
 
         # Find question text cell visible on this page
@@ -215,7 +295,12 @@ def _extract_orphan_qtxts(page):
                 continue
             try:
                 raw = page.crop(cb).extract_text() or ""
-                raw = re.sub(r"^Question \d+\s*\n?", "", raw).strip()
+                # For non-overflowing (near-bottom) tables, only a text block
+                # explicitly starting "Question N" is a safe orphan candidate —
+                # anything else is leftover option text from an earlier question.
+                if not overflows and not re.match(r"\s*Question \d+", raw):
+                    continue
+                raw = re.sub(r"^\s*Question \d+\s*\n?", "", raw).strip()
                 raw = re.sub(r"\s*Question Score:\s*[\d.]+\s*/\s*\d+\s*$", "", raw).strip()
                 raw = _FOOTER_RE.sub(" ", raw).strip()
                 txt = clean_text(raw)
@@ -324,7 +409,14 @@ def _extract_page_stubs(page, orphan_qtxts=None):
                         continue
 
         # ── Extract option cells ─────────────────────────────────────────────
-        opt_cells = _extract_option_cells(page, cells, header_bottom, pw, ph)
+        # Prefer separator-rect row bands (robust against ✓-icon cell-split /
+        # option-merge artifacts); fall back to table cells if none found.
+        tb = tbl.bbox
+        opt_cells = _bands_in_region(
+            page, max(0, header_bottom), min(tb[3], ph), tb[0], tb[2]
+        )[:5]
+        if not opt_cells:
+            opt_cells = _extract_option_cells(page, cells, header_bottom, pw, ph)
 
         options = []
         cidx    = None
@@ -342,13 +434,20 @@ def _extract_page_stubs(page, orphan_qtxts=None):
         # all 5 row crops span x=27–568 and pdfplumber returns CORRECT_CHAR in
         # every one, so cidx was always overwritten to the last option (index 4 = E).
         #
-        # Fix: try three methods in order, stopping as soon as cidx is found.
+        # Fix: try four methods in order, stopping as soon as cidx is found.
+
+        # 0) Direct char scan: CORRECT_CHAR glyph in the "Correct" column,
+        #    assigned to the row containing the glyph's vertical center.
+        #    (Most reliable — immune to crop-intersection leakage.)
+        cidx = _char_row_index(page, opt_cells, CORRECT_CHAR,
+                               col_x0=correct_col_x0, col_x1=correct_col_x1)
 
         # 1) Background colour: H5P marks the correct option with a coloured cell.
-        for idx, cb in enumerate(opt_cells):
-            if _cell_has_colored_bg(page, cb):
-                cidx = idx
-                break
+        if cidx is None:
+            for idx, cb in enumerate(opt_cells):
+                if _cell_has_colored_bg(page, cb):
+                    cidx = idx
+                    break
 
         # 2) CORRECT_CHAR in the "Correct" column only.
         #    correct_col_x0/x1 were found from the header row above; this narrow
@@ -382,15 +481,24 @@ def _extract_page_stubs(page, orphan_qtxts=None):
         # WRONG_CHAR (U+E894) appears in the user's selected option when they
         # chose incorrectly.  We scan each option cell's full-width crop for it.
         # uidx is None when the user was correct (no WRONG_CHAR present).
-        uidx = None
-        for idx, cb in enumerate(opt_cells):
-            try:
-                raw_chk = page.crop(cb).extract_text() or ""
-                if WRONG_CHAR in raw_chk:
-                    uidx = idx
-                    break
-            except Exception:
-                pass
+        uidx = _char_row_index(page, opt_cells, WRONG_CHAR)
+        if uidx is None:
+            for idx, cb in enumerate(opt_cells):
+                try:
+                    raw_chk = page.crop(cb).extract_text() or ""
+                    if WRONG_CHAR in raw_chk:
+                        uidx = idx
+                        break
+                except Exception:
+                    pass
+
+        # Whether the last row WITH TEXT may be cut mid-sentence at the page
+        # bottom.  Only possible when the table itself overflows the page
+        # (tb[3] > ph); if the table closes on this page, every rendered row
+        # is complete and next-page text is a whole new option.  The final
+        # mid-sentence test (no terminal punctuation) happens in
+        # _apply_continuation.
+        tail_cut = bool(tb[3] > ph + 2 and any(options))
 
         # Pad to 5 with empty strings (continuation expected from next page)
         while len(options) < 5:
@@ -409,7 +517,8 @@ def _extract_page_stubs(page, orphan_qtxts=None):
             and not last_cell_near_bottom
         )
         stubs.append({"qtxt": question_text, "opts": options,
-                      "cidx": cidx, "uidx": uidx, "complete": complete})
+                      "cidx": cidx, "uidx": uidx, "complete": complete,
+                      "tail_cut": tail_cut})
 
     return stubs
 
@@ -426,6 +535,9 @@ def _apply_continuation(pending, page, cont_cells):
             raw     = page.crop(cb).extract_text() or ""
             cleaned = scrub_option(raw)
             if not cleaned:
+                continue
+            # Skip pure page-furniture fragments (dates, "9/9", times)
+            if re.match(r'^[\d\s/:,.\-]+$', cleaned):
                 continue
             # Stop processing if we've hit the start of the next question
             if re.match(r'Question\s+\d+\s', cleaned, re.I):
@@ -453,12 +565,16 @@ def _apply_continuation(pending, page, cont_cells):
             # We no longer require the continuation to start lowercase — proper
             # nouns like "Ombudsman" can begin a continuation fragment.
             is_split_continuation = (
-                last_filled_idx is not None
+                pending.get("tail_cut", True)   # last filled row was cut at page bottom
+                and last_filled_idx is not None
                 and cleaned
                 and pending["opts"][last_filled_idx][-1:] not in {'.', '?', '!', '"', '”'}
             )
 
             empty = [i for i, o in enumerate(pending["opts"]) if not o]
+            # The cut-row rejoin only applies to the FIRST text cell of the
+            # continuation page; later cells are whole new options.
+            pending["tail_cut"] = False
             if is_split_continuation:
                 # Re-join the fragment that was cut at the page boundary
                 pending["opts"][last_filled_idx] = (
@@ -526,7 +642,36 @@ def parse_pdf(pdf_path, subject, paper):
 
                 # ── Complete pending from previous page ──────────────────────
                 if pending is not None:
-                    cont = [c for c in vcells if c[3] <= first_ay + 2]
+                    # Prefer separator-rect row bands from the continuation
+                    # table (the table hugging the page top) — same rationale
+                    # as in _extract_page_stubs: table cells get corrupted by
+                    # the ✓/✗ icon vector graphics.
+                    cont = None
+                    # Clip table bboxes to the visible page: some H5P exports
+                    # use virtual-page coordinates (negative tops, bottoms
+                    # beyond page height).
+                    cand = []
+                    for t in page.find_tables():
+                        t_top = max(0, t.bbox[1])
+                        t_bot = min(page.height, t.bbox[3])
+                        if t_top <= 45 and (t_bot - t_top) >= 20:
+                            cand.append((t_bot - t_top, t_top, t_bot, t))
+                    if cand:
+                        _, t_top, t_bot, t0 = min(cand, key=lambda c: c[0])
+                        bands = _bands_in_region(
+                            page, t_top, t_bot, t0.bbox[0], t0.bbox[2],
+                        )
+                        if bands:
+                            cont = bands
+                    if cont is None:
+                        cont = [c for c in vcells if c[3] <= first_ay + 2]
+                    if not cont:
+                        # Last resort: no tables detected at all (e.g. a lone
+                        # trailing option row on the final page) — build bands
+                        # straight from the separator rects on the page.
+                        y_end = first_ay if first_ay != float("inf") else page.height
+                        cont = _bands_in_region(page, 0, y_end,
+                                                27, page.width - 27)
                     _apply_continuation(pending, page, cont)
 
                     if (len(pending["opts"]) == 5
@@ -829,11 +974,23 @@ def _topic_key(stem):
     return m.group(1).lower() if m else stem.lower()
 
 
-def parse_all(tests_dir):
-    all_pdfs = sorted(Path(tests_dir).glob("*.pdf"))
+def parse_all(tests_dir, cache_file=None):
+    """
+    Parse all PDFs in tests_dir, deduplicate by topic key (keeping the most
+    recently modified file per topic), apply overrides, and return all questions.
+
+    Incremental cache: if cache_file is given (a Path or str), parsed results are
+    stored per PDF keyed by (filename, mtime).  On subsequent calls only PDFs
+    whose mtime has changed are re-parsed; the rest are loaded from cache.
+    This makes re-runs after adding a single new PDF very fast (~1–2s vs 50+s).
+
+    Cache format: JSON dict  { pdf_path_str: {"mtime": float, "questions": [...]} }
+    """
+    tests_dir = Path(tests_dir)
+    all_pdfs = sorted(tests_dir.glob("*.pdf"))
     _dbg(f"Found {len(all_pdfs)} PDF files")
 
-    # Deduplicate: for each topic code, keep the most recently modified file.
+    # ── 1. Deduplicate: keep most-recently-modified file per topic ─────────
     seen = {}   # topic_key → Path
     for p in all_pdfs:
         key = _topic_key(p.stem)
@@ -850,15 +1007,65 @@ def parse_all(tests_dir):
     pdfs = sorted(seen.values())
     _dbg(f"After dedup: {len(pdfs)} unique topics")
 
+    # ── 2. Load incremental cache (if requested) ───────────────────────────
+    cache = {}
+    if cache_file is not None:
+        cache_file = Path(cache_file)
+        if cache_file.exists():
+            try:
+                cache = json.loads(cache_file.read_text(encoding="utf-8"))
+                _dbg(f"Cache loaded: {len(cache)} entries from {cache_file.name}")
+            except Exception as e:
+                _dbg(f"Cache load error (ignored): {e}")
+                cache = {}
+
+    # ── 3. Parse each unique PDF (skip if cached and mtime unchanged) ──────
     all_q = []
+    cache_hits = 0
+    cache_misses = 0
     for p in pdfs:
-        subject, paper = subject_from_filename(p.name)
-        if p.stem.upper().startswith("SLK"):
-            qs = parse_canvas_pdf(str(p), subject, paper)
+        mtime = p.stat().st_mtime
+        cache_key = str(p)
+        cached = cache.get(cache_key)
+
+        if cached and abs(cached.get("mtime", 0) - mtime) < 1.0:
+            # Cache hit — reuse previously parsed questions
+            qs = cached["questions"]
+            cache_hits += 1
+            _dbg(f"  {len(qs):3d} q  [CACHED]  {p.name}")
         else:
-            qs = parse_pdf(str(p), subject, paper)
-        _dbg(f"  {len(qs):3d} q  [{paper:4s} / {subject}]  {p.name}")
+            # Cache miss — re-parse
+            subject, paper = subject_from_filename(p.name)
+            if p.stem.upper().startswith("SLK"):
+                qs = parse_canvas_pdf(str(p), subject, paper)
+            else:
+                qs = parse_pdf(str(p), subject, paper)
+            cache[cache_key] = {"mtime": mtime, "questions": qs}
+            cache_misses += 1
+            _dbg(f"  {len(qs):3d} q  [{paper:4s} / {subject}]  {p.name}")
+            # Persist incrementally so progress survives interrupted runs
+            # (e.g. sandbox timeouts) instead of only saving at the very end.
+            if cache_file is not None:
+                try:
+                    cache_file.write_text(
+                        json.dumps(cache, ensure_ascii=False), encoding="utf-8"
+                    )
+                except Exception:
+                    pass
+
         all_q.extend(qs)
+
+    _dbg(f"Cache: {cache_hits} hits, {cache_misses} misses")
+
+    # ── 4. Persist updated cache ───────────────────────────────────────────
+    if cache_file is not None:
+        try:
+            cache_file.write_text(
+                json.dumps(cache, ensure_ascii=False), encoding="utf-8"
+            )
+            _dbg(f"Cache saved: {len(cache)} entries → {cache_file.name}")
+        except Exception as e:
+            _dbg(f"Cache save error (ignored): {e}")
 
     all_q = apply_overrides(all_q)
     return all_q

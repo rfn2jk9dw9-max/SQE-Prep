@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SQE1 Progress · Ghita Bennis</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;
+  background:linear-gradient(135deg,#0c1024 0%,#1e3a5f 100%);
+  min-height:100dvh;padding:24px;color:#fff}
+.page{max-width:700px;margin:0 auto}
+.header{display:flex;align-items:center;justify-content:space-between;margin-bottom:28px}
+.logo{font-size:24px;font-weight:900;letter-spacing:-1px}
+.logo em{font-style:normal;color:#60a5fa}
+.back-btn{font-size:13px;color:rgba(255,255,255,.5);text-decoration:none;
+  padding:8px 14px;border:1px solid rgba(255,255,255,.15);border-radius:8px;
+  transition:all .15s}
+.back-btn:hover{color:#fff;border-color:rgba(255,255,255,.4)}
+
+.section-title{font-size:11px;letter-spacing:.8px;text-transform:uppercase;
+  color:rgba(255,255,255,.35);margin-bottom:12px;margin-top:24px}
+
+/* Summary cards */
+.summary-row{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:4px}
+.stat-card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);
+  border-radius:14px;padding:18px 16px;text-align:center}
+.stat-val{font-size:28px;font-weight:800;color:#60a5fa;margin-bottom:4px}
+.stat-label{font-size:11px;color:rgba(255,255,255,.45);text-transform:uppercase;letter-spacing:.5px}
+
+/* Session list */
+.session-card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);
+  border-radius:14px;padding:18px 20px;margin-bottom:10px}
+.session-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.session-meta{display:flex;align-items:center;gap:10px}
+.paper-badge{font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;
+  letter-spacing:.5px}
+.paper-badge.FLK1{background:rgba(99,102,241,.3);color:#a5b4fc}
+.paper-badge.FLK2{background:rgba(14,116,144,.3);color:#67e8f9}
+.session-date{font-size:12px;color:rgba(255,255,255,.4)}
+.score-badge{font-size:22px;font-weight:800}
+.score-badge.pass{color:#4ade80}
+.score-badge.fail{color:#f87171}
+.score-sub{font-size:11px;color:rgba(255,255,255,.4);text-align:right;margin-top:2px}
+
+/* Subject bars */
+.subj-list{display:flex;flex-direction:column;gap:7px;margin-top:4px}
+.subj-row{display:flex;align-items:center;gap:10px;font-size:12px}
+.subj-name{color:rgba(255,255,255,.6);min-width:190px;white-space:nowrap;
+  overflow:hidden;text-overflow:ellipsis}
+.bar-wrap{flex:1;height:6px;background:rgba(255,255,255,.1);border-radius:3px;overflow:hidden}
+.bar-fill{height:100%;border-radius:3px;background:#60a5fa}
+.bar-fill.low{background:#f59e0b}
+.subj-pct{font-size:11px;color:rgba(255,255,255,.4);min-width:34px;text-align:right}
+
+/* Subject aggregate */
+.agg-card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);
+  border-radius:14px;padding:20px 20px;margin-bottom:10px}
+.agg-title{font-size:13px;font-weight:700;margin-bottom:14px;color:rgba(255,255,255,.7)}
+.agg-row{display:flex;align-items:center;gap:10px;font-size:12px;margin-bottom:8px}
+.agg-name{color:rgba(255,255,255,.7);min-width:200px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.agg-bar-wrap{flex:1;height:8px;background:rgba(255,255,255,.1);border-radius:4px;overflow:hidden}
+.agg-bar-fill{height:100%;border-radius:4px;background:#60a5fa}
+.agg-bar-fill.low{background:#f59e0b}
+.agg-pct{font-size:11px;min-width:34px;text-align:right}
+.agg-pct.pass{color:#4ade80}
+.agg-pct.low{color:#f59e0b}
+
+.empty{text-align:center;color:rgba(255,255,255,.3);padding:60px 20px;font-size:14px}
+.trend-arrow{font-size:14px;margin-left:6px}
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="header">
+    <div class="logo">SQE<em>1</em> Progress</div>
+    <a href="index.html" class="back-btn">← Home</a>
+  </div>
+
+  <div id="content"></div>
+</div>
+
+<script>
+const PASS_MARK = 60;
+
+function loadProgress() {
+  try {
+    const raw = localStorage.getItem('sqe1_sessions');
+    if (raw) return JSON.parse(raw);
+  } catch(e) {}
+  return [];
+}
+
+function fmt(dt) {
+  const d = new Date(dt);
+  return d.toLocaleDateString('en-GB', {day:'numeric',month:'short',year:'numeric'}) +
+    ' ' + d.toLocaleTimeString('en-GB', {hour:'2-digit',minute:'2-digit'});
+}
+
+function render() {
+  const sessions = loadProgress().sort((a,b) => new Date(b.datetime) - new Date(a.datetime));
+  const el = document.getElementById('content');
+
+  if (sessions.length === 0) {
+    el.innerHTML = '<div class="empty">No sessions recorded yet.<br>Complete a mock exam to see your progress here.</div>';
+    return;
+  }
+
+  // Summary stats
+  const total = sessions.length;
+  const avg = Math.round(sessions.reduce((s,x) => s + x.percentage, 0) / total);
+  const best = Math.max(...sessions.map(x => x.percentage));
+  const trend = sessions.length >= 2
+    ? sessions[0].percentage - sessions[1].percentage
+    : null;
+
+  let trendHtml = '';
+  if (trend !== null) {
+    const sign = trend > 0 ? '+' : '';
+    trendHtml = `<span class="trend-arrow" style="color:${trend>=0?'#4ade80':'#f87171'}">${sign}${trend}%</span>`;
+  }
+
+  // Subject aggregate
+  const subjAgg = {};
+  for (const s of sessions) {
+    for (const [name, data] of Object.entries(s.subjects || {})) {
+      if (!subjAgg[name]) subjAgg[name] = {correct:0, total:0};
+      subjAgg[name].correct += data.correct;
+      subjAgg[name].total   += data.total;
+    }
+  }
+  const subjEntries = Object.entries(subjAgg)
+    .map(([name, d]) => ({name, pct: Math.round(d.correct/d.total*100), correct: d.correct, total: d.total}))
+    .sort((a,b) => a.pct - b.pct);
+
+  let aggHtml = '';
+  if (subjEntries.length > 0) {
+    aggHtml = `
+    <div class="section-title">Performance by subject (all sessions)</div>
+    <div class="agg-card">
+      ${subjEntries.map(s => `
+        <div class="agg-row">
+          <div class="agg-name">${s.name}</div>
+          <div class="agg-bar-wrap"><div class="agg-bar-fill ${s.pct<PASS_MARK?'low':''}" style="width:${s.pct}%"></div></div>
+          <div class="agg-pct ${s.pct<PASS_MARK?'low':'pass'}">${s.pct}%</div>
+        </div>`).join('')}
+    </div>`;
+  }
+
+  // Session cards
+  const sessionCards = sessions.map((s, i) => {
+    const pass = s.percentage >= PASS_MARK;
+    const subjHtml = Object.entries(s.subjects || {}).map(([name, d]) => {
+      const pct = Math.round(d.correct / d.total * 100);
+      return `<div class="subj-row">
+        <div class="subj-name">${name}</div>
+        <div class="bar-wrap"><div class="bar-fill ${pct<PASS_MARK?'low':''}" style="width:${pct}%"></div></div>
+        <div class="subj-pct">${pct}%</div>
+      </div>`;
+    }).join('');
+
+    const durLabel = {30:'30 min',60:'60 min',90:'90 min',153:'Full paper'}[s.durationMode] || s.durationMode+'min';
+
+    return `<div class="session-card">
+      <div class="session-top">
+        <div class="session-meta">
+          <span class="paper-badge ${s.paper}">${s.paper}</span>
+          <span class="session-date">${fmt(s.datetime)} · ${durLabel}</span>
+        </div>
+        <div>
+          <div class="score-badge ${pass?'pass':'fail'}">${s.percentage}%</div>
+          <div class="score-sub">${s.correct}/${s.totalQ} correct</div>
+        </div>
+      </div>
+      ${subjHtml ? '<div class="subj-list">'+subjHtml+'</div>' : ''}
+    </div>`;
+  }).join('');
+
+  el.innerHTML = `
+    <div class="section-title">Overview</div>
+    <div class="summary-row">
+      <div class="stat-card">
+        <div class="stat-val">${total}</div>
+        <div class="stat-label">Sessions</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-val">${avg}%${trendHtml}</div>
+        <div class="stat-label">Average score</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-val">${best}%</div>
+        <div class="stat-label">Best score</div>
+      </div>
+    </div>
+    ${aggHtml}
+    <div class="section-title">Session history</div>
+    ${sessionCards}
+  `;
+}
+
+render();
+</script>
+</body>
+</html>

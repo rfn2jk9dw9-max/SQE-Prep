@@ -323,9 +323,190 @@ def inject_personal_notes(html: str, by_chapter: dict[str, list[str]]) -> str:
     return html
 
 
+# ── Flashcard injection (mistakes → FLASH_DATA, NOT chapter notes) ───────────
+#
+# The revision guide has a separate flip-card flashcard feature (FLASH_DATA,
+# grouped by subject) distinct from the chapter-notes prose (D-style chapter
+# objects with "notes":[...], targeted by inject_personal_notes above).
+# Personal mistakes belong here, in flashcards — not woven into the notes.
+
+# Map from SUBJECT_NAME_TO_KEY's abbreviation to the actual key used in
+# FLASH_DATA (most match directly; a couple differ historically).
+FLASHCARD_KEY_OVERRIDES = {"BUS": "BUS7", "LSYS": "SYS"}
+
+FLASHCARD_LABELS = {
+    "DISP": "Dispute Resolution", "CONT": "Contract", "TORT": "Tort",
+    "BUS7": "Business Law & Tax", "SERV": "Legal Services", "SYS": "Legal System",
+    "PROP": "Property Law and Practice", "WILL": "Wills and Administration",
+    "LAND": "Land Law", "CRMP": "Criminal Practice", "TRUS": "Trusts",
+    "SLAC": "Solicitors Accounts", "CRML": "Criminal Law", "COND": "Conduct & Ethics",
+}
+FLASHCARD_COLORS = {"PROP": "#0f766e", "WILL": "#7c3aed", "SLAC": "#334155"}
+DEFAULT_FLASHCARD_COLOR = "#475569"
+
+_ORIGIN_LABEL = {
+    "mock_exam": "Mock Exam", "mock_exam_online": "Mock Exam",
+    "canvas_pdf": "Session", "h5p": "Session",
+}
+
+AUTO_MISTAKES_START = "/*AUTO_MISTAKES_START*/"
+AUTO_MISTAKES_END = "/*AUTO_MISTAKES_END*/"
+
+
+def wrong_answer_to_flashcard_key(q: dict) -> str | None:
+    subj_key = subject_to_key(q.get("subject", ""))
+    if not subj_key:
+        return None
+    return FLASHCARD_KEY_OVERRIDES.get(subj_key, subj_key)
+
+
+def map_wrong_answers_to_flashcards(wrong_answers: list[dict]) -> dict[str, list[dict]]:
+    """
+    Returns {flashcard_key: [{"q":..., "a":..., "auto": True}, ...]}
+    flashcard_key matches a FLASH_DATA deck's `key` (e.g. 'CONT', 'BUS7').
+    """
+    by_key = defaultdict(list)
+    seen = set()
+
+    for q in wrong_answers:
+        fkey = wrong_answer_to_flashcard_key(q)
+        if not fkey:
+            continue
+
+        qtext = (q.get("questionText") or "").strip()
+        if not qtext:
+            continue
+
+        dedup_key = (fkey, qtext[:80])
+        if dedup_key in seen:
+            continue
+        seen.add(dedup_key)
+
+        label = _ORIGIN_LABEL.get(q.get("origin", "h5p"), "Session")
+        q_short = qtext[:220].rstrip() + ("…" if len(qtext) > 220 else "")
+        user_ans = (q.get("userAnswer") or "?")[:150].rstrip()
+        corr_ans = (q.get("correctAnswer") or "?")[:150].rstrip()
+
+        by_key[fkey].append({
+            "q": f"⚠ Your mistake — {label}: {q_short}",
+            "a": f"You answered: {user_ans}. Correct answer: {corr_ans}.",
+            "auto": True,
+        })
+
+    return dict(by_key)
+
+
+def _find_matching_bracket(text: str, open_idx: int, open_ch="[", close_ch="]") -> int:
+    """
+    Depth-count from open_idx (which must point at open_ch) to find the index
+    of the matching close_ch, skipping over quoted string literals so that
+    literal brackets inside legal text (e.g. case citations like '[2003]')
+    don't throw off the count.
+    """
+    depth = 0
+    i = open_idx
+    n = len(text)
+    while i < n:
+        ch = text[i]
+        if ch in ("'", '"'):
+            quote = ch
+            i += 1
+            while i < n:
+                if text[i] == "\\":
+                    i += 2
+                    continue
+                if text[i] == quote:
+                    i += 1
+                    break
+                i += 1
+            continue
+        if ch == open_ch:
+            depth += 1
+        elif ch == close_ch:
+            depth -= 1
+            if depth == 0:
+                return i
+        i += 1
+    return -1
+
+
+def inject_mistake_flashcards(html: str, by_key: dict[str, list[dict]]) -> str:
+    """
+    Appends auto-generated mistake cards (tagged "auto": true) into the
+    matching FLASH_DATA deck's cards:[...] array, wrapped in
+    AUTO_MISTAKES_START/END comment markers so reruns replace (not
+    duplicate) the batch. Creates a new deck if the subject has no deck yet.
+    Hand-authored cards (no "auto" marker) are never touched.
+    """
+    fd_idx = html.find("const FLASH_DATA")
+    if fd_idx == -1:
+        print("  ⚠ FLASH_DATA not found — cannot inject mistake flashcards")
+        return html
+
+    arr_open = html.find("[", fd_idx)
+    if arr_open == -1:
+        return html
+    arr_close = _find_matching_bracket(html, arr_open)
+    if arr_close == -1:
+        print("  ⚠ Could not find end of FLASH_DATA array — skipping flashcard injection")
+        return html
+
+    block = html[arr_open:arr_close + 1]
+
+    for key, cards in by_key.items():
+        if not cards:
+            continue
+
+        auto_js = ",".join(json.dumps(c, ensure_ascii=False) for c in cards)
+
+        k_idx = block.find(f"key:'{key}'")
+        if k_idx == -1:
+            k_idx = block.find(f'"key":"{key}"')
+
+        if k_idx == -1:
+            # No existing deck for this subject — append a brand-new one.
+            label = FLASHCARD_LABELS.get(key, key)
+            color = FLASHCARD_COLORS.get(key, DEFAULT_FLASHCARD_COLOR)
+            new_deck = (
+                f'{{"key":"{key}","label":{json.dumps(label)},"color":"{color}","score":0,'
+                f'"cards":[{AUTO_MISTAKES_START}{auto_js}{AUTO_MISTAKES_END}]}}'
+            )
+            trimmed = block[:-1].rstrip()
+            sep = "" if trimmed.endswith(",") or trimmed.endswith("[") else ","
+            block = trimmed + sep + new_deck + "]"
+            print(f"  ✓ Created new flashcard deck '{key}' with {len(cards)} mistake card(s)")
+            continue
+
+        cards_marker = block.find("cards:[", k_idx)
+        if cards_marker == -1:
+            cards_marker = block.find('"cards":[', k_idx)
+        cards_open = block.find("[", cards_marker) if cards_marker != -1 else -1
+        if cards_open == -1:
+            continue
+        cards_close = _find_matching_bracket(block, cards_open)
+        if cards_close == -1:
+            continue
+
+        scope = block[cards_open:cards_close + 1]
+
+        auto_pat = re.compile(
+            r",?\s*" + re.escape(AUTO_MISTAKES_START) + r".*?" + re.escape(AUTO_MISTAKES_END),
+            re.DOTALL
+        )
+        scope_clean = auto_pat.sub("", scope)
+
+        insertion = f",{AUTO_MISTAKES_START}{auto_js}{AUTO_MISTAKES_END}"
+        updated_scope = scope_clean[:-1] + insertion + "]"
+
+        block = block[:cards_open] + updated_scope + block[cards_close + 1:]
+        print(f"  ✓ Injected {len(cards)} mistake flashcard(s) into '{key}' deck")
+
+    return html[:arr_open] + block + html[arr_close + 1:]
+
+
 # ── H5P PDF wrong-answer extraction ──────────────────────────────────────────
 
-def load_h5p_wrong_answers(tests_dir: Path) -> list[dict]:
+def load_h5p_wrong_answers(tests_dir: Path, cache_file: Path = None) -> list[dict]:
     """
     Parse ALL H5P PDFs (BUS, CONT, LAND, etc.) in tests_dir — including
     duplicate re-sits — and return wrong answers where the user's selection
@@ -334,6 +515,10 @@ def load_h5p_wrong_answers(tests_dir: Path) -> list[dict]:
     No deduplication is applied here: if the user sat the same test twice and
     got a question wrong both times, two entries are returned (they'll be
     deduped later by map_wrong_answers_to_chapters via the seen-set).
+
+    If cache_file is given, reuses the same incremental cache format written
+    by parse_questions.parse_all() ({pdf_path_str: {"mtime":..., "questions":...}})
+    so PDFs already parsed in step 1 of update_site.py aren't re-parsed here.
     """
     sys.path.insert(0, str(SCRIPT_DIR))
     try:
@@ -342,8 +527,18 @@ def load_h5p_wrong_answers(tests_dir: Path) -> list[dict]:
         print(f"  ⚠ Could not import parser: {e}")
         return []
 
+    cache = {}
+    if cache_file is not None:
+        cache_file = Path(cache_file)
+        if cache_file.exists():
+            try:
+                cache = json.loads(cache_file.read_text(encoding="utf-8"))
+            except Exception:
+                cache = {}
+
     wrong = []
     pdf_paths = sorted(Path(tests_dir).glob("*.pdf"))
+    cache_dirty = False
 
     for pdf_path in pdf_paths:
         if pdf_path.stem.upper().startswith("SLK"):
@@ -352,11 +547,21 @@ def load_h5p_wrong_answers(tests_dir: Path) -> list[dict]:
         subject, paper = subject_from_filename(pdf_path.name)
         source = pdf_path.stem
 
-        try:
-            questions = parse_pdf(str(pdf_path), subject, paper)
-        except Exception as e:
-            print(f"  ⚠ Could not parse {pdf_path.name}: {e}")
-            continue
+        cache_key = str(pdf_path)
+        mtime = pdf_path.stat().st_mtime
+        cached = cache.get(cache_key)
+
+        if cached and abs(cached.get("mtime", 0) - mtime) < 1.0:
+            questions = cached["questions"]
+        else:
+            try:
+                questions = parse_pdf(str(pdf_path), subject, paper)
+            except Exception as e:
+                print(f"  ⚠ Could not parse {pdf_path.name}: {e}")
+                continue
+            if cache_file is not None:
+                cache[cache_key] = {"mtime": mtime, "questions": questions}
+                cache_dirty = True
 
         for q in questions:
             uidx = q.get("user_wrong_index")
@@ -370,17 +575,25 @@ def load_h5p_wrong_answers(tests_dir: Path) -> list[dict]:
 
             wrong.append({
                 "source":        source,
+                "subject":       subject,
+                "origin":        "h5p",
                 "questionText":  q["question_text"],
                 "userAnswer":    user_ans,
                 "correctAnswer": correct_ans,
             })
+
+    if cache_file is not None and cache_dirty:
+        try:
+            cache_file.write_text(json.dumps(cache, ensure_ascii=False), encoding="utf-8")
+        except Exception:
+            pass
 
     return wrong
 
 
 # ── Public entry point ────────────────────────────────────────────────────────
 
-def get_personal_notes(tests_dir: Path, progress_file: Path) -> dict[str, list[str]]:
+def _gather_all_wrong_answers(tests_dir: Path, progress_file: Path, cache_file: Path = None) -> list[dict]:
     print("\n[Mistakes] Loading wrong answers...")
 
     wrong = []
@@ -401,15 +614,31 @@ def get_personal_notes(tests_dir: Path, progress_file: Path) -> dict[str, list[s
     wrong.extend(canvas)
 
     # 4. H5P PDFs (BUS, CONT, LAND, etc. — user's wrong selections in PDF)
-    h5p = load_h5p_wrong_answers(tests_dir)
+    h5p = load_h5p_wrong_answers(tests_dir, cache_file=cache_file)
     print(f"  H5P PDFs: {len(h5p)} wrong answers")
     wrong.extend(h5p)
 
     print(f"  Total wrong answers: {len(wrong)}")
+    return wrong
 
+
+def get_personal_notes(tests_dir: Path, progress_file: Path, cache_file: Path = None) -> dict[str, list[str]]:
+    """Legacy path: maps mistakes to chapter-notes prose. No longer used by
+    update_site.py's default pipeline — mistakes now go to flashcards
+    (see get_personal_mistake_flashcards) instead of the high-yield notes."""
+    wrong = _gather_all_wrong_answers(tests_dir, progress_file, cache_file)
     by_chapter = map_wrong_answers_to_chapters(wrong)
     print(f"  Mapped to {len(by_chapter)} chapter(s): {sorted(by_chapter.keys())}")
     return by_chapter
+
+
+def get_personal_mistake_flashcards(tests_dir: Path, progress_file: Path, cache_file: Path = None) -> dict[str, list[dict]]:
+    """Maps mistakes to FLASH_DATA flashcard decks, keyed by subject."""
+    wrong = _gather_all_wrong_answers(tests_dir, progress_file, cache_file)
+    by_key = map_wrong_answers_to_flashcards(wrong)
+    total = sum(len(v) for v in by_key.values())
+    print(f"  Mapped to {total} flashcard(s) across {len(by_key)} deck(s): {sorted(by_key.keys())}")
+    return by_key
 
 
 if __name__ == "__main__":

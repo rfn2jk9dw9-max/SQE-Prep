@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.sqe1.autoupdate</string>
+
+    <key>ProgramArguments</key>
+    <array>
+        <string>/bin/bash</string>
+        <string>-c</string>
+        <string>cd "/Users/ghitab/Documents/Claude/Projects/Mission solicitor" &amp;&amp; /usr/bin/python3 update_site.py</string>
+    </array>
+
+    <key>EnvironmentVariables</key>
+    <dict>
+        <key>HOME</key>
+        <string>/Users/ghitab</string>
+        <key>PATH</key>
+        <string>/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin</string>
+        <key>GIT_TERMINAL_PROMPT</key>
+        <string>0</string>
+    </dict>
+
+    <!-- Trigger when new PDFs are added to the Tests folder -->
+    <key>WatchPaths</key>
+    <array>
+        <string>/Users/ghitab/Library/Mobile Documents/com~apple~CloudDocs/GB LEX/Formation Solicitor/Tests</string>
+    </array>
+
+    <key>StandardOutPath</key>
+    <string>/Users/ghitab/Documents/Claude/Projects/Mission solicitor/autoupdate.log</string>
+    <key>StandardErrorPath</key>
+    <string>/Users/ghitab/Documents/Claude/Projects/Mission solicitor/autoupdate.log</string>
+
+    <key>RunAtLoad</key>
+    <false/>
+</dict>
+</plist>

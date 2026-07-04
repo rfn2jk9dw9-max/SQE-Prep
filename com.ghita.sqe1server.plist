@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN"
+  "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+
+  <!-- ── Identity ─────────────────────────────────────────────────── -->
+  <key>Label</key>
+  <string>com.ghita.sqe1server</string>
+
+  <!-- ── Command ──────────────────────────────────────────────────── -->
+  <key>ProgramArguments</key>
+  <array>
+    <string>/Library/Frameworks/Python.framework/Versions/3.14/bin/python3</string>
+    <string>/Users/ghitab/Documents/Claude/Projects/Mission solicitor/sqe1_server.py</string>
+  </array>
+
+  <!-- Working directory (same folder as the script) -->
+  <key>WorkingDirectory</key>
+  <string>/Users/ghitab/Documents/Claude/Projects/Mission solicitor</string>
+
+  <!-- ── Auto-start and crash-recovery ────────────────────────────── -->
+  <!-- Start automatically when you log in -->
+  <key>RunAtLoad</key>
+  <true/>
+
+  <!-- Restart automatically if the server crashes -->
+  <key>KeepAlive</key>
+  <true/>
+
+  <!-- Wait 5 seconds before restarting after a crash -->
+  <key>ThrottleInterval</key>
+  <integer>5</integer>
+
+  <!-- ── Logging (stdout/stderr captured here) ────────────────────── -->
+  <!-- Note: the server itself writes detailed logs to server.log via Python logging.
+       These files capture any crash output at the OS level. -->
+  <key>StandardOutPath</key>
+  <string>/Users/ghitab/Library/Mobile Documents/com~apple~CloudDocs/GB LEX/Formation Solicitor/server_stdout.log</string>
+  <key>StandardErrorPath</key>
+  <string>/Users/ghitab/Library/Mobile Documents/com~apple~CloudDocs/GB LEX/Formation Solicitor/server_stderr.log</string>
+
+  <!-- ── Environment ──────────────────────────────────────────────── -->
+  <key>EnvironmentVariables</key>
+  <dict>
+    <key>PATH</key>
+    <string>/Library/Frameworks/Python.framework/Versions/3.14/bin:/usr/local/bin:/usr/bin:/bin</string>
+  </dict>
+
+</dict>
+</plist>

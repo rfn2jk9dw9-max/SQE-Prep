@@ -8,9 +8,13 @@ It will: parse questions → rebuild the standalone exam HTML → push to GitHub
 Usage: python3 update_site.py
 """
 
-import sys, os, json, subprocess, re
+import sys, os, json, subprocess, re, base64
 from ftplib import FTP, all_errors as FTP_ERRORS
 from pathlib import Path
+try:
+    import urllib.request as _urllib
+except ImportError:
+    _urllib = None
 
 # ── Path resolution ───────────────────────────────────────────
 # Supports running on the user's Mac OR inside the Cowork sandbox.
@@ -51,6 +55,66 @@ TESTS_DIR  = next((p for p in _ICLOUD_CANDIDATES if _safe_exists(p)), _ICLOUD_CA
 # In sandbox, git operations always fail (lock-file permissions).
 IN_SANDBOX = str(Path.home()).startswith('/sessions/')
 
+GITHUB_REPO = "rfn2jk9dw9-max/SQE-Prep"
+GITHUB_BRANCH = "main"
+
+def _load_github_token():
+    """Load GitHub PAT from secrets.json next to this script."""
+    secrets_path = SCRIPT_DIR / "secrets.json"
+    if secrets_path.exists():
+        try:
+            data = json.loads(secrets_path.read_text())
+            return data.get("github_token", "")
+        except Exception:
+            pass
+    return os.environ.get("GITHUB_TOKEN", "")
+
+def _github_api(method, path, payload=None, token=""):
+    """Minimal GitHub REST API caller (no third-party deps)."""
+    url = f"https://api.github.com{path}"
+    data = json.dumps(payload).encode() if payload else None
+    req = _urllib.Request(url, data=data, method=method)
+    req.add_header("Authorization", f"token {token}")
+    req.add_header("Accept", "application/vnd.github.v3+json")
+    req.add_header("Content-Type", "application/json")
+    try:
+        with _urllib.urlopen(req, timeout=30) as resp:
+            return json.loads(resp.read()), None
+    except Exception as e:
+        return None, str(e)
+
+def github_push_files(files_dict, commit_message, token):
+    """
+    Push multiple files to GitHub via the Contents API.
+    files_dict: {filename: Path_or_bytes}
+    Returns (success, message).
+    """
+    if not token:
+        return False, "No GitHub token found in secrets.json"
+
+    pushed, errors = [], []
+    for filename, source in files_dict.items():
+        content_bytes = source.read_bytes() if isinstance(source, Path) else source
+        b64 = base64.b64encode(content_bytes).decode()
+
+        # Get current SHA (needed for updates)
+        info, err = _github_api("GET", f"/repos/{GITHUB_REPO}/contents/{filename}?ref={GITHUB_BRANCH}", token=token)
+        sha = info["sha"] if info and "sha" in info else None
+
+        payload = {"message": commit_message, "content": b64, "branch": GITHUB_BRANCH}
+        if sha:
+            payload["sha"] = sha
+
+        result, err = _github_api("PUT", f"/repos/{GITHUB_REPO}/contents/{filename}", payload=payload, token=token)
+        if result and "content" in result:
+            pushed.append(filename)
+        else:
+            errors.append(f"{filename}: {err}")
+
+    if errors:
+        return False, f"Errors: {'; '.join(errors)}"
+    return True, f"Pushed {len(pushed)} file(s): {', '.join(pushed)}"
+
 MOCK_SRC   = SCRIPT_DIR / "SQE1_MockExam.html"
 STANDALONE = SCRIPT_DIR / "SQE1_MockExam_Standalone.html"
 
@@ -74,7 +138,8 @@ def main():
 
     sys.path.insert(0, str(SCRIPT_DIR))
     import parse_questions
-    questions = parse_questions.parse_all(str(TESTS_DIR))
+    cache_file = SCRIPT_DIR / "_parse_cache.json"
+    questions = parse_questions.parse_all(str(TESTS_DIR), cache_file=cache_file)
     print(f"  ✓ {len(questions)} questions parsed")
 
     # ── 2. Rebuild standalone HTML ────────────────────────────
@@ -114,22 +179,24 @@ def main():
     STANDALONE.write_text(html, encoding='utf-8')
     print(f"  ✓ Standalone HTML written ({len(html):,} chars)")
 
-    # ── 2b. Inject personal mistake notes into revision guide ─
-    print(f"\n[2b/4] Injecting personal mistake notes into revision guide...")
+    # ── 2b. Inject personal mistakes into revision guide FLASHCARDS ──
+    # (Mistakes belong in the flip-card flashcard deck, NOT woven into the
+    # chapter notes prose — see extract_mistakes.inject_mistake_flashcards.)
+    print(f"\n[2b/4] Injecting personal mistake flashcards into revision guide...")
     hy_standalone = SCRIPT_DIR / "SQE1_HighYield_Standalone.html"
     if hy_standalone.exists():
         try:
-            from extract_mistakes import get_personal_notes, inject_personal_notes
-            by_chapter = get_personal_notes(TESTS_DIR, SCRIPT_DIR / "progress.json")
-            if by_chapter:
+            from extract_mistakes import get_personal_mistake_flashcards, inject_mistake_flashcards
+            by_key = get_personal_mistake_flashcards(TESTS_DIR, SCRIPT_DIR / "progress.json", cache_file=cache_file)
+            if by_key:
                 hy_html = hy_standalone.read_text(encoding='utf-8')
-                hy_html = inject_personal_notes(hy_html, by_chapter)
+                hy_html = inject_mistake_flashcards(hy_html, by_key)
                 hy_standalone.write_text(hy_html, encoding='utf-8')
-                print(f"  ✓ Revision guide updated with personal notes")
+                print(f"  ✓ Revision guide flashcards updated with personal mistakes")
             else:
-                print(f"  ℹ No wrong answers mapped to chapters yet")
+                print(f"  ℹ No wrong answers mapped to flashcard decks yet")
         except Exception as e:
-            print(f"  ⚠ Could not inject personal notes: {e}")
+            print(f"  ⚠ Could not inject mistake flashcards: {e}")
     else:
         print(f"  ⚠ SQE1_HighYield_Standalone.html not found")
 
@@ -157,34 +224,31 @@ def main():
         else:
             print(f"  ⚠ progress.php not found")
 
-    # ── 3. Stage & commit ─────────────────────────────────────
-    print(f"\n[3/4] Committing to git...")
-    if IN_SANDBOX:
-        print(f"  ℹ Skipped in sandbox (git lock-file restriction).")
-        print(f"  → Run locally: git add SQE1_MockExam_Standalone.html SQE1_HighYield_Standalone.html && git commit -m 'Update: {len(questions)} questions' && git push origin main")
+    # ── 3 & 4. Push to GitHub via API (no git required) ───────
+    print(f"\n[3/4] Pushing to GitHub via API...")
+    token = _load_github_token()
+    if not token:
+        print(f"  ⚠ No GitHub token — skipping push.")
+        print(f"  → Add your token to secrets.json: {{\"github_token\": \"ghp_...\"}}")
     else:
-        os.chdir(SCRIPT_DIR)
-        # Clear any stale lock files before committing
-        for lock in ['.git/HEAD.lock', '.git/index.lock', '.git/objects/maintenance.lock',
-                     '.git/refs/remotes/origin/main.lock']:
-            lock_path = SCRIPT_DIR / lock
-            if lock_path.exists():
-                lock_path.unlink(missing_ok=True)
-        run("git add SQE1_MockExam_Standalone.html index.html SQE1_HighYield_Standalone.html progress.php")
-        run(f'git commit -m "Update: {len(questions)} questions embedded"')
+        files_to_push = {
+            "SQE1_MockExam_Standalone.html": STANDALONE,
+            "SQE1_HighYield_Standalone.html": SCRIPT_DIR / "SQE1_HighYield_Standalone.html",
+        }
+        # Only push index.html if it exists locally
+        index_html = SCRIPT_DIR / "index.html"
+        if index_html.exists():
+            files_to_push["index.html"] = index_html
 
-        # ── 4. Push to GitHub ──────────────────────────────────
-        print(f"\n[4/4] Pushing to GitHub...")
-        # Pull first to avoid non-fast-forward rejection
-        run("git stash")
-        run("git pull origin main --rebase")
-        run("git stash pop")
-        code = run("git push origin main")
-        if code == 0:
+        commit_msg = f"Update: {len(questions)} questions embedded"
+        print(f"\n[4/4] Committing {len(files_to_push)} file(s)...")
+        ok, msg = github_push_files(files_to_push, commit_msg, token)
+        if ok:
+            print(f"  ✓ {msg}")
             print(f"\n✓ Done! Site updated at:")
             print(f"  https://rfn2jk9dw9-max.github.io/SQE-Prep/")
         else:
-            print(f"\n✗ Push failed — check your GitHub credentials.")
+            print(f"  ✗ {msg}")
 
     print("=" * 55)
 
