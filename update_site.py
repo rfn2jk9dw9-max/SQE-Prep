@@ -143,10 +143,20 @@ def main():
     print(f"  ✓ {len(questions)} questions parsed")
 
     # ── 2. Rebuild standalone HTML ────────────────────────────
-    print(f"\n[2/4] Rebuilding standalone HTML...")
-    html = MOCK_SRC.read_text(encoding='utf-8')
+    # IMPORTANT: only the COLP bank (QUESTION_BANK) is refreshed from the
+    # Tests PDFs. SRA_BANK (SRA Sample) and REVISE_BANK (Revise SQE) must
+    # NEVER be touched by the daily update — so we edit the standalone
+    # in place rather than rebuilding it from the SQE1_MockExam.html
+    # template (which would clobber the standalone's SRA/Revise banks
+    # with the template's copies).
+    print(f"\n[2/4] Updating COLP question bank in standalone HTML...")
+    if STANDALONE.exists():
+        html = STANDALONE.read_text(encoding='utf-8')
+    else:
+        print(f"  ℹ Standalone not found — bootstrapping from template {MOCK_SRC.name}")
+        html = MOCK_SRC.read_text(encoding='utf-8')
 
-    # Replace the embedded question bank directly (safe even if already updated)
+    # Replace ONLY the embedded COLP question bank (safe even if already updated)
     qbank_js = json.dumps(questions, ensure_ascii=False).replace("</script>", "<\\/script>")
     html, n = re.subn(
         r'const QUESTION_BANK = \[.*?\];',
@@ -156,7 +166,8 @@ def main():
         flags=re.DOTALL
     )
     if n:
-        print(f"  ✓ QUESTION_BANK replaced ({len(questions)} questions)")
+        print(f"  ✓ QUESTION_BANK (COLP) replaced ({len(questions)} questions)")
+        print(f"  ✓ SRA_BANK and REVISE_BANK left untouched")
     else:
         print(f"  ⚠ QUESTION_BANK pattern not found — standalone may already be current")
 
