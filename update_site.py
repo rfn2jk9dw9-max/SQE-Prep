@@ -69,6 +69,25 @@ def _load_github_token():
             pass
     return os.environ.get("GITHUB_TOKEN", "")
 
+def _load_ftp_creds():
+    """Load Hostinger FTP settings from secrets.json (falls back to defaults).
+    secrets.json may contain an "ftp" object, e.g.:
+      "ftp": {"host": "82.112.243.57", "port": 21,
+              "user": "u256011742.solicitor", "password": "...",
+              "dir": "solicitor"}
+    """
+    defaults = {"host": "82.112.243.57", "port": 21,
+                "user": "u256011742.solicitor", "password": "#Patience13#",
+                "dir": "solicitor"}
+    secrets_path = SCRIPT_DIR / "secrets.json"
+    if secrets_path.exists():
+        try:
+            data = json.loads(secrets_path.read_text())
+            defaults.update(data.get("ftp", {}) or {})
+        except Exception:
+            pass
+    return defaults
+
 def _github_api(method, path, payload=None, token=""):
     """Minimal GitHub REST API caller (no third-party deps)."""
     url = f"https://api.github.com{path}"
@@ -218,20 +237,26 @@ def main():
     else:
         php_file = SCRIPT_DIR / "progress.php"
         if php_file.exists():
+            creds = _load_ftp_creds()
             try:
                 ftp = FTP()
-                ftp.connect('82.112.243.57', 21, timeout=15)
-                ftp.login('u256011742.solicitor', '#Patience13#')
-                try:
-                    ftp.cwd('solicitor')
-                except Exception:
-                    pass
+                ftp.connect(creds["host"], int(creds.get("port", 21)), timeout=15)
+                ftp.login(creds["user"], creds["password"])
+                if creds.get("dir"):
+                    try:
+                        ftp.cwd(creds["dir"])
+                    except Exception:
+                        pass
                 with open(php_file, 'rb') as f:
                     ftp.storbinary('STOR progress.php', f)
                 ftp.quit()
                 print(f"  ✓ progress.php uploaded to Hostinger")
             except FTP_ERRORS as e:
                 print(f"  ⚠ FTP upload failed: {e}")
+                if "530" in str(e):
+                    print(f"    → 530 = login rejected. Refresh the FTP username/password")
+                    print(f"      in Hostinger (hPanel → Files → FTP Accounts), then update")
+                    print(f"      the \"ftp\" block in secrets.json.")
         else:
             print(f"  ⚠ progress.php not found")
 
