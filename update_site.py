@@ -134,6 +134,58 @@ def github_push_files(files_dict, commit_message, token):
         return False, f"Errors: {'; '.join(errors)}"
     return True, f"Pushed {len(pushed)} file(s): {', '.join(pushed)}"
 
+def git_publish(commit_message):
+    """Publish via LOCAL git so there is a single, linear history.
+
+    Root cause of the recurring merge conflicts: this script used to push via
+    the GitHub Contents API (server-side commits) while manual edits went
+    through local git, so the two histories diverged and collided on the
+    single-line data files. Publishing through git instead keeps origin and
+    local in lockstep — both the daily job and manual edits run on this Mac
+    and share this repo, so local is always ahead-or-equal to origin and a
+    plain push succeeds.
+
+    Also clears stale .git lock files left by crashed runs (the other thing
+    that jammed us), commits pending changes, resyncs with origin, and pushes.
+
+    Returns (ok, message). In the Cowork sandbox git is unavailable, so this
+    returns (False, ...) and the caller falls back to the API push.
+    """
+    if IN_SANDBOX:
+        return False, "sandbox — git unavailable, using API"
+
+    repo = str(SCRIPT_DIR)
+    def g(args):
+        return subprocess.run(f"git {args}", shell=True, cwd=repo,
+                              capture_output=True, text=True)
+
+    if g("rev-parse --is-inside-work-tree").returncode != 0:
+        return False, "not a git repository"
+
+    # 1. clear stale locks from a crashed git/editor (prevents index.lock hangs)
+    for lock in ("index.lock", "HEAD.lock"):
+        try:
+            (SCRIPT_DIR / ".git" / lock).unlink()
+        except OSError:
+            pass
+
+    # 2. stage + commit local changes (generated files + any manual note edits)
+    g("add -A")
+    if g("diff --cached --quiet").returncode != 0:
+        g(f'commit -m "{commit_message}"')
+
+    # 3. auto-resync with origin, then push
+    g("fetch origin main")
+    if g("rebase origin/main").returncode != 0:
+        # conflict (usually the single-line data files): keep our freshly
+        # generated/edited version rather than aborting into a broken state.
+        g("rebase --abort")
+        g("merge -X ours --no-edit origin/main")
+    push = g("push origin main")
+    ok = push.returncode == 0
+    tail = (push.stdout + push.stderr).strip().splitlines()
+    return ok, (tail[-1] if tail else ("pushed" if ok else "push failed"))
+
 MOCK_SRC   = SCRIPT_DIR / "SQE1_MockExam.html"
 STANDALONE = SCRIPT_DIR / "SQE1_MockExam_Standalone.html"
 
@@ -260,32 +312,36 @@ def main():
         else:
             print(f"  ⚠ progress.php not found")
 
-    # ── 3 & 4. Push to GitHub via API (no git required) ───────
-    print(f"\n[3/4] Pushing to GitHub via API...")
-    token = _load_github_token()
-    if not token:
-        print(f"  ⚠ No GitHub token — skipping push.")
-        print(f"  → Add your token to secrets.json: {{\"github_token\": \"ghp_...\"}}")
+    # ── 3 & 4. Publish ────────────────────────────────────────
+    # Prefer LOCAL git (single linear history — avoids the API-vs-git
+    # divergence that used to cause the recurring conflicts). Fall back to the
+    # GitHub API only in the sandbox or if git is unavailable.
+    print(f"\n[3/4] Publishing to GitHub...")
+    commit_msg = f"Update: {len(questions)} questions embedded"
+    ok, msg = git_publish(commit_msg)
+    if ok:
+        print(f"  ✓ Published via git: {msg}")
     else:
-        files_to_push = {
-            "SQE1_MockExam_Standalone.html": STANDALONE,
-            "SQE1_HighYield_Standalone.html": SCRIPT_DIR / "SQE1_HighYield_Standalone.html",
-        }
-        # Only push index.html if it exists locally
-        index_html = SCRIPT_DIR / "index.html"
-        if index_html.exists():
-            files_to_push["index.html"] = index_html
-
-        commit_msg = f"Update: {len(questions)} questions embedded"
-        print(f"\n[4/4] Committing {len(files_to_push)} file(s)...")
-        ok, msg = github_push_files(files_to_push, commit_msg, token)
-        if ok:
-            print(f"  ✓ {msg}")
-            print(f"\n✓ Done! Site updated at:")
-            print(f"  https://rfn2jk9dw9-max.github.io/SQE-Prep/")
+        print(f"  ℹ git publish unavailable ({msg}); trying GitHub API...")
+        token = _load_github_token()
+        if not token:
+            print(f"  ⚠ No GitHub token — skipping push.")
+            print(f"  → Add your token to secrets.json: {{\"github_token\": \"ghp_...\"}}")
         else:
-            print(f"  ✗ {msg}")
+            files_to_push = {
+                "SQE1_MockExam_Standalone.html": STANDALONE,
+                "SQE1_HighYield_Standalone.html": SCRIPT_DIR / "SQE1_HighYield_Standalone.html",
+            }
+            index_html = SCRIPT_DIR / "index.html"
+            if index_html.exists():
+                files_to_push["index.html"] = index_html
+            print(f"\n[4/4] Committing {len(files_to_push)} file(s) via API...")
+            ok, msg = github_push_files(files_to_push, commit_msg, token)
+            print(f"  {'✓' if ok else '✗'} {msg}")
 
+    if ok:
+        print(f"\n✓ Done! Site updated at:")
+        print(f"  https://rfn2jk9dw9-max.github.io/SQE-Prep/")
     print("=" * 55)
 
 if __name__ == "__main__":
