@@ -186,6 +186,65 @@ def git_publish(commit_message):
     tail = (push.stdout + push.stderr).strip().splitlines()
     return ok, (tail[-1] if tail else ("pushed" if ok else "push failed"))
 
+def git_publish_sandbox(commit_message, files):
+    """Publish from inside the Cowork sandbox.
+
+    Why not plain git on the repo, or the GitHub API?
+      • The sandbox mounts the iCloud repo on a filesystem that FORBIDS
+        deleting files. git constantly creates/removes lock files
+        (index.lock, ref .lock, tmp objects), so any git op against the
+        mounted .git leaves un-removable locks and wedges the repo.
+      • api.github.com is blocked by the sandbox proxy (403 Forbidden), so
+        the Contents-API fallback can't reach GitHub either.
+
+    Solution: git-https to github.com IS reachable. So we clone a fresh
+    working copy into the sandbox-local /tmp (which DOES allow deletes),
+    copy the freshly generated files in, commit and push from there. The
+    mounted .git is never touched, so nothing gets wedged.
+
+    files: {filename: Path_on_mount}. Returns (ok, message).
+    """
+    import tempfile, shutil
+    token = _load_github_token()
+    if not token:
+        return False, "no GitHub token in secrets.json"
+    owner = GITHUB_REPO.split("/")[0]
+    url = f"https://{owner}:{token}@github.com/{GITHUB_REPO}.git"
+    work = tempfile.mkdtemp(prefix="sqe_push_")
+    repo = os.path.join(work, "repo")
+    def g(args, cwd=repo):
+        return subprocess.run(f"git {args}", shell=True, cwd=cwd,
+                              capture_output=True, text=True)
+    try:
+        clone = subprocess.run(
+            f'git clone --depth 1 -b {GITHUB_BRANCH} "{url}" "{repo}"',
+            shell=True, capture_output=True, text=True, timeout=120)
+        if clone.returncode != 0:
+            return False, "clone failed: " + (clone.stderr.strip().splitlines()[-1] if clone.stderr.strip() else "unknown")
+        for name, src in files.items():
+            try:
+                shutil.copyfile(str(src), os.path.join(repo, name))
+            except Exception as e:
+                return False, f"copy {name} failed: {e}"
+        g('config user.email "auto@sqe1"')
+        g('config user.name "SQE1 Auto"')
+        g("add -A")
+        if g("diff --cached --quiet").returncode == 0:
+            return True, "no changes to publish (origin already current)"
+        c = g(f'commit -m "{commit_message}"')
+        if c.returncode != 0:
+            return False, "commit failed: " + (c.stderr or c.stdout).strip()
+        push = g(f"push origin HEAD:{GITHUB_BRANCH}")
+        if push.returncode != 0:
+            tail = (push.stdout + push.stderr).strip().splitlines()
+            return False, "push failed: " + (tail[-1] if tail else "unknown")
+        return True, "pushed via sandbox clone"
+    finally:
+        try:
+            shutil.rmtree(work, ignore_errors=True)
+        except Exception:
+            pass
+
 MOCK_SRC   = SCRIPT_DIR / "SQE1_MockExam.html"
 STANDALONE = SCRIPT_DIR / "SQE1_MockExam_Standalone.html"
 
@@ -318,26 +377,35 @@ def main():
     # GitHub API only in the sandbox or if git is unavailable.
     print(f"\n[3/4] Publishing to GitHub...")
     commit_msg = f"Update: {len(questions)} questions embedded"
-    ok, msg = git_publish(commit_msg)
-    if ok:
-        print(f"  ✓ Published via git: {msg}")
+
+    files_to_push = {
+        "SQE1_MockExam_Standalone.html": STANDALONE,
+        "SQE1_HighYield_Standalone.html": SCRIPT_DIR / "SQE1_HighYield_Standalone.html",
+    }
+    index_html = SCRIPT_DIR / "index.html"
+    if index_html.exists():
+        files_to_push["index.html"] = index_html
+
+    if IN_SANDBOX:
+        # Mount forbids deletes (wedges local git) and api.github.com is
+        # proxy-blocked — so publish from a throwaway clone on /tmp instead.
+        print(f"\n[4/4] Publishing {len(files_to_push)} file(s) via sandbox clone...")
+        ok, msg = git_publish_sandbox(commit_msg, files_to_push)
+        print(f"  {'✓' if ok else '✗'} {msg}")
     else:
-        print(f"  ℹ git publish unavailable ({msg}); trying GitHub API...")
-        token = _load_github_token()
-        if not token:
-            print(f"  ⚠ No GitHub token — skipping push.")
-            print(f"  → Add your token to secrets.json: {{\"github_token\": \"ghp_...\"}}")
+        ok, msg = git_publish(commit_msg)
+        if ok:
+            print(f"  ✓ Published via git: {msg}")
         else:
-            files_to_push = {
-                "SQE1_MockExam_Standalone.html": STANDALONE,
-                "SQE1_HighYield_Standalone.html": SCRIPT_DIR / "SQE1_HighYield_Standalone.html",
-            }
-            index_html = SCRIPT_DIR / "index.html"
-            if index_html.exists():
-                files_to_push["index.html"] = index_html
-            print(f"\n[4/4] Committing {len(files_to_push)} file(s) via API...")
-            ok, msg = github_push_files(files_to_push, commit_msg, token)
-            print(f"  {'✓' if ok else '✗'} {msg}")
+            print(f"  ℹ git publish unavailable ({msg}); trying GitHub API...")
+            token = _load_github_token()
+            if not token:
+                print(f"  ⚠ No GitHub token — skipping push.")
+                print(f"  → Add your token to secrets.json: {{\"github_token\": \"ghp_...\"}}")
+            else:
+                print(f"\n[4/4] Committing {len(files_to_push)} file(s) via API...")
+                ok, msg = github_push_files(files_to_push, commit_msg, token)
+                print(f"  {'✓' if ok else '✗'} {msg}")
 
     if ok:
         print(f"\n✓ Done! Site updated at:")
