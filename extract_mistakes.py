@@ -547,11 +547,17 @@ def load_h5p_wrong_answers(tests_dir: Path, cache_file: Path = None) -> list[dic
         subject, paper = subject_from_filename(pdf_path.name)
         source = pdf_path.stem
 
-        cache_key = str(pdf_path)
-        mtime = pdf_path.stat().st_mtime
+        # Key by filename and validate by size to match parse_questions.parse_all
+        # (keeps the shared cache valid across Mac/sandbox environments).
+        cache_key = pdf_path.name
+        st = pdf_path.stat()
+        mtime, size = st.st_mtime, st.st_size
         cached = cache.get(cache_key)
 
-        if cached and abs(cached.get("mtime", 0) - mtime) < 1.0:
+        if cached and (
+            (cached.get("size") is not None and cached.get("size") == size)
+            or (cached.get("size") is None and abs(cached.get("mtime", 0) - mtime) < 1.0)
+        ):
             questions = cached["questions"]
         else:
             try:
@@ -560,7 +566,7 @@ def load_h5p_wrong_answers(tests_dir: Path, cache_file: Path = None) -> list[dic
                 print(f"  ⚠ Could not parse {pdf_path.name}: {e}")
                 continue
             if cache_file is not None:
-                cache[cache_key] = {"mtime": mtime, "questions": questions}
+                cache[cache_key] = {"mtime": mtime, "size": size, "questions": questions}
                 cache_dirty = True
 
         for q in questions:

@@ -9,8 +9,33 @@ BUDGET = 33  # seconds
 START = time.time()
 
 SCRIPT_DIR = Path(__file__).resolve().parent
-TESTS_DIR = Path('/sessions/vigilant-youthful-mendel/mnt/Formation Solicitor/Tests')
 CACHE_FILE = SCRIPT_DIR / '_parse_cache.json'
+
+
+def _find_tests_dir():
+    """Locate the Tests folder on the Mac OR inside any Cowork sandbox session.
+    Session mount names change every run, so probe dynamically instead of
+    hardcoding a path."""
+    candidates = [
+        Path.home() / 'Library/Mobile Documents/com~apple~CloudDocs/GB LEX/Formation Solicitor/Tests',
+    ]
+    sessions_root = Path('/sessions')
+    if sessions_root.exists():
+        try:
+            for session in sessions_root.iterdir():
+                candidates.append(session / 'mnt' / 'Formation Solicitor' / 'Tests')
+        except PermissionError:
+            pass
+    for c in candidates:
+        try:
+            if c.exists():
+                return c
+        except PermissionError:
+            continue
+    return candidates[0]
+
+
+TESTS_DIR = _find_tests_dir()
 
 sys.path.insert(0, str(SCRIPT_DIR))
 import parse_questions as pq
@@ -37,8 +62,19 @@ def save():
         json.dump(cache, f, ensure_ascii=False)
     os.replace(tmp, str(CACHE_FILE))
 
-remaining = [p for p in pdfs
-             if not (cache.get(str(p)) and abs(cache[str(p)].get('mtime', 0) - p.stat().st_mtime) < 1.0)]
+def _is_cached(p):
+    """Cache hit if keyed by filename and file size matches (mtime fallback for
+    legacy entries).  Mirrors parse_questions.parse_all validation."""
+    c = cache.get(p.name)
+    if not c:
+        return False
+    size = p.stat().st_size
+    if c.get('size') is not None:
+        return c.get('size') == size
+    return abs(c.get('mtime', 0) - p.stat().st_mtime) < 1.0
+
+
+remaining = [p for p in pdfs if not _is_cached(p)]
 print(f'{len(pdfs)} unique topics, {len(remaining)} to parse')
 
 for p in remaining:
@@ -51,7 +87,8 @@ for p in remaining:
         qs = pq.parse_canvas_pdf(str(p), subject, paper)
     else:
         qs = pq.parse_pdf(str(p), subject, paper)
-    cache[str(p)] = {'mtime': p.stat().st_mtime, 'questions': qs}
+    st = p.stat()
+    cache[p.name] = {'mtime': st.st_mtime, 'size': st.st_size, 'questions': qs}
     save()
     print(f'  {len(qs):3d} q  parsed  {p.name}  [{time.time()-START:.0f}s]')
 

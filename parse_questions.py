@@ -980,11 +980,13 @@ def parse_all(tests_dir, cache_file=None):
     recently modified file per topic), apply overrides, and return all questions.
 
     Incremental cache: if cache_file is given (a Path or str), parsed results are
-    stored per PDF keyed by (filename, mtime).  On subsequent calls only PDFs
-    whose mtime has changed are re-parsed; the rest are loaded from cache.
-    This makes re-runs after adding a single new PDF very fast (~1–2s vs 50+s).
+    stored per PDF keyed by filename and validated by file size.  On subsequent
+    calls only PDFs whose size has changed are re-parsed; the rest are loaded
+    from cache.  Keying by filename (not full path) and validating by size keeps
+    the cache valid across environments (Mac vs sandbox) where paths and mtimes
+    differ.  This makes re-runs after adding a single new PDF very fast.
 
-    Cache format: JSON dict  { pdf_path_str: {"mtime": float, "questions": [...]} }
+    Cache format: JSON dict  { filename: {"mtime": float, "size": int, "questions": [...]} }
     """
     tests_dir = Path(tests_dir)
     all_pdfs = sorted(tests_dir.glob("*.pdf"))
@@ -1019,16 +1021,25 @@ def parse_all(tests_dir, cache_file=None):
                 _dbg(f"Cache load error (ignored): {e}")
                 cache = {}
 
-    # ── 3. Parse each unique PDF (skip if cached and mtime unchanged) ──────
+    # ── 3. Parse each unique PDF (skip if cached and unchanged) ──────
+    # Cache key is the bare filename (NOT the full path) so a cache built in
+    # one environment (e.g. the user's Mac) stays valid in another (e.g. the
+    # Cowork sandbox, whose mount path changes every session).  Validation is
+    # by file SIZE, which is stable across environments; mtime is only used as
+    # a fallback for legacy cache entries that predate size tracking.
     all_q = []
     cache_hits = 0
     cache_misses = 0
     for p in pdfs:
-        mtime = p.stat().st_mtime
-        cache_key = str(p)
+        st = p.stat()
+        mtime, size = st.st_mtime, st.st_size
+        cache_key = p.name
         cached = cache.get(cache_key)
 
-        if cached and abs(cached.get("mtime", 0) - mtime) < 1.0:
+        if cached and (
+            (cached.get("size") is not None and cached.get("size") == size)
+            or (cached.get("size") is None and abs(cached.get("mtime", 0) - mtime) < 1.0)
+        ):
             # Cache hit — reuse previously parsed questions
             qs = cached["questions"]
             cache_hits += 1
@@ -1040,7 +1051,7 @@ def parse_all(tests_dir, cache_file=None):
                 qs = parse_canvas_pdf(str(p), subject, paper)
             else:
                 qs = parse_pdf(str(p), subject, paper)
-            cache[cache_key] = {"mtime": mtime, "questions": qs}
+            cache[cache_key] = {"mtime": mtime, "size": size, "questions": qs}
             cache_misses += 1
             _dbg(f"  {len(qs):3d} q  [{paper:4s} / {subject}]  {p.name}")
             # Persist incrementally so progress survives interrupted runs
