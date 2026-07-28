@@ -16,8 +16,8 @@ echo "3) Pointing local branch at origin/main (keeps your working files)..."
 git reset --soft origin/main
 
 echo "4) Staging and committing the expanded revision guide..."
-git add SQE1_HighYield_Standalone.html
-git commit -m "Expand DISP High-Yield chapters vs SLK manual: 8.2 Building a Claim, 8.3 Pre-Action (Churchill), 8.10 Evidence, 8.11 Disclosure, 8.12 E-Disclosure, 8.13 Privilege, 8.14 Trial, 8.15 Costs, 8.16 Part 36, 8.17 Appeals & Enforcement; fix case-field rendering (8.5, 8.10)"
+git add SQE1_HighYield_Standalone.html "Fix Git & Push.command"
+git commit -m "Overhaul High-Yield vs SLK manuals: DISP 8.2,8.3,8.10-8.17; LAND 4.5 realigned (easements/covenants/mortgages, estoppel moved to 4.3); fix case-field rendering (8.5)"
 
 echo "5) Pushing..."
 git push && echo "✓ Pushed. Site will update at https://rfn2jk9dw9-max.github.io/SQE-Prep/"
