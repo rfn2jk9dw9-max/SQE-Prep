@@ -365,8 +365,18 @@ def main():
     if IN_SANDBOX:
         print(f"  ℹ Skipped in sandbox (no outbound FTP). Run locally to upload.")
     else:
-        php_file = SCRIPT_DIR / "progress.php"
-        if php_file.exists():
+        # Upload the API files. These must NOT contain credentials — they read
+        # them from db_config.php, which lives outside the web root and is
+        # uploaded manually, never by this script.
+        php_files = [SCRIPT_DIR / n for n in
+                     ("_db_connect.php", "progress.php", "colp_progress.php")]
+        php_files = [p for p in php_files if p.exists()]
+        leaky = [p.name for p in php_files if "DB_PASS" in p.read_text(errors="ignore")]
+        if leaky:
+            print(f"  ⚠ Refusing to upload {', '.join(leaky)} — still contains "
+                  f"hardcoded credentials. Use the patched version.")
+            php_files = [p for p in php_files if p.name not in leaky]
+        if php_files:
             creds = _load_ftp_creds()
             try:
                 ftp = FTP()
@@ -377,10 +387,11 @@ def main():
                         ftp.cwd(creds["dir"])
                     except Exception:
                         pass
-                with open(php_file, 'rb') as f:
-                    ftp.storbinary('STOR progress.php', f)
+                for p in php_files:
+                    with open(p, 'rb') as f:
+                        ftp.storbinary(f'STOR {p.name}', f)
+                    print(f"  ✓ {p.name} uploaded to Hostinger")
                 ftp.quit()
-                print(f"  ✓ progress.php uploaded to Hostinger")
             except FTP_ERRORS as e:
                 print(f"  ⚠ FTP upload failed: {e}")
                 if "530" in str(e):

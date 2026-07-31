@@ -3,6 +3,7 @@ secrets.json
 hostinger_patch/
 progress.php
 colp_progress.php
+_db_connect.php
 
 .DS_Store
 __pycache__/
