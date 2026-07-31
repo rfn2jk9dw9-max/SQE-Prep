@@ -76,8 +76,10 @@ def _load_ftp_creds():
               "user": "u256011742.solicitor", "password": "...",
               "dir": "solicitor"}
     """
+    # NOTE: no password default here on purpose. Credentials belong in
+    # secrets.json (gitignored), never in a tracked source file.
     defaults = {"host": "82.112.243.57", "port": 21,
-                "user": "u256011742.solicitor", "password": "#Patience13#",
+                "user": "u256011742.solicitor", "password": "",
                 "dir": "solicitor"}
     secrets_path = SCRIPT_DIR / "secrets.json"
     if secrets_path.exists():
@@ -86,6 +88,9 @@ def _load_ftp_creds():
             defaults.update(data.get("ftp", {}) or {})
         except Exception:
             pass
+    if not defaults.get("password"):
+        print("  ⚠ No FTP password found. Add it to secrets.json under "
+              '"ftp": {"password": "..."} to enable Hostinger upload.')
     return defaults
 
 def _github_api(method, path, payload=None, token=""):
@@ -181,10 +186,24 @@ def git_publish(commit_message):
         # generated/edited version rather than aborting into a broken state.
         g("rebase --abort")
         g("merge -X ours --no-edit origin/main")
-    push = g("push origin main")
+    # 4. push. Authenticate with the token from secrets.json rather than a
+    #    token baked into the remote URL — that keeps .git/config free of
+    #    secrets, so a shared folder or screenshot can't leak it. Fetching
+    #    needs no auth because the repo is public.
+    token = _load_github_token()
+    if token:
+        owner = GITHUB_REPO.split("/")[0]
+        push_url = f"https://{owner}:{token}@github.com/{GITHUB_REPO}.git"
+        push = g(f'push "{push_url}" HEAD:{GITHUB_BRANCH}')
+    else:
+        push = g("push origin main")
     ok = push.returncode == 0
     tail = (push.stdout + push.stderr).strip().splitlines()
-    return ok, (tail[-1] if tail else ("pushed" if ok else "push failed"))
+    msg = tail[-1] if tail else ("pushed" if ok else "push failed")
+    # never surface the token if git echoes the URL back in an error
+    if token:
+        msg = msg.replace(token, "<token>")
+    return ok, msg
 
 def git_publish_sandbox(commit_message, files):
     """Publish from inside the Cowork sandbox.

@@ -1,4 +1,9 @@
+# --- secrets: never commit these ---
 secrets.json
+hostinger_patch/
+progress.php
+colp_progress.php
+
 .DS_Store
 __pycache__/
 *.pyc
