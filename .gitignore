@@ -1,6 +1,7 @@
 # --- secrets: never commit these ---
 secrets.json
 hostinger_patch/
+For_Lucas_Hostinger_Files.zip
 progress.php
 colp_progress.php
 _db_connect.php
