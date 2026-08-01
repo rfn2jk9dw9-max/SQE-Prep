@@ -62,6 +62,9 @@ button { cursor: pointer; font-family: inherit; }
                      letter-spacing: .06em; color: #444; margin-bottom: 14px; }
 #dash-loading { color: #999; font-size: 0.88rem; }
 #dash-empty   { color: #999; font-size: 0.88rem; }
+#dash-offline { color: #92400e; background: #fef3c7; border: 1px solid #fcd34d;
+                border-radius: 6px; padding: 8px 10px; font-size: 0.82rem;
+                line-height: 1.4; margin-bottom: 10px; }
 .dash-stats { display: flex; gap: 24px; margin-bottom: 16px; flex-wrap: wrap; }
 .dash-stat  { text-align: center; }
 .dash-stat .val { font-size: 1.5rem; font-weight: 700; color: #1a56db; }
@@ -554,22 +557,95 @@ const REVISE_BANK = [{"question_text": "Z Two companies are locked in a contract
 // ══════════════════════════════════════════════════════════
 const PROGRESS_API = 'https://bidouillecode.dev/solicitor/progress.php';
 
+// ── Offline-safe session storage ──────────────────────────
+// Results are written to localStorage FIRST and only then pushed to the
+// server. A server outage therefore cannot lose a completed exam, and the
+// dashboard can distinguish "no sessions" from "cannot reach the server".
+const LS_CACHE   = 'sqe1_sessions_cache';
+const LS_PENDING = 'sqe1_sessions_pending';
+let SERVER_OK = true;
+
+function lsGet(k)   { try { const v = JSON.parse(localStorage.getItem(k)); return Array.isArray(v) ? v : []; } catch(e) { return []; } }
+function lsSet(k,v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch(e) { console.warn('localStorage unavailable:', e); } }
+
+function mergeSessions(a, b) {
+  const seen = new Map();
+  (a||[]).concat(b||[]).forEach(s => {
+    if (s && s.datetime && !seen.has(s.datetime)) seen.set(s.datetime, s);
+  });
+  return [...seen.values()];
+}
+
+async function postSession(data) {
+  const r = await fetch(PROGRESS_API, {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify(data)
+  });
+  if (!r.ok) throw new Error('HTTP ' + r.status);
+  return true;
+}
+
+// Retry anything queued while the server was down. Returns the number synced.
+async function flushPending() {
+  const pending = lsGet(LS_PENDING);
+  if (!pending.length) return 0;
+  const stillPending = [];
+  let synced = 0;
+  for (const s of pending) {
+    try { await postSession(s); synced++; }
+    catch(e) { stillPending.push(s); }
+  }
+  lsSet(LS_PENDING, stillPending);
+  return synced;
+}
+
 async function fetchSessions() {
+  let server = null;
   try {
-    const r = await fetch(PROGRESS_API);
-    if (r.ok) return await r.json();
-  } catch(e) {}
-  return [];
+    const r = await fetch(PROGRESS_API, {cache: 'no-store'});
+    if (r.ok) {
+      const j = await r.json();
+      if (Array.isArray(j)) server = j;
+    }
+  } catch(e) { /* fall through to the offline path below */ }
+
+  if (server) {
+    SERVER_OK = true;
+    if (await flushPending()) {
+      try {   // re-read so newly synced sessions show up straight away
+        const r2 = await fetch(PROGRESS_API, {cache: 'no-store'});
+        if (r2.ok) { const j2 = await r2.json(); if (Array.isArray(j2)) server = j2; }
+      } catch(e) {}
+    }
+    lsSet(LS_CACHE, server);
+    return mergeSessions(server, lsGet(LS_PENDING));
+  }
+
+  SERVER_OK = false;
+  console.warn('Progress server unreachable — showing locally cached sessions.');
+  return mergeSessions(lsGet(LS_CACHE), lsGet(LS_PENDING));
 }
 
 async function saveSession(data) {
+  // 1. Record locally FIRST, so the result survives a failed upload.
+  const pending = lsGet(LS_PENDING);
+  if (!pending.some(s => s.datetime === data.datetime)) {
+    pending.push(data);
+    lsSet(LS_PENDING, pending);
+  }
+  // 2. Then try the server.
   try {
-    await fetch(PROGRESS_API, {
-      method: 'POST',
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify(data)
-    });
-  } catch(e) { console.warn('Could not save session to server:', e); }
+    await postSession(data);
+    lsSet(LS_PENDING, lsGet(LS_PENDING).filter(s => s.datetime !== data.datetime));
+    lsSet(LS_CACHE, mergeSessions(lsGet(LS_CACHE), [data]));
+    SERVER_OK = true;
+    return true;
+  } catch(e) {
+    SERVER_OK = false;
+    console.warn('Server unreachable — session saved on this device, will sync later:', e);
+    return false;
+  }
 }
 
 function srcTag(src) {
@@ -582,7 +658,9 @@ function renderDashboard(sessions) {
   cnt.style.display = 'block';
 
   if (!sessions || sessions.length === 0) {
-    cnt.innerHTML = '<div id="dash-empty">No sessions yet — complete your first exam to see scores here.</div>';
+    cnt.innerHTML = SERVER_OK
+      ? '<div id="dash-empty">No sessions yet — complete your first exam to see scores here.</div>'
+      : '<div id="dash-offline">\u26a0 Can\u2019t reach the progress server, so your saved scores can\u2019t be loaded. They are not lost. Any exam you finish now is stored on this device and uploads automatically once the server is back.</div>';
     return;
   }
 
@@ -690,7 +768,14 @@ function renderDashboard(sessions) {
       "</div>"+subjHtml;
   }).join("");
 
+  const pendingCount = lsGet(LS_PENDING).length;
+  const offlineBanner = !SERVER_OK
+    ? '<div id="dash-offline">\u26a0 Can\u2019t reach the progress server \u2014 showing the last scores saved on this device'
+      + (pendingCount ? ' \u00b7 ' + pendingCount + ' session(s) waiting to upload' : '') + '.</div>'
+    : (pendingCount ? '<div id="dash-offline">\u26a0 ' + pendingCount + ' session(s) not yet uploaded \u2014 they will sync automatically.</div>' : '');
+
   cnt.innerHTML =
+    offlineBanner+
     "<div class='dash-stats'>"+
     "<div class='dash-stat'><div class='val'>"+sorted.length+"</div><div class='lbl'>Sessions</div></div>"+
     "<div class='dash-stat'><div class='val'>"+avg+"%<span style='font-size:0.9rem;"+trendCol+"'>"+trendStr+"</span></div><div class='lbl'>Average</div></div>"+
