@@ -1,0 +1,948 @@
+{
+ "updated": "2026-08-03",
+ "rule": "Each section: (1) pdftotext the SLK manual chapter, (2) rebuild notes terse (~15-20k chars, one point per line, citations only in cases array), (3) add visuals array - overview mind map + one per topic + decision trees for confusable doctrines, (4) preserve/relocate MCQ traps, never delete, (5) verify with node buildVis sweep, (6) push.",
+ "counts": {
+  "total": 117,
+  "done": 20,
+  "aligned_needs_visuals": 12,
+  "todo": 85
+ },
+ "sections": [
+  {
+   "id": "8.1",
+   "title": "Options for Dispute Resolution",
+   "manual": "SLK DISP8",
+   "status": "todo",
+   "visuals": "single",
+   "notes": ""
+  },
+  {
+   "id": "8.2",
+   "title": "Building a Claim",
+   "manual": "SLK DISP8",
+   "status": "todo",
+   "visuals": "single",
+   "notes": ""
+  },
+  {
+   "id": "8.3",
+   "title": "Pre-Action Conduct",
+   "manual": "SLK DISP8",
+   "status": "todo",
+   "visuals": "single",
+   "notes": ""
+  },
+  {
+   "id": "8.5",
+   "title": "Service of Proceedings",
+   "manual": "SLK DISP8",
+   "status": "todo",
+   "visuals": "single",
+   "notes": ""
+  },
+  {
+   "id": "8.6",
+   "title": "Responding to a Claim",
+   "manual": "SLK DISP8",
+   "status": "todo",
+   "visuals": "single",
+   "notes": ""
+  },
+  {
+   "id": "8.7",
+   "title": "Statements of Case",
+   "manual": "SLK DISP8",
+   "status": "todo",
+   "visuals": "single",
+   "notes": ""
+  },
+  {
+   "id": "8.8",
+   "title": "Interim Applications",
+   "manual": "SLK DISP8",
+   "status": "todo",
+   "visuals": "single",
+   "notes": ""
+  },
+  {
+   "id": "8.9",
+   "title": "Case Management",
+   "manual": "SLK DISP8",
+   "status": "todo",
+   "visuals": "single",
+   "notes": ""
+  },
+  {
+   "id": "8.10",
+   "title": "Evidence",
+   "manual": "SLK DISP8",
+   "status": "todo",
+   "visuals": "single",
+   "notes": ""
+  },
+  {
+   "id": "8.11",
+   "title": "Disclosure",
+   "manual": "SLK DISP8",
+   "status": "todo",
+   "visuals": "single",
+   "notes": ""
+  },
+  {
+   "id": "8.12",
+   "title": "Electronic Disclosure",
+   "manual": "SLK DISP8",
+   "status": "todo",
+   "visuals": "single",
+   "notes": ""
+  },
+  {
+   "id": "8.13",
+   "title": "Privilege",
+   "manual": "SLK DISP8",
+   "status": "todo",
+   "visuals": "single",
+   "notes": ""
+  },
+  {
+   "id": "8.14",
+   "title": "Trial",
+   "manual": "SLK DISP8",
+   "status": "todo",
+   "visuals": "single",
+   "notes": ""
+  },
+  {
+   "id": "8.15",
+   "title": "Costs",
+   "manual": "SLK DISP8",
+   "status": "todo",
+   "visuals": "single",
+   "notes": ""
+  },
+  {
+   "id": "8.16",
+   "title": "Settlement and Part 36",
+   "manual": "SLK DISP8",
+   "status": "todo",
+   "visuals": "single",
+   "notes": ""
+  },
+  {
+   "id": "8.17",
+   "title": "Appeals and Enforcement",
+   "manual": "SLK DISP8",
+   "status": "todo",
+   "visuals": "single",
+   "notes": ""
+  },
+  {
+   "id": "7.1",
+   "title": "Business Organisations",
+   "manual": "SLK BUS7",
+   "status": "todo",
+   "visuals": "single",
+   "notes": ""
+  },
+  {
+   "id": "7.2",
+   "title": "The Partnership Agreement",
+   "manual": "SLK BUS7",
+   "status": "todo",
+   "visuals": "single",
+   "notes": ""
+  },
+  {
+   "id": "7.3",
+   "title": "Partners' Responsibilities and Liability",
+   "manual": "SLK BUS7",
+   "status": "todo",
+   "visuals": "single",
+   "notes": ""
+  },
+  {
+   "id": "7.4",
+   "title": "Incorporation of a Company and Formation of LLPs",
+   "manual": "SLK BUS7",
+   "status": "todo",
+   "visuals": "single",
+   "notes": ""
+  },
+  {
+   "id": "7.5",
+   "title": "Shareholders' Rights",
+   "manual": "SLK BUS7",
+   "status": "todo",
+   "visuals": "single",
+   "notes": ""
+  },
+  {
+   "id": "7.6",
+   "title": "Directors' Appointment and Removal",
+   "manual": "SLK BUS7",
+   "status": "todo",
+   "visuals": "single",
+   "notes": ""
+  },
+  {
+   "id": "7.7",
+   "title": "Directors' Duties",
+   "manual": "SLK BUS7",
+   "status": "todo",
+   "visuals": "single",
+   "notes": ""
+  },
+  {
+   "id": "7.8",
+   "title": "Company Decision-Making",
+   "manual": "SLK BUS7",
+   "status": "todo",
+   "visuals": "single",
+   "notes": ""
+  },
+  {
+   "id": "7.9",
+   "title": "Corporate Finance \u2014 Share Funding (Equity)",
+   "manual": "SLK BUS7",
+   "status": "todo",
+   "visuals": "single",
+   "notes": ""
+  },
+  {
+   "id": "7.10",
+   "title": "Corporate Insolvency",
+   "manual": "SLK BUS7",
+   "status": "todo",
+   "visuals": "single",
+   "notes": ""
+  },
+  {
+   "id": "7.11",
+   "title": "Dividends and Other Uses of Profits",
+   "manual": "SLK BUS7",
+   "status": "todo",
+   "visuals": "single",
+   "notes": ""
+  },
+  {
+   "id": "7.12",
+   "title": "Accounts and Requirements",
+   "manual": "SLK BUS7",
+   "status": "todo",
+   "visuals": "single",
+   "notes": ""
+  },
+  {
+   "id": "7.13",
+   "title": "Corporate Insolvency and Liquidation",
+   "manual": "SLK BUS7",
+   "status": "todo",
+   "visuals": "single",
+   "notes": ""
+  },
+  {
+   "id": "7.14",
+   "title": "Claw-back and Distribution of Assets",
+   "manual": "SLK BUS7",
+   "status": "todo",
+   "visuals": "single",
+   "notes": ""
+  },
+  {
+   "id": "7.15",
+   "title": "Bankruptcy",
+   "manual": "SLK BUS7",
+   "status": "todo",
+   "visuals": "single",
+   "notes": ""
+  },
+  {
+   "id": "7.16",
+   "title": "Income Tax in England and Wales",
+   "manual": "SLK BUS7",
+   "status": "todo",
+   "visuals": "single",
+   "notes": ""
+  },
+  {
+   "id": "7.17",
+   "title": "Corporation Tax",
+   "manual": "SLK BUS7",
+   "status": "todo",
+   "visuals": "single",
+   "notes": ""
+  },
+  {
+   "id": "7.18",
+   "title": "Capital Gains Tax",
+   "manual": "SLK BUS7",
+   "status": "todo",
+   "visuals": "single",
+   "notes": ""
+  },
+  {
+   "id": "7.19",
+   "title": "Value Added Tax",
+   "manual": "SLK BUS7",
+   "status": "todo",
+   "visuals": "single",
+   "notes": ""
+  },
+  {
+   "id": "7.20",
+   "title": "Inheritance Tax",
+   "manual": "SLK BUS7",
+   "status": "todo",
+   "visuals": "single",
+   "notes": ""
+  },
+  {
+   "id": "1.1",
+   "title": "Formation",
+   "manual": "SLK CONT1",
+   "status": "todo",
+   "visuals": "single",
+   "notes": ""
+  },
+  {
+   "id": "1.2",
+   "title": "Terms",
+   "manual": "SLK CONT1",
+   "status": "todo",
+   "visuals": "single",
+   "notes": ""
+  },
+  {
+   "id": "1.3",
+   "title": "Vitiating Factors",
+   "manual": "SLK CONT1",
+   "status": "todo",
+   "visuals": "single",
+   "notes": ""
+  },
+  {
+   "id": "1.4",
+   "title": "Termination",
+   "manual": "SLK CONT1",
+   "status": "todo",
+   "visuals": "single",
+   "notes": ""
+  },
+  {
+   "id": "1.5",
+   "title": "Remedies",
+   "manual": "SLK CONT1",
+   "status": "todo",
+   "visuals": "single",
+   "notes": ""
+  },
+  {
+   "id": "6.1",
+   "title": "Creation and Requirements of an Express Trust",
+   "manual": "SLK TRUS6",
+   "status": "todo",
+   "visuals": "single",
+   "notes": ""
+  },
+  {
+   "id": "6.2",
+   "title": "Beneficial Entitlement",
+   "manual": "SLK TRUS6",
+   "status": "todo",
+   "visuals": "single",
+   "notes": ""
+  },
+  {
+   "id": "6.3",
+   "title": "Special Types of Trusts",
+   "manual": "SLK TRUS6",
+   "status": "done",
+   "visuals": "array",
+   "notes": ""
+  },
+  {
+   "id": "6.4",
+   "title": "Trustees and Fiduciary Obligations",
+   "manual": "SLK TRUS6",
+   "status": "todo",
+   "visuals": "single",
+   "notes": ""
+  },
+  {
+   "id": "6.5",
+   "title": "Liability of Trustees",
+   "manual": "SLK TRUS6",
+   "status": "todo",
+   "visuals": "single",
+   "notes": ""
+  },
+  {
+   "id": "13.1",
+   "title": "Validity of Wills and Codicils",
+   "manual": "SLK WILL13",
+   "status": "todo",
+   "visuals": "single",
+   "notes": ""
+  },
+  {
+   "id": "13.2",
+   "title": "Alterations, Amendments and Revocation of Wills",
+   "manual": "SLK WILL13",
+   "status": "todo",
+   "visuals": "single",
+   "notes": ""
+  },
+  {
+   "id": "13.3",
+   "title": "Personal Representatives and Interpretation of Wills",
+   "manual": "SLK WILL13",
+   "status": "todo",
+   "visuals": "single",
+   "notes": ""
+  },
+  {
+   "id": "13.4",
+   "title": "Intestacy and Property Passing Outside the Estate",
+   "manual": "SLK WILL13",
+   "status": "todo",
+   "visuals": "single",
+   "notes": ""
+  },
+  {
+   "id": "13.5",
+   "title": "Grants of Representation",
+   "manual": "SLK WILL13",
+   "status": "todo",
+   "visuals": "single",
+   "notes": ""
+  },
+  {
+   "id": "13.6",
+   "title": "Administration of Estates",
+   "manual": "SLK WILL13",
+   "status": "todo",
+   "visuals": "single",
+   "notes": ""
+  },
+  {
+   "id": "13.7",
+   "title": "Claims Against the Estate",
+   "manual": "SLK WILL13",
+   "status": "todo",
+   "visuals": "single",
+   "notes": ""
+  },
+  {
+   "id": "13.8",
+   "title": "Inheritance Tax and Income Tax and Capital Gains Tax for an Estate",
+   "manual": "SLK WILL13",
+   "status": "todo",
+   "visuals": "single",
+   "notes": ""
+  },
+  {
+   "id": "13.9",
+   "title": "Solicitors Accounts \u2013 Client Money",
+   "manual": "SLK WILL13",
+   "status": "todo",
+   "visuals": "single",
+   "notes": ""
+  },
+  {
+   "id": "13.10",
+   "title": "Solicitors Accounts \u2013 Accounting Records and Entries",
+   "manual": "SLK WILL13",
+   "status": "todo",
+   "visuals": "single",
+   "notes": ""
+  },
+  {
+   "id": "9.1",
+   "title": "At the Police Station \u2013 Rights and Processes",
+   "manual": "SLK CRMP9",
+   "status": "todo",
+   "visuals": "single",
+   "notes": ""
+  },
+  {
+   "id": "9.2",
+   "title": "At the Police Station \u2013 Interviews and Advice",
+   "manual": "SLK CRMP9",
+   "status": "done",
+   "visuals": "single",
+   "notes": ""
+  },
+  {
+   "id": "9.3",
+   "title": "First Appearance and Bail",
+   "manual": "SLK CRMP9",
+   "status": "todo",
+   "visuals": "single",
+   "notes": ""
+  },
+  {
+   "id": "9.4",
+   "title": "Early Trial Procedures",
+   "manual": "SLK CRMP9",
+   "status": "todo",
+   "visuals": "single",
+   "notes": ""
+  },
+  {
+   "id": "9.5",
+   "title": "Trials and Trial Procedures",
+   "manual": "SLK CRMP9",
+   "status": "todo",
+   "visuals": "single",
+   "notes": ""
+  },
+  {
+   "id": "9.6",
+   "title": "Evidence and Proof",
+   "manual": "SLK CRMP9",
+   "status": "done",
+   "visuals": "single",
+   "notes": ""
+  },
+  {
+   "id": "9.7",
+   "title": "Hearsay and Opinion Evidence",
+   "manual": "SLK CRMP9",
+   "status": "done",
+   "visuals": "single",
+   "notes": ""
+  },
+  {
+   "id": "9.8",
+   "title": "Character Evidence and Fairness",
+   "manual": "SLK CRMP9",
+   "status": "done",
+   "visuals": "single",
+   "notes": ""
+  },
+  {
+   "id": "9.9",
+   "title": "Preparing for Trial",
+   "manual": "SLK CRMP9",
+   "status": "todo",
+   "visuals": "single",
+   "notes": ""
+  },
+  {
+   "id": "9.10",
+   "title": "Sentencing",
+   "manual": "SLK CRMP9",
+   "status": "todo",
+   "visuals": "single",
+   "notes": ""
+  },
+  {
+   "id": "9.11",
+   "title": "Appeals",
+   "manual": "SLK CRMP9",
+   "status": "todo",
+   "visuals": "single",
+   "notes": ""
+  },
+  {
+   "id": "9.12",
+   "title": "Trials of Minors",
+   "manual": "SLK CRMP9",
+   "status": "todo",
+   "visuals": "single",
+   "notes": ""
+  },
+  {
+   "id": "9.13",
+   "title": "Conduct Issues in Criminal Litigation",
+   "manual": "SLK CRMP9",
+   "status": "todo",
+   "visuals": "single",
+   "notes": ""
+  },
+  {
+   "id": "2.1",
+   "title": "Negligence",
+   "manual": "SLK TORT2",
+   "status": "todo",
+   "visuals": "single",
+   "notes": ""
+  },
+  {
+   "id": "2.2",
+   "title": "Defences",
+   "manual": "SLK TORT2",
+   "status": "todo",
+   "visuals": "single",
+   "notes": ""
+  },
+  {
+   "id": "2.3",
+   "title": "Occupiers' Liability",
+   "manual": "SLK TORT2",
+   "status": "todo",
+   "visuals": "single",
+   "notes": ""
+  },
+  {
+   "id": "2.4",
+   "title": "Pure Economic Loss and Product Liability",
+   "manual": "SLK TORT2",
+   "status": "todo",
+   "visuals": "single",
+   "notes": ""
+  },
+  {
+   "id": "2.5",
+   "title": "Nuisance and Other Torts",
+   "manual": "SLK TORT2",
+   "status": "todo",
+   "visuals": "single",
+   "notes": ""
+  },
+  {
+   "id": "3.1",
+   "title": "Overview of the Principles and Codes \u2013 Part 1",
+   "manual": "SLK COND3",
+   "status": "todo",
+   "visuals": "single",
+   "notes": ""
+  },
+  {
+   "id": "3.2",
+   "title": "Overview of the Principles and Codes \u2013 Part 2",
+   "manual": "SLK COND3",
+   "status": "todo",
+   "visuals": "single",
+   "notes": ""
+  },
+  {
+   "id": "3.3",
+   "title": "Code of Conduct for Solicitors, RELs and RFLs",
+   "manual": "SLK COND3",
+   "status": "done",
+   "visuals": "single",
+   "notes": ""
+  },
+  {
+   "id": "3.4",
+   "title": "Code of Conduct for Firms",
+   "manual": "SLK COND3",
+   "status": "done",
+   "visuals": "single",
+   "notes": ""
+  },
+  {
+   "id": "5.1",
+   "title": "Understanding and Analysing Criminal Liability",
+   "manual": "SLK CRML5",
+   "status": "todo",
+   "visuals": "single",
+   "notes": ""
+  },
+  {
+   "id": "5.2",
+   "title": "Understanding Fault and Blame",
+   "manual": "SLK CRML5",
+   "status": "todo",
+   "visuals": "single",
+   "notes": ""
+  },
+  {
+   "id": "5.3",
+   "title": "Defences and Their Impact on Criminal Liability",
+   "manual": "SLK CRML5",
+   "status": "done",
+   "visuals": "single",
+   "notes": ""
+  },
+  {
+   "id": "5.4",
+   "title": "Criminal Liability for Acts of Others and Incomplete Acts",
+   "manual": "SLK CRML5",
+   "status": "todo",
+   "visuals": "single",
+   "notes": ""
+  },
+  {
+   "id": "5.5",
+   "title": "Offences of Dishonesty",
+   "manual": "SLK CRML5",
+   "status": "todo",
+   "visuals": "single",
+   "notes": ""
+  },
+  {
+   "id": "11.1",
+   "title": "The Courts",
+   "manual": "SLK SYS11",
+   "status": "todo",
+   "visuals": "single",
+   "notes": ""
+  },
+  {
+   "id": "11.2",
+   "title": "Primary Legislation: Structure of an Act of Parliament",
+   "manual": "SLK SYS11",
+   "status": "todo",
+   "visuals": "single",
+   "notes": ""
+  },
+  {
+   "id": "11.3",
+   "title": "Core Institutions of the State and How They Interrelate",
+   "manual": "SLK SYS11",
+   "status": "done",
+   "visuals": "single",
+   "notes": ""
+  },
+  {
+   "id": "11.4",
+   "title": "Legitimacy, Separation of Powers and the Rule of Law",
+   "manual": "SLK SYS11",
+   "status": "todo",
+   "visuals": "single",
+   "notes": ""
+  },
+  {
+   "id": "11.5",
+   "title": "Public Order Law",
+   "manual": "SLK SYS11",
+   "status": "todo",
+   "visuals": "single",
+   "notes": ""
+  },
+  {
+   "id": "11.6",
+   "title": "Judicial Review",
+   "manual": "SLK SYS11",
+   "status": "todo",
+   "visuals": "single",
+   "notes": ""
+  },
+  {
+   "id": "11.7",
+   "title": "Human Rights Act 1998 and the ECHR",
+   "manual": "SLK SYS11",
+   "status": "todo",
+   "visuals": "single",
+   "notes": ""
+  },
+  {
+   "id": "11.8",
+   "title": "The Place of EU Law in the UK Constitution",
+   "manual": "SLK SYS11",
+   "status": "todo",
+   "visuals": "single",
+   "notes": ""
+  },
+  {
+   "id": "10.1",
+   "title": "The Regulatory Role of the Solicitors Regulation Authority",
+   "manual": "SLK SERV10",
+   "status": "done",
+   "visuals": "single",
+   "notes": ""
+  },
+  {
+   "id": "10.2",
+   "title": "The Equality Act 2010",
+   "manual": "SLK SERV10",
+   "status": "done",
+   "visuals": "single",
+   "notes": ""
+  },
+  {
+   "id": "10.3",
+   "title": "Money Laundering",
+   "manual": "SLK SERV10",
+   "status": "done",
+   "visuals": "single",
+   "notes": ""
+  },
+  {
+   "id": "10.4",
+   "title": "Financial Services",
+   "manual": "SLK SERV10",
+   "status": "done",
+   "visuals": "single",
+   "notes": ""
+  },
+  {
+   "id": "10.5",
+   "title": "Funding Options for Legal Services",
+   "manual": "SLK SERV10",
+   "status": "done",
+   "visuals": "single",
+   "notes": ""
+  },
+  {
+   "id": "4.1",
+   "title": "Nature of Land",
+   "manual": "SLK LAND4",
+   "status": "todo",
+   "visuals": "single",
+   "notes": ""
+  },
+  {
+   "id": "4.2",
+   "title": "Title to Land",
+   "manual": "SLK LAND4",
+   "status": "done",
+   "visuals": "single",
+   "notes": ""
+  },
+  {
+   "id": "4.3",
+   "title": "Methods to Protect and Enforce Third-Party Interests",
+   "manual": "SLK LAND4",
+   "status": "todo",
+   "visuals": "single",
+   "notes": ""
+  },
+  {
+   "id": "4.4",
+   "title": "Co-ownership and Trusts of Land",
+   "manual": "SLK LAND4",
+   "status": "done",
+   "visuals": "single",
+   "notes": ""
+  },
+  {
+   "id": "4.5",
+   "title": "Proprietary Rights",
+   "manual": "SLK LAND4",
+   "status": "done",
+   "visuals": "single",
+   "notes": ""
+  },
+  {
+   "id": "4.6",
+   "title": "Leases",
+   "manual": "SLK LAND4",
+   "status": "todo",
+   "visuals": "single",
+   "notes": ""
+  },
+  {
+   "id": "12.1",
+   "title": "Introduction to Conveyancing",
+   "manual": "SLK PROP12",
+   "status": "aligned-needs-visuals",
+   "visuals": "single",
+   "notes": ""
+  },
+  {
+   "id": "12.2",
+   "title": "Taxation \u2013 Property",
+   "manual": "SLK PROP12",
+   "status": "aligned-needs-visuals",
+   "visuals": "single",
+   "notes": ""
+  },
+  {
+   "id": "12.3",
+   "title": "Preparing the Contract of Sale",
+   "manual": "SLK PROP12",
+   "status": "aligned-needs-visuals",
+   "visuals": "single",
+   "notes": ""
+  },
+  {
+   "id": "12.4",
+   "title": "Title Investigation",
+   "manual": "SLK PROP12",
+   "status": "aligned-needs-visuals",
+   "visuals": "single",
+   "notes": ""
+  },
+  {
+   "id": "12.5",
+   "title": "Pre-Contract Searches",
+   "manual": "SLK PROP12",
+   "status": "aligned-needs-visuals",
+   "visuals": "single",
+   "notes": ""
+  },
+  {
+   "id": "12.6",
+   "title": "Planning Law",
+   "manual": "SLK PROP12",
+   "status": "aligned-needs-visuals",
+   "visuals": "single",
+   "notes": ""
+  },
+  {
+   "id": "12.7",
+   "title": "Finance and Acting for a Lender",
+   "manual": "SLK PROP12",
+   "status": "done",
+   "visuals": "single",
+   "notes": ""
+  },
+  {
+   "id": "12.8",
+   "title": "Preparation for and Exchange of Contracts",
+   "manual": "SLK PROP12",
+   "status": "aligned-needs-visuals",
+   "visuals": "single",
+   "notes": ""
+  },
+  {
+   "id": "12.9",
+   "title": "Pre-Completion, Completion and Post-Completion",
+   "manual": "SLK PROP12",
+   "status": "done",
+   "visuals": "single",
+   "notes": ""
+  },
+  {
+   "id": "12.10",
+   "title": "Remedies for Delayed Completion",
+   "manual": "SLK PROP12",
+   "status": "aligned-needs-visuals",
+   "visuals": "single",
+   "notes": ""
+  },
+  {
+   "id": "12.11",
+   "title": "Structure, Content and Termination of Leases",
+   "manual": "SLK PROP12",
+   "status": "aligned-needs-visuals",
+   "visuals": "single",
+   "notes": ""
+  },
+  {
+   "id": "12.12",
+   "title": "Leasehold Covenants and Remedies",
+   "manual": "SLK PROP12",
+   "status": "aligned-needs-visuals",
+   "visuals": "single",
+   "notes": ""
+  },
+  {
+   "id": "12.13",
+   "title": "Procedural Steps for Grant of a Lease",
+   "manual": "SLK PROP12",
+   "status": "aligned-needs-visuals",
+   "visuals": "single",
+   "notes": ""
+  },
+  {
+   "id": "12.14",
+   "title": "Assignment of Lease, Licence to Assign and Licence to Underlet",
+   "manual": "SLK PROP12",
+   "status": "aligned-needs-visuals",
+   "visuals": "single",
+   "notes": ""
+  },
+  {
+   "id": "12.15",
+   "title": "Security of Tenure Under a Business Lease",
+   "manual": "SLK PROP12",
+   "status": "done",
+   "visuals": "single",
+   "notes": ""
+  }
+ ]
+}
