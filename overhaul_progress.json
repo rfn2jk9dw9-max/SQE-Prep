@@ -1,36 +1,44 @@
 {
- "updated": "2026-08-03",
+ "updated": "2026-08-04",
  "rule": "Each section: (1) pdftotext the SLK manual chapter, (2) rebuild notes terse (~15-20k chars, one point per line, citations only in cases array), (3) add visuals array - overview mind map + one per topic + decision trees for confusable doctrines, (4) preserve/relocate MCQ traps, never delete, (5) verify with node buildVis sweep, (6) push.",
  "counts": {
-  "total": 117,
-  "done": 20,
+  "total": 119,
+  "done": 26,
   "aligned_needs_visuals": 12,
-  "todo": 85
+  "todo": 81
  },
  "sections": [
   {
    "id": "8.1",
    "title": "Options for Dispute Resolution",
    "manual": "SLK DISP8",
-   "status": "todo",
-   "visuals": "single",
-   "notes": ""
+   "status": "done",
+   "visuals": "array",
+   "notes": "invented content (Halsey, PGF II, adjudication, CPR r 3.1(2)(m)) removed - Halsey's stated rule was also outdated post-Churchill; whole Arbitration Act 1996 procedure/challenge framework was missing (ss 4-9, 34-48, 52, 54, 65-70) plus the 3-step s 9 stay; single visual replaced with 6 (2 mind maps, 2 decision trees, comparison grid, mediation steps)."
   },
   {
    "id": "8.2",
    "title": "Building a Claim",
    "manual": "SLK DISP8",
-   "status": "todo",
-   "visuals": "single",
-   "notes": ""
+   "status": "done",
+   "visuals": "array",
+   "notes": "bloat + invented content: fabricated 4-item jurisdiction list (manual says detailed jurisdiction rules are NOT examinable), litigation-friend/capacity list and s.35A interest both belonged elsewhere and were MOVED (to 8.7); tort duty-of-care MCQ trap MOVED to 2.1; Rome I/Rome II were one line each and are now fully built out; single visual replaced with 7 (4 mind maps, 2 decision trees, limitation grid)."
   },
   {
    "id": "8.3",
    "title": "Pre-Action Conduct",
    "manual": "SLK DISP8",
-   "status": "todo",
-   "visuals": "single",
-   "notes": ""
+   "status": "done",
+   "visuals": "array",
+   "notes": "content was largely aligned but thin on the protocols (CNF, PI protocol, prof neg 6-month/14-day rules, PDPAC para 17) and had only a single flow visual; now 6 visuals incl. limitation-vs-PDPAC and which-protocol decision trees and a Debt v Prof Neg comparison grid."
+  },
+  {
+   "id": "8.4",
+   "title": "Commencing Court Proceedings",
+   "manual": "SLK DISP8",
+   "status": "done",
+   "visuals": "array",
+   "notes": "Section existed but was INVISIBLE to the tracker and to id greps - it was written with spaces after the colons ('\"id\": \"8.4\"') unlike every other section, so it was missing from this file entirely. Rebuilt against the manual: added divisions/specialist lists in full, the 11 Business and Property Courts, Pt 8 mechanics and conversion, CE File / Civil National Business Centre / MCOL / PD 51R / PD 51ZB conditions, service abroad (r 6.34), issue fees, and the whole CPR Pt 19 framework (rr 19.2-19.4, 19.6) with LA 1980 s 35(1), relation back, and the r 17.4(3) v r 19.6(3) misdescription/wrong-party distinction. All 6 existing MCQ traps preserved, incl. IP-to-Chancery. Single grid replaced with an array of 7."
   },
   {
    "id": "8.5",
@@ -172,9 +180,9 @@
    "id": "7.5",
    "title": "Shareholders' Rights",
    "manual": "SLK BUS7",
-   "status": "todo",
-   "visuals": "single",
-   "notes": ""
+   "status": "done",
+   "visuals": "array",
+   "notes": "wrong chapter's content: share classes belonged to 7.9 and resolutions to 7.8 (both MOVED), winding-up priority trap MOVED to 7.14; Foss v Harbottle and O'Neill v Phillips are not in the manual - replaced with the manual's three named principles (proper claimant / internal management / irregularity); entirely missing: s 33 statutory contract, shareholders' agreement, share certificate + register of members, show-of-hands vs poll and the 10% poll right (s 321(1)), proxy s 324(1), 5% circulation s 292, inspection rights, derivative claim TWO-STAGE permission test with 3 automatic refusals and 6 discretionary factors, s 994 grounds/examples/bars, s 125 last-resort rule; 6 visuals added; cases array left empty (manual cites no cases in 7.5)"
   },
   {
    "id": "7.6",
@@ -207,6 +215,14 @@
    "status": "todo",
    "visuals": "single",
    "notes": ""
+  },
+  {
+   "id": "7.9B",
+   "title": "Corporate Finance \u2014 Debt Finance & Security",
+   "manual": "SLK BUS7",
+   "status": "todo",
+   "visuals": "single",
+   "notes": "Was missing from this tracker - non-standard id ('7.9B') so it fell out of every id sweep. Not yet overhauled."
   },
   {
    "id": "7.10",
@@ -492,9 +508,9 @@
    "id": "9.5",
    "title": "Trials and Trial Procedures",
    "manual": "SLK CRMP9",
-   "status": "todo",
-   "visuals": "single",
-   "notes": ""
+   "status": "done",
+   "visuals": "array",
+   "notes": "was aligned but thin (11k, single visual): missing jury selection (stand by vs challenge for cause), the split summing-up practice, the 2-hour majority rule and 10:1/9:1 depleted-jury verdicts, the whole magistrates' trial section (no defence opening, duty to reach a verdict, no casting vote, no alternative verdict, legal advisor rules), the SRA duty table and the CrimPR 2020 overriding objective; two disclosure traps (CPIA s 3 / s 11 defence statement) MOVED to 9.4; 6 visuals added incl. the 10-stage CC vs MC grid and Galbraith + client-admits-guilt decision trees"
   },
   {
    "id": "9.6",
@@ -944,5 +960,9 @@
    "visuals": "single",
    "notes": ""
   }
+ ],
+ "gaps": [
+  "FORMATTING HAZARD: section 8.4 was serialised with spaces after colons ('\"id\": \"8.4\"') while every other section uses compact JSON ('\"id\":\"8.4\"'). Any grep or script matching the compact form silently skips it. Worth re-running an id audit with a whitespace-tolerant pattern before trusting the counts.",
+  "Non-standard id '7.9B' (Corporate Finance - Debt Finance & Security) also escapes numeric id sweeps. The file holds 119 sections in total, not 117."
  ]
 }
