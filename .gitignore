@@ -3,6 +3,7 @@ secrets.json
 hostinger_patch/
 For_Lucas_Hostinger_Files.zip
 *.bak
+*.bak_*
 *.bak[0-9]*
 *.orig
 progress.php

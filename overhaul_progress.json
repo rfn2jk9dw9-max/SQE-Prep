@@ -1,11 +1,11 @@
 {
- "updated": "2026-08-04",
+ "updated": "2026-08-05",
  "rule": "Each section: (1) pdftotext the SLK manual chapter, (2) rebuild notes terse (~15-20k chars, one point per line, citations only in cases array), (3) add visuals array - overview mind map + one per topic + decision trees for confusable doctrines, (4) preserve/relocate MCQ traps, never delete, (5) verify with node buildVis sweep, (6) push.",
  "counts": {
   "total": 119,
-  "done": 26,
-  "aligned_needs_visuals": 12,
-  "todo": 81
+  "done": 29,
+  "aligned_needs_visuals": 11,
+  "todo": 79
  },
  "sections": [
   {
@@ -210,7 +210,7 @@
   },
   {
    "id": "7.9",
-   "title": "Corporate Finance \u2014 Share Funding (Equity)",
+   "title": "Corporate Finance — Share Funding (Equity)",
    "manual": "SLK BUS7",
    "status": "todo",
    "visuals": "single",
@@ -218,7 +218,7 @@
   },
   {
    "id": "7.9B",
-   "title": "Corporate Finance \u2014 Debt Finance & Security",
+   "title": "Corporate Finance — Debt Finance & Security",
    "manual": "SLK BUS7",
    "status": "todo",
    "visuals": "single",
@@ -348,9 +348,9 @@
    "id": "1.5",
    "title": "Remedies",
    "manual": "SLK CONT1",
-   "status": "todo",
-   "visuals": "single",
-   "notes": ""
+   "status": "done",
+   "visuals": "array",
+   "notes": "invented content stripped: the CONT1 manual chapter 1.5 cites NO cases at all, yet the section carried 6 in the cases array plus Hadley/Victoria Laundry/Heron II/Ruxley/Makdessi/ParkingEye/Allied Maples/Co-op v Argyll/Lumley/American Cyanamid in the prose - all removed, cases now empty. American Cyanamid interim-injunction test dropped as superseded (8.8 covers interim applications). Whole halves of the chapter were missing: cost of cure, reliance interest, bad bargains, loss of a chance, non-pecuniary loss, third-party loss, indemnity, guarantee (s IV Statute of Frauds 1677), restitution/unjust enrichment, and the anticipatory-breach mitigation rule. Penalty test restated as the manual has it (detriment proportionate to a legitimate interest; penalty clause is ignored and C claims unliquidated damages). All MCQ traps preserved and sharpened. Single flow visual replaced with an array of 7 (3 mind maps, 3 decision trees, 2 grids)."
   },
   {
    "id": "6.1",
@@ -458,7 +458,7 @@
   },
   {
    "id": "13.9",
-   "title": "Solicitors Accounts \u2013 Client Money",
+   "title": "Solicitors Accounts – Client Money",
    "manual": "SLK WILL13",
    "status": "todo",
    "visuals": "single",
@@ -466,7 +466,7 @@
   },
   {
    "id": "13.10",
-   "title": "Solicitors Accounts \u2013 Accounting Records and Entries",
+   "title": "Solicitors Accounts – Accounting Records and Entries",
    "manual": "SLK WILL13",
    "status": "todo",
    "visuals": "single",
@@ -474,7 +474,7 @@
   },
   {
    "id": "9.1",
-   "title": "At the Police Station \u2013 Rights and Processes",
+   "title": "At the Police Station – Rights and Processes",
    "manual": "SLK CRMP9",
    "status": "todo",
    "visuals": "single",
@@ -482,7 +482,7 @@
   },
   {
    "id": "9.2",
-   "title": "At the Police Station \u2013 Interviews and Advice",
+   "title": "At the Police Station – Interviews and Advice",
    "manual": "SLK CRMP9",
    "status": "done",
    "visuals": "single",
@@ -610,15 +610,15 @@
   },
   {
    "id": "2.5",
-   "title": "Nuisance and Other Torts",
+   "title": "Nuisance",
    "manual": "SLK TORT2",
-   "status": "todo",
-   "visuals": "single",
-   "notes": ""
+   "status": "done",
+   "visuals": "array",
+   "notes": "retitled from 'Nuisance and Other Torts' to 'Nuisance' to match the manual (TORT2 has only 5 chapters; 2.5 is nuisance alone). Invented content removed: Hunter v Canary Wharf, Khorasandjian, Cambridge Water, Transco, St Helen's Smelting, Bridlington Relay, Hollywood Silver Fox, Sedleigh-Denfield, Nichols v Marsland, A-G v PYA Quarries and Gillingham are none of them in the manual - substance kept, names dropped; cases array now holds only Rylands v Fletcher, the one case the manual cites. Corrected a legal error: the old note listed 'overlooking?' as an amenity interference - the manual says being overlooked is NOT actionable, nor is blocked TV reception (no emanation). Missing material added: the 3 types of nuisance, the interference examples (knotweed, tree roots, land slip), planning-permission cases both ways, social utility, who can be liable (owner/occupier/creator), prescription (20 yrs, running from C's awareness), the three INEFFECTIVE defences, abatement/trespass, the HRA 1998 route, no personal injury in private nuisance but yes in public, and the full Rylands natural/non-natural examples plus the 5 defences. Single grid replaced with an array of 8 (3 mind maps, 2 decision trees, 3 grids)."
   },
   {
    "id": "3.1",
-   "title": "Overview of the Principles and Codes \u2013 Part 1",
+   "title": "Overview of the Principles and Codes – Part 1",
    "manual": "SLK COND3",
    "status": "todo",
    "visuals": "single",
@@ -626,7 +626,7 @@
   },
   {
    "id": "3.2",
-   "title": "Overview of the Principles and Codes \u2013 Part 2",
+   "title": "Overview of the Principles and Codes – Part 2",
    "manual": "SLK COND3",
    "status": "todo",
    "visuals": "single",
@@ -850,7 +850,7 @@
   },
   {
    "id": "12.2",
-   "title": "Taxation \u2013 Property",
+   "title": "Taxation – Property",
    "manual": "SLK PROP12",
    "status": "aligned-needs-visuals",
    "visuals": "single",
@@ -900,9 +900,9 @@
    "id": "12.8",
    "title": "Preparation for and Exchange of Contracts",
    "manual": "SLK PROP12",
-   "status": "aligned-needs-visuals",
-   "visuals": "single",
-   "notes": ""
+   "status": "done",
+   "visuals": "array",
+   "notes": "was flagged aligned-needs-visuals but the section was actually BROKEN: every note body was a plain string, not an array, so buildCh's (n.body||[]).map threw and the section would not render. Bodies converted to arrays - it was the only section in the file with this defect. Also removed invented content (Eccles v Bryant, LPA 1925 s.52, LRR 2003 - none in the chapter) and fixed the statutes/cases arrays, which held bare strings instead of {ref,text}/{name,citation,rule} objects and rendered blank. Corrected the postal-exchange rule: binding when the SELLER'S part is posted, not 'on the posting date'. Added the missing manual material: max 4 legal owners/legal estate is always a joint tenancy, overreaching and the second trustee, the full pre-exchange checklists for both solicitors, cleared deposit funds and the SRA Accounts Rules, the redemption-figure undertaking, memorandum contents, implied undertakings, estate contract (notice v C(iv)), risk and the seller's continuing duty, occupation before completion (SC licensee v SCPC silence) and simultaneous exchange and completion. Single steps visual replaced with an array of 8 (3 mind maps, 3 decision trees, 1 grid, 1 steps). Object is 26k chars, above the 15-20k target, because the chapter has 15 subsections and 8 visuals."
   },
   {
    "id": "12.9",
