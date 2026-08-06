@@ -3,6 +3,7 @@
 import json, os, re, sys
 import pdfplumber
 from pathlib import Path
+from collections import defaultdict
 
 CORRECT_CHAR = chr(0xE90C)   # H5P correct-answer glyph (U+E90C, private-use area)
 WRONG_CHAR   = chr(0xE894)   # H5P wrong-answer glyph   (U+E894)
@@ -1079,7 +1080,77 @@ def parse_all(tests_dir, cache_file=None):
             _dbg(f"Cache save error (ignored): {e}")
 
     all_q = apply_overrides(all_q)
-    return all_q
+
+    # ── 5. Question-level dedup (mock exam bank only) ──────────────────────
+    # Each question must appear ONCE in a mock exam. File-level dedup (step 1)
+    # misses re-sit files whose names start with a digit ("10.2 v2.pdf",
+    # "8.5 v2.pdf") or lack the topic code ("CRM 5.3.pdf"), because _topic_key
+    # requires letters-then-digits and falls back to the whole stem.
+    #
+    # Deliberately question-level, NOT file-level: those re-sit files also
+    # contain questions found nowhere else (e.g. "9.4 v2 0508" has 7 unique).
+    # Dropping whole files would lose them. Keyed on normalised question text
+    # so wording-identical repeats collapse regardless of option order.
+    #
+    # This does NOT affect flashcards: extract_mistakes.load_h5p_wrong_answers
+    # globs the PDFs itself and applies no dedup, so wrong answers from every
+    # sitting of every file are still captured.
+    #
+    # Matching on the stem ALONE is wrong: PROP12.7 contains two genuinely
+    # different questions sharing a word-for-word identical stem ("...subscribes
+    # to the UK Finance Mortgage Lenders' Handbook. Which one of the following is
+    # one of the requirements set out in the Handbook?"). Their option sets are
+    # disjoint and their answers differ — they are two real questions, and a
+    # stem-only rule silently deletes one.
+    #
+    # So: same stem AND some evidence the answer is the same. Evidence is either
+    # an overlapping option or a matching correct answer — either alone suffices,
+    # because both drift between sittings:
+    #   • options are reshuffled, so index means nothing
+    #   • wording drifts ("committed to" vs "sent to the Crown Court",
+    #     "7 years" vs "seven years")
+    #   • the correct answer can be abbreviated ("COLP" vs "compliance officer
+    #     for legal practice"), which defeats an answer-text test on its own
+    #   • the PDF parser truncates options mid-word, which defeats exact equality
+    # Comparing 40-char prefixes absorbs the truncation and most of the drift.
+    #
+    # Stems are compared on their first 150 chars for the same reason — trailing
+    # drift (a curly vs straight apostrophe, a reworded final sentence) otherwise
+    # splits a genuine repeat into two.
+    def _norm(s):
+        return re.sub(r'\W+', '', (s or '').lower())
+
+    def _opt_set(q):
+        return {_norm(o)[:40] for o in (q.get('options') or []) if _norm(o)}
+
+    def _answer(q):
+        opts, ci = q.get('options') or [], q.get('correct_index')
+        if not isinstance(ci, int) or not 0 <= ci < len(opts):
+            return ''                    # unanswered / unparsed — no evidence
+        return _norm(opts[ci])[:40]
+
+    by_stem = defaultdict(list)      # stem prefix -> [(opt_set, answer)]
+    deduped = []
+    for q in all_q:
+        stem = _norm(q.get('question_text'))[:150]
+        opts, ans = _opt_set(q), _answer(q)
+        is_repeat = False
+        for prev_opts, prev_ans in by_stem[stem]:
+            if not opts or not prev_opts:
+                is_repeat = True                      # nothing to compare on
+            else:
+                is_repeat = bool(opts & prev_opts) or (ans and ans == prev_ans)
+            if is_repeat:
+                break
+        if is_repeat:
+            continue
+        by_stem[stem].append((opts, ans))
+        deduped.append(q)
+
+    if len(deduped) != len(all_q):
+        _dbg(f"  [dedup] question-level: {len(all_q)} → {len(deduped)} "
+             f"({len(all_q) - len(deduped)} repeat(s) removed)")
+    return deduped
 
 
 if __name__ == "__main__":

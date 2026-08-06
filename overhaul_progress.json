@@ -1,11 +1,11 @@
 {
- "updated": "2026-08-05",
- "rule": "Each section: (1) pdftotext the SLK manual chapter, (2) rebuild notes terse (~15-20k chars, one point per line, citations only in cases array), (3) add visuals array - overview mind map + one per topic + decision trees for confusable doctrines, (4) preserve/relocate MCQ traps, never delete, (5) verify with node buildVis sweep, (6) push.",
+ "updated": "2026-08-06",
+ "rule": "Pick sections by running the REAL buildSchedule() from SQE1_COLP_Revision.html in node against the server done-set (colp_progress.php). SEED_DATES are TEACHING dates, not due dates: the schedule = teaching date + 14 days, clamped to today, snapped to a free day, spread to 2026-12-14. Nothing is ever overdue, and the queue drains in TEACHING order (oldest first). Take Today then Upcoming. Then: (1) pdftotext the SLK manual chapter, (2) rebuild notes terse (15-25k chars, one point per line, citations only in the cases array, grep every case name back against the manual), (3) visuals array - overview mind map + one per topic + decision trees for confusable doctrines (map: 2-5 branches, grid: 2-4 cols), (4) preserve/relocate MCQ traps, never delete, (5) verify with the node buildVis sweep, (6) push the single file via a /tmp clone.",
  "counts": {
   "total": 119,
-  "done": 29,
-  "aligned_needs_visuals": 11,
-  "todo": 79
+  "done": 39,
+  "aligned_needs_visuals": 9,
+  "todo": 71
  },
  "sections": [
   {
@@ -52,9 +52,9 @@
    "id": "8.6",
    "title": "Responding to a Claim",
    "manual": "SLK DISP8",
-   "status": "todo",
-   "visuals": "single",
-   "notes": ""
+   "status": "done",
+   "visuals": "array",
+   "notes": "largely aligned and unusually good already, but the MCQ trap block was buried at the BOTTOM of the notes instead of the top, so it did not get the trap styling or the open-by-default panel - moved to first position and expanded. Removed unsupported content: the CPR r 16.5 defence-content list and 'silence = deemed admission' (that is 8.7 Statements of Case, not this chapter) and two invented default-judgment bars (defendant has filed an AOS; claim against the Crown). Added the missing manual material: the five opening checks with the 4-month/6-month claim form validity split, the r 7.7 call-for-service tactic, the r 6.14/r 6.26 deemed-service inconsistency and the cautious earliest-date approach, the whole of CPR Pt 14 admissions (pre-action, forms, timing, consequences, instalments, the seven withdrawal factors), the r 20.9 factors for Pt 20 claims, the request-versus-application split for default judgment, the without-notice conditions, the strike-out/summary-judgment block and its further-particulars side effect, and the Denton/FXF overlay on r 13.3 - the two cases the chapter actually cites, which the empty cases array was missing. Single ladder replaced with an array of 8 (2 mind maps, 4 decision trees, 2 grids). Condensed from 41k to 37k after the first pass ran over the size limit."
   },
   {
    "id": "8.7",
@@ -84,9 +84,9 @@
    "id": "8.10",
    "title": "Evidence",
    "manual": "SLK DISP8",
-   "status": "todo",
-   "visuals": "single",
-   "notes": ""
+   "status": "done",
+   "visuals": "array",
+   "notes": "Prose was aligned but bloated, and carried INVENTED content: Re B (Children) [2008] UKHL 35 and the 'no sliding scale' proposition are not in the manual — removed, cases array now empty. Without-prejudice exceptions rewritten to the manual's own four (8.13.4). Prose condensed; legacy single flow visual replaced with an array of 9."
   },
   {
    "id": "8.11",
@@ -188,9 +188,9 @@
    "id": "7.6",
    "title": "Directors' Appointment and Removal",
    "manual": "SLK BUS7",
-   "status": "todo",
-   "visuals": "single",
-   "notes": ""
+   "status": "done",
+   "visuals": "array",
+   "notes": "content was broadly aligned but thin, and 'Form IN01' was not the manual's wording (it says statement of proposed officers). Added the whole missing procedural spine: s 250 definition, board sets remuneration under the MAs, s 288(2)(a) no written resolution, s 312(1) special notice at the registered office, the s 312(4) deeming rule (proper special notice even if the GM is held sooner than 28 clear days), s 312(3) newspaper advertisement 14 clear days, the s 303/304/305 requisition chain in full with the 21-day / 28-days-from-the-decision / 3-month longstop distinction, expenses recovered from the company then from directors personally, Form TM01 within 14 days, the four MA 18 automatic triggers, board removal only if the articles allow (no such power in the Model Articles), the s 169 rights x3, the six-point 'check before serving special notice' list, the CDDA grounds and examples, Sch 1 unfitness factors, the two permission conditions, and CURRENCY lines for the Rating (Coronavirus) and Directors Disqualification (Dissolved Companies) Act 2021 s 2 and the ECCTA 2023 void-appointment rule. Softened the old 's 6 is mandatory / court has no discretion' claim, which the manual does not support - it frames the power as discretionary. Single grid replaced with an array of 7 (2 mind maps, 3 decision trees, 2 grids incl. a thresholds grid)."
   },
   {
    "id": "7.7",
@@ -226,11 +226,11 @@
   },
   {
    "id": "7.10",
-   "title": "Corporate Insolvency",
+   "title": "Debt and Security",
    "manual": "SLK BUS7",
-   "status": "todo",
-   "visuals": "single",
-   "notes": ""
+   "status": "done",
+   "visuals": "array",
+   "notes": "MISALIGNED: section was titled 'Corporate Insolvency' and held manual 7.13 content, duplicating 7.13/7.14 — that content was MOVED to 7.13 and the section rebuilt against manual 7.10 (loans, four types of security, fixed/floating charges, debentures, s 859A registration, negative pledges, priority, liens, guarantees, equity-v-debt). Manual 7.10 had been missing from the tool entirely. Statutes populated (was empty); single grid replaced with an array of 9."
   },
   {
    "id": "7.11",
@@ -252,9 +252,9 @@
    "id": "7.13",
    "title": "Corporate Insolvency and Liquidation",
    "manual": "SLK BUS7",
-   "status": "todo",
-   "visuals": "single",
-   "notes": ""
+   "status": "done",
+   "visuals": "array",
+   "notes": "MISALIGNED + displaced content received. 7.13 had been holding manual 7.14 claw-back/waterfall material, which the dedicated 7.14 covers better — DROPPED as superseded. Rebuilt against manual 7.13 (s 123 tests, MVL/CVL/compulsory, Sch 4 liquidator powers, CIGA moratorium and restructuring plan, Sch B1 para 3 hierarchy and both routes into administration, CVA, fixed-asset receivership) using the procedure content moved out of 7.10. Corrected inherited errors: petitioner list, CVA >50%-unconnected override, no court approval for a CVA, removed unsupported 8-week and 75%-CVL points. Single grid replaced with an array of 8."
   },
   {
    "id": "7.14",
@@ -262,7 +262,7 @@
    "manual": "SLK BUS7",
    "status": "todo",
    "visuals": "single",
-   "notes": ""
+   "notes": "RECEIVED displaced content only — not a full overhaul. Directors' liability (s 213/246ZA fraudulent trading, s 214/246ZB wrongful trading, s 212 misfeasance) moved here from 7.13 and rebuilt against manual 7.14.4, adding the balance-sheet test, 6-year limitation, no s 1157 relief, resignation not a defence and CDDA 1986 disqualification. Two traps and three statutes added; nothing removed. Still needs its own visuals pass."
   },
   {
    "id": "7.15",
@@ -404,9 +404,9 @@
    "id": "13.2",
    "title": "Alterations, Amendments and Revocation of Wills",
    "manual": "SLK WILL13",
-   "status": "todo",
-   "visuals": "single",
-   "notes": ""
+   "status": "done",
+   "visuals": "array",
+   "notes": "Invented content + missing manual detail. The entire 'Revival' block was removed - revival does not appear in WILL13 - along with Re Goods of Morton, Re Jones, Sugden v Lord St Leonards, Dufour v Pereira and Re Cleaver (none in the manual), and the s.18/s.18A/s.20/s.21/s.22 section numbers, which the manual does not give (it cites only 'Wills Act 1837'). Added from the manual: magnifying-glass-only test for obliterations, the presumption on pre-execution alterations and how to rebut it, codicil republication, four methods of revocation with three deliberate, later will revokes only so far as inconsistent plus the foreign/asset-specific revocation-clause trap, crossing out is not destruction, both rebuttable presumptions, dependent relative revocation, the two contemplation-of-marriage clauses, and the divorce provisions in full. Single visual replaced with an array of 6."
   },
   {
    "id": "13.3",
@@ -420,9 +420,9 @@
    "id": "13.4",
    "title": "Intestacy and Property Passing Outside the Estate",
    "manual": "SLK WILL13",
-   "status": "todo",
-   "visuals": "single",
-   "notes": ""
+   "status": "done",
+   "visuals": "array",
+   "notes": "Content correct but had NO visuals and duplicated itself in a 'Summary of Key Principles' block — dropped. Added the CURRENCY point from the SLK Wills examinable-law update (Cator v Thynn [2026] EWHC 1045 (Ch), surrogacy and the definition of 'children' at 13.4.2.4). Legacy single ladder replaced with an array of 7."
   },
   {
    "id": "13.5",
@@ -700,9 +700,9 @@
    "id": "11.2",
    "title": "Primary Legislation: Structure of an Act of Parliament",
    "manual": "SLK SYS11",
-   "status": "todo",
-   "visuals": "single",
-   "notes": ""
+   "status": "done",
+   "visuals": "array",
+   "notes": "Bloat + displaced content + invented cases. A whole 'Constitutional Principles' block (Bingham rule of law, separation of powers, judicial independence, conventions, prerogative, Miller, De Keyser) and Dicey's three limbs belong to 11.3/11.4 which cover them properly - DROPPED as superseded. Removed as not in SYS11: Heydon's Case, Grey v Pearson, Adler v George, R v A (No 2), the Parliament Act 1949 one-year delay, Law Commission reports as an extrinsic aid, and the HRA s.3/s.4 statutes (11.2 only cross-refers to 11.7). Rebuilt against manual 11.2.2-11.2.7 with the three private members' Bills, public/private/hybrid, all seven stages, money Bills and the Speaker, commencement, structure of an Act, the four approaches with the manual's own authorities, five presumptions, intrinsic/extrinsic aids, the four Latin tags with worked examples, express and implied repeal, and secondary legislation incl. the 40-day negative and the Welsh 21-day/super-affirmative procedures. Single visual replaced with an array of 9."
   },
   {
    "id": "11.3",
@@ -860,17 +860,17 @@
    "id": "12.3",
    "title": "Preparing the Contract of Sale",
    "manual": "SLK PROP12",
-   "status": "aligned-needs-visuals",
-   "visuals": "single",
-   "notes": ""
+   "status": "done",
+   "visuals": "array",
+   "notes": "flagged aligned-needs-visuals but contained a REVERSED RULE: the trap block said the deposit is held by the seller's solicitor as AGENT so the seller can use it immediately. The manual says the opposite - it is held as STAKEHOLDER in client account for both parties until completion; agent is the exception a developer asks for on a new build. Corrected and called out in the traps. Also removed invented content: Eccles-style numbered conditions SC 2.2 / SC 5.1 / SC 6.1.2, the 2pm completion time and 20-working-day default (both belong to 12.9/12.10, not this chapter), and the classes of title / good root 15 years / three parts of the register material, dropped as superseded by 12.4 Title Investigation. Added what was missing: the undertaking to the lender for unregistered deeds, the full 12-item particulars of sale, title guarantee full/limited/NONE with the default-is-FULL trap, contract rate 4-5% above base, the chattels-overvaluation fraud point, reduced-deposit risk, deposit passing up a chain via Formula C, risk-is-not-an-obligation-to-insure, the whole VAT and option-to-tax section, conditional contracts as condition precedent, the 6-item contract package, the redemption undertaking and the shortfall coming out of the firm's own money, the seven seller's-title situations (12.3.10), and a CURRENCY line for the DMCCA 2024 material information duty. Single flow visual replaced with an array of 8 (2 mind maps, 4 decision trees, 2 grids)."
   },
   {
    "id": "12.4",
    "title": "Title Investigation",
    "manual": "SLK PROP12",
-   "status": "aligned-needs-visuals",
-   "visuals": "single",
-   "notes": ""
+   "status": "done",
+   "visuals": "array",
+   "notes": "Visuals pass only - status was aligned-needs-visuals, so the prose was verified as matching manual 12.4 and left untouched. Legacy single grid replaced with an array of 5 (mind map, registered/unregistered decision tree, contrasts grid, numbers grid, working sequence)."
   },
   {
    "id": "12.5",
@@ -964,5 +964,6 @@
  "gaps": [
   "FORMATTING HAZARD: section 8.4 was serialised with spaces after colons ('\"id\": \"8.4\"') while every other section uses compact JSON ('\"id\":\"8.4\"'). Any grep or script matching the compact form silently skips it. Worth re-running an id audit with a whitespace-tolerant pattern before trusting the counts.",
   "Non-standard id '7.9B' (Corporate Finance - Debt Finance & Security) also escapes numeric id sweeps. The file holds 119 sections in total, not 117."
- ]
+ ],
+ "scheduling": "Pick sections from the LIVE page https://rfn2jk9dw9-max.github.io/SQE-Prep/SQE1_COLP_Revision.html via Chrome: buildSchedule(done) after syncFromServer lands, take the first three by computed date. SEED_DATES in that file are COLP TEACHING dates, NOT revision dates - reading them as due dates produced a fictional overdue backlog and sent the first 5 Aug run at 1.5/2.5/12.8 (positions 68-70 of 110). Nothing is ever overdue; un-done modules are re-spread forward from today, oldest-seed-first."
 }
