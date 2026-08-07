@@ -626,9 +626,12 @@ function render() {
   // Revisits are shown ON the module's existing card, not as extra cards.
   // Pushing them as separate items tripled the length of the list and broke
   // ticking, because two cards sharing a code toggle the same done flag.
-  const revisits = {};
-  buildSecondPass(assignment, done).forEach(({ code, date, phase }) => {
+  const revisitList = buildSecondPass(assignment, done);
+  const revisits = {};        // code -> [{date, phase}]  (shown on the card)
+  const revisitsByDate = {};  // date -> [code]           (shown in the day group)
+  revisitList.forEach(({ code, date, phase }) => {
     (revisits[code] = revisits[code] || []).push({ date: date, phase: phase });
+    (revisitsByDate[date] = revisitsByDate[date] || []).push(code);
   });
   items.forEach(i => { i.revisits = revisits[i.code] || []; });
 
@@ -706,27 +709,62 @@ function render() {
     });
 
     // Group by date bucket
-    let lastDate = null;
-    let cardsEl = null;
+    // A day's work is session 1 (a new chapter) plus session 2 (a revisit).
+    // The revisit belongs in that day's group: showing it only as a line on the
+    // module's own card — which sits under a different date entirely — meant
+    // the day view never told you what to do on the day.
+    const dayBuckets = {};   // date -> {modules:[], revisits:[]}
+    const tail = [];         // done / nodate, which are not date groups
 
     sorted.forEach(item => {
-      const bucket = item.revDate || (item.status==='done' ? 'done' : 'nodate');
-      if(bucket !== lastDate) {
+      if (!item.revDate) { tail.push(item); return; }
+      (dayBuckets[item.revDate] = dayBuckets[item.revDate] || {modules:[], revisits:[]})
+        .modules.push(item);
+    });
+
+    // Revisit-only days need a group of their own, or they vanish entirely.
+    if (['all','today','overdue','upcoming'].includes(activeFilter)) {
+      Object.entries(revisitsByDate).forEach(([date, codes]) => {
+        const st = date < TODAY ? 'overdue' : (date === TODAY ? 'today' : 'upcoming');
+        if (activeFilter !== 'all' && activeFilter !== st) return;
+        (dayBuckets[date] = dayBuckets[date] || {modules:[], revisits:[]})
+          .revisits.push(...codes);
+      });
+    }
+
+    Object.keys(dayBuckets).sort().forEach(date => {
+      const bucket = dayBuckets[date];
+      const st = date < TODAY ? 'overdue' : (date === TODAY ? 'today' : 'upcoming');
+      const label =
+        date === TODAY   ? '📅 Today – ' + fmtDate(date) :
+        st === 'overdue' ? '⚠ Overdue – ' + fmtDate(date) :
+        fmtShort(date);
+      const section = document.createElement('div');
+      section.innerHTML = '<div class="section-date">'+label+'</div>';
+      const cardsEl = document.createElement('div');
+      cardsEl.className = 'cards';
+      bucket.modules.forEach(i => cardsEl.appendChild(makeCard(i)));
+      bucket.revisits.forEach(c => cardsEl.appendChild(makeRevisitRow(c, st)));
+      section.appendChild(cardsEl);
+      root.appendChild(section);
+    });
+
+    // Completed and no-slot items keep their own trailing groups.
+    let lastTail = null, tailEl = null;
+    tail.forEach(item => {
+      const bucket = item.status === 'done' ? 'done' : 'nodate';
+      if (bucket !== lastTail) {
         const section = document.createElement('div');
-        const label =
-          item.status==='done' ? '✓ Completed' :
-          item.status==='nodate' ? '— No slot before the FLK1 exam' :
-          item.revDate===TODAY ? '📅 Today – '+fmtDate(item.revDate) :
-          item.status==='overdue' ? '⚠ Overdue – '+fmtDate(item.revDate) :
-          fmtShort(item.revDate);
-        section.innerHTML = '<div class="section-date">'+label+'</div>';
-        cardsEl = document.createElement('div');
-        cardsEl.className = 'cards';
-        section.appendChild(cardsEl);
+        section.innerHTML = '<div class="section-date">'
+          + (bucket === 'done' ? '✓ Completed' : '— No slot before the FLK1 exam')
+          + '</div>';
+        tailEl = document.createElement('div');
+        tailEl.className = 'cards';
+        section.appendChild(tailEl);
         root.appendChild(section);
-        lastDate = bucket;
+        lastTail = bucket;
       }
-      cardsEl.appendChild(makeCard(item));
+      tailEl.appendChild(makeCard(item));
     });
   } else {
     const cardsEl = document.createElement('div');
@@ -734,6 +772,26 @@ function render() {
     filtered.forEach(item => cardsEl.appendChild(makeCard(item)));
     root.appendChild(cardsEl);
   }
+}
+
+// Session 2 of a day. Deliberately a slim row rather than a full card: the
+// module already has exactly one tickable card elsewhere, and a second card
+// sharing its code would toggle the same done flag.
+function makeRevisitRow(code, status) {
+  const m = MODULES.find(x => x.code === code) || { code: code, title: '' };
+  const el = document.createElement('div');
+  el.className = 'card s-' + status;
+  el.style.cssText = 'opacity:.9;border-left:3px solid ' + codeColour(code);
+  el.innerHTML =
+    '<div class="card-head">'+
+      '<span class="card-code" style="color:'+codeColour(code)+'">🔁 '+code+'</span>'+
+      '<span class="card-title">'+m.title+'</span>'+
+      '<span class="card-check"></span>'+
+      '<span class="badge">Revisit</span>'+
+    '</div>'+
+    '<div class="card-sub"><span style="opacity:.75">Session 2 — recall first, '
+      + 'then reread only what you could not retrieve</span></div>';
+  return el;
 }
 
 function makeCard(item) {
@@ -777,13 +835,9 @@ function makeCard(item) {
     '</div>'+
     '<div class="card-sub">'+
       '<span>📚 COLP: '+fmtDate(item.colpDate)+'</span>'+
-      // Revisits ride on the module's own card. Rendering them as separate
-      // cards tripled the list and broke ticking, since two cards sharing a
-      // code toggle the same done flag.
-      ((item.revisits && item.revisits.length)
-        ? '<span style="opacity:.75">🔁 Revisit: '
-          + item.revisits.map(r => fmtShort(r.date)).join(' · ') + '</span>'
-        : '')+
+      // Revisit dates are NOT repeated here: each revisit gets its own slim row
+      // in the day it falls on, which is where it is actually actionable.
+      // Listing them on the card as well was noise.
       (CANVAS_URLS[item.code]
         ? '<a class="card-link" href="'+BASE+CANVAS_URLS[item.code]+'" target="_blank" rel="noopener">↗ Open on COLP</a>'
         : '')+
