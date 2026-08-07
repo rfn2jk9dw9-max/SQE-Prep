@@ -919,16 +919,53 @@ def parse_canvas_pdf(pdf_path, subject, paper):
     return questions
 
 
+def _norm_opt(s):
+    """Normalise text for override matching: lowercase, strip all non-alphanumerics.
+
+    Absorbs the differences that otherwise defeat exact equality — curly vs
+    straight apostrophes, non-breaking spaces, £/currency spacing, double
+    spaces, trailing punctuation, and the parser's mid-word truncation.
+
+    Used for BOTH the question_prefix match and the correct_text match. The
+    question_prefix needs it too: the 'A defendant's trial is at the Crown
+    Court' override silently matched nothing for months purely because the
+    override file had a straight apostrophe and the PDF has a curly one.
+    """
+    return re.sub(r'[^a-z0-9]', '', (s or '').lower())
+
+
 def apply_overrides(questions, script_dir=None):
     """
     Apply manual answer corrections from answer_overrides.json.
 
-    Each override matches by:
-      • source_prefix  — question's 'source' field must start with this
-      • question_prefix — question's 'question_text' must start with this (first 60 chars)
+    Each override matches a question by:
+      • source_prefix   — question's 'source' field must start with this
+      • question_prefix — question's 'question_text' must start with this
 
-    On match, 'correct_index' is replaced with the override value and a
-    'override_note' key is added for transparency.
+    The correct answer is then located by TEXT, not by index:
+      • correct_text  — a distinctive substring of the option that is correct
+
+    WHY TEXT AND NOT AN INDEX
+    -------------------------
+    Option ORDER is not stable. It changes whenever the parser is improved
+    (e.g. when the option-merge bug is fixed and a merged option splits back
+    into two) or when the source PDF is re-issued with reshuffled answers.
+    A hardcoded 'correct_index' written against one parse silently points at a
+    different option after the next parse — and because these overrides exist
+    precisely to REJECT the plausible-but-wrong H5P answer, a stale index tends
+    to land on exactly the option the override was written to rule out.
+
+    On 2026-08-06 five of twelve index-based overrides were found doing this
+    (roommates→"Tribunal", murder→"Magistrates' Court", new factory unit→
+    "construction services are zero rated", new dwelling→"buyers not VAT
+    registered", option to purchase→"no protectable interest").
+
+    FAILURE BEHAVIOUR
+    -----------------
+    If correct_text matches zero options or more than one, the override is
+    NOT applied and a loud warning is emitted. Leaving the H5P answer in place
+    is bad; asserting a wrong answer with an authoritative override_note
+    attached to it is worse, because it teaches the wrong rule with confidence.
     """
     if script_dir is None:
         script_dir = Path(__file__).parent
@@ -945,23 +982,71 @@ def apply_overrides(questions, script_dir=None):
         _dbg(f"  [overrides] failed to load: {e}")
         return questions
 
-    applied = 0
+    applied  = 0
+    failures = []
+    matched  = set()          # ids of overrides that found a question at all
+
     for q in questions:
-        src   = q.get("source", "")
-        qtxt  = q.get("question_text", "")
-        for ov in overrides:
+        src  = q.get("source", "")
+        qtxt = q.get("question_text", "")
+        for oi, ov in enumerate(overrides):
             sp = ov.get("source_prefix", "")
             qp = ov.get("question_prefix", "")
-            if src.startswith(sp) and qtxt.startswith(qp):
-                old_idx = q.get("correct_index")
+            if not (src.startswith(sp) and _norm_opt(qtxt).startswith(_norm_opt(qp))):
+                continue
+
+            matched.add(oi)
+            label   = f"{sp} | {qtxt[:55]!r}"
+            old_idx = q.get("correct_index")
+            opts    = q.get("options") or []
+            ctext   = ov.get("correct_text")
+
+            if ctext:
+                needle = _norm_opt(ctext)
+                hits   = [i for i, o in enumerate(opts) if needle in _norm_opt(o)]
+                if len(hits) == 1:
+                    new_idx = hits[0]
+                elif not hits:
+                    failures.append(f"{label}: correct_text {ctext!r} matches NO option "
+                                    f"(options: {[o[:60] for o in opts]})")
+                    break
+                else:
+                    failures.append(f"{label}: correct_text {ctext!r} is AMBIGUOUS — "
+                                    f"matches options {hits}")
+                    break
+            elif isinstance(ov.get("correct_index"), int):
+                # Legacy entry with no text anchor. Honour it, but say so —
+                # it carries the staleness risk described above.
                 new_idx = ov["correct_index"]
-                q["correct_index"]  = new_idx
-                q["override_note"]  = ov.get("note", "")
-                _dbg(f"  [override] {src} | {qtxt[:55]!r}  cidx {old_idx}→{new_idx}")
-                applied += 1
-                break   # only one override per question
+                failures.append(f"{label}: no correct_text, falling back to brittle "
+                                f"correct_index={new_idx} — add a correct_text anchor")
+            else:
+                failures.append(f"{label}: override has neither correct_text nor correct_index")
+                break
+
+            if not 0 <= new_idx < len(opts):
+                failures.append(f"{label}: resolved index {new_idx} out of range "
+                                f"({len(opts)} options)")
+                break
+
+            q["correct_index"] = new_idx
+            q["override_note"] = ov.get("note", "")
+            _dbg(f"  [override] {label}  cidx {old_idx}→{new_idx}  "
+                 f"({opts[new_idx][:60]!r})")
+            applied += 1
+            break   # only one override per question
+
+    for oi, ov in enumerate(overrides):
+        if oi not in matched:
+            failures.append(f"{ov.get('source_prefix','')} | "
+                            f"{ov.get('question_prefix','')[:50]!r}: matched NO question "
+                            f"— question text may have drifted, or it was deduped away")
 
     _dbg(f"  [overrides] applied {applied}/{len(overrides)} corrections")
+    for f in failures:
+        _dbg(f"  [overrides] !! {f}")
+        print(f"WARNING [overrides] {f}", file=sys.stderr)
+
     return questions
 
 
