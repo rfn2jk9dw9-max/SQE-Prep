@@ -347,7 +347,8 @@ def main():
     if hy_standalone.exists():
         try:
             from extract_mistakes import get_personal_mistake_flashcards, inject_mistake_flashcards
-            by_key = get_personal_mistake_flashcards(TESTS_DIR, SCRIPT_DIR / "progress.json", cache_file=cache_file)
+            by_key = get_personal_mistake_flashcards(TESTS_DIR, SCRIPT_DIR / "progress.json",
+                                                     cache_file=cache_file, bank=questions)
             if by_key:
                 hy_html = hy_standalone.read_text(encoding='utf-8')
                 hy_html = inject_mistake_flashcards(hy_html, by_key)

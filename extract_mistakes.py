@@ -13,6 +13,8 @@ Maps each wrong answer to a revision guide chapter and returns
 a dict of {chapter_id: [note_strings]} for injection into the HTML.
 """
 
+from __future__ import annotations   # allows `str | None` hints on Python 3.9
+
 import json, re, sys, urllib.request
 from pathlib import Path
 from collections import defaultdict
@@ -346,7 +348,7 @@ DEFAULT_FLASHCARD_COLOR = "#475569"
 
 _ORIGIN_LABEL = {
     "mock_exam": "Mock Exam", "mock_exam_online": "Mock Exam",
-    "canvas_pdf": "Session", "h5p": "Session",
+    "mock_exam_pdf": "Mock Exam", "canvas_pdf": "Session", "h5p": "Session",
 }
 
 AUTO_MISTAKES_START = "/*AUTO_MISTAKES_START*/"
@@ -504,6 +506,231 @@ def inject_mistake_flashcards(html: str, by_key: dict[str, list[dict]]) -> str:
     return html[:arr_open] + block + html[arr_close + 1:]
 
 
+# ── Mock exam results-PDF extraction ─────────────────────────────────────────
+#
+# These are print-to-PDF captures of the mock exam results page, kept as a
+# safety net in case a session is lost from progress.json / the Hostinger DB.
+# The page colour-codes each reviewed question, which is what we key off:
+#   green  (0.024, 0.373, 0.275) → the correct option ("… ✓ Correct Answer")
+#   red    (0.600, 0.106, 0.106) → the option the user actually picked
+#   dark   (0.102, 0.102, 0.102) → the question stem
+#   grey   (0.333, 0.333, 0.333) → the other, unpicked options
+# A question is only shown in red when the user got it wrong, so the red span
+# IS the wrong answer — no need to parse the A–E option lettering (which is
+# unreliable here, since stems routinely begin "A solicitor…", "A lender…").
+
+MOCK_GREEN = (0.02352941, 0.372549, 0.2745098)
+MOCK_RED   = (0.6, 0.1058824, 0.1058824)
+MOCK_STEM  = (0.1019608, 0.1019608, 0.1019608)
+
+_MOCK_HEADER_RE = re.compile(r'^\s*[✓✗]\s*Q(\d+)\s+(.*)$')
+_MOCK_DATE_RE   = re.compile(r'SQE1 Mock Exam\s+(\d{2})/(\d{2})/(\d{4}),\s*(\d{2}):(\d{2})')
+
+
+def _colour_is(colour, target, tol=0.02) -> bool:
+    try:
+        return len(colour) == 3 and all(abs(a - b) < tol for a, b in zip(colour, target))
+    except (TypeError, ValueError):
+        return False
+
+
+def _mock_subject_from_header(header_tail: str) -> str:
+    """
+    The header line ends with the subject, e.g.
+      'A contractual dispute between two roommates is worth a large… Legal System'
+    Match against the known subject names, longest first so that
+    'Criminal Law and Practice' wins over 'Criminal Law'.
+    """
+    tail = header_tail.strip()
+    for name in sorted(SUBJECT_NAME_TO_KEY, key=len, reverse=True):
+        if tail.lower().endswith(name):
+            return name
+    return ""
+
+
+def load_mock_pdf_wrong_answers(mock_dir: Path, bank: list = None) -> list[dict]:
+    """
+    Parse the mock-exam results PDFs in `mock_dir` and return the questions the
+    user got wrong, with both their selection and the correct answer.
+
+    `bank`, if given, is the freshly parsed current question bank. Each PDF
+    records the answer key AS IT STOOD ON THE DAY it was printed, so a question
+    whose key has since been corrected would otherwise re-teach the old, wrong
+    answer. When the bank is supplied we (a) prefer the bank's current correct
+    answer and (b) drop the entry entirely if the user's pick is now the correct
+    one — i.e. the mark was a false negative, not a real mistake.
+    """
+    mock_dir = Path(mock_dir)
+    if not mock_dir.exists():
+        print(f"  ⚠ Mock exams folder not found: {mock_dir}")
+        return []
+
+    try:
+        import pdfplumber
+    except ImportError as e:
+        print(f"  ⚠ pdfplumber unavailable, skipping mock PDFs: {e}")
+        return []
+
+    # question stem (first 60 chars, normalised) → current correct option text
+    bank_key = {}
+    if bank:
+        for q in bank:
+            stem = _norm_stem(q.get("question_text", ""))
+            opts = q.get("options") or []
+            ci = q.get("correct_index")
+            if stem and isinstance(ci, int) and 0 <= ci < len(opts):
+                bank_key[stem] = opts[ci]
+
+    wrong = []
+    stale_skipped = 0
+
+    for pdf_path in sorted(mock_dir.glob("*.pdf")):
+        try:
+            entries, sat_at = _parse_mock_pdf(pdf_path, pdfplumber)
+        except Exception as e:
+            print(f"  ⚠ Could not parse {pdf_path.name}: {e}")
+            continue
+
+        kept = 0
+        for e in entries:
+            stem = _norm_stem(e["questionText"])
+            correct = e["correctAnswer"]
+            current = bank_key.get(stem)
+            if current:
+                # The key may have been corrected since this PDF was printed.
+                if _norm_stem(current) == _norm_stem(e["userAnswer"]):
+                    stale_skipped += 1      # she was actually right; ignore
+                    continue
+                correct = current
+            wrong.append({
+                'questionText':  e["questionText"],
+                'subject':       e["subject"],
+                'source':        pdf_path.stem,
+                'userAnswer':    e["userAnswer"],
+                'correctAnswer': correct,
+                'datetime':      sat_at,
+                'origin':        'mock_exam_pdf',
+            })
+            kept += 1
+        print(f"    {kept:>3} wrong  {pdf_path.name}")
+
+    if stale_skipped:
+        print(f"    ({stale_skipped} skipped — answer key has since been "
+              f"corrected, the original mark was a false negative)")
+    return wrong
+
+
+def _norm_stem(text: str) -> str:
+    """Whitespace/punctuation-insensitive key for matching stems and options."""
+    return re.sub(r'[^a-z0-9]+', ' ', (text or "").lower()).strip()[:60]
+
+
+def _cluster_rows(words: list, tol: float = 5.0):
+    """Yield words grouped into visual lines, left-to-right, top-to-bottom."""
+    rows = []
+    for w in sorted(words, key=lambda w: w['top']):
+        if rows and abs(w['top'] - rows[-1][0]) <= tol:
+            rows[-1][1].append(w)
+        else:
+            rows.append((w['top'], [w]))
+    for _, ws in rows:
+        yield sorted(ws, key=lambda w: w['x0'])
+
+
+def _parse_mock_pdf(pdf_path: Path, pdfplumber) -> tuple[list[dict], str]:
+    """Returns ([{questionText, subject, userAnswer, correctAnswer}, ...], iso_datetime)."""
+    lines = []          # [{text, colour, page}]
+    sat_at = ""
+
+    with pdfplumber.open(str(pdf_path)) as pdf:
+        for pno, page in enumerate(pdf.pages):
+            words = page.extract_words(extra_attrs=['non_stroking_color'])
+            # Group words into visual lines. Fixed-bucket rounding is not safe
+            # here: the ✓/✗ status glyph sits a fraction of a point below the
+            # text it labels, so a naive round(top/3) drops it onto its own row
+            # and the question header stops looking like a header. Cluster on
+            # the gap between successive tops instead.
+            for ws in _cluster_rows(words):
+                text = ' '.join(w['text'] for w in ws).strip()
+                if not text:
+                    continue
+                if not sat_at:
+                    m = _MOCK_DATE_RE.search(text)
+                    if m:
+                        d, mo, y, hh, mm = m.groups()
+                        sat_at = f"{y}-{mo}-{d}T{hh}:{mm}:00"
+                # drop the print header/footer furniture
+                if 'Page' in text and 'of' in text and 'github.io' in text:
+                    continue
+                if _MOCK_DATE_RE.search(text) and len(text) < 60:
+                    continue
+                lines.append({
+                    'text':   text,
+                    'colour': ws[0].get('non_stroking_color'),
+                    'words':  ws,
+                    'page':   pno,
+                })
+
+    # walk the lines, slicing into per-question blocks at each ✓/✗ Qn header
+    entries, block, header = [], [], None
+    def flush():
+        if header is not None and header['wrong']:
+            e = _mock_block_to_entry(header, block)
+            if e:
+                entries.append(e)
+
+    for ln in lines:
+        m = _MOCK_HEADER_RE.match(ln['text'])
+        if m:
+            flush()
+            header = {
+                'wrong':   ln['text'].lstrip().startswith('✗'),
+                'subject': _mock_subject_from_header(m.group(2)),
+            }
+            block = []
+        elif header is not None:
+            block.append(ln)
+    flush()
+    return entries, sat_at
+
+
+def _mock_block_to_entry(header: dict, block: list) -> dict | None:
+    """Pull the stem (dark text) plus the red and green spans out of one block."""
+    stem_parts, red_parts, green_parts = [], [], []
+    for ln in block:
+        for w in ln['words']:
+            col = w.get('non_stroking_color')
+            if _colour_is(col, MOCK_RED):
+                red_parts.append(w['text'])
+            elif _colour_is(col, MOCK_GREEN):
+                green_parts.append(w['text'])
+            elif _colour_is(col, MOCK_STEM) and not red_parts and not green_parts:
+                stem_parts.append(w['text'])
+
+    stem = ' '.join(stem_parts).strip()
+    user = _strip_option_letter(' '.join(red_parts).strip())
+    # Truncate at the "✓ Correct Answer" marker rather than only stripping it
+    # from the end: if a block boundary is ever missed, the next question's
+    # green option would otherwise be glued onto this one's answer.
+    corr = ' '.join(green_parts).strip()
+    corr = re.split(r'\s*✓?\s*Correct Answer\b', corr)[0].strip()
+    corr = _strip_option_letter(corr)
+
+    if not stem or not user:
+        return None
+    return {
+        'questionText':  stem,
+        'subject':       header['subject'],
+        'userAnswer':    user,
+        'correctAnswer': corr,
+    }
+
+
+def _strip_option_letter(text: str) -> str:
+    """'B High Court (King's Bench Division)' → 'High Court (King's Bench Division)'"""
+    return re.sub(r'^[A-E]\s+', '', text).strip()
+
+
 # ── H5P PDF wrong-answer extraction ──────────────────────────────────────────
 
 def load_h5p_wrong_answers(tests_dir: Path, cache_file: Path = None) -> list[dict]:
@@ -599,7 +826,8 @@ def load_h5p_wrong_answers(tests_dir: Path, cache_file: Path = None) -> list[dic
 
 # ── Public entry point ────────────────────────────────────────────────────────
 
-def _gather_all_wrong_answers(tests_dir: Path, progress_file: Path, cache_file: Path = None) -> list[dict]:
+def _gather_all_wrong_answers(tests_dir: Path, progress_file: Path, cache_file: Path = None,
+                              bank: list = None) -> list[dict]:
     print("\n[Mistakes] Loading wrong answers...")
 
     wrong = []
@@ -624,6 +852,16 @@ def _gather_all_wrong_answers(tests_dir: Path, progress_file: Path, cache_file: 
     print(f"  H5P PDFs: {len(h5p)} wrong answers")
     wrong.extend(h5p)
 
+    # 5. Mock exam results PDFs — the safety net for sessions that never made
+    #    it into progress.json or the Hostinger DB. Deliberately LAST: the
+    #    dedup in map_wrong_answers_to_flashcards keeps the first entry it sees
+    #    for a question, so live session data always wins and these only fill
+    #    the gaps.
+    mock_dir = Path(tests_dir).parent / "Mock exams"
+    mock = load_mock_pdf_wrong_answers(mock_dir, bank=bank)
+    print(f"  Mock exam PDFs: {len(mock)} wrong answers")
+    wrong.extend(mock)
+
     print(f"  Total wrong answers: {len(wrong)}")
     return wrong
 
@@ -638,9 +876,14 @@ def get_personal_notes(tests_dir: Path, progress_file: Path, cache_file: Path = 
     return by_chapter
 
 
-def get_personal_mistake_flashcards(tests_dir: Path, progress_file: Path, cache_file: Path = None) -> dict[str, list[dict]]:
-    """Maps mistakes to FLASH_DATA flashcard decks, keyed by subject."""
-    wrong = _gather_all_wrong_answers(tests_dir, progress_file, cache_file)
+def get_personal_mistake_flashcards(tests_dir: Path, progress_file: Path, cache_file: Path = None,
+                                    bank: list = None) -> dict[str, list[dict]]:
+    """Maps mistakes to FLASH_DATA flashcard decks, keyed by subject.
+
+    `bank` is the freshly parsed question bank; pass it so mistakes read out of
+    old mock-exam PDFs are checked against the current answer key.
+    """
+    wrong = _gather_all_wrong_answers(tests_dir, progress_file, cache_file, bank=bank)
     by_key = map_wrong_answers_to_flashcards(wrong)
     total = sum(len(v) for v in by_key.values())
     print(f"  Mapped to {total} flashcard(s) across {len(by_key)} deck(s): {sorted(by_key.keys())}")

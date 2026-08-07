@@ -1,11 +1,11 @@
 {
- "updated": "2026-08-06",
+ "updated": "2026-08-07",
  "rule": "Pick sections by running the REAL buildSchedule() from SQE1_COLP_Revision.html in node against the server done-set (colp_progress.php). SEED_DATES are TEACHING dates, not due dates: the schedule = teaching date + 14 days, clamped to today, snapped to a free day, spread to 2026-12-14. Nothing is ever overdue, and the queue drains in TEACHING order (oldest first). Take Today then Upcoming. Then: (1) pdftotext the SLK manual chapter, (2) rebuild notes terse (15-25k chars, one point per line, citations only in the cases array, grep every case name back against the manual), (3) visuals array - overview mind map + one per topic + decision trees for confusable doctrines (map: 2-5 branches, grid: 2-4 cols), (4) preserve/relocate MCQ traps, never delete, (5) verify with the node buildVis sweep, (6) push the single file via a /tmp clone.",
  "counts": {
   "total": 119,
-  "done": 39,
+  "done": 42,
   "aligned_needs_visuals": 9,
-  "todo": 71
+  "todo": 68
  },
  "sections": [
   {
@@ -60,9 +60,9 @@
    "id": "8.7",
    "title": "Statements of Case",
    "manual": "SLK DISP8",
-   "status": "todo",
-   "visuals": "single",
-   "notes": ""
+   "status": "done",
+   "visuals": "array",
+   "notes": "Invented content + missing visuals. Removed the Judgments Act 1838 s 17 row, the Late Payment Act rate and fixed-charge figures (£40/£70/£100 and 8% above base), the 'simple interest only / compound' propositions and the CPR r 3.4 citation - none of them appear in DISP8 8.7. Added the manual material that was absent: electronic filing (PD 51ZB paras 5-10, MCOL's 1,080-character limit or separate service within 14 days, CE File PD 51O para 5.1 and tracked amended versions), PD 7A para 4.1 title requirements, the Commercial Court Guide 25-page/font 12/1.5-spacing cap and the factual-matrix requirement at C1.3(h), PD 22 para 3.10 personal knowledge and the 2.2/2.3 variants for witness statements and costs budgets, 8.7.3.7 presentation (statement of truth on the same page as substance or the court office may refuse it), the Commercial Court 21-day reply and 28-day defence to counterclaim under r 58.10(1), the RFI objection procedure and summary assessment of the application costs, and the full amendment lateness factors. Cases array empty - the chapter cites none. Legacy single flow visual replaced with an array of 11. 33k, driven by a 19-page manual chapter and 11 visuals."
   },
   {
    "id": "8.8",
@@ -196,9 +196,9 @@
    "id": "7.7",
    "title": "Directors' Duties",
    "manual": "SLK BUS7",
-   "status": "todo",
-   "visuals": "single",
-   "notes": ""
+   "status": "done",
+   "visuals": "array",
+   "notes": "Invented content + displaced content. BTI 2014 v Sequana and the s 172(3) creditors' duty are not in BUS7 7.7 - removed and cross-referred to 7.14, which covers directors' exposure to creditors properly (dropped as superseded, not moved). The s 248 ten-year minutes point DROPPED as superseded - 7.8 already carries it. Removed section numbers the manual does not give: s 386 for accounting records, s 260 for derivative claims, and a 6-year retention figure for public companies. Added the missing procedural detail: s 170 and who enforces, the four identical s 177/s 182 exceptions, the three methods of declaration (meeting / s 184 / s 185), Model Article 14, the sole-director exception, s 191(2) in full including called-up share capital where there are no statutory accounts, a LOAN IS NOT A NON-CASH ASSET, the holding-company and wholly-owned-subsidiary approval rules, the loan memorandum and its 15-day inspection period, the three board-only loan exceptions, the three bars to avoidance, the three specified persons, the no-knowledge defence and affirmation within a reasonable time, plus a CURRENCY line for the March 2026 examinable-law update at 7.7.4.2 (register of members only, at the registered office or a SAIL). Cases array empty - the chapter cites none. Single cards visual replaced with an array of 8. 29k, above the 15-20k ideal because the chapter has 7 duties, 2 approval regimes and 8 visuals."
   },
   {
    "id": "7.8",
@@ -340,9 +340,9 @@
    "id": "1.4",
    "title": "Termination",
    "manual": "SLK CONT1",
-   "status": "todo",
-   "visuals": "single",
-   "notes": ""
+   "status": "done",
+   "visuals": "array",
+   "notes": "Invented content. CONT1 chapter 1.4 cites NO cases, yet the section carried six in the cases array (Davis Contractors, Taylor v Caldwell, Cutter v Powell, Hoenig v Isaacs, Hochster, Krell) plus Vitol v Norelf, Maritime National Fish and Bell v Lever Bros in the prose - all removed, cases array now empty. Also dropped force majeure, foreseeability as an element of frustration and tender of performance (none in the chapter); common mistake kept only as a boundary cross-reference to 1.3. Added the missing spine: the three options on imperfect performance, entire vs divisible on the parties' intention, substantial performance as a question of degree with the cost of making good deducted, partial performance recovering nothing without a genuine choice to accept, prevention by the other party, the three routes to time of the essence, bilateral vs unilateral discharge and accord and satisfaction, expiry/condition precedent, waiver needing consideration, the affirmation rules (no duty to mitigate, but no co-operation required and legitimate interest), the four frustration categories, what is NOT frustration, the common-law bar where a benefit has been received, and the LRFCA 1943 with its three excluded contract types and the just sum. Legacy single ladder replaced with an array of 8 (2 mind maps, 3 decision trees, 2 grids, 1 map). 23k."
   },
   {
    "id": "1.5",
