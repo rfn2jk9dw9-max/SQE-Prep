@@ -472,6 +472,86 @@ function buildSchedule(doneSet) {
   return assignment;
 }
 
+// ── Second pass ────────────────────────────────────────────────────────────
+// Modules taught early get one revision touch and are then never revisited:
+// CONT1.1 was taught in March, so a single pass leaves it cold for a January
+// exam. Worse, those are exactly the chapters that generate no mistake
+// flashcards, because they were answered correctly at the time. Free days left
+// idle by the first pass are given to a second look at the earliest material.
+// There are 113 modules and fewer free days before 14 Dec, so the first pass is
+// oversubscribed — there are no idle days to reclaim. The second pass therefore
+// lives in the one genuinely empty stretch: after the COLP exam on 15 Dec and
+// before the SQE1 sitting. That window was previously unplanned, which is the
+// weakest point in the whole schedule.
+const EARLY_CUTOFF   = '2026-06-01';   // "taught early" = COLP date before this
+const POST_COLP_FROM = '2026-12-16';   // day after the COLP exam
+const EXAM_DATE      = '2027-01-15';   // ← set to your actual SQE1 date
+const PER_DAY        = 2;              // revisits per day in the run-up
+
+function buildSecondPass(assignment, doneSet) {
+  // Days available between the COLP exam and the real thing.
+  const days = [];
+  let d = parseDate(POST_COLP_FROM);
+  const stop = parseDate(EXAM_DATE);
+  stop.setDate(stop.getDate() - 1);          // leave the day before clear
+  while (toYMD(d) <= toYMD(stop)) {
+    if (isFreeDay(toYMD(d))) days.push(toYMD(d));
+    d.setDate(d.getDate() + 1);
+  }
+  if (!days.length) return {};
+
+  // Priority 1: modules the first pass could not fit at all (taught inside the
+  // 14-day gap before 14 Dec) — these would otherwise never be revised once.
+  const orphans = MODULES
+    .filter(m => SEED_DATES[m.code] && !doneSet.has(m.code))
+    .filter(m => assignment[m.code] == null)
+    .map(m => m.code);
+
+  // Priority 2: earliest-taught material, coldest first. These generate no
+  // mistake flashcards precisely because they were answered correctly in
+  // spring, so nothing else brings them back.
+  const early = MODULES
+    .filter(m => SEED_DATES[m.code] && SEED_DATES[m.code] < EARLY_CUTOFF)
+    .filter(m => !doneSet.has(m.code) && !orphans.includes(m.code))
+    .sort((a, b) => SEED_DATES[a.code].localeCompare(SEED_DATES[b.code]))
+    .map(m => m.code);
+
+  const queue = orphans.concat(early);
+  const second = {};
+  let i = 0;
+  for (const day of days) {
+    for (let k = 0; k < PER_DAY && i < queue.length; k++, i++) second[queue[i]] = day;
+    if (i >= queue.length) break;
+  }
+  return second;
+}
+
+// ── Full-length paper days ─────────────────────────────────────────────────
+// SQE1 is 180 questions per FLK, sat as two 90-question sittings of 2h33m on
+// non-consecutive days. Short mocks never rehearse that, and endurance is a
+// separate skill — the COLP exam on 15 Dec should not be the first time.
+const FULL_PAPER_START = '2026-10-01';
+const FULL_PAPER_END   = '2026-12-12';
+const FULL_PAPER_COUNT = 4;
+
+function buildFullPaperDays() {
+  const window = [];
+  let d = parseDate(FULL_PAPER_START);
+  while (toYMD(d) <= FULL_PAPER_END) {
+    const ymd = toYMD(d);
+    if (isFreeDay(ymd) && ymd >= todayYMD()) window.push(ymd);
+    d.setDate(d.getDate() + 1);
+  }
+  if (!window.length) return {};
+  const n = Math.min(FULL_PAPER_COUNT, window.length);
+  const step = (window.length - 1) / Math.max(n - 1, 1);
+  const out = {};
+  for (let i = 0; i < n; i++) {
+    out[window[Math.round(i * step)]] = (i % 2 === 0) ? 'FLK1' : 'FLK2';
+  }
+  return out;
+}
+
 // ── Render ─────────────────────────────────────────────────────────────────
 let activeFilter = 'all';
 
@@ -495,6 +575,33 @@ function render() {
     revDate: done.has(m.code) ? null : (assignment[m.code] ?? null),
     status: getStatus(m.code, assignment[m.code]),
   }));
+
+  // Second-pass revisits and full-paper days are extra entries in the same
+  // date-grouped list, not a separate view — they only work if they show up
+  // on the day alongside everything else.
+  const secondPass = buildSecondPass(assignment, done);
+  Object.entries(secondPass).forEach(([code, day]) => {
+    const m = MODULES.find(x => x.code === code);
+    if (!m) return;
+    items.push({
+      ...m,
+      colpDate: SEED_DATES[code] || null,
+      revDate: day,
+      status: day < TODAY ? 'overdue' : (day === TODAY ? 'today' : 'upcoming'),
+      secondPass: true,
+    });
+  });
+
+  Object.entries(buildFullPaperDays()).forEach(([day, flk]) => {
+    items.push({
+      code: flk + ' FULL',
+      title: 'Full paper — two sittings of 90 questions, 2h33m each',
+      colpDate: null,
+      revDate: day,
+      status: day === TODAY ? 'today' : 'upcoming',
+      fullPaper: flk,
+    });
+  });
 
   // Stats
   const totalModules = MODULES.length;
@@ -588,6 +695,25 @@ function render() {
 
 function makeCard(item) {
   const s = item.status;
+
+  // Full-paper days are not a module and must not be tickable — clicking one
+  // would write a bogus code into the done set and corrupt the progress count.
+  if (item.fullPaper) {
+    const el = document.createElement('div');
+    el.className = 'card s-' + s;
+    el.style.borderLeft = '3px solid #f59e0b';
+    el.innerHTML =
+      '<div class="card-head">' +
+        '<span class="card-code" style="color:#f59e0b">⏱ ' + item.fullPaper + '</span>' +
+        '<span class="card-title">' + item.title + '</span>' +
+        '<span class="card-check"></span>' +
+        '<span class="badge">' + (s === 'today' ? '📅 Today' : fmtDate(item.revDate)) + '</span>' +
+      '</div>' +
+      '<div class="card-sub"><span>Sit both halves in one day, with a break between. ' +
+      'Do not check answers in between — the endurance is the point.</span></div>';
+    return el;
+  }
+
   const colour = codeColour(item.code);
   const badgeText = {
     done:     '✓ Done',
@@ -602,7 +728,8 @@ function makeCard(item) {
   el.innerHTML =
     '<div class="card-head">'+
       '<span class="card-code" style="color:'+colour+'">'+item.code+'</span>'+
-      '<span class="card-title">'+item.title+'</span>'+
+      '<span class="card-title">'+item.title+
+        (item.secondPass ? ' <em style="opacity:.7">· 2nd pass</em>' : '')+'</span>'+
       '<span class="card-check">'+(s==='done'?'✓':'')+'</span>'+
       '<span class="badge">'+badgeText+'</span>'+
     '</div>'+
