@@ -389,6 +389,16 @@ button { cursor: pointer; font-family: inherit; }
     </div>
   </div>
 
+  <div class="setup-card" id="studied-card">
+    <h2>Subject Filter</h2>
+    <label style="display:flex;gap:.6rem;align-items:flex-start;cursor:pointer">
+      <input type="checkbox" id="studied-only" checked style="margin-top:.25rem">
+      <span>Only subjects I have studied
+        <div class="sub" id="studied-summary">Applies to the SRA and Revise sets, which are fixed papers covering the whole syllabus. Uncheck to sit the paper in full.</div>
+      </span>
+    </label>
+  </div>
+
   <div class="setup-card">
     <h2>Session Duration</h2>
     <div class="radio-grid cols4">
@@ -851,6 +861,12 @@ async function deleteSession(dt) {
 // Load dashboard on page start
 fetchSessions().then(renderDashboard);
 
+document.addEventListener('DOMContentLoaded', () => {
+  const box = document.getElementById('studied-only');
+  if (box) box.addEventListener('change', refreshStudiedSummary);
+  refreshStudiedSummary();
+});
+
 // ══════════════════════════════════════════════════════════
 //  CONFIGURATION
 // ══════════════════════════════════════════════════════════
@@ -878,6 +894,43 @@ const PAPER_SUBJECTS = {
 
 const DURATION_TO_QS = { "30": 18, "60": 35, "90": 53, "153": 90 };
 const LETTERS = ["A","B","C","D","E"];
+
+// COLP teaching calendar, rewritten from SQE1_COLP_Revision.html on every
+// update_site.py run. Used to work out which subjects have actually been
+// taught, so the fixed SRA / Revise sets can be restricted to studied material
+// instead of being avoided altogether.
+/*COURSE_CALENDAR_START*/
+const COURSE_CALENDAR = [{"code": "CONT1.1", "subject": "Contract Law", "date": "2026-03-16"}, {"code": "TORT2.1", "subject": "Tort", "date": "2026-03-17"}, {"code": "COND3.1", "subject": "Ethics and Professional Conduct", "date": "2026-03-18"}, {"code": "LAND4.1", "subject": "Land Law", "date": "2026-03-19"}, {"code": "CRML5.1", "subject": "Criminal Liability", "date": "2026-03-23"}, {"code": "TRUS6.1", "subject": "Trusts Law", "date": "2026-03-24"}, {"code": "COND3.2", "subject": "Ethics and Professional Conduct", "date": "2026-03-25"}, {"code": "BUS7.1", "subject": "Business Law and Practice", "date": "2026-03-26"}, {"code": "DISP8.1", "subject": "Dispute Resolution", "date": "2026-03-30"}, {"code": "CRMP9.1", "subject": "Criminal Law and Practice", "date": "2026-03-31"}, {"code": "CONT1.2", "subject": "Contract Law", "date": "2026-04-01"}, {"code": "TORT2.2", "subject": "Tort", "date": "2026-04-02"}, {"code": "COND3.3", "subject": "Ethics and Professional Conduct", "date": "2026-04-06"}, {"code": "LAND4.2", "subject": "Land Law", "date": "2026-04-07"}, {"code": "CRML5.2", "subject": "Criminal Liability", "date": "2026-04-08"}, {"code": "TRUS6.2", "subject": "Trusts Law", "date": "2026-04-09"}, {"code": "LAND4.3", "subject": "Land Law", "date": "2026-04-13"}, {"code": "BUS7.2", "subject": "Business Law and Practice", "date": "2026-04-14"}, {"code": "DISP8.2", "subject": "Dispute Resolution", "date": "2026-04-15"}, {"code": "CRMP9.2", "subject": "Criminal Law and Practice", "date": "2026-04-16"}, {"code": "SERV10.1", "subject": "Legal Services", "date": "2026-04-20"}, {"code": "BUS7.3", "subject": "Business Law and Practice", "date": "2026-04-21"}, {"code": "COND3.4", "subject": "Ethics and Professional Conduct", "date": "2026-04-22"}, {"code": "DISP8.3", "subject": "Dispute Resolution", "date": "2026-04-23"}, {"code": "SYS11.1", "subject": "Legal System", "date": "2026-04-27"}, {"code": "PROP12.1", "subject": "Property Law and Practice", "date": "2026-04-28"}, {"code": "LAND4.4", "subject": "Land Law", "date": "2026-04-29"}, {"code": "BUS7.4", "subject": "Business Law and Practice", "date": "2026-04-30"}, {"code": "DISP8.4", "subject": "Dispute Resolution", "date": "2026-05-04"}, {"code": "CRMP9.3", "subject": "Criminal Law and Practice", "date": "2026-05-05"}, {"code": "CONT1.3", "subject": "Contract Law", "date": "2026-05-06"}, {"code": "TORT2.3", "subject": "Tort", "date": "2026-05-07"}, {"code": "PROP12.2", "subject": "Property Law and Practice", "date": "2026-05-11"}, {"code": "LAND4.5", "subject": "Land Law", "date": "2026-05-12"}, {"code": "CRML5.3", "subject": "Criminal Liability", "date": "2026-05-13"}, {"code": "TRUS6.3", "subject": "Trusts Law", "date": "2026-05-14"}, {"code": "WILL13.1", "subject": "Wills and Administration of Estates", "date": "2026-05-18"}, {"code": "BUS7.5", "subject": "Business Law and Practice", "date": "2026-05-19"}, {"code": "DISP8.5", "subject": "Dispute Resolution", "date": "2026-05-20"}, {"code": "CRMP9.4", "subject": "Criminal Law and Practice", "date": "2026-05-21"}, {"code": "SERV10.2", "subject": "Legal Services", "date": "2026-05-25"}, {"code": "BUS7.6", "subject": "Business Law and Practice", "date": "2026-05-26"}, {"code": "PROP12.3", "subject": "Property Law and Practice", "date": "2026-05-27"}, {"code": "DISP8.6", "subject": "Dispute Resolution", "date": "2026-05-28"}, {"code": "SYS11.2", "subject": "Legal System", "date": "2026-06-01"}, {"code": "PROP12.4", "subject": "Property Law and Practice", "date": "2026-06-02"}, {"code": "WILL13.2", "subject": "Wills and Administration of Estates", "date": "2026-06-03"}, {"code": "BUS7.7", "subject": "Business Law and Practice", "date": "2026-06-04"}, {"code": "DISP8.7", "subject": "Dispute Resolution", "date": "2026-06-08"}, {"code": "CRMP9.5", "subject": "Criminal Law and Practice", "date": "2026-06-09"}, {"code": "CONT1.4", "subject": "Contract Law", "date": "2026-06-10"}, {"code": "TORT2.4", "subject": "Tort", "date": "2026-06-11"}, {"code": "PROP12.5", "subject": "Property Law and Practice", "date": "2026-06-15"}, {"code": "LAND4.6", "subject": "Land Law", "date": "2026-06-16"}, {"code": "CRML5.4", "subject": "Criminal Liability", "date": "2026-06-17"}, {"code": "TRUS6.4", "subject": "Trusts Law", "date": "2026-06-22"}, {"code": "WILL13.3", "subject": "Wills and Administration of Estates", "date": "2026-06-23"}, {"code": "BUS7.8", "subject": "Business Law and Practice", "date": "2026-06-24"}, {"code": "DISP8.8", "subject": "Dispute Resolution", "date": "2026-07-06"}, {"code": "CRMP9.6", "subject": "Criminal Law and Practice", "date": "2026-07-07"}, {"code": "SERV10.3", "subject": "Legal Services", "date": "2026-07-08"}, {"code": "BUS7.9", "subject": "Business Law and Practice", "date": "2026-07-13"}, {"code": "PROP12.6", "subject": "Property Law and Practice", "date": "2026-07-14"}, {"code": "DISP8.9", "subject": "Dispute Resolution", "date": "2026-07-15"}, {"code": "SYS11.3", "subject": "Legal System", "date": "2026-07-20"}, {"code": "PROP12.7", "subject": "Property Law and Practice", "date": "2026-07-21"}, {"code": "WILL13.4", "subject": "Wills and Administration of Estates", "date": "2026-07-22"}, {"code": "BUS7.10", "subject": "Business Law and Practice", "date": "2026-07-27"}, {"code": "DISP8.10", "subject": "Dispute Resolution", "date": "2026-07-28"}, {"code": "CRMP9.7", "subject": "Criminal Law and Practice", "date": "2026-07-29"}, {"code": "CONT1.5", "subject": "Contract Law", "date": "2026-08-10"}, {"code": "TORT2.5", "subject": "Tort", "date": "2026-08-11"}, {"code": "PROP12.8", "subject": "Property Law and Practice", "date": "2026-08-12"}, {"code": "WILL13.5", "subject": "Wills and Administration of Estates", "date": "2026-08-17"}, {"code": "CRML5.5", "subject": "Criminal Liability", "date": "2026-08-18"}, {"code": "TRUS6.5", "subject": "Trusts Law", "date": "2026-08-19"}, {"code": "WILL13.6", "subject": "Wills and Administration of Estates", "date": "2026-08-24"}, {"code": "BUS7.11", "subject": "Business Law and Practice", "date": "2026-08-25"}, {"code": "DISP8.11", "subject": "Dispute Resolution", "date": "2026-08-26"}, {"code": "CRMP9.8", "subject": "Criminal Law and Practice", "date": "2026-08-31"}, {"code": "SERV10.4", "subject": "Legal Services", "date": "2026-09-01"}, {"code": "BUS7.12", "subject": "Business Law and Practice", "date": "2026-09-02"}, {"code": "PROP12.9", "subject": "Property Law and Practice", "date": "2026-09-07"}, {"code": "DISP8.12", "subject": "Dispute Resolution", "date": "2026-09-08"}, {"code": "SYS11.4", "subject": "Legal System", "date": "2026-09-09"}, {"code": "PROP12.10", "subject": "Property Law and Practice", "date": "2026-09-14"}, {"code": "WILL13.7", "subject": "Wills and Administration of Estates", "date": "2026-09-15"}, {"code": "BUS7.13", "subject": "Business Law and Practice", "date": "2026-09-16"}, {"code": "DISP8.13", "subject": "Dispute Resolution", "date": "2026-09-21"}, {"code": "CRMP9.9", "subject": "Criminal Law and Practice", "date": "2026-09-22"}, {"code": "SYS11.5", "subject": "Legal System", "date": "2026-09-23"}, {"code": "BUS7.14", "subject": "Business Law and Practice", "date": "2026-10-05"}, {"code": "PROP12.11", "subject": "Property Law and Practice", "date": "2026-10-06"}, {"code": "DISP8.14", "subject": "Dispute Resolution", "date": "2026-10-07"}, {"code": "SYS11.6", "subject": "Legal System", "date": "2026-10-12"}, {"code": "PROP12.12", "subject": "Property Law and Practice", "date": "2026-10-13"}, {"code": "WILL13.8", "subject": "Wills and Administration of Estates", "date": "2026-10-14"}, {"code": "BUS7.15", "subject": "Business Law and Practice", "date": "2026-10-19"}, {"code": "DISP8.15", "subject": "Dispute Resolution", "date": "2026-10-20"}, {"code": "CRMP9.10", "subject": "Criminal Law and Practice", "date": "2026-10-21"}, {"code": "SERV10.5", "subject": "Legal Services", "date": "2026-10-26"}, {"code": "BUS7.16", "subject": "Business Law and Practice", "date": "2026-10-27"}, {"code": "PROP12.13", "subject": "Property Law and Practice", "date": "2026-10-28"}, {"code": "DISP8.16", "subject": "Dispute Resolution", "date": "2026-11-02"}, {"code": "SYS11.7", "subject": "Legal System", "date": "2026-11-03"}, {"code": "PROP12.14", "subject": "Property Law and Practice", "date": "2026-11-04"}, {"code": "WILL13.9", "subject": "Solicitors Accounts", "date": "2026-11-09"}, {"code": "BUS7.17", "subject": "Business Law and Practice", "date": "2026-11-10"}, {"code": "DISP8.17", "subject": "Dispute Resolution", "date": "2026-11-11"}, {"code": "CRMP9.11", "subject": "Criminal Law and Practice", "date": "2026-11-16"}, {"code": "SYS11.8", "subject": "Legal System", "date": "2026-11-17"}, {"code": "BUS7.18", "subject": "Business Law and Practice", "date": "2026-11-18"}, {"code": "PROP12.15", "subject": "Property Law and Practice", "date": "2026-11-30"}, {"code": "CRMP9.12", "subject": "Criminal Law and Practice", "date": "2026-12-02"}, {"code": "BUS7.19", "subject": "Business Law and Practice", "date": "2026-12-07"}, {"code": "WILL13.10", "subject": "Solicitors Accounts", "date": "2026-12-09"}, {"code": "BUS7.20", "subject": "Business Law and Practice", "date": "2026-12-10"}];
+/*COURSE_CALENDAR_END*/
+
+// A subject counts as studied once this share of its modules has been taught.
+// Not 100%: every subject keeps teaching new modules until December, so
+// requiring completion would block everything until the course ends. At 0.6 the
+// filter excluded Dispute Resolution (10/17) and Business (10/20) — the two
+// largest FLK1 subjects — which gutted the paper. Half is the working
+// compromise: the filter is subject-level because SRA questions carry no module
+// tag, so it can only ever be approximate. The excluded list is shown on the
+// setup screen so the approximation stays visible.
+const STUDIED_THRESHOLD = 0.5;
+
+function subjectCoverage(asOf) {
+  const today = asOf || new Date().toISOString().slice(0, 10);
+  const cov = {};
+  COURSE_CALENDAR.forEach(m => {
+    if (!m.subject) return;
+    if (!cov[m.subject]) cov[m.subject] = { taught: 0, total: 0, pending: [] };
+    cov[m.subject].total++;
+    if (m.date <= today) cov[m.subject].taught++;
+    else cov[m.subject].pending.push(m.code);
+  });
+  Object.values(cov).forEach(c => { c.ratio = c.total ? c.taught / c.total : 0; });
+  return cov;
+}
+
+function studiedSubjects(asOf) {
+  const cov = subjectCoverage(asOf);
+  return new Set(Object.keys(cov).filter(s => cov[s].ratio >= STUDIED_THRESHOLD));
+}
 
 // ══════════════════════════════════════════════════════════
 //  STATE
@@ -1020,7 +1073,17 @@ function selectQuestions(paper, totalQ, source) {
   if (source && source !== 'bank') {
     // Fixed sets: full set, original question order AND original option order —
     // Q numbers and letters match the book/PDF (explanations refer to these letters).
-    return [...getPool(paper, source)].map(q => ({
+    let fixed = [...getPool(paper, source)];
+    // Optionally drop questions on subjects not yet studied. Without this the
+    // SRA / Revise sets are unusable mid-course — a wrong answer on an untaught
+    // subject is noise, and worse, it becomes a mistake flashcard for material
+    // never covered. Filtering beats avoiding the sets entirely.
+    if (window.STUDIED_ONLY !== false && COURSE_CALENDAR.length) {
+      const ok = studiedSubjects();
+      const kept = fixed.filter(q => ok.has(q.subject));
+      if (kept.length) fixed = kept;
+    }
+    return fixed.map(q => ({
       ...q, shuffledOptions: q.options, correctShuffledIdx: q.correct_index
     }));
   }
@@ -1066,6 +1129,30 @@ function selectQuestions(paper, totalQ, source) {
 
   // Attach shuffled options for each question
   return attachShuffledOptions(selected);
+}
+
+// Keep window.STUDIED_ONLY in step with the checkbox, and show what the filter
+// is actually excluding — a hidden filter that silently shrinks a paper is
+// worse than no filter at all.
+function refreshStudiedSummary() {
+  const box = document.getElementById('studied-only');
+  const out = document.getElementById('studied-summary');
+  if (!box || !out) return;
+  window.STUDIED_ONLY = box.checked;
+  if (!COURSE_CALENDAR.length) {
+    out.textContent = 'Teaching calendar unavailable — no filtering applied.';
+    return;
+  }
+  const cov = subjectCoverage();
+  const held = Object.keys(cov).filter(s => cov[s].ratio < STUDIED_THRESHOLD)
+                     .sort((a, b) => cov[b].ratio - cov[a].ratio);
+  const done = Object.keys(cov).length - held.length;
+  out.innerHTML = box.checked
+    ? `${done} of ${Object.keys(cov).length} subjects available. Excluded: `
+      + (held.length
+          ? held.map(s => `${s} (${cov[s].taught}/${cov[s].total} taught)`).join(' · ')
+          : 'none — the whole syllabus is now in range.')
+    : 'Filter off — SRA and Revise sets will include subjects you have not been taught yet.';
 }
 
 function startSession(paper, durationMinutes, source) {
