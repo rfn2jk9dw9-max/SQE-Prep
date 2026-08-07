@@ -484,21 +484,47 @@ function buildSchedule(doneSet) {
 // before the SQE1 sitting. That window was previously unplanned, which is the
 // weakest point in the whole schedule.
 const EARLY_CUTOFF   = '2026-06-01';   // "taught early" = COLP date before this
-const POST_COLP_FROM = '2026-12-16';   // day after the COLP exam
-const EXAM_DATE      = '2027-01-15';   // ← set to your actual SQE1 date
+const POST_COLP_FROM = '2026-12-16';   // day after the COLP mock exam
 const PER_DAY        = 2;              // revisits per day in the run-up
 
-function buildSecondPass(assignment, doneSet) {
-  // Days available between the COLP exam and the real thing.
-  const days = [];
-  let d = parseDate(POST_COLP_FROM);
-  const stop = parseDate(EXAM_DATE);
-  stop.setDate(stop.getDate() - 1);          // leave the day before clear
-  while (toYMD(d) <= toYMD(stop)) {
-    if (isFreeDay(toYMD(d))) days.push(toYMD(d));
+// SQE1 January 2027 is sat as two separate papers a week apart:
+//   FLK1  11–15 January      FLK2  18–22 January
+// Planned against the EARLIEST day of each window, so the schedule holds even
+// if the booked slot is the first one. Update once the actual dates are booked.
+const FLK1_EXAM = '2027-01-11';
+const FLK2_EXAM = '2027-01-18';
+
+// Which paper a module belongs to, from its code prefix. COND (ethics) is
+// examined pervasively in both, so it is never deferred to the FLK2-only phase.
+const FLK1_PREFIXES = ['CONT', 'TORT', 'BUS', 'DISP', 'SERV', 'SYS'];
+const FLK2_PREFIXES = ['LAND', 'CRML', 'TRUS', 'CRMP', 'PROP', 'WILL'];
+
+function paperOf(code) {
+  const p = String(code).match(/^[A-Z]+/);
+  if (!p) return 'BOTH';
+  if (FLK1_PREFIXES.includes(p[0])) return 'FLK1';
+  if (FLK2_PREFIXES.includes(p[0])) return 'FLK2';
+  return 'BOTH';
+}
+
+function freeDaysBetween(fromYMD, toExclusiveYMD) {
+  const out = [];
+  let d = parseDate(fromYMD);
+  while (toYMD(d) < toExclusiveYMD) {
+    if (isFreeDay(toYMD(d))) out.push(toYMD(d));
     d.setDate(d.getDate() + 1);
   }
-  if (!days.length) return {};
+  return out;
+}
+
+function buildSecondPass(assignment, doneSet) {
+  // Two phases, because the papers are a week apart:
+  //   A: 16 Dec → FLK1 exam. Everything, but ordered so FLK1 material lands
+  //      closest to 11 Jan and is therefore freshest.
+  //   B: after FLK1 → FLK2 exam. FLK2 and ethics only; FLK1 is already sat and
+  //      revising it in that week is wasted effort.
+  const phaseA = freeDaysBetween(POST_COLP_FROM, FLK1_EXAM);
+  const phaseB = freeDaysBetween(FLK1_EXAM, FLK2_EXAM).filter(d => d > FLK1_EXAM);
 
   // Priority 1: modules the first pass could not fit at all (taught inside the
   // 14-day gap before 14 Dec) — these would otherwise never be revised once.
@@ -507,22 +533,45 @@ function buildSecondPass(assignment, doneSet) {
     .filter(m => assignment[m.code] == null)
     .map(m => m.code);
 
-  // Priority 2: earliest-taught material, coldest first. These generate no
-  // mistake flashcards precisely because they were answered correctly in
-  // spring, so nothing else brings them back.
+  // Priority 2: earliest-taught material, coldest first. It generates no
+  // mistake flashcards precisely because it was answered correctly in spring,
+  // so nothing else brings it back.
   const early = MODULES
     .filter(m => SEED_DATES[m.code] && SEED_DATES[m.code] < EARLY_CUTOFF)
     .filter(m => !doneSet.has(m.code) && !orphans.includes(m.code))
     .sort((a, b) => SEED_DATES[a.code].localeCompare(SEED_DATES[b.code]))
     .map(m => m.code);
 
-  const queue = orphans.concat(early);
-  const second = {};
-  let i = 0;
-  for (const day of days) {
-    for (let k = 0; k < PER_DAY && i < queue.length; k++, i++) second[queue[i]] = day;
-    if (i >= queue.length) break;
-  }
+  // A list, not a code→date map: a module can legitimately appear twice (once
+  // in each phase), and a map would silently overwrite the first visit.
+  const second = [];
+  // Spread the queue across the available days rather than filling at a fixed
+  // rate: a fixed PER_DAY silently drops whatever does not fit, which is how
+  // four modules fell off the end of Phase A entirely.
+  const assign = (queue, days, phase) => {
+    let i = 0;
+    days.forEach((day, di) => {
+      const remainingDays = days.length - di;
+      const perDay = Math.max(PER_DAY, Math.ceil((queue.length - i) / remainingDays));
+      for (let k = 0; k < perDay && i < queue.length; k++, i++) {
+        second.push({ code: queue[i], date: day, phase: phase });
+      }
+    });
+    return queue.slice(i);
+  };
+
+  // Phase A: orphans first, then FLK2 material, then FLK1 last so it is the
+  // most recently seen going into 11 January.
+  const rest = orphans.concat(early);
+  assign(
+    rest.filter(c => paperOf(c) === 'FLK2')
+        .concat(rest.filter(c => paperOf(c) === 'BOTH'))
+        .concat(rest.filter(c => paperOf(c) === 'FLK1')),
+    phaseA, 'A');
+
+  // Phase B: a final FLK2 pass in the week between the papers.
+  assign(early.filter(c => paperOf(c) !== 'FLK1'), phaseB, 'B');
+
   return second;
 }
 
@@ -579,16 +628,15 @@ function render() {
   // Second-pass revisits and full-paper days are extra entries in the same
   // date-grouped list, not a separate view — they only work if they show up
   // on the day alongside everything else.
-  const secondPass = buildSecondPass(assignment, done);
-  Object.entries(secondPass).forEach(([code, day]) => {
+  buildSecondPass(assignment, done).forEach(({ code, date, phase }) => {
     const m = MODULES.find(x => x.code === code);
     if (!m) return;
     items.push({
       ...m,
       colpDate: SEED_DATES[code] || null,
-      revDate: day,
-      status: day < TODAY ? 'overdue' : (day === TODAY ? 'today' : 'upcoming'),
-      secondPass: true,
+      revDate: date,
+      status: date < TODAY ? 'overdue' : (date === TODAY ? 'today' : 'upcoming'),
+      secondPass: phase === 'B' ? 'FLK2 final' : '2nd pass',
     });
   });
 
@@ -729,7 +777,7 @@ function makeCard(item) {
     '<div class="card-head">'+
       '<span class="card-code" style="color:'+colour+'">'+item.code+'</span>'+
       '<span class="card-title">'+item.title+
-        (item.secondPass ? ' <em style="opacity:.7">· 2nd pass</em>' : '')+'</span>'+
+        (item.secondPass ? ' <em style="opacity:.7">· '+item.secondPass+'</em>' : '')+'</span>'+
       '<span class="card-check">'+(s==='done'?'✓':'')+'</span>'+
       '<span class="badge">'+badgeText+'</span>'+
     '</div>'+
