@@ -34,8 +34,29 @@ def _dbg(*args, **kwargs):
     except (OSError, BrokenPipeError):
         pass
 
+# Solicitors Accounts is examined as its own FLK2 subject by the SRA, but COLP
+# teaches it inside other module families: WILL13.9/13.10 (client money, other
+# requirements) and BUS7.12 (accounts and requirements). Left to the prefix map
+# those questions file under Wills and Business, so the FLK2 blueprint's
+# "Solicitors Accounts" slot draws nothing and accounts performance disappears
+# into two unrelated subjects. Route them explicitly — most specific first.
+#
+# BUS7.12 "Accounts and requirements" is deliberately NOT listed: in a Business
+# Law module that means company accounts and filing requirements, which is
+# genuinely FLK1 Business Law — not solicitors' client money.
+MODULE_SUBJECT_OVERRIDES = (
+    ("WILL13.9",  ("Solicitors Accounts", "FLK2")),
+    ("WILL13.10", ("Solicitors Accounts", "FLK2")),
+)
+
+
 def subject_from_filename(name):
     stem = Path(name).stem.upper()
+    for prefix, info in MODULE_SUBJECT_OVERRIDES:
+        # match the module code followed by a non-digit, so WILL13.1 never
+        # swallows WILL13.10
+        if re.match(re.escape(prefix) + r'(\D|$)', stem):
+            return info[0], info[1]
     for prefix, info in SUBJECT_MAP.items():
         if stem.startswith(prefix):
             return info[0], info[1]

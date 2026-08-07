@@ -205,6 +205,57 @@ def git_publish(commit_message):
         msg = msg.replace(token, "<token>")
     return ok, msg
 
+def inject_course_calendar():
+    """
+    Copy the COLP teaching calendar (module code, subject, teaching date) from
+    SQE1_COLP_Revision.html into SQE1_MockExam_Standalone.html.
+
+    The mock exam needs to know what has been taught so the fixed SRA / Revise
+    papers can be limited to studied subjects. Rather than keep a second copy of
+    the calendar by hand — which would rot — it is regenerated from the single
+    source of truth on every run.
+    """
+    import parse_questions
+
+    colp = SCRIPT_DIR / "SQE1_COLP_Revision.html"
+    mock = SCRIPT_DIR / "SQE1_MockExam_Standalone.html"
+    if not colp.exists() or not mock.exists():
+        return 0
+
+    colp_html = colp.read_text(encoding="utf-8")
+
+    m = re.search(r"SEED_DATES\s*=\s*\{(.*?)\};", colp_html, re.S)
+    if not m:
+        raise ValueError("SEED_DATES not found in SQE1_COLP_Revision.html")
+    dates = dict(re.findall(r"'([A-Z0-9.]+)'\s*:\s*'(\d{4}-\d{2}-\d{2})'", m.group(1)))
+
+    # Subject comes from the same mapping the parser uses, so a module's
+    # questions and its calendar entry can never disagree about its subject.
+    calendar = [
+        # ".pdf" is not cosmetic: subject_from_filename() calls Path(...).stem,
+        # which would read the ".9" of "WILL13.9" as a file extension and strip
+        # it, collapsing the accounts modules back into Wills.
+        {"code": code,
+         "subject": parse_questions.subject_from_filename(code + ".pdf")[0],
+         "date": date}
+        for code, date in sorted(dates.items(), key=lambda kv: kv[1])
+    ]
+
+    block = ("/*COURSE_CALENDAR_START*/\nconst COURSE_CALENDAR = "
+             + json.dumps(calendar, ensure_ascii=False)
+             + ";\n/*COURSE_CALENDAR_END*/")
+
+    html = mock.read_text(encoding="utf-8")
+    new_html, n = re.subn(
+        r"/\*COURSE_CALENDAR_START\*/.*?/\*COURSE_CALENDAR_END\*/",
+        lambda _: block, html, count=1, flags=re.S)
+    if not n:
+        raise ValueError("COURSE_CALENDAR markers not found in the mock exam HTML")
+    if new_html != html:
+        mock.write_text(new_html, encoding="utf-8")
+    return len(calendar)
+
+
 def git_publish_sandbox(commit_message, files):
     """Publish from inside the Cowork sandbox.
 
@@ -338,6 +389,16 @@ def main():
 
     STANDALONE.write_text(html, encoding='utf-8')
     print(f"  ✓ Standalone HTML written ({len(html):,} chars)")
+
+    # ── 2a2. Refresh the teaching calendar embedded in the mock exam ──
+    # Drives the "only subjects I have studied" filter. Regenerated every run so
+    # it follows the COLP calendar forward without anyone maintaining a copy.
+    try:
+        n = inject_course_calendar()
+        if n:
+            print(f"  ✓ Teaching calendar refreshed ({n} modules)")
+    except Exception as e:
+        print(f"  ⚠ Could not refresh teaching calendar: {e}")
 
     # ── 2b. Inject personal mistakes into revision guide FLASHCARDS ──
     # (Mistakes belong in the flip-card flashcard deck, NOT woven into the
