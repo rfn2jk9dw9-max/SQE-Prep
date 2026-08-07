@@ -349,9 +349,14 @@ function fmtShort(s){
   return parseDate(s).toLocaleDateString('en-GB',{weekday:'short',day:'numeric',month:'short'});
 }
 function todayYMD(){ return toYMD(new Date()); }
+// Filled in once buildFullPaperDays and its constants exist further down; empty
+// until then, which is harmless because nothing schedules during parsing.
+let FULL_PAPER_DAYS = {};
 function isFreeDay(s){
   const d = parseDate(s);
-  return d.getDay() !== 6 && !COLP_BUSY.has(s);
+  // Full-paper Sundays are not free: 180 questions across two 2h33m sittings
+  // plus a break is most of the day, so nothing else is scheduled on them.
+  return d.getDay() !== 6 && !COLP_BUSY.has(s) && !FULL_PAPER_DAYS[s];
 }
 
 // ── Subject accent colours ─────────────────────────────────────────────────
@@ -627,8 +632,9 @@ const FULL_PAPER_COUNT = 4;
 function buildFullPaperDays() {
   // Sundays only. A full paper is two 2h33m sittings plus a break — most of a
   // day — so it needs a day with nothing else on it, not a weekday already
-  // carrying a revision block and a revisit. Sunday is also deliberately not
-  // excluded by isFreeDay (which only drops Saturdays and COLP teaching days).
+  // carrying a chapter and a revisit. Note this deliberately does NOT call
+  // isFreeDay: isFreeDay now excludes these very days, so using it here would
+  // be circular and would return nothing.
   const window = [];
   let d = parseDate(FULL_PAPER_START);
   while (toYMD(d) <= FULL_PAPER_END) {
@@ -645,6 +651,10 @@ function buildFullPaperDays() {
   }
   return out;
 }
+
+// Resolve now that the constants above exist. isFreeDay reads this, so it must
+// be set before anything builds a schedule.
+FULL_PAPER_DAYS = buildFullPaperDays();
 
 // ── Render ─────────────────────────────────────────────────────────────────
 let activeFilter = 'all';
@@ -723,20 +733,6 @@ function render() {
   const root = document.getElementById('root');
   root.innerHTML = '';
 
-  // Full-paper rehearsal days: one compact strip, not cards in the list. They
-  // are not modules, cannot be ticked, and interleaving them buried the
-  // schedule they are meant to punctuate.
-  const fullDays = Object.entries(buildFullPaperDays()).sort();
-  if (fullDays.length && filtered.length) {
-    const strip = document.createElement('div');
-    strip.style.cssText = 'margin:0 0 1rem;padding:.7rem .9rem;border:1px solid rgba(245,158,11,.35);'
-                        + 'border-radius:8px;background:rgba(245,158,11,.07);font-size:.85rem;line-height:1.5';
-    strip.innerHTML = '<strong style="color:#f59e0b">⏱ Full-paper rehearsals</strong> '
-      + '<span style="opacity:.75">— 90 questions in 2h33m, sat twice in the day, as in the real exam</span><br>'
-      + fullDays.map(([d, f]) => f + ' &middot; ' + fmtDate(d)).join(' &nbsp;|&nbsp; ');
-    root.appendChild(strip);
-  }
-
   if(!filtered.length) {
     root.innerHTML = '<div class="empty">No items in this category.</div>';
     return;
@@ -760,14 +756,23 @@ function render() {
     // The revisit belongs in that day's group: showing it only as a line on the
     // module's own card — which sits under a different date entirely — meant
     // the day view never told you what to do on the day.
-    const dayBuckets = {};   // date -> {modules:[], revisits:[]}
+    const dayBuckets = {};   // date -> {modules:[], revisits:[], fullPaper:null}
     const tail = [];         // done / nodate, which are not date groups
+    const bucketFor = d =>
+      (dayBuckets[d] = dayBuckets[d] || {modules:[], revisits:[], fullPaper:null});
 
     sorted.forEach(item => {
       if (!item.revDate) { tail.push(item); return; }
-      (dayBuckets[item.revDate] = dayBuckets[item.revDate] || {modules:[], revisits:[]})
-        .modules.push(item);
+      bucketFor(item.revDate).modules.push(item);
     });
+
+    // Full-paper Sundays belong on their day, not in a banner at the top of the
+    // page where they are read once and then never seen again.
+    if (['all','today','upcoming'].includes(activeFilter)) {
+      Object.entries(FULL_PAPER_DAYS).forEach(([date, flk]) => {
+        bucketFor(date).fullPaper = flk;
+      });
+    }
 
     // Revisit-only days need a group of their own, or they vanish entirely.
     if (['all','today','overdue','upcoming'].includes(activeFilter)) {
@@ -790,6 +795,7 @@ function render() {
       section.innerHTML = '<div class="section-date">'+label+'</div>';
       const cardsEl = document.createElement('div');
       cardsEl.className = 'cards';
+      if (bucket.fullPaper) cardsEl.appendChild(makeFullPaperRow(bucket.fullPaper, st));
       bucket.modules.forEach(i => cardsEl.appendChild(makeCard(i)));
       bucket.revisits.forEach(c => cardsEl.appendChild(makeRevisitRow(c, st)));
       section.appendChild(cardsEl);
@@ -821,6 +827,24 @@ function render() {
   }
 }
 
+// A full-paper Sunday. Not a module, so not tickable — ticking it would write a
+// bogus code into the done set and skew the progress count.
+function makeFullPaperRow(flk, status) {
+  const el = document.createElement('div');
+  el.className = 'card s-' + status;
+  el.style.cssText = 'border-left:3px solid #f59e0b;background:rgba(245,158,11,.06)';
+  el.innerHTML =
+    '<div class="card-head">'+
+      '<span class="card-code" style="color:#f59e0b">⏱ '+flk+'</span>'+
+      '<span class="card-title">Full paper — 180 questions in two sittings</span>'+
+      '<span class="card-check"></span>'+
+      '<span class="badge">Mock exam</span>'+
+    '</div>'+
+    '<div class="card-sub"><span style="opacity:.8">90 questions in 2h33m, break, '
+      + 'then 90 more. No answer-checking in between — the endurance is the point.</span></div>';
+  return el;
+}
+
 // Session 2 of a day. Deliberately a slim row rather than a full card: the
 // module already has exactly one tickable card elsewhere, and a second card
 // sharing its code would toggle the same done flag.
@@ -836,8 +860,13 @@ function makeRevisitRow(code, status) {
       '<span class="card-check"></span>'+
       '<span class="badge">Revisit</span>'+
     '</div>'+
-    '<div class="card-sub"><span style="opacity:.75">Session 2 — recall first, '
-      + 'then reread only what you could not retrieve</span></div>';
+    '<div class="card-sub">'+
+      '<span style="opacity:.75">Session 2 — recall first, then reread only '
+        + 'what you could not retrieve</span>'+
+      (CANVAS_URLS[code]
+        ? '<a class="card-link" href="'+BASE+CANVAS_URLS[code]+'" target="_blank" rel="noopener">↗ Open on COLP</a>'
+        : '')+
+    '</div>';
   return el;
 }
 
