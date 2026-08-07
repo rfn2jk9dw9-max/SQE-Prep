@@ -614,11 +614,12 @@ def load_mock_pdf_wrong_answers(mock_dir: Path, bank: list = None) -> list[dict]
                 continue
             if current:
                 # The key may have been corrected since this PDF was printed.
-                if _norm_stem(current) == _norm_stem(e["userAnswer"]):
+                # Compare answers at FULL length — see _norm_answer.
+                if _norm_answer(current) == _norm_answer(e["userAnswer"]):
                     stale_skipped += 1      # she was actually right; ignore
                     audit.append((pdf_path.name, e, current, "false negative"))
                     continue
-                if e["correctAnswer"] and _norm_stem(current) != _norm_stem(e["correctAnswer"]):
+                if e["correctAnswer"] and _norm_answer(current) != _norm_answer(e["correctAnswer"]):
                     audit.append((pdf_path.name, e, current, "key changed"))
                 correct = current
             wrong.append({
@@ -667,9 +668,22 @@ def _norm_stem(text: str) -> str:
     the stem, which the question bank never has. Strip it first: on a short
     stem the suffix reaches into the 60-char key and the match fails silently.
     """
+    return _norm_answer(text)[:60]
+
+
+def _norm_answer(text: str) -> str:
+    """
+    Normalise for comparing ANSWER text — full length, never truncated.
+
+    Truncation is safe for stems (60 chars identifies a question) but wrong for
+    options: SQE1 distractors are built to share long openings. 'The two
+    directors will be in potential breach of their duties to avoid conflicts of
+    interest' and '...to act within their powers' agree for 61 characters, so a
+    60-char key rates a wrong answer as correct and inflates the score.
+    """
     text = re.sub(r'\s*Question Score:\s*\d+\s*/\s*\d+\s*$', '', text or "",
                   flags=re.I)
-    return re.sub(r'[^a-z0-9]+', ' ', text.lower()).strip()[:60]
+    return re.sub(r'[^a-z0-9]+', ' ', text.lower()).strip()
 
 
 def _cluster_rows(words: list, tol: float = 5.0):
