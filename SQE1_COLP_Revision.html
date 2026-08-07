@@ -389,6 +389,24 @@ function loadDone(){
 // and fall back to their teaching date, which correctly treats them as cold.
 const DONE_DATES_KEY = STORE_KEY + '_dates';
 
+// Completed revisits: code -> date of the most recent one. Ticking a revisit
+// has to record WHEN, not just that it happened — the next revisit is due
+// 21 days after the last one, so a bare "done" flag would leave the scheduler
+// computing from the first-pass date and offering it again far too soon.
+const REVISIT_KEY = STORE_KEY + '_revisits';
+
+function loadRevisitLog(){
+  try { return JSON.parse(localStorage.getItem(REVISIT_KEY)) || {}; }
+  catch { return {}; }
+}
+
+function markRevisitDone(code, date){
+  // Keep the latest, so a revisit ticked late still pushes the clock forward.
+  if (!revisitLog[code] || revisitLog[code] < date) revisitLog[code] = date;
+  try { localStorage.setItem(REVISIT_KEY, JSON.stringify(revisitLog)); } catch {}
+  render();
+}
+
 function loadDoneDates(){
   try { return JSON.parse(localStorage.getItem(DONE_DATES_KEY)) || {}; }
   catch { return {}; }
@@ -429,6 +447,7 @@ async function syncFromServer(){
 
 let done = loadDone();
 let doneDates = loadDoneDates();
+let revisitLog = loadRevisitLog();
 
 // ── Core: build spread schedule ────────────────────────────────────────────
 // Returns {code: revDate | null}
@@ -575,11 +594,16 @@ function buildSecondPass(assignment, doneSet) {
   const lastSeen = {};
   MODULES.forEach(m => {
     if (!SEED_DATES[m.code]) return;
-    lastSeen[m.code] = doneSet.has(m.code)
+    let seen = doneSet.has(m.code)
       // ticked: when it was ticked, else fall back to the teaching date, which
       // treats a chapter ticked at an unknown past time as due.
       ? (doneDates[m.code] || SEED_DATES[m.code])
       : (assignment[m.code] || null);
+    // A completed revisit is the most recent contact with the chapter, so it
+    // supersedes both of the above and restarts the 21-day clock.
+    const r = revisitLog[m.code];
+    if (r && (!seen || r > seen)) seen = r;
+    lastSeen[m.code] = seen;
   });
 
   const out = [];
@@ -797,7 +821,7 @@ function render() {
       cardsEl.className = 'cards';
       if (bucket.fullPaper) cardsEl.appendChild(makeFullPaperRow(bucket.fullPaper, st));
       bucket.modules.forEach(i => cardsEl.appendChild(makeCard(i)));
-      bucket.revisits.forEach(c => cardsEl.appendChild(makeRevisitRow(c, st)));
+      bucket.revisits.forEach(c => cardsEl.appendChild(makeRevisitRow(c, st, date)));
       section.appendChild(cardsEl);
       root.appendChild(section);
     });
@@ -848,11 +872,18 @@ function makeFullPaperRow(flk, status) {
 // Session 2 of a day. Deliberately a slim row rather than a full card: the
 // module already has exactly one tickable card elsewhere, and a second card
 // sharing its code would toggle the same done flag.
-function makeRevisitRow(code, status) {
+function makeRevisitRow(code, status, date) {
   const m = MODULES.find(x => x.code === code) || { code: code, title: '' };
   const el = document.createElement('div');
   el.className = 'card s-' + status;
-  el.style.cssText = 'opacity:.9;border-left:3px solid ' + codeColour(code);
+  el.style.cssText = 'opacity:.9;cursor:pointer;border-left:3px solid ' + codeColour(code);
+  // Ticking a revisit records the date and restarts its 21-day clock, so the
+  // row drops out of the schedule on the next render. It does NOT touch the
+  // module's own done flag — that tracks the first pass.
+  el.addEventListener('click', e => {
+    if (e.target.closest('a')) return;   // let the COLP link through
+    markRevisitDone(code, date);
+  });
   el.innerHTML =
     '<div class="card-head">'+
       '<span class="card-code" style="color:'+codeColour(code)+'">🔁 '+code+'</span>'+
