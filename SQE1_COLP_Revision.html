@@ -172,7 +172,12 @@ const EXTRA_BUSY = [
 ];
 const COLP_BUSY = new Set([...Object.values(SEED_DATES), ...EXTRA_BUSY]);
 const MIN_GAP   = 14;
-const SCHED_END = '2026-12-14';
+// The schedule used to stop on 2026-12-14, the day before the COLP mock exam —
+// a hard stop set before the real SQE1 dates were known. That is why everything
+// appeared to end mid-December, and why four modules taught in the last fortnight
+// of term could never be fitted at all. The COLP exam is a rehearsal, not the
+// deadline: the first pass now runs to the day before FLK1.
+const SCHED_END = '2027-01-10';
 // Modules taught after this date can't get a slot before Dec 14
 const DEFAULT_DONE = ['CONT1.1','CONT1.2','CONT1.3'];
 
@@ -476,16 +481,15 @@ function buildSchedule(doneSet) {
 // Modules taught early get one revision touch and are then never revisited:
 // CONT1.1 was taught in March, so a single pass leaves it cold for a January
 // exam. Worse, those are exactly the chapters that generate no mistake
-// flashcards, because they were answered correctly at the time. Free days left
-// idle by the first pass are given to a second look at the earliest material.
-// There are 113 modules and fewer free days before 14 Dec, so the first pass is
-// oversubscribed — there are no idle days to reclaim. The second pass therefore
-// lives in the one genuinely empty stretch: after the COLP exam on 15 Dec and
-// before the SQE1 sitting. That window was previously unplanned, which is the
-// weakest point in the whole schedule.
-const EARLY_CUTOFF   = '2026-06-01';   // "taught early" = COLP date before this
-const POST_COLP_FROM = '2026-12-16';   // day after the COLP mock exam
-const PER_DAY        = 2;              // revisits per day in the run-up
+// flashcards, because they were answered correctly at the time.
+//
+// The first pass is oversubscribed against ONE session a day — 113 modules,
+// fewer free days. With two sessions a day the second slot is free from today,
+// so revisits run continuously from now instead of being crammed into the weeks
+// after the COLP mock. That is also the point: spacing works by repeated
+// contact over months, not by one late re-read.
+const SECOND_PASS_GAP = 21;            // min days between visits to a module
+const POST_COLP_FROM  = '2026-12-16';  // day after the COLP mock exam
 
 // SQE1 January 2027 is sat as two separate papers a week apart:
 //   FLK1  11–15 January      FLK2  18–22 January
@@ -518,61 +522,51 @@ function freeDaysBetween(fromYMD, toExclusiveYMD) {
 }
 
 function buildSecondPass(assignment, doneSet) {
-  // Two phases, because the papers are a week apart:
-  //   A: 16 Dec → FLK1 exam. Everything, but ordered so FLK1 material lands
-  //      closest to 11 Jan and is therefore freshest.
-  //   B: after FLK1 → FLK2 exam. FLK2 and ethics only; FLK1 is already sat and
-  //      revising it in that week is wasted effort.
-  const phaseA = freeDaysBetween(POST_COLP_FROM, FLK1_EXAM);
-  const phaseB = freeDaysBetween(FLK1_EXAM, FLK2_EXAM).filter(d => d > FLK1_EXAM);
+  // Session 2 of each day, from today through to the FLK2 exam. Every module
+  // that has already had its first pass becomes eligible again SECOND_PASS_GAP
+  // days later; each day takes whichever is coldest. That produces genuine
+  // spacing — a module seen in August comes round again in September, and so
+  // on — rather than a single re-read months later.
+  const days = freeDaysBetween(todayYMD(), FLK2_EXAM);
+  if (!days.length) return [];
 
-  // Priority 1: modules the first pass could not fit at all (taught inside the
-  // 14-day gap before 14 Dec) — these would otherwise never be revised once.
-  const orphans = MODULES
-    .filter(m => SEED_DATES[m.code] && !doneSet.has(m.code))
-    .filter(m => assignment[m.code] == null)
-    .map(m => m.code);
+  // Last time each module was seen. Modules the first pass could not fit at all
+  // have no date, so they sort first and get picked up straight away.
+  const lastSeen = {};
+  MODULES.forEach(m => {
+    if (!SEED_DATES[m.code] || doneSet.has(m.code)) return;
+    lastSeen[m.code] = assignment[m.code] || null;
+  });
 
-  // Priority 2: earliest-taught material, coldest first. It generates no
-  // mistake flashcards precisely because it was answered correctly in spring,
-  // so nothing else brings it back.
-  const early = MODULES
-    .filter(m => SEED_DATES[m.code] && SEED_DATES[m.code] < EARLY_CUTOFF)
-    .filter(m => !doneSet.has(m.code) && !orphans.includes(m.code))
-    .sort((a, b) => SEED_DATES[a.code].localeCompare(SEED_DATES[b.code]))
-    .map(m => m.code);
+  const out = [];
+  for (const day of days) {
+    // After FLK1 is sat, FLK1 material is finished — that week belongs to FLK2
+    // and to ethics, which is examined in both papers.
+    const flk2Only = day > FLK1_EXAM;
 
-  // A list, not a code→date map: a module can legitimately appear twice (once
-  // in each phase), and a map would silently overwrite the first visit.
-  const second = [];
-  // Spread the queue across the available days rather than filling at a fixed
-  // rate: a fixed PER_DAY silently drops whatever does not fit, which is how
-  // four modules fell off the end of Phase A entirely.
-  const assign = (queue, days, phase) => {
-    let i = 0;
-    days.forEach((day, di) => {
-      const remainingDays = days.length - di;
-      const perDay = Math.max(PER_DAY, Math.ceil((queue.length - i) / remainingDays));
-      for (let k = 0; k < perDay && i < queue.length; k++, i++) {
-        second.push({ code: queue[i], date: day, phase: phase });
-      }
+    const eligible = Object.keys(lastSeen).filter(code => {
+      if (flk2Only && paperOf(code) === 'FLK1') return false;
+      // Nothing can be revised before COLP has taught it. Without this check a
+      // module with no first-pass slot counted as "never revised" and was
+      // scheduled immediately — putting CRMP9.12, taught 2 December, in August.
+      const taught = parseDate(SEED_DATES[code]);
+      taught.setDate(taught.getDate() + MIN_GAP);
+      if (toYMD(taught) > day) return false;
+      const seen = lastSeen[code];
+      if (!seen) return true;                 // taught but never revised
+      const ready = parseDate(seen);
+      ready.setDate(ready.getDate() + SECOND_PASS_GAP);
+      return toYMD(ready) <= day;
     });
-    return queue.slice(i);
-  };
+    if (!eligible.length) continue;
 
-  // Phase A: orphans first, then FLK2 material, then FLK1 last so it is the
-  // most recently seen going into 11 January.
-  const rest = orphans.concat(early);
-  assign(
-    rest.filter(c => paperOf(c) === 'FLK2')
-        .concat(rest.filter(c => paperOf(c) === 'BOTH'))
-        .concat(rest.filter(c => paperOf(c) === 'FLK1')),
-    phaseA, 'A');
-
-  // Phase B: a final FLK2 pass in the week between the papers.
-  assign(early.filter(c => paperOf(c) !== 'FLK1'), phaseB, 'B');
-
-  return second;
+    // Coldest first; never-seen modules ahead of everything else.
+    eligible.sort((a, b) => (lastSeen[a] || '').localeCompare(lastSeen[b] || ''));
+    const code = eligible[0];
+    out.push({ code: code, date: day, phase: day >= POST_COLP_FROM ? 'final' : 'spaced' });
+    lastSeen[code] = day;
+  }
+  return out;
 }
 
 // ── Full-length paper days ─────────────────────────────────────────────────
@@ -584,11 +578,15 @@ const FULL_PAPER_END   = '2026-12-12';
 const FULL_PAPER_COUNT = 4;
 
 function buildFullPaperDays() {
+  // Sundays only. A full paper is two 2h33m sittings plus a break — most of a
+  // day — so it needs a day with nothing else on it, not a weekday already
+  // carrying a revision block and a revisit. Sunday is also deliberately not
+  // excluded by isFreeDay (which only drops Saturdays and COLP teaching days).
   const window = [];
   let d = parseDate(FULL_PAPER_START);
   while (toYMD(d) <= FULL_PAPER_END) {
     const ymd = toYMD(d);
-    if (isFreeDay(ymd) && ymd >= todayYMD()) window.push(ymd);
+    if (d.getDay() === 0 && ymd >= todayYMD()) window.push(ymd);
     d.setDate(d.getDate() + 1);
   }
   if (!window.length) return {};
@@ -625,31 +623,14 @@ function render() {
     status: getStatus(m.code, assignment[m.code]),
   }));
 
-  // Second-pass revisits and full-paper days are extra entries in the same
-  // date-grouped list, not a separate view — they only work if they show up
-  // on the day alongside everything else.
+  // Revisits are shown ON the module's existing card, not as extra cards.
+  // Pushing them as separate items tripled the length of the list and broke
+  // ticking, because two cards sharing a code toggle the same done flag.
+  const revisits = {};
   buildSecondPass(assignment, done).forEach(({ code, date, phase }) => {
-    const m = MODULES.find(x => x.code === code);
-    if (!m) return;
-    items.push({
-      ...m,
-      colpDate: SEED_DATES[code] || null,
-      revDate: date,
-      status: date < TODAY ? 'overdue' : (date === TODAY ? 'today' : 'upcoming'),
-      secondPass: phase === 'B' ? 'FLK2 final' : '2nd pass',
-    });
+    (revisits[code] = revisits[code] || []).push({ date: date, phase: phase });
   });
-
-  Object.entries(buildFullPaperDays()).forEach(([day, flk]) => {
-    items.push({
-      code: flk + ' FULL',
-      title: 'Full paper — two sittings of 90 questions, 2h33m each',
-      colpDate: null,
-      revDate: day,
-      status: day === TODAY ? 'today' : 'upcoming',
-      fullPaper: flk,
-    });
-  });
+  items.forEach(i => { i.revisits = revisits[i.code] || []; });
 
   // Stats
   const totalModules = MODULES.length;
@@ -692,6 +673,20 @@ function render() {
   const root = document.getElementById('root');
   root.innerHTML = '';
 
+  // Full-paper rehearsal days: one compact strip, not cards in the list. They
+  // are not modules, cannot be ticked, and interleaving them buried the
+  // schedule they are meant to punctuate.
+  const fullDays = Object.entries(buildFullPaperDays()).sort();
+  if (fullDays.length && filtered.length) {
+    const strip = document.createElement('div');
+    strip.style.cssText = 'margin:0 0 1rem;padding:.7rem .9rem;border:1px solid rgba(245,158,11,.35);'
+                        + 'border-radius:8px;background:rgba(245,158,11,.07);font-size:.85rem;line-height:1.5';
+    strip.innerHTML = '<strong style="color:#f59e0b">⏱ Full-paper rehearsals</strong> '
+      + '<span style="opacity:.75">— 90 questions in 2h33m, sat twice in the day, as in the real exam</span><br>'
+      + fullDays.map(([d, f]) => f + ' &middot; ' + fmtDate(d)).join(' &nbsp;|&nbsp; ');
+    root.appendChild(strip);
+  }
+
   if(!filtered.length) {
     root.innerHTML = '<div class="empty">No items in this category.</div>';
     return;
@@ -720,7 +715,7 @@ function render() {
         const section = document.createElement('div');
         const label =
           item.status==='done' ? '✓ Completed' :
-          item.status==='nodate' ? '— No slot before 14 Dec 2026' :
+          item.status==='nodate' ? '— No slot before the FLK1 exam' :
           item.revDate===TODAY ? '📅 Today – '+fmtDate(item.revDate) :
           item.status==='overdue' ? '⚠ Overdue – '+fmtDate(item.revDate) :
           fmtShort(item.revDate);
@@ -768,7 +763,7 @@ function makeCard(item) {
     today:    '📅 Today',
     overdue:  '⚠ Overdue',
     upcoming: fmtDate(item.revDate),
-    nodate:   'After 14 Dec',
+    nodate:   'After FLK1',
   }[s];
 
   const el = document.createElement('div');
@@ -776,13 +771,19 @@ function makeCard(item) {
   el.innerHTML =
     '<div class="card-head">'+
       '<span class="card-code" style="color:'+colour+'">'+item.code+'</span>'+
-      '<span class="card-title">'+item.title+
-        (item.secondPass ? ' <em style="opacity:.7">· '+item.secondPass+'</em>' : '')+'</span>'+
+      '<span class="card-title">'+item.title+'</span>'+
       '<span class="card-check">'+(s==='done'?'✓':'')+'</span>'+
       '<span class="badge">'+badgeText+'</span>'+
     '</div>'+
     '<div class="card-sub">'+
       '<span>📚 COLP: '+fmtDate(item.colpDate)+'</span>'+
+      // Revisits ride on the module's own card. Rendering them as separate
+      // cards tripled the list and broke ticking, since two cards sharing a
+      // code toggle the same done flag.
+      ((item.revisits && item.revisits.length)
+        ? '<span style="opacity:.75">🔁 Revisit: '
+          + item.revisits.map(r => fmtShort(r.date)).join(' · ') + '</span>'
+        : '')+
       (CANVAS_URLS[item.code]
         ? '<a class="card-link" href="'+BASE+CANVAS_URLS[item.code]+'" target="_blank" rel="noopener">↗ Open on COLP</a>'
         : '')+
