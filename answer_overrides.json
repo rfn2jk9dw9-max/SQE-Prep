@@ -84,6 +84,30 @@
       "correct_index": 1,
       "note": "Obiter dicta are never binding on any court. Crown Court is bound by CoA Criminal Division on ratio only. Option A is a parser error (two answers merged). Correct answer is B (index 1).",
       "correct_text": "statements made in obiter are not binding"
+    },
+    {
+      "source_prefix": "6.3 trust",
+      "question_prefix": "A client was buying a new house and, on the morning of comple",
+      "note": "Option-wrap repair 2026-08-07. Solicitor is exposed on BOTH limbs: dishonest assistance (surprised but chose not to question = blind-eye, Ivey objective standard) AND knowing receipt (beneficial receipt once paid into a PERSONAL account, Akindele unconscionability). Also a Code breach for holding client money beneficially. C (receipt only) and E (accessory only) are each half the answer.",
+      "correct_text": "both accessory liability and recipient liability"
+    },
+    {
+      "source_prefix": "CRML5.2",
+      "question_prefix": "A solicitor acts for a client who is charged with arson. The c",
+      "note": "Option-wrap repair 2026-08-07. Refusal is required because submitting a known false alibi MISLEADS THE COURT (SRA Principle 1 / Code 1.4), not because of embarrassment (B) or independence (E). A is wrong: you cannot proceed on instructions to mislead.",
+      "correct_text": "would be misleading the court"
+    },
+    {
+      "source_prefix": "PROP12.6",
+      "question_prefix": "A person is purchasing a property which they intend to use as",
+      "note": "Option-wrap repair 2026-08-07. Work was permitted development so planning limits are irrelevant. Building regs: prosecution is time-limited, but an INJUNCTION under s.36(6) Building Act 1984 (and Building Safety Regulator powers) has NO time limit where the work is unsafe. So the 10-year/4-year/1-year options are all distractors.",
+      "correct_text": "unlimited jurisdiction to apply for an injunction"
+    },
+    {
+      "source_prefix": "TRUS6.4",
+      "question_prefix": "A trust was set up 10 years ago by a person for their three c",
+      "note": "Option-wrap repair 2026-08-07. s.39 Trustee Act 1925: retirement without replacement needs a DEED, the CONSENT of the co-trustees, AND at least two trustees (or a trust corporation) remaining afterwards. Three trustees here, so two remain and the condition is met. A omits the two-trustee proviso; B wrongly drops the consent requirement.",
+      "correct_text": "at least two persons to act as trustees"
     }
   ]
 }

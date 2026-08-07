@@ -571,18 +571,31 @@ def load_mock_pdf_wrong_answers(mock_dir: Path, bank: list = None) -> list[dict]
         print(f"  ⚠ pdfplumber unavailable, skipping mock PDFs: {e}")
         return []
 
+    # Safari's print-to-PDF embeds fonts without a FontBBox, so pdfminer logs
+    # "Could not get FontBBox from font descriptor" once per font per page —
+    # dozens of lines that bury the real output. Harmless; text and colour
+    # extraction are unaffected.
+    import logging
+    logging.getLogger("pdfminer").setLevel(logging.ERROR)
+
     # question stem (first 60 chars, normalised) → current correct option text
-    bank_key = {}
+    # `disputed` holds stems whose answer the option-wrap repair could not
+    # settle; nothing from those becomes a flashcard.
+    bank_key, disputed = {}, set()
     if bank:
         for q in bank:
             stem = _norm_stem(q.get("question_text", ""))
             opts = q.get("options") or []
             ci = q.get("correct_index")
+            if stem and q.get("answer_ambiguous"):
+                disputed.add(stem)
             if stem and isinstance(ci, int) and 0 <= ci < len(opts):
                 bank_key[stem] = opts[ci]
 
     wrong = []
     stale_skipped = 0
+    disputed_skipped = 0
+    audit = []          # PDFs whose recorded key disagrees with the bank
 
     for pdf_path in sorted(mock_dir.glob("*.pdf")):
         try:
@@ -596,11 +609,17 @@ def load_mock_pdf_wrong_answers(mock_dir: Path, bank: list = None) -> list[dict]
             stem = _norm_stem(e["questionText"])
             correct = e["correctAnswer"]
             current = bank_key.get(stem)
+            if stem in disputed:
+                disputed_skipped += 1       # answer unsettled; teach nothing
+                continue
             if current:
                 # The key may have been corrected since this PDF was printed.
                 if _norm_stem(current) == _norm_stem(e["userAnswer"]):
                     stale_skipped += 1      # she was actually right; ignore
+                    audit.append((pdf_path.name, e, current, "false negative"))
                     continue
+                if e["correctAnswer"] and _norm_stem(current) != _norm_stem(e["correctAnswer"]):
+                    audit.append((pdf_path.name, e, current, "key changed"))
                 correct = current
             wrong.append({
                 'questionText':  e["questionText"],
@@ -617,12 +636,40 @@ def load_mock_pdf_wrong_answers(mock_dir: Path, bank: list = None) -> list[dict]
     if stale_skipped:
         print(f"    ({stale_skipped} skipped — answer key has since been "
               f"corrected, the original mark was a false negative)")
+    if disputed_skipped:
+        print(f"    ({disputed_skipped} skipped — question's answer is still "
+              f"disputed, so no flashcard was created)")
+
+    # Report-only audit. Every disagreement between what a mock PDF recorded
+    # and what the bank now says is printed for confirmation; nothing is
+    # written back, because a genuinely wrong answer of hers must never be
+    # allowed to silently flip a correct key.
+    if audit:
+        print(f"\n  [audit] {len(audit)} question(s) where a mock result "
+              f"disagrees with the current answer key:")
+        for name, e, current, kind in audit:
+            print(f"    • {name} — {kind}")
+            print(f"        Q: {e['questionText'][:80]}")
+            print(f"        recorded correct: {(e['correctAnswer'] or '?')[:70]}")
+            print(f"        bank now says   : {current[:70]}")
+            if kind == "false negative":
+                print(f"        → you answered this correctly; the mark was wrong")
+        print("    (report only — nothing was changed. Add an entry to "
+              "answer_overrides.json to pin any of these.)")
     return wrong
 
 
 def _norm_stem(text: str) -> str:
-    """Whitespace/punctuation-insensitive key for matching stems and options."""
-    return re.sub(r'[^a-z0-9]+', ' ', (text or "").lower()).strip()[:60]
+    """
+    Whitespace/punctuation-insensitive key for matching stems and options.
+
+    Sessions stored via the H5P/Canvas path append "Question Score: 1 / 1" to
+    the stem, which the question bank never has. Strip it first: on a short
+    stem the suffix reaches into the 60-char key and the match fails silently.
+    """
+    text = re.sub(r'\s*Question Score:\s*\d+\s*/\s*\d+\s*$', '', text or "",
+                  flags=re.I)
+    return re.sub(r'[^a-z0-9]+', ' ', text.lower()).strip()[:60]
 
 
 def _cluster_rows(words: list, tol: float = 5.0):

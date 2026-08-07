@@ -934,6 +934,119 @@ def _norm_opt(s):
     return re.sub(r'[^a-z0-9]', '', (s or '').lower())
 
 
+SENTENCE_END = re.compile(r'(?<=[.?!])\s+')
+
+
+def _is_continuation(prev: str, frag: str) -> bool:
+    """
+    True when `frag` is the tail of `prev` that the parser split into its own
+    option. Signature: the previous option is a long clause with no terminal
+    punctuation, and the fragment opens in lower case.
+
+    The length floor matters — options like 'LLP', 'plc', 'ltd' are short,
+    unpunctuated and lower case, and are NOT continuations of each other.
+    """
+    prev, frag = (prev or '').strip(), (frag or '').strip()
+    if not prev or not frag:
+        return False
+    if len(prev) < 40:
+        return False
+    if re.search(r'[.?!]$', prev):
+        return False
+    return frag[0].islower()
+
+
+def _split_merged_option(text: str, siblings: list) -> tuple:
+    """
+    The same parser bug that splits one option in two also glues two options
+    into one. Split `text` back into a pair at a sentence boundary.
+
+    Prefer a boundary where the right-hand side opens the way the sibling
+    options do (SQE1 answers overwhelmingly start 'Yes,' / 'No,'), since that
+    is a far stronger signal than length. Fall back to the most balanced split.
+    Returns (left, right) or (text, None) if no sane boundary exists.
+    """
+    parts = SENTENCE_END.split(text.strip())
+    if len(parts) < 2:
+        return text, None
+
+    openers = tuple(w for w in ('Yes', 'No')
+                    if sum(s.strip().startswith(w) for s in siblings) >= 2)
+
+    best = None
+    for i in range(1, len(parts)):
+        left, right = ' '.join(parts[:i]).strip(), ' '.join(parts[i:]).strip()
+        if len(left) < 25 or len(right) < 25:
+            continue
+        score = abs(len(left) - len(right))
+        if openers and right.startswith(openers):
+            score -= 10_000          # decisive preference
+        if best is None or score < best[0]:
+            best = (score, left, right)
+    return (best[1], best[2]) if best else (text, None)
+
+
+def repair_wrapped_options(questions):
+    """
+    Repair the option-wrap corruption: a wrapped option is split into two
+    options, and — because the count must stay at five — the final two real
+    options end up merged into one. Left alone this both scrambles the choices
+    and points correct_index at the wrong text, which marks correct answers
+    wrong. Runs before apply_overrides so overrides anchor on repaired text.
+
+    Repair is structural and deterministic; where the answer becomes ambiguous
+    the question is flagged rather than guessed, and can be pinned in
+    answer_overrides.json.
+    """
+    repaired = ambiguous = 0
+    for q in questions:
+        opts = list(q.get('options') or [])
+        if len(opts) < 2:
+            continue
+        key = q.get('correct_index')
+
+        # 1. rejoin fragments into the option they were split from
+        joined, key_map, changed = [], {}, False
+        for i, o in enumerate(opts):
+            if joined and _is_continuation(joined[-1], o):
+                joined[-1] = joined[-1].rstrip() + ' ' + o.strip()
+                key_map[i] = len(joined) - 1
+                changed = True
+            else:
+                joined.append(o)
+                key_map[i] = len(joined) - 1
+        if not changed:
+            continue
+
+        new_key = key_map.get(key, key)
+
+        # 2. one option now holds two — split the longest back apart
+        if len(joined) < len(opts):
+            longest = max(range(len(joined)), key=lambda i: len(joined[i]))
+            left, right = _split_merged_option(
+                joined[longest], [o for i, o in enumerate(joined) if i != longest])
+            if right:
+                joined[longest:longest + 1] = [left, right]
+                if new_key == longest:
+                    # the key pointed into the merged blob — which half is
+                    # anyone's guess, so say so instead of picking one
+                    ambiguous += 1
+                    q['answer_ambiguous'] = True
+                elif new_key is not None and new_key > longest:
+                    new_key += 1
+
+        q['options'] = joined
+        if new_key is not None:
+            q['correct_index'] = new_key
+        q['options_repaired'] = True
+        repaired += 1
+
+    if repaired:
+        _dbg(f"  [repair] rejoined wrapped options in {repaired} question(s)"
+             + (f", {ambiguous} awaiting a pinned answer" if ambiguous else ""))
+    return questions
+
+
 def apply_overrides(questions, script_dir=None):
     """
     Apply manual answer corrections from answer_overrides.json.
@@ -1031,6 +1144,10 @@ def apply_overrides(questions, script_dir=None):
 
             q["correct_index"] = new_idx
             q["override_note"] = ov.get("note", "")
+            # An override is a hand-verified answer, so it settles anything the
+            # option-wrap repair had to flag as ambiguous. Clearing this is what
+            # lets the question back into flashcards and normal marking.
+            q.pop("answer_ambiguous", None)
             _dbg(f"  [override] {label}  cidx {old_idx}→{new_idx}  "
                  f"({opts[new_idx][:60]!r})")
             applied += 1
@@ -1164,7 +1281,19 @@ def parse_all(tests_dir, cache_file=None):
         except Exception as e:
             _dbg(f"Cache save error (ignored): {e}")
 
+    all_q = repair_wrapped_options(all_q)
     all_q = apply_overrides(all_q)
+
+    # Anything still ambiguous after overrides is genuinely unresolved: it is
+    # excluded from mistake flashcards, so surface it rather than let it sit.
+    still = [q for q in all_q if q.get("answer_ambiguous")]
+    if still:
+        _dbg(f"  [repair] {len(still)} question(s) still need an answer pinned "
+             f"in answer_overrides.json:")
+        for q in still:
+            _dbg(f"      {q.get('source','?')[:34]} | {q.get('question_text','')[:60]}")
+    else:
+        _dbg("  [repair] no unresolved answers")
 
     # ── 5. Question-level dedup (mock exam bank only) ──────────────────────
     # Each question must appear ONCE in a mock exam. File-level dedup (step 1)
