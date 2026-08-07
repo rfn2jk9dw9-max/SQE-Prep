@@ -171,7 +171,12 @@ const EXTRA_BUSY = [
   '2026-11-29','2026-12-01','2026-12-15',
 ];
 const COLP_BUSY = new Set([...Object.values(SEED_DATES), ...EXTRA_BUSY]);
-const MIN_GAP   = 14;
+// A 14-day wait between COLP teaching a module and it becoming eligible for
+// revision used to sit here. It was arbitrary and, measurably, inert: with the
+// queue this oversubscribed the median gap between teaching and revision is 101
+// days, so the constraint never once bound. Removing it changed nothing —
+// 117/117 modules still scheduled, same end date, same 78 revisits. A module is
+// now eligible as soon as it has been taught.
 // The schedule used to stop on 2026-12-14, the day before the COLP mock exam —
 // a hard stop set before the real SQE1 dates were known. That is why everything
 // appeared to end mid-December, and why four modules taught in the last fortnight
@@ -416,7 +421,7 @@ function buildSchedule(doneSet) {
   }
 
   // Pending modules: not done, has a COLP date
-  // Compute earliest eligible = colp + MIN_GAP, clamped to today, snapped to free day
+  // Earliest eligible = the day COLP taught it, clamped to today, snapped to a free day
   const pending = [];
   const nodateMap = {}; // code -> null (past deadline)
 
@@ -425,7 +430,6 @@ function buildSchedule(doneSet) {
     if(doneSet.has(m.code)) return;
 
     let e = parseDate(SEED_DATES[m.code]);
-    e.setDate(e.getDate() + MIN_GAP);
     // clamp to today
     const todayD = parseDate(TODAY);
     if(e < todayD) e = new Date(todayD);
@@ -549,9 +553,7 @@ function buildSecondPass(assignment, doneSet) {
       // Nothing can be revised before COLP has taught it. Without this check a
       // module with no first-pass slot counted as "never revised" and was
       // scheduled immediately — putting CRMP9.12, taught 2 December, in August.
-      const taught = parseDate(SEED_DATES[code]);
-      taught.setDate(taught.getDate() + MIN_GAP);
-      if (toYMD(taught) > day) return false;
+      if (SEED_DATES[code] > day) return false;
       const seen = lastSeen[code];
       if (!seen) return true;                 // taught but never revised
       const ready = parseDate(seen);
