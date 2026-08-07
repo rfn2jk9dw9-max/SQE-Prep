@@ -514,6 +514,11 @@ function buildSchedule(doneSet) {
 // after the COLP mock. That is also the point: spacing works by repeated
 // contact over months, not by one late re-read.
 const SECOND_PASS_GAP = 21;            // min days between visits to a module
+
+// Canonical chapter order, taken from MODULES rather than from any date, so
+// revisits run 1.1, 1.2, 1.3 … regardless of when each was taught or ticked.
+const MODULE_ORDER = {};
+MODULES.forEach((m, i) => { MODULE_ORDER[m.code] = i; });
 const POST_COLP_FROM  = '2026-12-16';  // day after the COLP mock exam
 
 // SQE1 January 2027 is sat as two separate papers a week apart:
@@ -573,6 +578,7 @@ function buildSecondPass(assignment, doneSet) {
   });
 
   const out = [];
+  const visits = {};   // code -> how many revisits already scheduled
   for (const day of days) {
     // After FLK1 is sat, FLK1 material is finished — that week belongs to FLK2
     // and to ethics, which is examined in both papers.
@@ -592,9 +598,18 @@ function buildSecondPass(assignment, doneSet) {
     });
     if (!eligible.length) continue;
 
-    // Coldest first; never-seen modules ahead of everything else.
-    eligible.sort((a, b) => (lastSeen[a] || '').localeCompare(lastSeen[b] || ''));
+    // Fewest visits first, then chapter order. Both halves matter:
+    //  • chapter order, because sorting by how long ago each was last seen
+    //    mixed two clocks — ticked chapters carry their teaching date, unticked
+    //    ones their first-pass date — so BUS7.8 came up before BUS7.2;
+    //  • visit count, because chapter order ALONE starves the later chapters:
+    //    the earliest eligible always wins, so BUS7.1 was revisited seven times
+    //    before BUS7.2 was touched once.
+    // Together they walk 1.1, 1.2, 1.3 … to the end, then start again.
+    eligible.sort((a, b) =>
+      (visits[a] || 0) - (visits[b] || 0) || MODULE_ORDER[a] - MODULE_ORDER[b]);
     const code = eligible[0];
+    visits[code] = (visits[code] || 0) + 1;
     out.push({ code: code, date: day, phase: day >= POST_COLP_FROM ? 'final' : 'spaced' });
     lastSeen[code] = day;
   }
