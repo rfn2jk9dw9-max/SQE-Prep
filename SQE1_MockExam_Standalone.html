@@ -658,7 +658,12 @@ function srcTag(src) {
 // deflated score. Sessions saved without per-question detail are left alone.
 function rescoreSessions(sessions) {
   const key = {};
-  const norm = s => (s || '').toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim().slice(0, 60);
+  // Records saved by the H5P/Canvas path append "Question Score: 1 / 1" to the
+  // stem; the bank has no such suffix. Strip it before keying, or a short stem
+  // lets the suffix into the first 60 chars and the match silently fails.
+  const norm = s => (s || '')
+    .replace(/\s*Question Score:\s*\d+\s*\/\s*\d+\s*$/i, '')
+    .toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim().slice(0, 60);
   (typeof QUESTION_BANK !== 'undefined' ? QUESTION_BANK : []).forEach(q => {
     const opts = q.options || [];
     if (q.correct_index != null && opts[q.correct_index]) {
@@ -1244,13 +1249,20 @@ function submitExam() {
     // flashcards, and a session could never be re-scored after an answer key
     // was corrected. Answers are stored as TEXT, not indices, because options
     // are shuffled per session and re-indexed whenever the parser improves.
+    // Field set matches the records already in the Hostinger DB exactly, so
+    // old and new sessions stay readable by the same code. userOption /
+    // correctOption are letters for display only — never match on them, the
+    // options are shuffled per session, so text is the only stable key.
     questions:    qs.map((q, i) => ({
+      preview:       (q.question_text || '').slice(0, 80),
       questionText:  q.question_text,
       subject:       q.subject,
       source:        q.source || '',
+      isCorrect:     session.answers[i] === q.correctShuffledIdx,
+      userOption:    session.answers[i] != null ? LETTERS[session.answers[i]] : '',
+      correctOption: LETTERS[q.correctShuffledIdx],
       userAnswer:    session.answers[i] != null ? q.shuffledOptions[session.answers[i]] : '',
-      correctAnswer: q.shuffledOptions[q.correctShuffledIdx],
-      isCorrect:     session.answers[i] === q.correctShuffledIdx
+      correctAnswer: q.shuffledOptions[q.correctShuffledIdx]
     }))
   };
   saveSession(result);
