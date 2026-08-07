@@ -473,6 +473,11 @@ def main():
     files_to_push = {
         "SQE1_MockExam_Standalone.html": STANDALONE,
         "SQE1_HighYield_Standalone.html": SCRIPT_DIR / "SQE1_HighYield_Standalone.html",
+        # The revision schedule holds the teaching calendar, the second-pass
+        # plan and the full-paper days. The local git path picks it up via
+        # `git add -A`, but the sandbox path pushes an explicit list — without
+        # this entry the two paths publish different things.
+        "SQE1_COLP_Revision.html": SCRIPT_DIR / "SQE1_COLP_Revision.html",
     }
     index_html = SCRIPT_DIR / "index.html"
     if index_html.exists():

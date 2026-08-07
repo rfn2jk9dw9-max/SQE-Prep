@@ -316,39 +316,6 @@ def build_chapter_unlock_dates(events):
 MIN_GAP_DAYS = 14   # minimum days between COLP teaching and first revision
 SCHEDULE_END = date(2026, 12, 14)   # hard stop for revision calendar
 
-# ── Second pass ───────────────────────────────────────────────────────────
-# Chapters taught early are the ones most at risk by January: material first
-# seen in March gets one revision touch and is then never revisited. Any free
-# day with no newly-unlocked chapter used to be skipped entirely; those days now
-# go to a second pass over the earliest-taught chapters, oldest revision first.
-EARLY_CUTOFF      = date(2026, 6, 1)   # "taught early" = before this
-SECOND_PASS_GAP   = 21                 # min days between the two passes
-
-# ── Full-length sittings ──────────────────────────────────────────────────
-# SQE1 is 180 questions per FLK, split into two sittings of 90 questions with
-# 2h33m each, on non-consecutive days. A 30-minute daily mock never rehearses
-# that; the endurance is a separate skill. These days sit a complete FLK: two
-# 153-minute sittings with a break between.
-FULL_SITTING_MINUTES = 153
-FULL_SITTING_START   = date(2026, 10, 1)   # once enough syllabus is taught
-FULL_SITTING_END     = date(2026, 12, 12)  # before the COLP exam on the 15th
-FULL_SITTING_COUNT   = 4                   # FLK1, FLK2, FLK1, FLK2
-
-
-def pick_full_sitting_days(free_days):
-    """Evenly spaced free days for full-length papers, alternating FLK1/FLK2."""
-    window = [d for d in free_days if FULL_SITTING_START <= d <= FULL_SITTING_END]
-    if not window:
-        return []
-    n = min(FULL_SITTING_COUNT, len(window))
-    step = (len(window) - 1) / max(n - 1, 1)
-    out = []
-    for i in range(n):
-        day = window[int(round(i * step))]
-        if day not in [d for d, _ in out]:
-            out.append((day, "FLK1" if i % 2 == 0 else "FLK2"))
-    return out
-
 
 def build_schedule(events, free_days):
     """
@@ -366,12 +333,11 @@ def build_schedule(events, free_days):
     )
     assignment = []
     used_chapters = []   # chapters already assigned to a free day
-    last_revised  = {}   # chapter idx -> date of its most recent revision
     flk_toggle = "FLK1"
 
     for day in free_days:
         # Find next chapter that: (a) taught at least MIN_GAP_DAYS ago, (b) not yet used
-        chosen, pass_no = None, 1
+        chosen = None
         for idx in chapter_queue:
             if idx in used_chapters:
                 continue
@@ -380,27 +346,11 @@ def build_schedule(events, free_days):
                 chosen = idx
                 break
 
-        if chosen is None:
-            # Nothing new is unlocked. Rather than waste the day, take a second
-            # pass over the earliest-taught chapters, least recently revised
-            # first, so the March–May material does not go cold.
-            candidates = [
-                i for i in used_chapters
-                if unlock_dates.get(i) and unlock_dates[i] < EARLY_CUTOFF
-                and last_revised.get(i)
-                and (last_revised[i] + timedelta(days=SECOND_PASS_GAP)) <= day
-            ]
-            if candidates:
-                chosen = min(candidates, key=lambda i: last_revised[i])
-                pass_no = 2
-
         if chosen is not None:
-            assignment.append((day, chosen, flk_toggle, pass_no))
-            if pass_no == 1:
-                used_chapters.append(chosen)
-            last_revised[chosen] = day
+            assignment.append((day, chosen, flk_toggle))
+            used_chapters.append(chosen)
             flk_toggle = "FLK2" if flk_toggle == "FLK1" else "FLK1"
-        # else: nothing eligible at all for this day — skip it
+        # else: no unlocked chapter yet for this day — skip it
 
     return assignment
 
@@ -430,42 +380,18 @@ def make_event(summary, description, d, start_hour, start_min, duration_min):
 def write_ics(schedule, out_path):
     ics_events = []
 
-    full_days = dict(pick_full_sitting_days(sorted({d for d, *_ in schedule})))
-
-    for day, ch_idx, mock_paper, *rest in schedule:
-        pass_no = rest[0] if rest else 1
+    for day, ch_idx, mock_paper in schedule:
         subj, paper, ch_id, ch_title, _ = CHAPTERS[ch_idx]
 
         # Revision block 09:00–10:30
-        tag      = " (2nd pass)" if pass_no == 2 else ""
-        rev_sum  = f"SQE1 Revision{tag} - {subj}: {ch_id} {ch_title}"
+        rev_sum  = f"SQE1 Revision - {subj}: {ch_id} {ch_title}"
         rev_desc = (
             f"Subject: {subj} ({paper})\\n"
             f"Chapter: {ch_id} {ch_title}\\n"
             f"Duration: 90 min\\n"
-            + ("Second pass — taught before June, revised once already. Test "
-               "yourself first, then reread only what you could not recall.\\n"
-               if pass_no == 2 else "")
-            + f"\\nOpen revision guide: http://127.0.0.1:4321/guide"
+            f"\\nOpen revision guide: http://127.0.0.1:4321/guide"
         )
         ics_events.append(make_event(rev_sum, rev_desc, day, 9, 0, 90))
-
-        # Full-length paper days replace the short mock with two real sittings
-        if day in full_days:
-            flk = full_days[day]
-            for n, (hh, mm) in enumerate(((9, 0), (13, 30)), start=1):
-                ics_events.append(make_event(
-                    f"SQE1 FULL PAPER - {flk} sitting {n} of 2 (153 min)",
-                    (f"Full-length rehearsal: 90 questions in 2h33m.\\n"
-                     f"This is one half of a real {flk} paper; sitting 2 follows "
-                     f"after a break, exactly as on the day.\\n"
-                     f"Do not stop early and do not check answers between "
-                     f"sittings — the point is the endurance.\\n"
-                     f"\\nOpen mock exam: http://127.0.0.1:4321/test\\n"
-                     f"Select {flk}, source of your choice, and the Full "
-                     f"(90 q / 153 min) duration."),
-                    day, hh, mm, FULL_SITTING_MINUTES))
-            continue
 
         # Mock session 11:00–11:30
         mock_sum  = f"SQE1 Mock - {mock_paper} (30 min)"
