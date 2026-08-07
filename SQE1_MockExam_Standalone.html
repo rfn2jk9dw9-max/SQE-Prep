@@ -661,13 +661,18 @@ function rescoreSessions(sessions) {
   // Records saved by the H5P/Canvas path append "Question Score: 1 / 1" to the
   // stem; the bank has no such suffix. Strip it before keying, or a short stem
   // lets the suffix into the first 60 chars and the match silently fails.
-  const norm = s => (s || '')
+  // normAns compares ANSWER text and must NOT truncate: SQE1 distractors share
+  // long openings, so a 60-char key rates a wrong answer correct and inflates
+  // the score. normStem truncates deliberately — 60 chars identifies a
+  // question, and absorbs wording drift between sittings.
+  const normAns = s => (s || '')
     .replace(/\s*Question Score:\s*\d+\s*\/\s*\d+\s*$/i, '')
-    .toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim().slice(0, 60);
+    .toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
+  const norm = s => normAns(s).slice(0, 60);
   (typeof QUESTION_BANK !== 'undefined' ? QUESTION_BANK : []).forEach(q => {
     const opts = q.options || [];
     if (q.correct_index != null && opts[q.correct_index]) {
-      key[norm(q.question_text)] = norm(opts[q.correct_index]);
+      key[norm(q.question_text)] = normAns(opts[q.correct_index]);
     }
   });
   if (!Object.keys(key).length) return sessions;
@@ -680,7 +685,7 @@ function rescoreSessions(sessions) {
       const current = key[norm(q.questionText)];
       let ok = !!q.isCorrect;
       if (current && q.userAnswer) {
-        const now = norm(q.userAnswer) === current;
+        const now = normAns(q.userAnswer) === current;
         if (now !== ok) changed++;
         ok = now;
       }
