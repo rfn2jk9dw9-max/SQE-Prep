@@ -377,8 +377,28 @@ function loadDone(){
   return new Set(DEFAULT_DONE);
 }
 
+// When each chapter was ticked. The done set is only a list of codes, so
+// without this there is no way to know how long ago a chapter was revised —
+// and that is exactly what decides when it is due to come round again.
+// Local-only and best-effort: chapters ticked before this existed have no date
+// and fall back to their teaching date, which correctly treats them as cold.
+const DONE_DATES_KEY = STORE_KEY + '_dates';
+
+function loadDoneDates(){
+  try { return JSON.parse(localStorage.getItem(DONE_DATES_KEY)) || {}; }
+  catch { return {}; }
+}
+
+function saveDoneDates(s){
+  const today = todayYMD();
+  s.forEach(code => { if(!doneDates[code]) doneDates[code] = today; });
+  Object.keys(doneDates).forEach(code => { if(!s.has(code)) delete doneDates[code]; });
+  try { localStorage.setItem(DONE_DATES_KEY, JSON.stringify(doneDates)); } catch {}
+}
+
 function saveDone(s){
   const arr = [...s];
+  saveDoneDates(s);
   localStorage.setItem(STORE_KEY, JSON.stringify(arr));
   // Async push to server — fire and forget
   fetch(COLP_API, {
@@ -403,6 +423,7 @@ async function syncFromServer(){
 }
 
 let done = loadDone();
+let doneDates = loadDoneDates();
 
 // ── Core: build spread schedule ────────────────────────────────────────────
 // Returns {code: revDate | null}
@@ -534,12 +555,21 @@ function buildSecondPass(assignment, doneSet) {
   const days = freeDaysBetween(todayYMD(), FLK2_EXAM);
   if (!days.length) return [];
 
-  // Last time each module was seen. Modules the first pass could not fit at all
-  // have no date, so they sort first and get picked up straight away.
+  // Last time each module was seen.
+  //
+  // Ticked chapters are INCLUDED, not skipped. A completed first pass is what
+  // qualifies a chapter for a second one; excluding them meant ticking a
+  // chapter deleted it from the schedule permanently, and left revisits
+  // starting at PROP12.4 — the first chapter that happened not to be ticked —
+  // rather than at the coldest material.
   const lastSeen = {};
   MODULES.forEach(m => {
-    if (!SEED_DATES[m.code] || doneSet.has(m.code)) return;
-    lastSeen[m.code] = assignment[m.code] || null;
+    if (!SEED_DATES[m.code]) return;
+    lastSeen[m.code] = doneSet.has(m.code)
+      // ticked: when it was ticked, else fall back to the teaching date, which
+      // treats a chapter ticked at an unknown past time as due.
+      ? (doneDates[m.code] || SEED_DATES[m.code])
+      : (assignment[m.code] || null);
   });
 
   const out = [];
