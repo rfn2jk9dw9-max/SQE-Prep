@@ -1,11 +1,11 @@
 {
- "updated": "2026-08-07",
+ "updated": "2026-08-09",
  "rule": "Pick sections by running the REAL buildSchedule() AND buildSecondPass() from SQE1_COLP_Revision.html in node against the server done-set (colp_progress.php), then MERGING both passes by date. SEED_DATES are TEACHING dates, not due dates. As at the Aug 2026 rewrite of that file: no MIN_GAP (eligible the day taught), SCHED_END 2027-01-10 (day before FLK1), isFreeDay also excludes four FULL_PAPER_DAYS Sundays, DEFAULT_DONE CONT1.1-1.3. The first pass assigns ONE new module per free day (75 days); buildSecondPass adds ONE spaced revisit per day (83 entries, 21-day gap, coldest first). BOTH COUNT. getStatus() colours cards from the first pass only and revisits render on the existing card - that is display, not scheduling. Taking the first pass alone sends the overhaul to material 2-3 weeks out and skips the oldest never-overhauled chapters, which is what the second pass exists to rescue. Nothing is ever overdue; the queue drains in TEACHING order. Take Today then Upcoming from the MERGED list, skipping sections already done here. Then: (1) pdftotext the SLK manual chapter, (2) rebuild notes terse (15-25k chars, one point per line, citations only in the cases array, grep every case name back against the manual), (3) visuals array - overview mind map + one per topic + decision trees for confusable doctrines (map: 2-5 branches, grid: 2-4 cols), (4) preserve/relocate MCQ traps, never delete, (5) verify with the node buildVis sweep, (6) push the single file via a /tmp clone.",
  "counts": {
   "total": 119,
-  "done": 45,
+  "done": 51,
   "aligned_needs_visuals": 9,
-  "todo": 65
+  "todo": 59
  },
  "sections": [
   {
@@ -148,9 +148,9 @@
    "id": "7.1",
    "title": "Business Organisations",
    "manual": "SLK BUS7",
-   "status": "todo",
-   "visuals": "single",
-   "notes": ""
+   "status": "done",
+   "visuals": "array",
+   "notes": "invented content + displaced content + missing visuals. Removed Salomon v Salomon, Prest v Petrodel, CA 2006 ss 3 and 7 and the 'plc min GBP 50k' line - manual 7.1 cites NO cases and none of those provisions, so the cases array is now empty. PA 1890 implied terms, dissolution grounds and outgoing-partner liability DROPPED as superseded: 7.2 and 7.3 already cover them with section numbers. Added everything the chapter was missing: promoters and pre-incorporation contracts, limited partnerships (LPA 1907 as amended by ECCTA 2023, authorised-agent filing), companies limited by guarantee, unlimited companies, IA 1986 s 74(2), the three situations disapplying separate legal personality, maintenance of capital, transparency, factors influencing choice and the full 7.1.7 comparison table. Single grid replaced with an array of 9."
   },
   {
    "id": "7.2",
@@ -356,9 +356,9 @@
    "id": "6.1",
    "title": "Creation and Requirements of an Express Trust",
    "manual": "SLK TRUS6",
-   "status": "todo",
-   "visuals": "single",
-   "notes": ""
+   "status": "done",
+   "visuals": "array",
+   "notes": "invented content removed (Knight v Knight, Quistclose, Re Wait, Palmer v Simmonds, Re Gulbenkian, Gillett v Holt) plus the PAA 2009 s 5 citation the manual never gives; one MCQ trap was legally WRONG - it said 'reasonable income' is uncertain when Re Golay's WT holds it potentially CERTAIN - corrected, and the 'friends' trap re-attributed from Re Gulbenkian to Re Barlow's WT; unincorporated-association trap DROPPED as superseded by 6.3; whole of 6.1.4 interest in possession, 6.1.6.1 transfer-methods table and the Mascall/Pennington/Zeital/Strong v Bird/Re Ralli/DMC material were missing and are now built out; CURRENCY lines added (National Iranian Oil [2025] EWCA Civ 1211; Property (Digital Assets etc) Act 2025); single flow visual replaced with an array of 9."
   },
   {
    "id": "6.2",
@@ -604,9 +604,9 @@
    "id": "2.4",
    "title": "Pure Economic Loss and Product Liability",
    "manual": "SLK TORT2",
-   "status": "todo",
-   "visuals": "single",
-   "notes": ""
+   "status": "done",
+   "visuals": "array",
+   "notes": "Invented content removed: Caparo v Dickman (belongs to 2.1, which is done and covers duty), Spartan Steel v Martin, Henderson v Merrett Syndicates and White v Jones - none is in the manual chapter, which cites only Hedley Byrne, JEB Fasteners, Donoghue v Stevenson and Evans v Triplex. Also removed as unsupported: the GBP 275 property-damage threshold, 'importer into the EU', the supplier-who-fails-to-identify-the-producer limb, s 11A Limitation Act 1980, the intermediate-examination gloss on Donoghue, and the claim that the development risks defence is unavailable to pharmaceutical manufacturers (the manual's actual limit is that it fails where a GENERIC defect was or should have been known). Missing manual material added: the contract-first analysis and the buyer's remedy against the seller on express/implied terms, negligent ACTS as distinct from misstatements, the fourth Hedley Byrne requirement plus the separate breach and real-and-substantial-inducement steps from JEB Fasteners, the three extensions of Hedley Byrne (advice, non-performance of will services, pension advice), the whole of 2.4.3 element by element (broad reading of consumer and manufacturer, containers/packaging/instructions, the inferred-breach presumption and its rebuttal, warn-or-recall, the causation and damage points), and on the CPA the s 1(2)/s 45 product and goods definitions, the s 3(2) factors, the claimant's burden of proving the defect, all SIX s 4(1) defences and contributory negligence, and both limitation clocks. Statutes array rebuilt to the eight provisions the manual actually cites. Trap block kept first and rewritten to the manual (nine traps). Single flow replaced with an array of 7 (2 mind maps, 2 decision trees, comparison grid, defences steps, figures grid). 6k -> 21k chars."
   },
   {
    "id": "2.5",
@@ -628,9 +628,9 @@
    "id": "3.2",
    "title": "Overview of the Principles and Codes – Part 2",
    "manual": "SLK COND3",
-   "status": "todo",
-   "visuals": "single",
-   "notes": ""
+   "status": "done",
+   "visuals": "array",
+   "notes": "prose was largely aligned - the real defects were structural: the cases array used ref/point instead of name/citation/rule so every citation and rule rendered BLANK, and the SRA enforcement strategy quote said 'support a competitive market' when the manual says 'supporting access to affordable legal services, the rule of law and the administration of justice'. Added the Wingate [93] honesty passage, the SRA two-stage dishonesty formulation, the honesty-for-firms requirement and the EDI guidance detail. Single flow visual replaced with an array of 8."
   },
   {
    "id": "3.3",
@@ -652,9 +652,9 @@
    "id": "5.1",
    "title": "Understanding and Analysing Criminal Liability",
    "manual": "SLK CRML5",
-   "status": "todo",
-   "visuals": "single",
-   "notes": ""
+   "status": "done",
+   "visuals": "array",
+   "notes": "Invented content removed - none of these appear in the manual chapter: Woollin, Mohan, R v G and R, Caldwell, Thabo Meli, Sweet v Parsley, Gammon v A-G Hong Kong, Collins v Wilcock, Ireland, Burstow, Mowatt, Pittwood, Stone and Dobinson and R v Miller [1983] (the manual's duty-to-act list is unattributed, and its R v Miller is the 1954 ABH case). Oblique intent / the Woollin direction was DROPPED as superseded: the manual expressly defers intention to the next chapter and 5.2 already covers it. The empty-ish cases array is now the manual's actual thirteen: Miller, Chan-Fook, R (T) v DPP, DPP v Smith, C (a minor) v Eisenhower, Savage, A-G's Reference (No 6 of 1980), Paterson, M (B), White, Smith, Blaue, Jordan. Missing manual material added: the three types of actus reus, voluntariness, the four common law duty situations, the TWO-question recklessness test (subjective AND objective - the old note only gave the subjective half), gross negligence, strict liability and the point that none of the SRA-specified offences is strict liability, transferred mens rea and its same-offence limit, both coincidence theories, the full assault and battery actus reus breakdown, the whole of 5.1.6 consent (three requirements plus the public-interest lists for intended and unintended harm) and the whole of 5.1.7 causation including the four novus actus categories and the manual's warning that this area of law is not consistent. s 47 statute text no longer asserts a five-year maximum, which the manual does not give. MCQ traps de-duplicated from six to seven distinct ones (the wound and transferred-mens-rea traps each appeared twice and were merged, with the manual's same-offence limit folded into the latter). Single flow replaced with an array of 9 (2 mind maps, 3 decision trees, the offence ladder, 3 grids). 8k -> 27k chars."
   },
   {
    "id": "5.2",
@@ -796,9 +796,9 @@
    "id": "4.1",
    "title": "Nature of Land",
    "manual": "SLK LAND4",
-   "status": "todo",
-   "visuals": "single",
-   "notes": ""
+   "status": "done",
+   "visuals": "array",
+   "notes": "MASSIVE displaced content: the whole of Registered Land, Unregistered Land and Doctrine of Notice sat in 4.1 but belong to 4.2 (Title to Land) and 4.3 (Protecting Third-Party Interests) - both already cover them better, so dropped as SUPERSEDED rather than moved. Invented content removed: the manual chapter cites NO cases at all, so Williams & Glyn's Bank v Boland, Midland Bank v Green, Walsh v Lonsdale, TSB Bank v Botham and Hunt v Luck all went and the cases array is now EMPTY. Statutory numbering not in the manual also removed: LRA 2002 ss 27/29 and Sch 3, LPA 1925 s 205(1)(ix), LPA 1925 s 54(2) (the manual gives the 3-year lease only as an unnumbered exception to s 52) and the LCA 1972 class list. Missing manual material added in full: 4.1.2 terminology table, real v personal property and choses in possession/action, the four exceptions to air-above/ground-below (airspace, things in the ground, wild animals, objects found - with the Treasure Act 1996 rules), 4.1.3.1 use classes and sui generis, legal estate v beneficial interest with the FOUR-legal-owner cap, commonhold, all five legal interests in detail, the three deed-execution requirements, TR1/TP1/conveyance, and the four routes to an equitable interest with the tenant-in-common/joint-tenant assignment rule. CURRENCY lines added from the Land SQE July 2026 update: Use Classes Order 1987 as amended by the 2020 (England) Regs; Family Law Act 1996 as amended by the Civil Partnership Act 2004. MCQ traps: rent-charge/positive-covenant trap kept and sharpened; the 'unregistered land - legal title does not pass on completion' trap DROPPED as superseded - 4.2 already carries the same point sourced from her 04/08 FLK2 mock and states it the OTHER way round (unregistered: title passes on COMPLETION), which is the correct rule. Five new manual-derived traps added. Single table replaced with an array of 10 (3 mind maps, 3 decision trees, 4 grids incl. a figures grid). 11k -> 24k chars."
   },
   {
    "id": "4.2",
