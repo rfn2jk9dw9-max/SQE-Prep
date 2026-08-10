@@ -62,7 +62,23 @@ def subject_from_filename(name):
             return info[0], info[1]
     if stem.startswith("SLK"):
         return "Mixed Practice", "BOTH"
+    # Canvas taster/progress exports whose filename carries the paper, e.g.
+    # "Progress Taster 0908 FLK1.pdf". These are mixed-subject papers, so the
+    # only reliable subject signal is the paper label in the name itself.
+    m = re.search(r'\bFLK\s*([12])\b', stem)
+    if m and _is_canvas_name(stem):
+        return "Mixed Practice", f"FLK{m.group(1)}"
     return "Unknown", "BOTH"
+
+
+def _is_canvas_name(stem: str) -> bool:
+    """
+    True for Canvas LMS quiz-results exports (multi-subject taster / progress
+    tests), which parse_canvas_pdf handles. Historically these were all named
+    "SLK ...", but COLP now exports them as "Progress Taster <ddmm> FLK<n>".
+    """
+    stem = stem.upper()
+    return stem.startswith("SLK") or "PROGRESS TASTER" in stem or "PROGRESS TEST" in stem
 
 def clean_text(text):
     """Remove H5P/Canvas icon glyphs and collapse whitespace."""
@@ -864,6 +880,7 @@ def _parse_canvas_block(block, score):
         _dbg(f"  CANVAS-BLOCK: {len(opts_list)} opts for: {qtxt[:60]!r}")
         return None
 
+    opts_list = _merge_canvas_overflow(opts_list)
     opts_list = opts_list[:5]
     options   = [t for _, t in opts_list]
 
@@ -871,21 +888,9 @@ def _parse_canvas_block(block, score):
         # Correct answer = the selected option
         cidx = next((j for j, (sel, _) in enumerate(opts_list) if sel), None)
     else:
-        # Correct answer = best word-overlap match against correct_parts text
-        correct_text = clean_text(" ".join(correct_parts))
-        cidx = None
-        if correct_text:
-            cw   = set(correct_text.lower().split())
-            best = -1.0
-            for j, (_, opt_text) in enumerate(opts_list):
-                ow = set(opt_text.lower().split())
-                if not ow or not cw:
-                    continue
-                overlap = len(ow & cw) / min(len(ow), len(cw))
-                if overlap > best:
-                    best = overlap
-                    cidx = j
+        cidx = _match_correct_option(correct_parts, opts_list)
         if cidx is None:
+            correct_text = clean_text(" ".join(correct_parts))
             _dbg(f"  CANVAS-BLOCK: no correct match for: {correct_text[:60]!r}")
             return None
 
@@ -894,6 +899,96 @@ def _parse_canvas_block(block, score):
         "options":       options,
         "correct_index": cidx,
     }
+
+
+def _merge_canvas_overflow(opts_list):
+    """
+    Repair Canvas blocks that yielded MORE than 5 option groups.
+
+    An option's second line is treated as a new option whenever it starts with
+    a capital — so "…breach of the Code of Conduct for / Solicitors will be the
+    senior partner's responsibility." splits in two. With six groups the old
+    code took the first five, which silently DISCARDED the real fifth option;
+    when the discarded one was the selected answer, correct_index came back
+    None and the whole question was dropped.
+
+    Merge the most likely wrap point (a group with no terminal punctuation
+    followed by one that continues the sentence) until five remain. Never
+    merges across a selection boundary in a way that loses the ✓ marker: the
+    merged group keeps `selected` if either half had it.
+    """
+    while len(opts_list) > 5:
+        lengths = sorted(len(t.strip()) for _, t in opts_list)
+        median  = lengths[len(lengths) // 2] or 1
+        best_i, best_score = None, None
+        for i in range(len(opts_list) - 1):
+            prev, nxt = opts_list[i][1].strip(), opts_list[i + 1][1].strip()
+            if not prev or not nxt:
+                continue
+            score = 0.0
+            if re.search(r'[.?!]["”)]?$', prev):
+                score -= 5.0      # prev looks complete — unlikely wrap point
+            elif len(prev) >= 40:
+                score += 1.0      # long unpunctuated clause = wrapped line
+            if nxt[0].islower():
+                score += 2.0      # classic continuation
+            # A stray tail is much shorter than a real option. "Namely, a
+            # denial that she committed the offence." next to five 150-char
+            # options is the give-away even though it ends in a full stop.
+            score += 2.0 * max(0.0, 1.0 - len(nxt) / median)
+            score += 0.5 if opts_list[i][0] == opts_list[i + 1][0] else -1.0
+            if best_score is None or score > best_score:
+                best_i, best_score = i, score
+        if best_i is None:
+            break                 # nothing left to merge — fall back to [:5]
+        sel = opts_list[best_i][0] or opts_list[best_i + 1][0]
+        text = (opts_list[best_i][1].rstrip() + " " +
+                opts_list[best_i + 1][1].lstrip()).strip()
+        opts_list = opts_list[:best_i] + [(sel, text)] + opts_list[best_i + 2:]
+    return opts_list
+
+
+def _match_correct_option(correct_parts, opts_list):
+    """
+    Resolve the "Correct Answer:" text to an option index.
+
+    The old scoring was |A∩B| / min(|A|,|B|), which returns a perfect 1.0 for
+    any option whose words are a SUBSET of the answer text. On short options
+    that ties the right answer against a strictly-shorter distractor and the
+    earlier index wins: "LP and LLP only" lost to "LLP only" — which was the
+    answer she had actually picked and got marked wrong for.
+
+    Order of preference:
+      1. exact normalised equality (unique match only)
+      2. Jaccard |A∩B| / |A∪B|, which penalises the length gap
+      3. containment, but only as a tiebreak within equal Jaccard
+    """
+    correct_text = clean_text(" ".join(correct_parts))
+    if not correct_text:
+        return None
+
+    # 1. exact normalised equality
+    target = _norm_opt(correct_text)
+    exact  = [j for j, (_, t) in enumerate(opts_list) if _norm_opt(t) == target]
+    if len(exact) == 1:
+        return exact[0]
+    # the answer text is sometimes truncated mid-word by the PDF layout
+    pref = [j for j, (_, t) in enumerate(opts_list)
+            if target and len(target) >= 20 and _norm_opt(t).startswith(target)]
+    if len(pref) == 1:
+        return pref[0]
+
+    cw   = set(correct_text.lower().split())
+    best, cidx = (-1.0, -1.0), None
+    for j, (_, opt_text) in enumerate(opts_list):
+        ow = set(opt_text.lower().split())
+        if not ow or not cw:
+            continue
+        jac  = len(ow & cw) / len(ow | cw)
+        cont = len(ow & cw) / min(len(ow), len(cw))
+        if (jac, cont) > best:
+            best, cidx = (jac, cont), j
+    return cidx
 
 
 def parse_canvas_pdf(pdf_path, subject, paper):
@@ -1271,7 +1366,7 @@ def parse_all(tests_dir, cache_file=None):
         else:
             # Cache miss — re-parse
             subject, paper = subject_from_filename(p.name)
-            if p.stem.upper().startswith("SLK"):
+            if _is_canvas_name(p.stem):
                 qs = parse_canvas_pdf(str(p), subject, paper)
             else:
                 qs = parse_pdf(str(p), subject, paper)

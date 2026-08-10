@@ -66,6 +66,46 @@ def source_to_chapter_id(source: str) -> str | None:
     return None
 
 
+# Leading number of an SLK manual reference → subject. Canvas mixed-subject
+# papers ("SLK Progress Test 1A", "Progress Taster 0908 FLK2") carry no subject
+# in the filename, but every feedback block ends "See 5.2.4.3." and that first
+# digit IS the manual number — CONT1, TORT2, COND3, LAND4, CRML5, TRUS6, BUS7,
+# DISP8, CRMP9, SERV10, SYS11, PROP12, WILL13.
+MODULE_NUM_TO_SUBJECT = {
+    1:  "Contract Law",
+    2:  "Tort",
+    3:  "Ethics and Professional Conduct",
+    4:  "Land Law",
+    5:  "Criminal Liability",
+    6:  "Trusts Law",
+    7:  "Business Law and Practice",
+    8:  "Dispute Resolution",
+    9:  "Criminal Law and Practice",
+    10: "Legal Services",
+    11: "Legal System",
+    12: "Property Law and Practice",
+    13: "Wills and Administration",
+}
+
+_SEE_REF_RE = re.compile(r'\bSee\s+(\d{1,2}(?:\.\d+)+)')
+
+
+def chapter_from_feedback(feedback: str) -> str | None:
+    """
+    Pull the SLK manual reference out of a Canvas feedback block and reduce it
+    to a top-level chapter id ('5.2.4.3' → '5.2') matching the HighYield keys.
+    """
+    m = _SEE_REF_RE.search(feedback or '')
+    if not m:
+        return None
+    parts = m.group(1).split('.')
+    if len(parts) < 2 or not parts[0].isdigit():
+        return None
+    if int(parts[0]) not in MODULE_NUM_TO_SUBJECT:
+        return None
+    return f"{parts[0]}.{parts[1]}"
+
+
 # ── Progress.json reader ──────────────────────────────────────────────────────
 
 def load_local_wrong_answers(progress_file: Path) -> list[dict]:
@@ -129,14 +169,14 @@ def load_canvas_wrong_answers(tests_dir: Path) -> list[dict]:
     sys.path.insert(0, str(SCRIPT_DIR))
     try:
         import pdfplumber, re as _re
-        from parse_questions import SUBJECT_MAP, subject_from_filename, _FOOTER_RE, clean_text, scrub_option, _cell_has_colored_bg, _visible_cells
+        from parse_questions import SUBJECT_MAP, subject_from_filename, _FOOTER_RE, clean_text, scrub_option, _cell_has_colored_bg, _visible_cells, _is_canvas_name
     except ImportError as e:
         print(f"  ⚠ Could not import parser: {e}")
         return []
 
     wrong = []
     for pdf_path in sorted(tests_dir.glob("*.pdf")):
-        if not pdf_path.stem.upper().startswith("SLK"):
+        if not _is_canvas_name(pdf_path.stem):
             continue
         subject, paper = subject_from_filename(pdf_path.name)
         source = pdf_path.stem
@@ -151,8 +191,9 @@ def load_canvas_wrong_answers(tests_dir: Path) -> list[dict]:
             print(f"  ⚠ Could not open {pdf_path.name}: {e}")
             continue
 
+        # Newer COLP exports write "Multiple choice" in lower case.
         Q_PAT = _re.compile(
-            r'^\s{3,6}(\d+)\s+([\d.]+)\s*/\s*1\s+point\s+Multiple\s+Choice',
+            r'^\s{3,6}(\d+)\s+([\d.]+)\s*/\s*1\s+point\s+Multiple\s+[Cc]hoice',
             _re.M
         )
         matches = list(Q_PAT.finditer(all_text))
@@ -166,10 +207,17 @@ def load_canvas_wrong_answers(tests_dir: Path) -> list[dict]:
             end   = matches[i + 1].start() if i + 1 < len(matches) else len(all_text)
             block = all_text[start:end]
 
-            # Trim at Feedback
+            # Trim at Feedback — but keep the feedback text: on mixed-subject
+            # papers its "See 5.2.4.3" reference is the ONLY subject signal.
+            feedback = ""
             fb = _re.search(r'\n\s{7,}Feedback\s*\n', block)
             if fb:
+                feedback = clean_text(block[fb.end():])
                 block = block[:fb.start()]
+            chapter = chapter_from_feedback(feedback)
+            q_subject = subject
+            if chapter and subject in ("Mixed Practice", "Unknown", ""):
+                q_subject = MODULE_NUM_TO_SUBJECT[int(chapter.split('.')[0])]
 
             # Extract question text (body lines at indent ~6)
             lines = block.splitlines()
@@ -216,8 +264,10 @@ def load_canvas_wrong_answers(tests_dir: Path) -> list[dict]:
 
             wrong.append({
                 'questionText':  question_text,
-                'subject':       subject,
+                'subject':       q_subject,
                 'source':        source,
+                'chapter':       chapter,          # from "See x.y" in feedback
+                'feedback':      feedback,
                 'userAnswer':    selected_text or '(not recorded)',
                 'correctAnswer': correct_text or '(see PDF)',
                 'datetime':      pdf_path.stem,
@@ -240,7 +290,9 @@ def map_wrong_answers_to_chapters(wrong_answers: list[dict]) -> dict[str, list[s
     seen = set()
 
     for q in wrong_answers:
-        chapter_id = source_to_chapter_id(q['source'])
+        # A chapter carried on the entry (Canvas feedback "See 5.2.4.3") beats
+        # the filename, which on mixed-subject papers names no chapter at all.
+        chapter_id = q.get('chapter') or source_to_chapter_id(q['source'])
         if not chapter_id:
             continue  # can't map to specific chapter
 
