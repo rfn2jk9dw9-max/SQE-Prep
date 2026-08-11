@@ -1,11 +1,12 @@
 {
- "updated": "2026-08-09",
+ "updated": "2026-08-11",
  "rule": "Pick sections by running the REAL buildSchedule() AND buildSecondPass() from SQE1_COLP_Revision.html in node against the server done-set (colp_progress.php), then MERGING both passes by date. SEED_DATES are TEACHING dates, not due dates. As at the Aug 2026 rewrite of that file: no MIN_GAP (eligible the day taught), SCHED_END 2027-01-10 (day before FLK1), isFreeDay also excludes four FULL_PAPER_DAYS Sundays, DEFAULT_DONE CONT1.1-1.3. The first pass assigns ONE new module per free day (75 days); buildSecondPass adds ONE spaced revisit per day (83 entries, 21-day gap, coldest first). BOTH COUNT. getStatus() colours cards from the first pass only and revisits render on the existing card - that is display, not scheduling. Taking the first pass alone sends the overhaul to material 2-3 weeks out and skips the oldest never-overhauled chapters, which is what the second pass exists to rescue. Nothing is ever overdue; the queue drains in TEACHING order. Take Today then Upcoming from the MERGED list, skipping sections already done here. Then: (1) pdftotext the SLK manual chapter, (2) rebuild notes terse (15-25k chars, one point per line, citations only in the cases array, grep every case name back against the manual), (3) visuals array - overview mind map + one per topic + decision trees for confusable doctrines (map: 2-5 branches, grid: 2-4 cols), (4) preserve/relocate MCQ traps, never delete, (5) verify with the node buildVis sweep, (6) push the single file via a /tmp clone.",
  "counts": {
   "total": 119,
-  "done": 51,
-  "aligned_needs_visuals": 9,
-  "todo": 59
+  "done": 54,
+  "aligned_needs_visuals": 8,
+  "todo": 57,
+  "needs_format_pass": 113
  },
  "sections": [
   {
@@ -14,7 +15,9 @@
    "manual": "SLK DISP8",
    "status": "done",
    "visuals": "array",
-   "notes": "invented content (Halsey, PGF II, adjudication, CPR r 3.1(2)(m)) removed - Halsey's stated rule was also outdated post-Churchill; whole Arbitration Act 1996 procedure/challenge framework was missing (ss 4-9, 34-48, 52, 54, 65-70) plus the 3-step s 9 stay; single visual replaced with 6 (2 mind maps, 2 decision trees, comparison grid, mediation steps)."
+   "notes": "invented content (Halsey, PGF II, adjudication, CPR r 3.1(2)(m)) removed - Halsey's stated rule was also outdated post-Churchill; whole Arbitration Act 1996 procedure/challenge framework was missing (ss 4-9, 34-48, 52, 54, 65-70) plus the 3-step s 9 stay; single visual replaced with 6 (2 mind maps, 2 decision trees, comparison grid, mediation steps).",
+   "default_words": 1334,
+   "needs_format_pass": true
   },
   {
    "id": "8.2",
@@ -22,7 +25,9 @@
    "manual": "SLK DISP8",
    "status": "done",
    "visuals": "array",
-   "notes": "bloat + invented content: fabricated 4-item jurisdiction list (manual says detailed jurisdiction rules are NOT examinable), litigation-friend/capacity list and s.35A interest both belonged elsewhere and were MOVED (to 8.7); tort duty-of-care MCQ trap MOVED to 2.1; Rome I/Rome II were one line each and are now fully built out; single visual replaced with 7 (4 mind maps, 2 decision trees, limitation grid)."
+   "notes": "bloat + invented content: fabricated 4-item jurisdiction list (manual says detailed jurisdiction rules are NOT examinable), litigation-friend/capacity list and s.35A interest both belonged elsewhere and were MOVED (to 8.7); tort duty-of-care MCQ trap MOVED to 2.1; Rome I/Rome II were one line each and are now fully built out; single visual replaced with 7 (4 mind maps, 2 decision trees, limitation grid).",
+   "default_words": 1472,
+   "needs_format_pass": true
   },
   {
    "id": "8.3",
@@ -30,7 +35,9 @@
    "manual": "SLK DISP8",
    "status": "done",
    "visuals": "array",
-   "notes": "content was largely aligned but thin on the protocols (CNF, PI protocol, prof neg 6-month/14-day rules, PDPAC para 17) and had only a single flow visual; now 6 visuals incl. limitation-vs-PDPAC and which-protocol decision trees and a Debt v Prof Neg comparison grid."
+   "notes": "content was largely aligned but thin on the protocols (CNF, PI protocol, prof neg 6-month/14-day rules, PDPAC para 17) and had only a single flow visual; now 6 visuals incl. limitation-vs-PDPAC and which-protocol decision trees and a Debt v Prof Neg comparison grid.",
+   "default_words": 1322,
+   "needs_format_pass": true
   },
   {
    "id": "8.4",
@@ -38,7 +45,9 @@
    "manual": "SLK DISP8",
    "status": "done",
    "visuals": "array",
-   "notes": "Section existed but was INVISIBLE to the tracker and to id greps - it was written with spaces after the colons ('\"id\": \"8.4\"') unlike every other section, so it was missing from this file entirely. Rebuilt against the manual: added divisions/specialist lists in full, the 11 Business and Property Courts, Pt 8 mechanics and conversion, CE File / Civil National Business Centre / MCOL / PD 51R / PD 51ZB conditions, service abroad (r 6.34), issue fees, and the whole CPR Pt 19 framework (rr 19.2-19.4, 19.6) with LA 1980 s 35(1), relation back, and the r 17.4(3) v r 19.6(3) misdescription/wrong-party distinction. All 6 existing MCQ traps preserved, incl. IP-to-Chancery. Single grid replaced with an array of 7."
+   "notes": "Section existed but was INVISIBLE to the tracker and to id greps - it was written with spaces after the colons ('\"id\": \"8.4\"') unlike every other section, so it was missing from this file entirely. Rebuilt against the manual: added divisions/specialist lists in full, the 11 Business and Property Courts, Pt 8 mechanics and conversion, CE File / Civil National Business Centre / MCOL / PD 51R / PD 51ZB conditions, service abroad (r 6.34), issue fees, and the whole CPR Pt 19 framework (rr 19.2-19.4, 19.6) with LA 1980 s 35(1), relation back, and the r 17.4(3) v r 19.6(3) misdescription/wrong-party distinction. All 6 existing MCQ traps preserved, incl. IP-to-Chancery. Single grid replaced with an array of 7.",
+   "default_words": 1863,
+   "needs_format_pass": true
   },
   {
    "id": "8.5",
@@ -46,7 +55,9 @@
    "manual": "SLK DISP8",
    "status": "todo",
    "visuals": "single",
-   "notes": ""
+   "notes": "",
+   "default_words": 805,
+   "needs_format_pass": true
   },
   {
    "id": "8.6",
@@ -54,7 +65,9 @@
    "manual": "SLK DISP8",
    "status": "done",
    "visuals": "array",
-   "notes": "largely aligned and unusually good already, but the MCQ trap block was buried at the BOTTOM of the notes instead of the top, so it did not get the trap styling or the open-by-default panel - moved to first position and expanded. Removed unsupported content: the CPR r 16.5 defence-content list and 'silence = deemed admission' (that is 8.7 Statements of Case, not this chapter) and two invented default-judgment bars (defendant has filed an AOS; claim against the Crown). Added the missing manual material: the five opening checks with the 4-month/6-month claim form validity split, the r 7.7 call-for-service tactic, the r 6.14/r 6.26 deemed-service inconsistency and the cautious earliest-date approach, the whole of CPR Pt 14 admissions (pre-action, forms, timing, consequences, instalments, the seven withdrawal factors), the r 20.9 factors for Pt 20 claims, the request-versus-application split for default judgment, the without-notice conditions, the strike-out/summary-judgment block and its further-particulars side effect, and the Denton/FXF overlay on r 13.3 - the two cases the chapter actually cites, which the empty cases array was missing. Single ladder replaced with an array of 8 (2 mind maps, 4 decision trees, 2 grids). Condensed from 41k to 37k after the first pass ran over the size limit."
+   "notes": "largely aligned and unusually good already, but the MCQ trap block was buried at the BOTTOM of the notes instead of the top, so it did not get the trap styling or the open-by-default panel - moved to first position and expanded. Removed unsupported content: the CPR r 16.5 defence-content list and 'silence = deemed admission' (that is 8.7 Statements of Case, not this chapter) and two invented default-judgment bars (defendant has filed an AOS; claim against the Crown). Added the missing manual material: the five opening checks with the 4-month/6-month claim form validity split, the r 7.7 call-for-service tactic, the r 6.14/r 6.26 deemed-service inconsistency and the cautious earliest-date approach, the whole of CPR Pt 14 admissions (pre-action, forms, timing, consequences, instalments, the seven withdrawal factors), the r 20.9 factors for Pt 20 claims, the request-versus-application split for default judgment, the without-notice conditions, the strike-out/summary-judgment block and its further-particulars side effect, and the Denton/FXF overlay on r 13.3 - the two cases the chapter actually cites, which the empty cases array was missing. Single ladder replaced with an array of 8 (2 mind maps, 4 decision trees, 2 grids). Condensed from 41k to 37k after the first pass ran over the size limit.",
+   "default_words": 2198,
+   "needs_format_pass": true
   },
   {
    "id": "8.7",
@@ -62,7 +75,10 @@
    "manual": "SLK DISP8",
    "status": "done",
    "visuals": "array",
-   "notes": "Invented content + missing visuals. Removed the Judgments Act 1838 s 17 row, the Late Payment Act rate and fixed-charge figures (£40/£70/£100 and 8% above base), the 'simple interest only / compound' propositions and the CPR r 3.4 citation - none of them appear in DISP8 8.7. Added the manual material that was absent: electronic filing (PD 51ZB paras 5-10, MCOL's 1,080-character limit or separate service within 14 days, CE File PD 51O para 5.1 and tracked amended versions), PD 7A para 4.1 title requirements, the Commercial Court Guide 25-page/font 12/1.5-spacing cap and the factual-matrix requirement at C1.3(h), PD 22 para 3.10 personal knowledge and the 2.2/2.3 variants for witness statements and costs budgets, 8.7.3.7 presentation (statement of truth on the same page as substance or the court office may refuse it), the Commercial Court 21-day reply and 28-day defence to counterclaim under r 58.10(1), the RFI objection procedure and summary assessment of the application costs, and the full amendment lateness factors. Cases array empty - the chapter cites none. Legacy single flow visual replaced with an array of 11. 33k, driven by a 19-page manual chapter and 11 visuals."
+   "notes": "11 Aug 2026 format pass + 2026 edition check (DISP8 2026_05_29). LEGAL CORRECTION: the Commercial Court deadline for a defence to counterclaim is 21 days, not 28 - CPR r 58.10(1) gives 21 days for BOTH the reply and the defence to counterclaim, and the 2026 manual says so expressly at 8.7.3.12. The 28-day figure came from the 2025-edition run and was wrong in the grid, the statutes array and the tip; all three fixed. Checked the DR examinable-law update (13 March 2026): its three entries are at 8.4.4.2 (Mazur v Charles Russell Speechlys), 8.8.3.2 and 8.15.2 (SLAPPs) - none touches 8.7. Four enumerating tree nodes moved to collapsed grids: the interest model wording, defence quantum and structure, reply and defence to counterclaim, and late amendments/procedure/costs. Long tree answers cut to memory triggers. 2296 -> 1410 default words.",
+   "default_words": 1410,
+   "needs_format_pass": false,
+   "manual_edition": "SLK DISP8 manual 2026_05_29.pdf"
   },
   {
    "id": "8.8",
@@ -70,7 +86,9 @@
    "manual": "SLK DISP8",
    "status": "todo",
    "visuals": "single",
-   "notes": ""
+   "notes": "",
+   "default_words": 1097,
+   "needs_format_pass": true
   },
   {
    "id": "8.9",
@@ -78,7 +96,9 @@
    "manual": "SLK DISP8",
    "status": "todo",
    "visuals": "single",
-   "notes": ""
+   "notes": "",
+   "default_words": 1243,
+   "needs_format_pass": true
   },
   {
    "id": "8.10",
@@ -86,7 +106,9 @@
    "manual": "SLK DISP8",
    "status": "done",
    "visuals": "array",
-   "notes": "Prose was aligned but bloated, and carried INVENTED content: Re B (Children) [2008] UKHL 35 and the 'no sliding scale' proposition are not in the manual — removed, cases array now empty. Without-prejudice exceptions rewritten to the manual's own four (8.13.4). Prose condensed; legacy single flow visual replaced with an array of 9."
+   "notes": "Prose was aligned but bloated, and carried INVENTED content: Re B (Children) [2008] UKHL 35 and the 'no sliding scale' proposition are not in the manual — removed, cases array now empty. Without-prejudice exceptions rewritten to the manual's own four (8.13.4). Prose condensed; legacy single flow visual replaced with an array of 9.",
+   "default_words": 1547,
+   "needs_format_pass": true
   },
   {
    "id": "8.11",
@@ -94,7 +116,9 @@
    "manual": "SLK DISP8",
    "status": "todo",
    "visuals": "single",
-   "notes": ""
+   "notes": "",
+   "default_words": 397,
+   "needs_format_pass": true
   },
   {
    "id": "8.12",
@@ -102,7 +126,9 @@
    "manual": "SLK DISP8",
    "status": "todo",
    "visuals": "single",
-   "notes": ""
+   "notes": "",
+   "default_words": 321,
+   "needs_format_pass": true
   },
   {
    "id": "8.13",
@@ -110,7 +136,9 @@
    "manual": "SLK DISP8",
    "status": "todo",
    "visuals": "single",
-   "notes": ""
+   "notes": "",
+   "default_words": 448,
+   "needs_format_pass": true
   },
   {
    "id": "8.14",
@@ -118,7 +146,9 @@
    "manual": "SLK DISP8",
    "status": "todo",
    "visuals": "single",
-   "notes": ""
+   "notes": "",
+   "default_words": 469,
+   "needs_format_pass": true
   },
   {
    "id": "8.15",
@@ -126,7 +156,9 @@
    "manual": "SLK DISP8",
    "status": "todo",
    "visuals": "single",
-   "notes": ""
+   "notes": "",
+   "default_words": 416,
+   "needs_format_pass": true
   },
   {
    "id": "8.16",
@@ -134,7 +166,9 @@
    "manual": "SLK DISP8",
    "status": "todo",
    "visuals": "single",
-   "notes": ""
+   "notes": "",
+   "default_words": 403,
+   "needs_format_pass": true
   },
   {
    "id": "8.17",
@@ -142,7 +176,9 @@
    "manual": "SLK DISP8",
    "status": "todo",
    "visuals": "single",
-   "notes": ""
+   "notes": "",
+   "default_words": 370,
+   "needs_format_pass": true
   },
   {
    "id": "7.1",
@@ -150,7 +186,9 @@
    "manual": "SLK BUS7",
    "status": "done",
    "visuals": "array",
-   "notes": "invented content + displaced content + missing visuals. Removed Salomon v Salomon, Prest v Petrodel, CA 2006 ss 3 and 7 and the 'plc min GBP 50k' line - manual 7.1 cites NO cases and none of those provisions, so the cases array is now empty. PA 1890 implied terms, dissolution grounds and outgoing-partner liability DROPPED as superseded: 7.2 and 7.3 already cover them with section numbers. Added everything the chapter was missing: promoters and pre-incorporation contracts, limited partnerships (LPA 1907 as amended by ECCTA 2023, authorised-agent filing), companies limited by guarantee, unlimited companies, IA 1986 s 74(2), the three situations disapplying separate legal personality, maintenance of capital, transparency, factors influencing choice and the full 7.1.7 comparison table. Single grid replaced with an array of 9."
+   "notes": "invented content + displaced content + missing visuals. Removed Salomon v Salomon, Prest v Petrodel, CA 2006 ss 3 and 7 and the 'plc min GBP 50k' line - manual 7.1 cites NO cases and none of those provisions, so the cases array is now empty. PA 1890 implied terms, dissolution grounds and outgoing-partner liability DROPPED as superseded: 7.2 and 7.3 already cover them with section numbers. Added everything the chapter was missing: promoters and pre-incorporation contracts, limited partnerships (LPA 1907 as amended by ECCTA 2023, authorised-agent filing), companies limited by guarantee, unlimited companies, IA 1986 s 74(2), the three situations disapplying separate legal personality, maintenance of capital, transparency, factors influencing choice and the full 7.1.7 comparison table. Single grid replaced with an array of 9.",
+   "default_words": 1115,
+   "needs_format_pass": true
   },
   {
    "id": "7.2",
@@ -158,7 +196,9 @@
    "manual": "SLK BUS7",
    "status": "todo",
    "visuals": "single",
-   "notes": ""
+   "notes": "",
+   "default_words": 559,
+   "needs_format_pass": true
   },
   {
    "id": "7.3",
@@ -166,7 +206,9 @@
    "manual": "SLK BUS7",
    "status": "todo",
    "visuals": "single",
-   "notes": ""
+   "notes": "",
+   "default_words": 712,
+   "needs_format_pass": true
   },
   {
    "id": "7.4",
@@ -174,7 +216,9 @@
    "manual": "SLK BUS7",
    "status": "todo",
    "visuals": "single",
-   "notes": ""
+   "notes": "",
+   "default_words": 548,
+   "needs_format_pass": true
   },
   {
    "id": "7.5",
@@ -182,7 +226,9 @@
    "manual": "SLK BUS7",
    "status": "done",
    "visuals": "array",
-   "notes": "wrong chapter's content: share classes belonged to 7.9 and resolutions to 7.8 (both MOVED), winding-up priority trap MOVED to 7.14; Foss v Harbottle and O'Neill v Phillips are not in the manual - replaced with the manual's three named principles (proper claimant / internal management / irregularity); entirely missing: s 33 statutory contract, shareholders' agreement, share certificate + register of members, show-of-hands vs poll and the 10% poll right (s 321(1)), proxy s 324(1), 5% circulation s 292, inspection rights, derivative claim TWO-STAGE permission test with 3 automatic refusals and 6 discretionary factors, s 994 grounds/examples/bars, s 125 last-resort rule; 6 visuals added; cases array left empty (manual cites no cases in 7.5)"
+   "notes": "wrong chapter's content: share classes belonged to 7.9 and resolutions to 7.8 (both MOVED), winding-up priority trap MOVED to 7.14; Foss v Harbottle and O'Neill v Phillips are not in the manual - replaced with the manual's three named principles (proper claimant / internal management / irregularity); entirely missing: s 33 statutory contract, shareholders' agreement, share certificate + register of members, show-of-hands vs poll and the 10% poll right (s 321(1)), proxy s 324(1), 5% circulation s 292, inspection rights, derivative claim TWO-STAGE permission test with 3 automatic refusals and 6 discretionary factors, s 994 grounds/examples/bars, s 125 last-resort rule; 6 visuals added; cases array left empty (manual cites no cases in 7.5)",
+   "default_words": 1146,
+   "needs_format_pass": true
   },
   {
    "id": "7.6",
@@ -190,7 +236,9 @@
    "manual": "SLK BUS7",
    "status": "done",
    "visuals": "array",
-   "notes": "content was broadly aligned but thin, and 'Form IN01' was not the manual's wording (it says statement of proposed officers). Added the whole missing procedural spine: s 250 definition, board sets remuneration under the MAs, s 288(2)(a) no written resolution, s 312(1) special notice at the registered office, the s 312(4) deeming rule (proper special notice even if the GM is held sooner than 28 clear days), s 312(3) newspaper advertisement 14 clear days, the s 303/304/305 requisition chain in full with the 21-day / 28-days-from-the-decision / 3-month longstop distinction, expenses recovered from the company then from directors personally, Form TM01 within 14 days, the four MA 18 automatic triggers, board removal only if the articles allow (no such power in the Model Articles), the s 169 rights x3, the six-point 'check before serving special notice' list, the CDDA grounds and examples, Sch 1 unfitness factors, the two permission conditions, and CURRENCY lines for the Rating (Coronavirus) and Directors Disqualification (Dissolved Companies) Act 2021 s 2 and the ECCTA 2023 void-appointment rule. Softened the old 's 6 is mandatory / court has no discretion' claim, which the manual does not support - it frames the power as discretionary. Single grid replaced with an array of 7 (2 mind maps, 3 decision trees, 2 grids incl. a thresholds grid)."
+   "notes": "content was broadly aligned but thin, and 'Form IN01' was not the manual's wording (it says statement of proposed officers). Added the whole missing procedural spine: s 250 definition, board sets remuneration under the MAs, s 288(2)(a) no written resolution, s 312(1) special notice at the registered office, the s 312(4) deeming rule (proper special notice even if the GM is held sooner than 28 clear days), s 312(3) newspaper advertisement 14 clear days, the s 303/304/305 requisition chain in full with the 21-day / 28-days-from-the-decision / 3-month longstop distinction, expenses recovered from the company then from directors personally, Form TM01 within 14 days, the four MA 18 automatic triggers, board removal only if the articles allow (no such power in the Model Articles), the s 169 rights x3, the six-point 'check before serving special notice' list, the CDDA grounds and examples, Sch 1 unfitness factors, the two permission conditions, and CURRENCY lines for the Rating (Coronavirus) and Directors Disqualification (Dissolved Companies) Act 2021 s 2 and the ECCTA 2023 void-appointment rule. Softened the old 's 6 is mandatory / court has no discretion' claim, which the manual does not support - it frames the power as discretionary. Single grid replaced with an array of 7 (2 mind maps, 3 decision trees, 2 grids incl. a thresholds grid).",
+   "default_words": 1359,
+   "needs_format_pass": true
   },
   {
    "id": "7.7",
@@ -198,7 +246,10 @@
    "manual": "SLK BUS7",
    "status": "done",
    "visuals": "array",
-   "notes": "Invented content + displaced content. BTI 2014 v Sequana and the s 172(3) creditors' duty are not in BUS7 7.7 - removed and cross-referred to 7.14, which covers directors' exposure to creditors properly (dropped as superseded, not moved). The s 248 ten-year minutes point DROPPED as superseded - 7.8 already carries it. Removed section numbers the manual does not give: s 386 for accounting records, s 260 for derivative claims, and a 6-year retention figure for public companies. Added the missing procedural detail: s 170 and who enforces, the four identical s 177/s 182 exceptions, the three methods of declaration (meeting / s 184 / s 185), Model Article 14, the sole-director exception, s 191(2) in full including called-up share capital where there are no statutory accounts, a LOAN IS NOT A NON-CASH ASSET, the holding-company and wholly-owned-subsidiary approval rules, the loan memorandum and its 15-day inspection period, the three board-only loan exceptions, the three bars to avoidance, the three specified persons, the no-knowledge defence and affirmation within a reasonable time, plus a CURRENCY line for the March 2026 examinable-law update at 7.7.4.2 (register of members only, at the registered office or a SAIL). Cases array empty - the chapter cites none. Single cards visual replaced with an array of 8. 29k, above the 15-20k ideal because the chapter has 7 duties, 2 approval regimes and 8 visuals."
+   "notes": "11 Aug 2026 format pass + 2026 edition check (BUS7 2026_05_28). The chapter DOES carry statutory numbering, so ss 171-177, 182, 190 stay. Corrected a WRONG section number: connected persons is ss 252-253, not s 250. Dropped the superseded ECCTA transitional lines (registers of directors/PSC/secretary) - the 2026 manual's 7.7.4.2 already carries the final position, register of MEMBERS only at the registered office or a SAIL, so the March 2026 update is now built into the manual; CURRENCY line kept. KEPT though the chapter omits them: s 170, ss 184-185, s 191(2), s 197, s 239(3)-(4), s 1157(1), Model Article 14, and s 190(4) (no approval for a non-UK company or a wholly owned subsidiary) - all real and examinable. Enumerating tree 'a duty has been breached: what now?' converted to a collapsed 3-col grid; the 4-exceptions node and the cross-company node moved into notes. Notes resplit so the OPEN first block is a short framework. 2259 -> 1238 default words.",
+   "default_words": 1238,
+   "needs_format_pass": false,
+   "manual_edition": "SLK BUS7 manual 2026_05_28.pdf"
   },
   {
    "id": "7.8",
@@ -206,7 +257,9 @@
    "manual": "SLK BUS7",
    "status": "todo",
    "visuals": "single",
-   "notes": ""
+   "notes": "",
+   "default_words": 529,
+   "needs_format_pass": true
   },
   {
    "id": "7.9",
@@ -214,7 +267,9 @@
    "manual": "SLK BUS7",
    "status": "todo",
    "visuals": "single",
-   "notes": ""
+   "notes": "",
+   "default_words": 494,
+   "needs_format_pass": true
   },
   {
    "id": "7.9B",
@@ -222,7 +277,9 @@
    "manual": "SLK BUS7",
    "status": "todo",
    "visuals": "single",
-   "notes": "Was missing from this tracker - non-standard id ('7.9B') so it fell out of every id sweep. Not yet overhauled."
+   "notes": "Was missing from this tracker - non-standard id ('7.9B') so it fell out of every id sweep. Not yet overhauled.",
+   "default_words": 445,
+   "needs_format_pass": true
   },
   {
    "id": "7.10",
@@ -230,7 +287,9 @@
    "manual": "SLK BUS7",
    "status": "done",
    "visuals": "array",
-   "notes": "MISALIGNED: section was titled 'Corporate Insolvency' and held manual 7.13 content, duplicating 7.13/7.14 — that content was MOVED to 7.13 and the section rebuilt against manual 7.10 (loans, four types of security, fixed/floating charges, debentures, s 859A registration, negative pledges, priority, liens, guarantees, equity-v-debt). Manual 7.10 had been missing from the tool entirely. Statutes populated (was empty); single grid replaced with an array of 9."
+   "notes": "MISALIGNED: section was titled 'Corporate Insolvency' and held manual 7.13 content, duplicating 7.13/7.14 — that content was MOVED to 7.13 and the section rebuilt against manual 7.10 (loans, four types of security, fixed/floating charges, debentures, s 859A registration, negative pledges, priority, liens, guarantees, equity-v-debt). Manual 7.10 had been missing from the tool entirely. Statutes populated (was empty); single grid replaced with an array of 9.",
+   "default_words": 1088,
+   "needs_format_pass": true
   },
   {
    "id": "7.11",
@@ -238,7 +297,9 @@
    "manual": "SLK BUS7",
    "status": "todo",
    "visuals": "single",
-   "notes": ""
+   "notes": "",
+   "default_words": 264,
+   "needs_format_pass": true
   },
   {
    "id": "7.12",
@@ -246,7 +307,9 @@
    "manual": "SLK BUS7",
    "status": "todo",
    "visuals": "single",
-   "notes": ""
+   "notes": "",
+   "default_words": 374,
+   "needs_format_pass": true
   },
   {
    "id": "7.13",
@@ -254,7 +317,9 @@
    "manual": "SLK BUS7",
    "status": "done",
    "visuals": "array",
-   "notes": "MISALIGNED + displaced content received. 7.13 had been holding manual 7.14 claw-back/waterfall material, which the dedicated 7.14 covers better — DROPPED as superseded. Rebuilt against manual 7.13 (s 123 tests, MVL/CVL/compulsory, Sch 4 liquidator powers, CIGA moratorium and restructuring plan, Sch B1 para 3 hierarchy and both routes into administration, CVA, fixed-asset receivership) using the procedure content moved out of 7.10. Corrected inherited errors: petitioner list, CVA >50%-unconnected override, no court approval for a CVA, removed unsupported 8-week and 75%-CVL points. Single grid replaced with an array of 8."
+   "notes": "MISALIGNED + displaced content received. 7.13 had been holding manual 7.14 claw-back/waterfall material, which the dedicated 7.14 covers better — DROPPED as superseded. Rebuilt against manual 7.13 (s 123 tests, MVL/CVL/compulsory, Sch 4 liquidator powers, CIGA moratorium and restructuring plan, Sch B1 para 3 hierarchy and both routes into administration, CVA, fixed-asset receivership) using the procedure content moved out of 7.10. Corrected inherited errors: petitioner list, CVA >50%-unconnected override, no court approval for a CVA, removed unsupported 8-week and 75%-CVL points. Single grid replaced with an array of 8.",
+   "default_words": 1743,
+   "needs_format_pass": true
   },
   {
    "id": "7.14",
@@ -262,7 +327,9 @@
    "manual": "SLK BUS7",
    "status": "todo",
    "visuals": "single",
-   "notes": "RECEIVED displaced content only — not a full overhaul. Directors' liability (s 213/246ZA fraudulent trading, s 214/246ZB wrongful trading, s 212 misfeasance) moved here from 7.13 and rebuilt against manual 7.14.4, adding the balance-sheet test, 6-year limitation, no s 1157 relief, resignation not a defence and CDDA 1986 disqualification. Two traps and three statutes added; nothing removed. Still needs its own visuals pass."
+   "notes": "RECEIVED displaced content only — not a full overhaul. Directors' liability (s 213/246ZA fraudulent trading, s 214/246ZB wrongful trading, s 212 misfeasance) moved here from 7.13 and rebuilt against manual 7.14.4, adding the balance-sheet test, 6-year limitation, no s 1157 relief, resignation not a defence and CDDA 1986 disqualification. Two traps and three statutes added; nothing removed. Still needs its own visuals pass.",
+   "default_words": 265,
+   "needs_format_pass": true
   },
   {
    "id": "7.15",
@@ -270,7 +337,9 @@
    "manual": "SLK BUS7",
    "status": "todo",
    "visuals": "single",
-   "notes": ""
+   "notes": "",
+   "default_words": 366,
+   "needs_format_pass": true
   },
   {
    "id": "7.16",
@@ -278,7 +347,9 @@
    "manual": "SLK BUS7",
    "status": "todo",
    "visuals": "single",
-   "notes": ""
+   "notes": "",
+   "default_words": 225,
+   "needs_format_pass": true
   },
   {
    "id": "7.17",
@@ -286,7 +357,9 @@
    "manual": "SLK BUS7",
    "status": "todo",
    "visuals": "single",
-   "notes": ""
+   "notes": "",
+   "default_words": 227,
+   "needs_format_pass": true
   },
   {
    "id": "7.18",
@@ -294,7 +367,9 @@
    "manual": "SLK BUS7",
    "status": "todo",
    "visuals": "single",
-   "notes": ""
+   "notes": "",
+   "default_words": 253,
+   "needs_format_pass": true
   },
   {
    "id": "7.19",
@@ -302,7 +377,9 @@
    "manual": "SLK BUS7",
    "status": "todo",
    "visuals": "single",
-   "notes": ""
+   "notes": "",
+   "default_words": 215,
+   "needs_format_pass": true
   },
   {
    "id": "7.20",
@@ -310,7 +387,9 @@
    "manual": "SLK BUS7",
    "status": "todo",
    "visuals": "single",
-   "notes": ""
+   "notes": "",
+   "default_words": 222,
+   "needs_format_pass": true
   },
   {
    "id": "1.1",
@@ -318,7 +397,10 @@
    "manual": "SLK CONT1",
    "status": "done",
    "visuals": "array",
-   "notes": "Invented content. CONT1 chapter 1.1 names only FOUR cases; the section carried nine, eight of which are not in the chapter - Carlill, Adams v Lindsell, Felthouse v Bindley, Williams v Roffey, Central London v High Trees, Balfour v Balfour, Merritt v Merritt and Walford v Miles, all removed. Cases array now holds the manual's own four (Currie v Misa, Pinnel's case, Shuey v United States, Nash v Inman). Added what was missing: tenders and the no-referential-bids rule, auctions, request for information vs counter-offer, battle of the forms and last shot wins, the postal rule and its displacement by 'notice in writing', revocation by a reliable third party, the normal-office-hours rule, irrevocability once performance of a unilateral offer has started, lapse of time and the asymmetric death rules, the three past-consideration exceptions, existing duties owed to third parties vs public and contractual duties, the three part-payment exceptions and judgment-debt interest, the five elements of promissory estoppel, formalities (deed execution, LP(MP)A 1989 s 2, Statute of Frauds 1677 s IV, e-signatures), capacity for minors/substance abuse/mental incapacity, and privity with collateral contracts and C(RTP)A 1999 s 1(3). Single flow visual replaced with an array of 9. 30k."
+   "notes": "11 Aug 2026 format pass + 2026 edition check (CONT1 2026_05_25). The 2026 chapter cites NO cases at all (grep returns zero 'X v Y'); the four in the cases array - Currie v Misa, Pinnel's Case, Shuey v United States, Nash v Inman - were KEPT under the fictional-or-not-examinable test, as all four are real and directly on the chapter's content. Five open decision trees were the whole problem. Four enumerating nodes pulled out into collapsed grids: the four classic invitations to treat, the five ways an offer terminates, the four part-payment exceptions, and the whole intention-to-create-legal-relations tree. Three open trees remain, each a real fork. 3019 -> 1471 default words.",
+   "default_words": 1471,
+   "needs_format_pass": false,
+   "manual_edition": "SLK CONT1 manual 2026_05_25.pdf"
   },
   {
    "id": "1.2",
@@ -326,7 +408,9 @@
    "manual": "SLK CONT1",
    "status": "todo",
    "visuals": "single",
-   "notes": ""
+   "notes": "",
+   "default_words": 883,
+   "needs_format_pass": true
   },
   {
    "id": "1.3",
@@ -334,7 +418,9 @@
    "manual": "SLK CONT1",
    "status": "todo",
    "visuals": "single",
-   "notes": ""
+   "notes": "",
+   "default_words": 881,
+   "needs_format_pass": true
   },
   {
    "id": "1.4",
@@ -342,7 +428,9 @@
    "manual": "SLK CONT1",
    "status": "done",
    "visuals": "array",
-   "notes": "Invented content. CONT1 chapter 1.4 cites NO cases, yet the section carried six in the cases array (Davis Contractors, Taylor v Caldwell, Cutter v Powell, Hoenig v Isaacs, Hochster, Krell) plus Vitol v Norelf, Maritime National Fish and Bell v Lever Bros in the prose - all removed, cases array now empty. Also dropped force majeure, foreseeability as an element of frustration and tender of performance (none in the chapter); common mistake kept only as a boundary cross-reference to 1.3. Added the missing spine: the three options on imperfect performance, entire vs divisible on the parties' intention, substantial performance as a question of degree with the cost of making good deducted, partial performance recovering nothing without a genuine choice to accept, prevention by the other party, the three routes to time of the essence, bilateral vs unilateral discharge and accord and satisfaction, expiry/condition precedent, waiver needing consideration, the affirmation rules (no duty to mitigate, but no co-operation required and legitimate interest), the four frustration categories, what is NOT frustration, the common-law bar where a benefit has been received, and the LRFCA 1943 with its three excluded contract types and the just sum. Legacy single ladder replaced with an array of 8 (2 mind maps, 3 decision trees, 2 grids, 1 map). 23k."
+   "notes": "Invented content. CONT1 chapter 1.4 cites NO cases, yet the section carried six in the cases array (Davis Contractors, Taylor v Caldwell, Cutter v Powell, Hoenig v Isaacs, Hochster, Krell) plus Vitol v Norelf, Maritime National Fish and Bell v Lever Bros in the prose - all removed, cases array now empty. Also dropped force majeure, foreseeability as an element of frustration and tender of performance (none in the chapter); common mistake kept only as a boundary cross-reference to 1.3. Added the missing spine: the three options on imperfect performance, entire vs divisible on the parties' intention, substantial performance as a question of degree with the cost of making good deducted, partial performance recovering nothing without a genuine choice to accept, prevention by the other party, the three routes to time of the essence, bilateral vs unilateral discharge and accord and satisfaction, expiry/condition precedent, waiver needing consideration, the affirmation rules (no duty to mitigate, but no co-operation required and legitimate interest), the four frustration categories, what is NOT frustration, the common-law bar where a benefit has been received, and the LRFCA 1943 with its three excluded contract types and the just sum. Legacy single ladder replaced with an array of 8 (2 mind maps, 3 decision trees, 2 grids, 1 map). 23k.",
+   "default_words": 1496,
+   "needs_format_pass": true
   },
   {
    "id": "1.5",
@@ -350,7 +438,9 @@
    "manual": "SLK CONT1",
    "status": "done",
    "visuals": "array",
-   "notes": "invented content stripped: the CONT1 manual chapter 1.5 cites NO cases at all, yet the section carried 6 in the cases array plus Hadley/Victoria Laundry/Heron II/Ruxley/Makdessi/ParkingEye/Allied Maples/Co-op v Argyll/Lumley/American Cyanamid in the prose - all removed, cases now empty. American Cyanamid interim-injunction test dropped as superseded (8.8 covers interim applications). Whole halves of the chapter were missing: cost of cure, reliance interest, bad bargains, loss of a chance, non-pecuniary loss, third-party loss, indemnity, guarantee (s IV Statute of Frauds 1677), restitution/unjust enrichment, and the anticipatory-breach mitigation rule. Penalty test restated as the manual has it (detriment proportionate to a legitimate interest; penalty clause is ignored and C claims unliquidated damages). All MCQ traps preserved and sharpened. Single flow visual replaced with an array of 7 (3 mind maps, 3 decision trees, 2 grids)."
+   "notes": "invented content stripped: the CONT1 manual chapter 1.5 cites NO cases at all, yet the section carried 6 in the cases array plus Hadley/Victoria Laundry/Heron II/Ruxley/Makdessi/ParkingEye/Allied Maples/Co-op v Argyll/Lumley/American Cyanamid in the prose - all removed, cases now empty. American Cyanamid interim-injunction test dropped as superseded (8.8 covers interim applications). Whole halves of the chapter were missing: cost of cure, reliance interest, bad bargains, loss of a chance, non-pecuniary loss, third-party loss, indemnity, guarantee (s IV Statute of Frauds 1677), restitution/unjust enrichment, and the anticipatory-breach mitigation rule. Penalty test restated as the manual has it (detriment proportionate to a legitimate interest; penalty clause is ignored and C claims unliquidated damages). All MCQ traps preserved and sharpened. Single flow visual replaced with an array of 7 (3 mind maps, 3 decision trees, 2 grids).",
+   "default_words": 1022,
+   "needs_format_pass": true
   },
   {
    "id": "6.1",
@@ -358,7 +448,9 @@
    "manual": "SLK TRUS6",
    "status": "done",
    "visuals": "array",
-   "notes": "invented content removed (Knight v Knight, Quistclose, Re Wait, Palmer v Simmonds, Re Gulbenkian, Gillett v Holt) plus the PAA 2009 s 5 citation the manual never gives; one MCQ trap was legally WRONG - it said 'reasonable income' is uncertain when Re Golay's WT holds it potentially CERTAIN - corrected, and the 'friends' trap re-attributed from Re Gulbenkian to Re Barlow's WT; unincorporated-association trap DROPPED as superseded by 6.3; whole of 6.1.4 interest in possession, 6.1.6.1 transfer-methods table and the Mascall/Pennington/Zeital/Strong v Bird/Re Ralli/DMC material were missing and are now built out; CURRENCY lines added (National Iranian Oil [2025] EWCA Civ 1211; Property (Digital Assets etc) Act 2025); single flow visual replaced with an array of 9."
+   "notes": "invented content removed (Knight v Knight, Quistclose, Re Wait, Palmer v Simmonds, Re Gulbenkian, Gillett v Holt) plus the PAA 2009 s 5 citation the manual never gives; one MCQ trap was legally WRONG - it said 'reasonable income' is uncertain when Re Golay's WT holds it potentially CERTAIN - corrected, and the 'friends' trap re-attributed from Re Gulbenkian to Re Barlow's WT; unincorporated-association trap DROPPED as superseded by 6.3; whole of 6.1.4 interest in possession, 6.1.6.1 transfer-methods table and the Mascall/Pennington/Zeital/Strong v Bird/Re Ralli/DMC material were missing and are now built out; CURRENCY lines added (National Iranian Oil [2025] EWCA Civ 1211; Property (Digital Assets etc) Act 2025); single flow visual replaced with an array of 9.",
+   "default_words": 2231,
+   "needs_format_pass": true
   },
   {
    "id": "6.2",
@@ -366,7 +458,9 @@
    "manual": "SLK TRUS6",
    "status": "todo",
    "visuals": "single",
-   "notes": ""
+   "notes": "",
+   "default_words": 614,
+   "needs_format_pass": true
   },
   {
    "id": "6.3",
@@ -374,7 +468,9 @@
    "manual": "SLK TRUS6",
    "status": "done",
    "visuals": "array",
-   "notes": ""
+   "notes": "",
+   "default_words": 1297,
+   "needs_format_pass": true
   },
   {
    "id": "6.4",
@@ -382,7 +478,9 @@
    "manual": "SLK TRUS6",
    "status": "todo",
    "visuals": "single",
-   "notes": ""
+   "notes": "",
+   "default_words": 1534,
+   "needs_format_pass": true
   },
   {
    "id": "6.5",
@@ -390,7 +488,9 @@
    "manual": "SLK TRUS6",
    "status": "todo",
    "visuals": "single",
-   "notes": ""
+   "notes": "",
+   "default_words": 623,
+   "needs_format_pass": true
   },
   {
    "id": "13.1",
@@ -398,7 +498,9 @@
    "manual": "SLK WILL13",
    "status": "todo",
    "visuals": "single",
-   "notes": ""
+   "notes": "",
+   "default_words": 800,
+   "needs_format_pass": true
   },
   {
    "id": "13.2",
@@ -406,7 +508,9 @@
    "manual": "SLK WILL13",
    "status": "done",
    "visuals": "array",
-   "notes": "Invented content + missing manual detail. The entire 'Revival' block was removed - revival does not appear in WILL13 - along with Re Goods of Morton, Re Jones, Sugden v Lord St Leonards, Dufour v Pereira and Re Cleaver (none in the manual), and the s.18/s.18A/s.20/s.21/s.22 section numbers, which the manual does not give (it cites only 'Wills Act 1837'). Added from the manual: magnifying-glass-only test for obliterations, the presumption on pre-execution alterations and how to rebut it, codicil republication, four methods of revocation with three deliberate, later will revokes only so far as inconsistent plus the foreign/asset-specific revocation-clause trap, crossing out is not destruction, both rebuttable presumptions, dependent relative revocation, the two contemplation-of-marriage clauses, and the divorce provisions in full. Single visual replaced with an array of 6."
+   "notes": "Invented content + missing manual detail. The entire 'Revival' block was removed - revival does not appear in WILL13 - along with Re Goods of Morton, Re Jones, Sugden v Lord St Leonards, Dufour v Pereira and Re Cleaver (none in the manual), and the s.18/s.18A/s.20/s.21/s.22 section numbers, which the manual does not give (it cites only 'Wills Act 1837'). Added from the manual: magnifying-glass-only test for obliterations, the presumption on pre-execution alterations and how to rebut it, codicil republication, four methods of revocation with three deliberate, later will revokes only so far as inconsistent plus the foreign/asset-specific revocation-clause trap, crossing out is not destruction, both rebuttable presumptions, dependent relative revocation, the two contemplation-of-marriage clauses, and the divorce provisions in full. Single visual replaced with an array of 6.",
+   "default_words": 1740,
+   "needs_format_pass": true
   },
   {
    "id": "13.3",
@@ -414,7 +518,9 @@
    "manual": "SLK WILL13",
    "status": "todo",
    "visuals": "single",
-   "notes": ""
+   "notes": "",
+   "default_words": 228,
+   "needs_format_pass": true
   },
   {
    "id": "13.4",
@@ -422,7 +528,9 @@
    "manual": "SLK WILL13",
    "status": "done",
    "visuals": "array",
-   "notes": "Content correct but had NO visuals and duplicated itself in a 'Summary of Key Principles' block — dropped. Added the CURRENCY point from the SLK Wills examinable-law update (Cator v Thynn [2026] EWHC 1045 (Ch), surrogacy and the definition of 'children' at 13.4.2.4). Legacy single ladder replaced with an array of 7."
+   "notes": "Content correct but had NO visuals and duplicated itself in a 'Summary of Key Principles' block — dropped. Added the CURRENCY point from the SLK Wills examinable-law update (Cator v Thynn [2026] EWHC 1045 (Ch), surrogacy and the definition of 'children' at 13.4.2.4). Legacy single ladder replaced with an array of 7.",
+   "default_words": 2589,
+   "needs_format_pass": true
   },
   {
    "id": "13.5",
@@ -430,7 +538,9 @@
    "manual": "SLK WILL13",
    "status": "todo",
    "visuals": "single",
-   "notes": ""
+   "notes": "",
+   "default_words": 211,
+   "needs_format_pass": true
   },
   {
    "id": "13.6",
@@ -438,7 +548,9 @@
    "manual": "SLK WILL13",
    "status": "todo",
    "visuals": "single",
-   "notes": ""
+   "notes": "",
+   "default_words": 210,
+   "needs_format_pass": true
   },
   {
    "id": "13.7",
@@ -446,7 +558,9 @@
    "manual": "SLK WILL13",
    "status": "todo",
    "visuals": "single",
-   "notes": ""
+   "notes": "",
+   "default_words": 454,
+   "needs_format_pass": true
   },
   {
    "id": "13.8",
@@ -454,7 +568,9 @@
    "manual": "SLK WILL13",
    "status": "todo",
    "visuals": "single",
-   "notes": ""
+   "notes": "",
+   "default_words": 250,
+   "needs_format_pass": true
   },
   {
    "id": "13.9",
@@ -462,7 +578,9 @@
    "manual": "SLK WILL13",
    "status": "todo",
    "visuals": "single",
-   "notes": ""
+   "notes": "",
+   "default_words": 256,
+   "needs_format_pass": true
   },
   {
    "id": "13.10",
@@ -470,7 +588,9 @@
    "manual": "SLK WILL13",
    "status": "todo",
    "visuals": "single",
-   "notes": ""
+   "notes": "",
+   "default_words": 244,
+   "needs_format_pass": true
   },
   {
    "id": "9.1",
@@ -478,7 +598,9 @@
    "manual": "SLK CRMP9",
    "status": "todo",
    "visuals": "single",
-   "notes": ""
+   "notes": "",
+   "default_words": 566,
+   "needs_format_pass": true
   },
   {
    "id": "9.2",
@@ -486,7 +608,9 @@
    "manual": "SLK CRMP9",
    "status": "done",
    "visuals": "single",
-   "notes": ""
+   "notes": "",
+   "default_words": 984,
+   "needs_format_pass": true
   },
   {
    "id": "9.3",
@@ -494,7 +618,9 @@
    "manual": "SLK CRMP9",
    "status": "todo",
    "visuals": "single",
-   "notes": ""
+   "notes": "",
+   "default_words": 730,
+   "needs_format_pass": true
   },
   {
    "id": "9.4",
@@ -502,7 +628,9 @@
    "manual": "SLK CRMP9",
    "status": "todo",
    "visuals": "single",
-   "notes": ""
+   "notes": "",
+   "default_words": 353,
+   "needs_format_pass": true
   },
   {
    "id": "9.5",
@@ -510,7 +638,10 @@
    "manual": "SLK CRMP9",
    "status": "done",
    "visuals": "array",
-   "notes": "was aligned but thin (11k, single visual): missing jury selection (stand by vs challenge for cause), the split summing-up practice, the 2-hour majority rule and 10:1/9:1 depleted-jury verdicts, the whole magistrates' trial section (no defence opening, duty to reach a verdict, no casting vote, no alternative verdict, legal advisor rules), the SRA duty table and the CrimPR 2020 overriding objective; two disclosure traps (CPIA s 3 / s 11 defence statement) MOVED to 9.4; 6 visuals added incl. the 10-stage CC vs MC grid and Galbraith + client-admits-guilt decision trees"
+   "notes": "11 Aug 2026 content gap + 2026 edition check (CRMP9 2026_06_04). This one was UNDER-length, not over: 749 default words. Added the material the section was missing against the 2026 chapter - the cardinal rule of relevance and the exclusionary rules (PACE ss 76 and 78, hearsay, bad character); authenticity of real evidence and the recommended procedure for admitting it; the whole legal-versus-evidential burden analysis with the standards, the prosecution's limited duty to disprove defences, and insanity carrying BOTH burdens; the reverse-burden statutes (Homicide Act 1957 s 2(2), CJA 1988 s 139, RTA 1988 s 5(2)); and the whole of GOOD CHARACTER, which the SRA spec lists expressly and the section carried nothing on - absolute versus effective, tribunal of LAW decides, and the two Vye limbs, with R v Vye [1993] 1 WLR 471 added to the cases array. Two new open decision trees (burden/standard, good character) plus two collapsed grids. Overview map leaves rewritten - they were three-word stubs. Checked the CRMP Sentencing Act 2026 update: everything in it lands at 9.3 (bail) and 9.10 (sentencing), nothing at 9.5. 749 -> 1419 default words.",
+   "default_words": 1419,
+   "needs_format_pass": false,
+   "manual_edition": "SLK CRMP9 manual 2026_06_04.pdf"
   },
   {
    "id": "9.6",
@@ -518,7 +649,9 @@
    "manual": "SLK CRMP9",
    "status": "done",
    "visuals": "single",
-   "notes": ""
+   "notes": "",
+   "default_words": 758,
+   "needs_format_pass": true
   },
   {
    "id": "9.7",
@@ -526,7 +659,9 @@
    "manual": "SLK CRMP9",
    "status": "done",
    "visuals": "single",
-   "notes": ""
+   "notes": "",
+   "default_words": 409,
+   "needs_format_pass": true
   },
   {
    "id": "9.8",
@@ -534,7 +669,9 @@
    "manual": "SLK CRMP9",
    "status": "done",
    "visuals": "single",
-   "notes": ""
+   "notes": "",
+   "default_words": 231,
+   "needs_format_pass": true
   },
   {
    "id": "9.9",
@@ -542,7 +679,9 @@
    "manual": "SLK CRMP9",
    "status": "todo",
    "visuals": "single",
-   "notes": ""
+   "notes": "",
+   "default_words": 185,
+   "needs_format_pass": true
   },
   {
    "id": "9.10",
@@ -550,7 +689,9 @@
    "manual": "SLK CRMP9",
    "status": "todo",
    "visuals": "single",
-   "notes": ""
+   "notes": "",
+   "default_words": 181,
+   "needs_format_pass": true
   },
   {
    "id": "9.11",
@@ -558,7 +699,9 @@
    "manual": "SLK CRMP9",
    "status": "todo",
    "visuals": "single",
-   "notes": ""
+   "notes": "",
+   "default_words": 206,
+   "needs_format_pass": true
   },
   {
    "id": "9.12",
@@ -566,7 +709,9 @@
    "manual": "SLK CRMP9",
    "status": "todo",
    "visuals": "single",
-   "notes": ""
+   "notes": "",
+   "default_words": 195,
+   "needs_format_pass": true
   },
   {
    "id": "9.13",
@@ -574,7 +719,9 @@
    "manual": "SLK CRMP9",
    "status": "todo",
    "visuals": "single",
-   "notes": ""
+   "notes": "",
+   "default_words": 255,
+   "needs_format_pass": true
   },
   {
    "id": "2.1",
@@ -582,7 +729,10 @@
    "manual": "SLK TORT2",
    "status": "done",
    "visuals": "array",
-   "notes": "Invented citation + very thin. 'Compensation Act 2006 s 1' is not in TORT2 2.1 - the manual states the mesothelioma exception without naming the statute; removed and SARAH 2015 added, which the manual does name. The cases array held two; the chapter names SIXTEEN, all now present with the manual's own citations. Deliberately NOT named: Bolam, Bolitho, Montgomery, Wagon Mound, Fairchild - the manual states those rules without naming the cases, so naming them would be invented content. Added: the three-stage duty analysis with the five established duty situations, pure omissions and the exceptions, the four third-party routes, voluntary assumption, the police/ambulance/fire distinctions, the two-stage breach test, children and skilled defendants judged at the time of the tort, the five breach factors, cumulative (material contribution to damage, proportionate) vs non-cumulative (material increase in risk) causation, the mesothelioma exception, loss of a chance, indeterminate and multiple sufficient causes, the three thin-skull conditions, novus by claimant and third party, the primary/secondary victim split with the three Alcock criteria and the Paul definition of an accident, and the full damages taxonomy with the Judicial College 10% uplift and FAA 1976. Duplicate maintenance-company trap de-duplicated. Single flow visual replaced with an array of 8. 32k."
+   "notes": "11 Aug 2026 format pass + 2026 edition check (TORT2 2026_05_25). All 16 case names in the cases array grep back to the 2026 chapter. Checked the Tort examinable-law update: it removes the defence of necessity at 2.2.2.4, which is 2.2, not 2.1 - nothing to apply here. Four enumerating tree nodes converted to collapsed grids per the tree rule: third parties / voluntary assumption / public bodies (was two nodes), causation 'special cases', and rescuers. Four open trees remain, each a genuine multi-criteria test or fork. 1692 -> 1439 default words.",
+   "default_words": 1439,
+   "needs_format_pass": false,
+   "manual_edition": "SLK TORT2 manual 2026_05_25.pdf"
   },
   {
    "id": "2.2",
@@ -590,7 +740,9 @@
    "manual": "SLK TORT2",
    "status": "todo",
    "visuals": "single",
-   "notes": ""
+   "notes": "",
+   "default_words": 519,
+   "needs_format_pass": true
   },
   {
    "id": "2.3",
@@ -598,7 +750,9 @@
    "manual": "SLK TORT2",
    "status": "todo",
    "visuals": "single",
-   "notes": ""
+   "notes": "",
+   "default_words": 639,
+   "needs_format_pass": true
   },
   {
    "id": "2.4",
@@ -606,7 +760,9 @@
    "manual": "SLK TORT2",
    "status": "done",
    "visuals": "array",
-   "notes": "Invented content removed: Caparo v Dickman (belongs to 2.1, which is done and covers duty), Spartan Steel v Martin, Henderson v Merrett Syndicates and White v Jones - none is in the manual chapter, which cites only Hedley Byrne, JEB Fasteners, Donoghue v Stevenson and Evans v Triplex. Also removed as unsupported: the GBP 275 property-damage threshold, 'importer into the EU', the supplier-who-fails-to-identify-the-producer limb, s 11A Limitation Act 1980, the intermediate-examination gloss on Donoghue, and the claim that the development risks defence is unavailable to pharmaceutical manufacturers (the manual's actual limit is that it fails where a GENERIC defect was or should have been known). Missing manual material added: the contract-first analysis and the buyer's remedy against the seller on express/implied terms, negligent ACTS as distinct from misstatements, the fourth Hedley Byrne requirement plus the separate breach and real-and-substantial-inducement steps from JEB Fasteners, the three extensions of Hedley Byrne (advice, non-performance of will services, pension advice), the whole of 2.4.3 element by element (broad reading of consumer and manufacturer, containers/packaging/instructions, the inferred-breach presumption and its rebuttal, warn-or-recall, the causation and damage points), and on the CPA the s 1(2)/s 45 product and goods definitions, the s 3(2) factors, the claimant's burden of proving the defect, all SIX s 4(1) defences and contributory negligence, and both limitation clocks. Statutes array rebuilt to the eight provisions the manual actually cites. Trap block kept first and rewritten to the manual (nine traps). Single flow replaced with an array of 7 (2 mind maps, 2 decision trees, comparison grid, defences steps, figures grid). 6k -> 21k chars."
+   "notes": "Invented content removed: Caparo v Dickman (belongs to 2.1, which is done and covers duty), Spartan Steel v Martin, Henderson v Merrett Syndicates and White v Jones - none is in the manual chapter, which cites only Hedley Byrne, JEB Fasteners, Donoghue v Stevenson and Evans v Triplex. Also removed as unsupported: the GBP 275 property-damage threshold, 'importer into the EU', the supplier-who-fails-to-identify-the-producer limb, s 11A Limitation Act 1980, the intermediate-examination gloss on Donoghue, and the claim that the development risks defence is unavailable to pharmaceutical manufacturers (the manual's actual limit is that it fails where a GENERIC defect was or should have been known). Missing manual material added: the contract-first analysis and the buyer's remedy against the seller on express/implied terms, negligent ACTS as distinct from misstatements, the fourth Hedley Byrne requirement plus the separate breach and real-and-substantial-inducement steps from JEB Fasteners, the three extensions of Hedley Byrne (advice, non-performance of will services, pension advice), the whole of 2.4.3 element by element (broad reading of consumer and manufacturer, containers/packaging/instructions, the inferred-breach presumption and its rebuttal, warn-or-recall, the causation and damage points), and on the CPA the s 1(2)/s 45 product and goods definitions, the s 3(2) factors, the claimant's burden of proving the defect, all SIX s 4(1) defences and contributory negligence, and both limitation clocks. Statutes array rebuilt to the eight provisions the manual actually cites. Trap block kept first and rewritten to the manual (nine traps). Single flow replaced with an array of 7 (2 mind maps, 2 decision trees, comparison grid, defences steps, figures grid). 6k -> 21k chars.",
+   "default_words": 1136,
+   "needs_format_pass": true
   },
   {
    "id": "2.5",
@@ -614,7 +770,9 @@
    "manual": "SLK TORT2",
    "status": "done",
    "visuals": "array",
-   "notes": "retitled from 'Nuisance and Other Torts' to 'Nuisance' to match the manual (TORT2 has only 5 chapters; 2.5 is nuisance alone). Invented content removed: Hunter v Canary Wharf, Khorasandjian, Cambridge Water, Transco, St Helen's Smelting, Bridlington Relay, Hollywood Silver Fox, Sedleigh-Denfield, Nichols v Marsland, A-G v PYA Quarries and Gillingham are none of them in the manual - substance kept, names dropped; cases array now holds only Rylands v Fletcher, the one case the manual cites. Corrected a legal error: the old note listed 'overlooking?' as an amenity interference - the manual says being overlooked is NOT actionable, nor is blocked TV reception (no emanation). Missing material added: the 3 types of nuisance, the interference examples (knotweed, tree roots, land slip), planning-permission cases both ways, social utility, who can be liable (owner/occupier/creator), prescription (20 yrs, running from C's awareness), the three INEFFECTIVE defences, abatement/trespass, the HRA 1998 route, no personal injury in private nuisance but yes in public, and the full Rylands natural/non-natural examples plus the 5 defences. Single grid replaced with an array of 8 (3 mind maps, 2 decision trees, 3 grids)."
+   "notes": "retitled from 'Nuisance and Other Torts' to 'Nuisance' to match the manual (TORT2 has only 5 chapters; 2.5 is nuisance alone). Invented content removed: Hunter v Canary Wharf, Khorasandjian, Cambridge Water, Transco, St Helen's Smelting, Bridlington Relay, Hollywood Silver Fox, Sedleigh-Denfield, Nichols v Marsland, A-G v PYA Quarries and Gillingham are none of them in the manual - substance kept, names dropped; cases array now holds only Rylands v Fletcher, the one case the manual cites. Corrected a legal error: the old note listed 'overlooking?' as an amenity interference - the manual says being overlooked is NOT actionable, nor is blocked TV reception (no emanation). Missing material added: the 3 types of nuisance, the interference examples (knotweed, tree roots, land slip), planning-permission cases both ways, social utility, who can be liable (owner/occupier/creator), prescription (20 yrs, running from C's awareness), the three INEFFECTIVE defences, abatement/trespass, the HRA 1998 route, no personal injury in private nuisance but yes in public, and the full Rylands natural/non-natural examples plus the 5 defences. Single grid replaced with an array of 8 (3 mind maps, 2 decision trees, 3 grids).",
+   "default_words": 863,
+   "needs_format_pass": true
   },
   {
    "id": "3.1",
@@ -622,7 +780,10 @@
    "manual": "SLK COND3",
    "status": "done",
    "visuals": "array",
-   "notes": "Missing detail + unsupported citation. 'Legal Services Act 2007, s 1' reduced to the Act, which is all the manual gives. Added: the three StaRs components with their dates and respective scopes, the Principles reaching into private life and binding firms and non-solicitors, the code overlap and Code for Firms para 7.1, who is regulated individually vs under both codes, paras 8.2 and 8.4 in full with the 8-week rule and the ADR body, the seven categories of eligible LeO complainant and the two exclusions, the three direct-access routes, dismissal for no 'significant' loss, the eight LeO powers and which four count towards the £50,000 cap, the enforcement-strategy seriousness threshold and its five factors, para 7.4, publication of outcomes and Principle 2, the SDT's constitution and lack of investigatory capacity, the shift from the criminal to the civil standard, the s 47 powers in full and the 21-day appeal to the Administrative Court. The backdating trap was reframed onto the manual's own enforcement-strategy seriousness list rather than the Principle numbering, which belongs to 3.2. Cases array empty - the chapter cites none. Single flow visual replaced with an array of 8. 26k."
+   "notes": "11 Aug 2026 format pass + 2026 edition check (COND3 2026_05_26). Figures re-verified against the 2026 chapter: the £50,000 LeO cap, fines up to £250m for an entity, the 8-week rule, the 1-year LeO time limit, the civil standard at the SDT and the 21-day appeal to the Administrative Court all still hold. The single decision tree carried 3,103 characters over four nodes and was doing all the damage; it is now three nodes of memory triggers, with the para 8.2/8.4 complaints duties, the LeO's own process and the Compensation Fund pulled out into three collapsed grids. The OPEN first note block was the manual's learning outcomes - replaced with a short 'who regulates what' framework and the learning outcomes moved to a collapsed block. 1744 -> 1449 default words.",
+   "default_words": 1449,
+   "needs_format_pass": false,
+   "manual_edition": "SLK COND3 manual 2026_05_26.pdf"
   },
   {
    "id": "3.2",
@@ -630,7 +791,9 @@
    "manual": "SLK COND3",
    "status": "done",
    "visuals": "array",
-   "notes": "prose was largely aligned - the real defects were structural: the cases array used ref/point instead of name/citation/rule so every citation and rule rendered BLANK, and the SRA enforcement strategy quote said 'support a competitive market' when the manual says 'supporting access to affordable legal services, the rule of law and the administration of justice'. Added the Wingate [93] honesty passage, the SRA two-stage dishonesty formulation, the honesty-for-firms requirement and the EDI guidance detail. Single flow visual replaced with an array of 8."
+   "notes": "prose was largely aligned - the real defects were structural: the cases array used ref/point instead of name/citation/rule so every citation and rule rendered BLANK, and the SRA enforcement strategy quote said 'support a competitive market' when the manual says 'supporting access to affordable legal services, the rule of law and the administration of justice'. Added the Wingate [93] honesty passage, the SRA two-stage dishonesty formulation, the honesty-for-firms requirement and the EDI guidance detail. Single flow visual replaced with an array of 8.",
+   "default_words": 1394,
+   "needs_format_pass": true
   },
   {
    "id": "3.3",
@@ -638,7 +801,9 @@
    "manual": "SLK COND3",
    "status": "done",
    "visuals": "single",
-   "notes": ""
+   "notes": "",
+   "default_words": 734,
+   "needs_format_pass": true
   },
   {
    "id": "3.4",
@@ -646,7 +811,9 @@
    "manual": "SLK COND3",
    "status": "done",
    "visuals": "single",
-   "notes": ""
+   "notes": "",
+   "default_words": 746,
+   "needs_format_pass": true
   },
   {
    "id": "5.1",
@@ -654,7 +821,9 @@
    "manual": "SLK CRML5",
    "status": "done",
    "visuals": "array",
-   "notes": "Invented content removed - none of these appear in the manual chapter: Woollin, Mohan, R v G and R, Caldwell, Thabo Meli, Sweet v Parsley, Gammon v A-G Hong Kong, Collins v Wilcock, Ireland, Burstow, Mowatt, Pittwood, Stone and Dobinson and R v Miller [1983] (the manual's duty-to-act list is unattributed, and its R v Miller is the 1954 ABH case). Oblique intent / the Woollin direction was DROPPED as superseded: the manual expressly defers intention to the next chapter and 5.2 already covers it. The empty-ish cases array is now the manual's actual thirteen: Miller, Chan-Fook, R (T) v DPP, DPP v Smith, C (a minor) v Eisenhower, Savage, A-G's Reference (No 6 of 1980), Paterson, M (B), White, Smith, Blaue, Jordan. Missing manual material added: the three types of actus reus, voluntariness, the four common law duty situations, the TWO-question recklessness test (subjective AND objective - the old note only gave the subjective half), gross negligence, strict liability and the point that none of the SRA-specified offences is strict liability, transferred mens rea and its same-offence limit, both coincidence theories, the full assault and battery actus reus breakdown, the whole of 5.1.6 consent (three requirements plus the public-interest lists for intended and unintended harm) and the whole of 5.1.7 causation including the four novus actus categories and the manual's warning that this area of law is not consistent. s 47 statute text no longer asserts a five-year maximum, which the manual does not give. MCQ traps de-duplicated from six to seven distinct ones (the wound and transferred-mens-rea traps each appeared twice and were merged, with the manual's same-offence limit folded into the latter). Single flow replaced with an array of 9 (2 mind maps, 3 decision trees, the offence ladder, 3 grids). 8k -> 27k chars."
+   "notes": "Invented content removed - none of these appear in the manual chapter: Woollin, Mohan, R v G and R, Caldwell, Thabo Meli, Sweet v Parsley, Gammon v A-G Hong Kong, Collins v Wilcock, Ireland, Burstow, Mowatt, Pittwood, Stone and Dobinson and R v Miller [1983] (the manual's duty-to-act list is unattributed, and its R v Miller is the 1954 ABH case). Oblique intent / the Woollin direction was DROPPED as superseded: the manual expressly defers intention to the next chapter and 5.2 already covers it. The empty-ish cases array is now the manual's actual thirteen: Miller, Chan-Fook, R (T) v DPP, DPP v Smith, C (a minor) v Eisenhower, Savage, A-G's Reference (No 6 of 1980), Paterson, M (B), White, Smith, Blaue, Jordan. Missing manual material added: the three types of actus reus, voluntariness, the four common law duty situations, the TWO-question recklessness test (subjective AND objective - the old note only gave the subjective half), gross negligence, strict liability and the point that none of the SRA-specified offences is strict liability, transferred mens rea and its same-offence limit, both coincidence theories, the full assault and battery actus reus breakdown, the whole of 5.1.6 consent (three requirements plus the public-interest lists for intended and unintended harm) and the whole of 5.1.7 causation including the four novus actus categories and the manual's warning that this area of law is not consistent. s 47 statute text no longer asserts a five-year maximum, which the manual does not give. MCQ traps de-duplicated from six to seven distinct ones (the wound and transferred-mens-rea traps each appeared twice and were merged, with the manual's same-offence limit folded into the latter). Single flow replaced with an array of 9 (2 mind maps, 3 decision trees, the offence ladder, 3 grids). 8k -> 27k chars.",
+   "default_words": 1903,
+   "needs_format_pass": true
   },
   {
    "id": "5.2",
@@ -662,7 +831,9 @@
    "manual": "SLK CRML5",
    "status": "todo",
    "visuals": "single",
-   "notes": ""
+   "notes": "",
+   "default_words": 642,
+   "needs_format_pass": true
   },
   {
    "id": "5.3",
@@ -670,15 +841,19 @@
    "manual": "SLK CRML5",
    "status": "done",
    "visuals": "single",
-   "notes": ""
+   "notes": "",
+   "default_words": 2985,
+   "needs_format_pass": true
   },
   {
    "id": "5.4",
    "title": "Criminal Liability for Acts of Others and Incomplete Acts",
    "manual": "SLK CRML5",
-   "status": "todo",
-   "visuals": "single",
-   "notes": ""
+   "status": "done",
+   "visuals": "array",
+   "notes": "Invented content + missing manual detail. Removed R v Shivpuri, the Chan Wing-Siu overruling and 'conditional intent' (none in CRML5 5.4), plus attempt examples and withdrawal-timing propositions the chapter does not contain. Added: co-principals with differing mens rea, charging on the same count and the alternative principal/accessory basis, innocent agency, the requirement of a fully constituted actus reus with conspiracy and SCA 2007 ss 44-46 as the fallback where commission fails, an accessory being convictable of an offence they could not commit as principal, the four mens rea aspects in full with wilful blindness v failure to inquire, the lesser-offence and unlawful-act-manslaughter analysis, s 1(3) legal impossibility and s 1(4). Cases limited to the five the chapter cites. Single grid replaced with an array of 10. 24k. RE-VERIFIED against CRML5 2026_05_25: diff is wording only, no substantive change.",
+   "default_words": 2219,
+   "needs_format_pass": true
   },
   {
    "id": "5.5",
@@ -686,7 +861,9 @@
    "manual": "SLK CRML5",
    "status": "todo",
    "visuals": "single",
-   "notes": ""
+   "notes": "",
+   "default_words": 489,
+   "needs_format_pass": true
   },
   {
    "id": "11.1",
@@ -694,7 +871,9 @@
    "manual": "SLK SYS11",
    "status": "todo",
    "visuals": "single",
-   "notes": ""
+   "notes": "",
+   "default_words": 405,
+   "needs_format_pass": true
   },
   {
    "id": "11.2",
@@ -702,7 +881,9 @@
    "manual": "SLK SYS11",
    "status": "done",
    "visuals": "array",
-   "notes": "Bloat + displaced content + invented cases. A whole 'Constitutional Principles' block (Bingham rule of law, separation of powers, judicial independence, conventions, prerogative, Miller, De Keyser) and Dicey's three limbs belong to 11.3/11.4 which cover them properly - DROPPED as superseded. Removed as not in SYS11: Heydon's Case, Grey v Pearson, Adler v George, R v A (No 2), the Parliament Act 1949 one-year delay, Law Commission reports as an extrinsic aid, and the HRA s.3/s.4 statutes (11.2 only cross-refers to 11.7). Rebuilt against manual 11.2.2-11.2.7 with the three private members' Bills, public/private/hybrid, all seven stages, money Bills and the Speaker, commencement, structure of an Act, the four approaches with the manual's own authorities, five presumptions, intrinsic/extrinsic aids, the four Latin tags with worked examples, express and implied repeal, and secondary legislation incl. the 40-day negative and the Welsh 21-day/super-affirmative procedures. Single visual replaced with an array of 9."
+   "notes": "Bloat + displaced content + invented cases. A whole 'Constitutional Principles' block (Bingham rule of law, separation of powers, judicial independence, conventions, prerogative, Miller, De Keyser) and Dicey's three limbs belong to 11.3/11.4 which cover them properly - DROPPED as superseded. Removed as not in SYS11: Heydon's Case, Grey v Pearson, Adler v George, R v A (No 2), the Parliament Act 1949 one-year delay, Law Commission reports as an extrinsic aid, and the HRA s.3/s.4 statutes (11.2 only cross-refers to 11.7). Rebuilt against manual 11.2.2-11.2.7 with the three private members' Bills, public/private/hybrid, all seven stages, money Bills and the Speaker, commencement, structure of an Act, the four approaches with the manual's own authorities, five presumptions, intrinsic/extrinsic aids, the four Latin tags with worked examples, express and implied repeal, and secondary legislation incl. the 40-day negative and the Welsh 21-day/super-affirmative procedures. Single visual replaced with an array of 9.",
+   "default_words": 2842,
+   "needs_format_pass": true
   },
   {
    "id": "11.3",
@@ -710,7 +891,9 @@
    "manual": "SLK SYS11",
    "status": "done",
    "visuals": "single",
-   "notes": ""
+   "notes": "",
+   "default_words": 766,
+   "needs_format_pass": true
   },
   {
    "id": "11.4",
@@ -718,7 +901,9 @@
    "manual": "SLK SYS11",
    "status": "todo",
    "visuals": "single",
-   "notes": ""
+   "notes": "",
+   "default_words": 458,
+   "needs_format_pass": true
   },
   {
    "id": "11.5",
@@ -726,7 +911,9 @@
    "manual": "SLK SYS11",
    "status": "todo",
    "visuals": "single",
-   "notes": ""
+   "notes": "",
+   "default_words": 261,
+   "needs_format_pass": true
   },
   {
    "id": "11.6",
@@ -734,7 +921,9 @@
    "manual": "SLK SYS11",
    "status": "todo",
    "visuals": "single",
-   "notes": ""
+   "notes": "",
+   "default_words": 338,
+   "needs_format_pass": true
   },
   {
    "id": "11.7",
@@ -742,7 +931,9 @@
    "manual": "SLK SYS11",
    "status": "todo",
    "visuals": "single",
-   "notes": ""
+   "notes": "",
+   "default_words": 393,
+   "needs_format_pass": true
   },
   {
    "id": "11.8",
@@ -750,7 +941,9 @@
    "manual": "SLK SYS11",
    "status": "todo",
    "visuals": "single",
-   "notes": ""
+   "notes": "",
+   "default_words": 298,
+   "needs_format_pass": true
   },
   {
    "id": "10.1",
@@ -758,7 +951,9 @@
    "manual": "SLK SERV10",
    "status": "done",
    "visuals": "single",
-   "notes": ""
+   "notes": "",
+   "default_words": 761,
+   "needs_format_pass": true
   },
   {
    "id": "10.2",
@@ -766,7 +961,9 @@
    "manual": "SLK SERV10",
    "status": "done",
    "visuals": "single",
-   "notes": ""
+   "notes": "",
+   "default_words": 329,
+   "needs_format_pass": true
   },
   {
    "id": "10.3",
@@ -774,7 +971,9 @@
    "manual": "SLK SERV10",
    "status": "done",
    "visuals": "single",
-   "notes": ""
+   "notes": "",
+   "default_words": 399,
+   "needs_format_pass": true
   },
   {
    "id": "10.4",
@@ -782,7 +981,9 @@
    "manual": "SLK SERV10",
    "status": "done",
    "visuals": "single",
-   "notes": ""
+   "notes": "",
+   "default_words": 336,
+   "needs_format_pass": true
   },
   {
    "id": "10.5",
@@ -790,7 +991,9 @@
    "manual": "SLK SERV10",
    "status": "done",
    "visuals": "single",
-   "notes": ""
+   "notes": "",
+   "default_words": 452,
+   "needs_format_pass": true
   },
   {
    "id": "4.1",
@@ -798,7 +1001,9 @@
    "manual": "SLK LAND4",
    "status": "done",
    "visuals": "array",
-   "notes": "MASSIVE displaced content: the whole of Registered Land, Unregistered Land and Doctrine of Notice sat in 4.1 but belong to 4.2 (Title to Land) and 4.3 (Protecting Third-Party Interests) - both already cover them better, so dropped as SUPERSEDED rather than moved. Invented content removed: the manual chapter cites NO cases at all, so Williams & Glyn's Bank v Boland, Midland Bank v Green, Walsh v Lonsdale, TSB Bank v Botham and Hunt v Luck all went and the cases array is now EMPTY. Statutory numbering not in the manual also removed: LRA 2002 ss 27/29 and Sch 3, LPA 1925 s 205(1)(ix), LPA 1925 s 54(2) (the manual gives the 3-year lease only as an unnumbered exception to s 52) and the LCA 1972 class list. Missing manual material added in full: 4.1.2 terminology table, real v personal property and choses in possession/action, the four exceptions to air-above/ground-below (airspace, things in the ground, wild animals, objects found - with the Treasure Act 1996 rules), 4.1.3.1 use classes and sui generis, legal estate v beneficial interest with the FOUR-legal-owner cap, commonhold, all five legal interests in detail, the three deed-execution requirements, TR1/TP1/conveyance, and the four routes to an equitable interest with the tenant-in-common/joint-tenant assignment rule. CURRENCY lines added from the Land SQE July 2026 update: Use Classes Order 1987 as amended by the 2020 (England) Regs; Family Law Act 1996 as amended by the Civil Partnership Act 2004. MCQ traps: rent-charge/positive-covenant trap kept and sharpened; the 'unregistered land - legal title does not pass on completion' trap DROPPED as superseded - 4.2 already carries the same point sourced from her 04/08 FLK2 mock and states it the OTHER way round (unregistered: title passes on COMPLETION), which is the correct rule. Five new manual-derived traps added. Single table replaced with an array of 10 (3 mind maps, 3 decision trees, 4 grids incl. a figures grid). 11k -> 24k chars."
+   "notes": "MASSIVE displaced content: the whole of Registered Land, Unregistered Land and Doctrine of Notice sat in 4.1 but belong to 4.2 (Title to Land) and 4.3 (Protecting Third-Party Interests) - both already cover them better, so dropped as SUPERSEDED rather than moved. Invented content removed: the manual chapter cites NO cases at all, so Williams & Glyn's Bank v Boland, Midland Bank v Green, Walsh v Lonsdale, TSB Bank v Botham and Hunt v Luck all went and the cases array is now EMPTY. Statutory numbering not in the manual also removed: LRA 2002 ss 27/29 and Sch 3, LPA 1925 s 205(1)(ix), LPA 1925 s 54(2) (the manual gives the 3-year lease only as an unnumbered exception to s 52) and the LCA 1972 class list. Missing manual material added in full: 4.1.2 terminology table, real v personal property and choses in possession/action, the four exceptions to air-above/ground-below (airspace, things in the ground, wild animals, objects found - with the Treasure Act 1996 rules), 4.1.3.1 use classes and sui generis, legal estate v beneficial interest with the FOUR-legal-owner cap, commonhold, all five legal interests in detail, the three deed-execution requirements, TR1/TP1/conveyance, and the four routes to an equitable interest with the tenant-in-common/joint-tenant assignment rule. CURRENCY lines added from the Land SQE July 2026 update: Use Classes Order 1987 as amended by the 2020 (England) Regs; Family Law Act 1996 as amended by the Civil Partnership Act 2004. MCQ traps: rent-charge/positive-covenant trap kept and sharpened; the 'unregistered land - legal title does not pass on completion' trap DROPPED as superseded - 4.2 already carries the same point sourced from her 04/08 FLK2 mock and states it the OTHER way round (unregistered: title passes on COMPLETION), which is the correct rule. Five new manual-derived traps added. Single table replaced with an array of 10 (3 mind maps, 3 decision trees, 4 grids incl. a figures grid). 11k -> 24k chars.",
+   "default_words": 1444,
+   "needs_format_pass": true
   },
   {
    "id": "4.2",
@@ -806,7 +1011,9 @@
    "manual": "SLK LAND4",
    "status": "done",
    "visuals": "single",
-   "notes": ""
+   "notes": "",
+   "default_words": 637,
+   "needs_format_pass": true
   },
   {
    "id": "4.3",
@@ -814,7 +1021,9 @@
    "manual": "SLK LAND4",
    "status": "todo",
    "visuals": "single",
-   "notes": ""
+   "notes": "",
+   "default_words": 1093,
+   "needs_format_pass": true
   },
   {
    "id": "4.4",
@@ -822,7 +1031,9 @@
    "manual": "SLK LAND4",
    "status": "done",
    "visuals": "single",
-   "notes": ""
+   "notes": "",
+   "default_words": 726,
+   "needs_format_pass": true
   },
   {
    "id": "4.5",
@@ -830,15 +1041,19 @@
    "manual": "SLK LAND4",
    "status": "done",
    "visuals": "single",
-   "notes": ""
+   "notes": "",
+   "default_words": 993,
+   "needs_format_pass": true
   },
   {
    "id": "4.6",
    "title": "Leases",
    "manual": "SLK LAND4",
-   "status": "todo",
-   "visuals": "single",
-   "notes": ""
+   "status": "done",
+   "visuals": "array",
+   "notes": "Invented content + a misclassification + displaced content. Removed cases not in LAND4 4.6 (Prudential Assurance, Ashburn Anstalt, Walsh v Lonsdale, Billson, Sirius International) and LTCA section numbering the manual does not give (s 5, the s 17 notice and its 6 months, s 19 overriding lease, s 25), plus touch-and-concern, LPA ss 141-142, LTA 1985 s 8, non-derogation from grant, FRI/IRI, dilapidations s 18(1) LTA 1927, LTA 1927 s 3, break-clause strict compliance, upward-only rent review, LTA 1985 ss 18-30 service charges, County Courts Act 1984 s 138, remediable v irremediable breaches, s 38A, the (g) five-year rule, 1x/2x rateable value compensation and interim rent. CORRECTED: the manual makes (a)(b)(c)(e) DISCRETIONARY and (d)(f)(g) MANDATORY - the section had grouped (d) with the fault grounds; 6-12 months belongs to the OPPOSED s 25 notice; a s 26 request gives the landlord 2 months. Added the three leasehold estates, formalities for registered and unregistered land (three short-lease conditions, assignment only by deed, 2-month registration out of an unregistered title, C(iv) for an equitable lease), the key leasehold terms block, landlord/tenant express and implied covenants, alienation and alterations, the full remedies table (CRAR from 6 April 2014, Jervis v Harris self-help as a DEBT) and the LTA 1954 machinery end to end. Forfeiture waiver, the 6-month notice to a former tenant and relief from forfeiture MOVED to 12.12, where the PROP12 manual carries them. Single grid replaced with an array of 13. 32k, above the ideal because the chapter runs 13 pages and carries 13 visuals. RE-VERIFIED against LAND4 2026_05_21: 3-7 yr lease binds whether noted or not (7 yrs or less = overriding interest); short lease now FOUR conditions; damages for disrepair capped at the diminution in the reversion (LTA 1927 s 18, which the 2026 edition now gives); s 146 counter-notice where 3+ years unexpired = leave of the court; self-help avoids the damages cap; LTA 1985 s 17 citation dropped from the manual and removed here.",
+   "default_words": 1964,
+   "needs_format_pass": true
   },
   {
    "id": "12.1",
@@ -846,7 +1061,9 @@
    "manual": "SLK PROP12",
    "status": "aligned-needs-visuals",
    "visuals": "single",
-   "notes": ""
+   "notes": "",
+   "default_words": 594,
+   "needs_format_pass": true
   },
   {
    "id": "12.2",
@@ -854,7 +1071,9 @@
    "manual": "SLK PROP12",
    "status": "aligned-needs-visuals",
    "visuals": "single",
-   "notes": ""
+   "notes": "",
+   "default_words": 1041,
+   "needs_format_pass": true
   },
   {
    "id": "12.3",
@@ -862,7 +1081,9 @@
    "manual": "SLK PROP12",
    "status": "done",
    "visuals": "array",
-   "notes": "flagged aligned-needs-visuals but contained a REVERSED RULE: the trap block said the deposit is held by the seller's solicitor as AGENT so the seller can use it immediately. The manual says the opposite - it is held as STAKEHOLDER in client account for both parties until completion; agent is the exception a developer asks for on a new build. Corrected and called out in the traps. Also removed invented content: Eccles-style numbered conditions SC 2.2 / SC 5.1 / SC 6.1.2, the 2pm completion time and 20-working-day default (both belong to 12.9/12.10, not this chapter), and the classes of title / good root 15 years / three parts of the register material, dropped as superseded by 12.4 Title Investigation. Added what was missing: the undertaking to the lender for unregistered deeds, the full 12-item particulars of sale, title guarantee full/limited/NONE with the default-is-FULL trap, contract rate 4-5% above base, the chattels-overvaluation fraud point, reduced-deposit risk, deposit passing up a chain via Formula C, risk-is-not-an-obligation-to-insure, the whole VAT and option-to-tax section, conditional contracts as condition precedent, the 6-item contract package, the redemption undertaking and the shortfall coming out of the firm's own money, the seven seller's-title situations (12.3.10), and a CURRENCY line for the DMCCA 2024 material information duty. Single flow visual replaced with an array of 8 (2 mind maps, 4 decision trees, 2 grids)."
+   "notes": "flagged aligned-needs-visuals but contained a REVERSED RULE: the trap block said the deposit is held by the seller's solicitor as AGENT so the seller can use it immediately. The manual says the opposite - it is held as STAKEHOLDER in client account for both parties until completion; agent is the exception a developer asks for on a new build. Corrected and called out in the traps. Also removed invented content: Eccles-style numbered conditions SC 2.2 / SC 5.1 / SC 6.1.2, the 2pm completion time and 20-working-day default (both belong to 12.9/12.10, not this chapter), and the classes of title / good root 15 years / three parts of the register material, dropped as superseded by 12.4 Title Investigation. Added what was missing: the undertaking to the lender for unregistered deeds, the full 12-item particulars of sale, title guarantee full/limited/NONE with the default-is-FULL trap, contract rate 4-5% above base, the chattels-overvaluation fraud point, reduced-deposit risk, deposit passing up a chain via Formula C, risk-is-not-an-obligation-to-insure, the whole VAT and option-to-tax section, conditional contracts as condition precedent, the 6-item contract package, the redemption undertaking and the shortfall coming out of the firm's own money, the seven seller's-title situations (12.3.10), and a CURRENCY line for the DMCCA 2024 material information duty. Single flow visual replaced with an array of 8 (2 mind maps, 4 decision trees, 2 grids).",
+   "default_words": 1469,
+   "needs_format_pass": true
   },
   {
    "id": "12.4",
@@ -870,15 +1091,19 @@
    "manual": "SLK PROP12",
    "status": "done",
    "visuals": "array",
-   "notes": "Visuals pass only - status was aligned-needs-visuals, so the prose was verified as matching manual 12.4 and left untouched. Legacy single grid replaced with an array of 5 (mind map, registered/unregistered decision tree, contrasts grid, numbers grid, working sequence)."
+   "notes": "Visuals pass only - status was aligned-needs-visuals, so the prose was verified as matching manual 12.4 and left untouched. Legacy single grid replaced with an array of 5 (mind map, registered/unregistered decision tree, contrasts grid, numbers grid, working sequence).",
+   "default_words": 677,
+   "needs_format_pass": true
   },
   {
    "id": "12.5",
-   "title": "Pre-Contract Searches",
+   "title": "Pre-Contract Searches and Enquiries",
    "manual": "SLK PROP12",
-   "status": "aligned-needs-visuals",
-   "visuals": "single",
-   "notes": ""
+   "status": "done",
+   "visuals": "array",
+   "notes": "Was labelled aligned-needs-visuals but was badly misaligned on content. Removed invented/displaced material: LLC1/Con29/Con29O/CON29DW/CON29M form names, chancel repair 13 Oct 2013, EPA 1990 Pt IIA, LRA 2002 s 72, Water Industry Act 1991, Local Land Charges Act 1975 and official-v-personal searches (none in PROP12 12.5); the entire pre-completion block (OS1/OS2/K15/K16 priority periods and the Class C/D land-charge tables) DROPPED AS SUPERSEDED - 12.9 already carries the pre-completion searches and 4.3 the land-charge classes, and the manual expressly warns not to confuse the two stages. Added the manual material that was absent: the three surveys and who may rely on each, caveat emptor and physical inspection, the five every-purchase and nine location-dependent searches, cautions against first registration, raising enquiries and the no-exchange rule, TA6/CPSE misrepresentation and 'not so far as the seller is aware', the common issues table, commercial CPSE contents, sale of part (DS1 v DS3, HMLR plan red/blue, TR1 v TP1, rights granted and reserved, covenants) and new build (planning + building regs completion certificate, adoption agreements and bonds, stakeholder v agent deposit, 10-year NHBC warranty with deposit protection). Title corrected to 'Pre-Contract Searches and Enquiries'. Cases array empty - the chapter cites none. Single cards visual replaced with an array of 9. 27k. RE-VERIFIED against PROP12 2026_06_09: s 38 (roads) and s 104 (water/sewers) adoption agreements now named; 'bankruptcy official search' and 'Land Charges official search'; K15 periods of ownership IN THE RELEVANT COUNTY with classes cross-referred to Land Law 4.3.4.2; TA6 named; Conveyancing Protocol (2019); footpath reported to the lender only where also acting for it; warranty 'within' the first 10 years; LPA 1925 s 62 removed.",
+   "default_words": 1256,
+   "needs_format_pass": true
   },
   {
    "id": "12.6",
@@ -886,7 +1111,9 @@
    "manual": "SLK PROP12",
    "status": "aligned-needs-visuals",
    "visuals": "single",
-   "notes": ""
+   "notes": "",
+   "default_words": 372,
+   "needs_format_pass": true
   },
   {
    "id": "12.7",
@@ -894,7 +1121,9 @@
    "manual": "SLK PROP12",
    "status": "done",
    "visuals": "single",
-   "notes": ""
+   "notes": "",
+   "default_words": 347,
+   "needs_format_pass": true
   },
   {
    "id": "12.8",
@@ -902,7 +1131,9 @@
    "manual": "SLK PROP12",
    "status": "done",
    "visuals": "array",
-   "notes": "was flagged aligned-needs-visuals but the section was actually BROKEN: every note body was a plain string, not an array, so buildCh's (n.body||[]).map threw and the section would not render. Bodies converted to arrays - it was the only section in the file with this defect. Also removed invented content (Eccles v Bryant, LPA 1925 s.52, LRR 2003 - none in the chapter) and fixed the statutes/cases arrays, which held bare strings instead of {ref,text}/{name,citation,rule} objects and rendered blank. Corrected the postal-exchange rule: binding when the SELLER'S part is posted, not 'on the posting date'. Added the missing manual material: max 4 legal owners/legal estate is always a joint tenancy, overreaching and the second trustee, the full pre-exchange checklists for both solicitors, cleared deposit funds and the SRA Accounts Rules, the redemption-figure undertaking, memorandum contents, implied undertakings, estate contract (notice v C(iv)), risk and the seller's continuing duty, occupation before completion (SC licensee v SCPC silence) and simultaneous exchange and completion. Single steps visual replaced with an array of 8 (3 mind maps, 3 decision trees, 1 grid, 1 steps). Object is 26k chars, above the 15-20k target, because the chapter has 15 subsections and 8 visuals."
+   "notes": "was flagged aligned-needs-visuals but the section was actually BROKEN: every note body was a plain string, not an array, so buildCh's (n.body||[]).map threw and the section would not render. Bodies converted to arrays - it was the only section in the file with this defect. Also removed invented content (Eccles v Bryant, LPA 1925 s.52, LRR 2003 - none in the chapter) and fixed the statutes/cases arrays, which held bare strings instead of {ref,text}/{name,citation,rule} objects and rendered blank. Corrected the postal-exchange rule: binding when the SELLER'S part is posted, not 'on the posting date'. Added the missing manual material: max 4 legal owners/legal estate is always a joint tenancy, overreaching and the second trustee, the full pre-exchange checklists for both solicitors, cleared deposit funds and the SRA Accounts Rules, the redemption-figure undertaking, memorandum contents, implied undertakings, estate contract (notice v C(iv)), risk and the seller's continuing duty, occupation before completion (SC licensee v SCPC silence) and simultaneous exchange and completion. Single steps visual replaced with an array of 8 (3 mind maps, 3 decision trees, 1 grid, 1 steps). Object is 26k chars, above the 15-20k target, because the chapter has 15 subsections and 8 visuals.",
+   "default_words": 1177,
+   "needs_format_pass": true
   },
   {
    "id": "12.9",
@@ -910,7 +1141,9 @@
    "manual": "SLK PROP12",
    "status": "done",
    "visuals": "single",
-   "notes": ""
+   "notes": "",
+   "default_words": 558,
+   "needs_format_pass": true
   },
   {
    "id": "12.10",
@@ -918,7 +1151,9 @@
    "manual": "SLK PROP12",
    "status": "aligned-needs-visuals",
    "visuals": "single",
-   "notes": ""
+   "notes": "",
+   "default_words": 333,
+   "needs_format_pass": true
   },
   {
    "id": "12.11",
@@ -926,7 +1161,9 @@
    "manual": "SLK PROP12",
    "status": "aligned-needs-visuals",
    "visuals": "single",
-   "notes": ""
+   "notes": "",
+   "default_words": 387,
+   "needs_format_pass": true
   },
   {
    "id": "12.12",
@@ -934,7 +1171,9 @@
    "manual": "SLK PROP12",
    "status": "aligned-needs-visuals",
    "visuals": "single",
-   "notes": ""
+   "notes": "Received from 4.6 (2026-08-10): forfeiture waiver (knowledge + act recognising continuance + communication), the 6-month notice required to sue a FORMER tenant, and relief from forfeiture including s 146(2) and the subtenant's s 146(4) route. Still needs its own visuals pass.",
+   "default_words": 310,
+   "needs_format_pass": true
   },
   {
    "id": "12.13",
@@ -942,7 +1181,9 @@
    "manual": "SLK PROP12",
    "status": "aligned-needs-visuals",
    "visuals": "single",
-   "notes": ""
+   "notes": "",
+   "default_words": 452,
+   "needs_format_pass": true
   },
   {
    "id": "12.14",
@@ -950,7 +1191,9 @@
    "manual": "SLK PROP12",
    "status": "aligned-needs-visuals",
    "visuals": "single",
-   "notes": ""
+   "notes": "",
+   "default_words": 522,
+   "needs_format_pass": true
   },
   {
    "id": "12.15",
@@ -958,12 +1201,45 @@
    "manual": "SLK PROP12",
    "status": "done",
    "visuals": "single",
-   "notes": ""
+   "notes": "",
+   "default_words": 243,
+   "needs_format_pass": true
   }
  ],
  "gaps": [
   "FORMATTING HAZARD: section 8.4 was serialised with spaces after colons ('\"id\": \"8.4\"') while every other section uses compact JSON ('\"id\":\"8.4\"'). Any grep or script matching the compact form silently skips it. Worth re-running an id audit with a whitespace-tolerant pattern before trusting the counts.",
   "Non-standard id '7.9B' (Corporate Finance - Debt Finance & Security) also escapes numeric id sweeps. The file holds 119 sections in total, not 117."
  ],
- "scheduling": "Run buildSchedule() AND buildSecondPass() from the LIVE SQE1_COLP_Revision.html (github.io == origin/main == local as at 7 Aug 2026, 46,157 bytes) and merge by date. SANITY CHECK, UPDATED: the old 'two modules per free day' check is now WRONG and would fire a false STOP AND ASK - the correct check is ONE first-pass module per free day plus ONE revisit. Merged opening as at 7 Aug 2026 (done-set reconstructed as SEED_DATES[code] < '2026-05-27', 42 modules): 7 Aug PROP12.3 + CONT1.1 | 13 Aug DISP8.6 + TORT2.1 | 14 Aug SYS11.2 + COND3.1 | 16 Aug PROP12.4 + LAND4.1 | 20 Aug WILL13.2 + CRML5.1 | 21 Aug BUS7.7 + TRUS6.1 | 23 Aug DISP8.7 + COND3.2. CORRECTION (Ghita, 7 Aug 2026): the 7 Aug run took 7.7, 8.7 and 1.4 from the first pass alone. Those are due 21, 23 and 28 Aug. The correct three for that day, merging both passes and skipping sections already done here, were 1.1 Formation, 2.1 Negligence and 3.1 Overview of the Principles and Codes Part 1 - all still todo. The page subtitle still reads '14-day gap - Ends 14 Dec 2026'; that text is stale, the JS is authoritative."
+ "scheduling": "Run buildSchedule() AND buildSecondPass() from the LIVE SQE1_COLP_Revision.html (github.io == origin/main == local as at 7 Aug 2026, 46,157 bytes) and merge by date. SANITY CHECK, UPDATED: the old 'two modules per free day' check is now WRONG and would fire a false STOP AND ASK - the correct check is ONE first-pass module per free day plus ONE revisit. Merged opening as at 7 Aug 2026 (done-set reconstructed as SEED_DATES[code] < '2026-05-27', 42 modules): 7 Aug PROP12.3 + CONT1.1 | 13 Aug DISP8.6 + TORT2.1 | 14 Aug SYS11.2 + COND3.1 | 16 Aug PROP12.4 + LAND4.1 | 20 Aug WILL13.2 + CRML5.1 | 21 Aug BUS7.7 + TRUS6.1 | 23 Aug DISP8.7 + COND3.2. CORRECTION (Ghita, 7 Aug 2026): the 7 Aug run took 7.7, 8.7 and 1.4 from the first pass alone. Those are due 21, 23 and 28 Aug. The correct three for that day, merging both passes and skipping sections already done here, were 1.1 Formation, 2.1 Negligence and 3.1 Overview of the Principles and Codes Part 1 - all still todo. The page subtitle still reads '14-day gap - Ends 14 Dec 2026'; that text is stale, the JS is authoritative.",
+ "manual_editions": {
+  "source_folder": "Formation Solicitor/Manuals",
+  "verified_against_2026": [
+   "1.1",
+   "12.5",
+   "2.1",
+   "3.1",
+   "4.6",
+   "5.4",
+   "7.7",
+   "8.7",
+   "9.5"
+  ],
+  "warning": "Sections not listed in verified_against_2026 were built against the 2025 manual editions and have NOT been re-checked against the 2026 editions in Formation Solicitor/Manuals."
+ },
+ "format_spec": {
+  "set": "2026-08-10",
+  "rule": "Quick refresher for memorisation. Complete sentences, one idea per line, no character caps. Compress by removing empty words, splitting compound lines, saying it once, and pushing detail into collapsed panels - never by truncating.",
+  "default_screen_target_words": 1200,
+  "mcq_traps": "REMOVED from all sections 2026-08-10 - superseded by the FLASH_DATA deck (244 cards, 243 auto-generated from wrong answers). Backup in removed_mcq_traps_backup.json.",
+  "decision_trees": "Only for a multi-criteria test where every limb must be worked, or a real fork (if X then this, if not-X then that). Never to enumerate.",
+  "reference_section": "2.1"
+ },
+ "examinable_law_updates_checked": {
+  "date": "2026-08-11",
+  "Business to March 2026": "7.7.4.2 register of members - already incorporated into the 2026 BUS7 manual; CURRENCY line kept in 7.7. Nothing else in the update touches 7.7.",
+  "Tort (SQE July 2026)": "Removes the defence of necessity at 2.2.2.4. Does not touch 2.1.",
+  "Dispute Resolution (13 March 2026)": "Entries at 8.4.4.2, 8.8.3.2 and 8.15.2 only. Does not touch 8.7.",
+  "CRMP Sentencing Act 2026": "Entries at 9.3 (bail) and 9.10 (sentencing) only. Does not touch 9.5.",
+  "Contract, Conduct": "No update file exists for CONT1 or COND3."
+ }
 }
