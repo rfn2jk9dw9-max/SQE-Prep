@@ -1,12 +1,12 @@
 {
- "updated": "2026-08-11",
+ "updated": "2026-08-12",
  "rule": "Pick sections by running the REAL buildSchedule() AND buildSecondPass() from SQE1_COLP_Revision.html in node against the server done-set (colp_progress.php), then MERGING both passes by date. SEED_DATES are TEACHING dates, not due dates. As at the Aug 2026 rewrite of that file: no MIN_GAP (eligible the day taught), SCHED_END 2027-01-10 (day before FLK1), isFreeDay also excludes four FULL_PAPER_DAYS Sundays, DEFAULT_DONE CONT1.1-1.3. The first pass assigns ONE new module per free day (75 days); buildSecondPass adds ONE spaced revisit per day (83 entries, 21-day gap, coldest first). BOTH COUNT. getStatus() colours cards from the first pass only and revisits render on the existing card - that is display, not scheduling. Taking the first pass alone sends the overhaul to material 2-3 weeks out and skips the oldest never-overhauled chapters, which is what the second pass exists to rescue. Nothing is ever overdue; the queue drains in TEACHING order. Take Today then Upcoming from the MERGED list, skipping sections already done here. Then: (1) pdftotext the SLK manual chapter, (2) rebuild notes terse (15-25k chars, one point per line, citations only in the cases array, grep every case name back against the manual), (3) visuals array - overview mind map + one per topic + decision trees for confusable doctrines (map: 2-5 branches, grid: 2-4 cols), (4) preserve/relocate MCQ traps, never delete, (5) verify with the node buildVis sweep, (6) push the single file via a /tmp clone.",
  "counts": {
   "total": 119,
-  "done": 54,
+  "done": 55,
   "aligned_needs_visuals": 8,
-  "todo": 57,
-  "needs_format_pass": 113
+  "todo": 56,
+  "needs_format_pass": 107
  },
  "sections": [
   {
@@ -428,9 +428,10 @@
    "manual": "SLK CONT1",
    "status": "done",
    "visuals": "array",
-   "notes": "Invented content. CONT1 chapter 1.4 cites NO cases, yet the section carried six in the cases array (Davis Contractors, Taylor v Caldwell, Cutter v Powell, Hoenig v Isaacs, Hochster, Krell) plus Vitol v Norelf, Maritime National Fish and Bell v Lever Bros in the prose - all removed, cases array now empty. Also dropped force majeure, foreseeability as an element of frustration and tender of performance (none in the chapter); common mistake kept only as a boundary cross-reference to 1.3. Added the missing spine: the three options on imperfect performance, entire vs divisible on the parties' intention, substantial performance as a question of degree with the cost of making good deducted, partial performance recovering nothing without a genuine choice to accept, prevention by the other party, the three routes to time of the essence, bilateral vs unilateral discharge and accord and satisfaction, expiry/condition precedent, waiver needing consideration, the affirmation rules (no duty to mitigate, but no co-operation required and legitimate interest), the four frustration categories, what is NOT frustration, the common-law bar where a benefit has been received, and the LRFCA 1943 with its three excluded contract types and the just sum. Legacy single ladder replaced with an array of 8 (2 mind maps, 3 decision trees, 2 grids, 1 map). 23k.",
-   "default_words": 1496,
-   "needs_format_pass": true
+   "notes": "Full verification against the 2026 CONT1. Chapter was MISSING 1.4.2.5 illegitimate pressure entirely and had renumbered late performance as 1.4.2.5 instead of 1.4.2.6 - both fixed. 1.4.2.1 was described loosely; rewritten to the manual's prerequisite/lump-sum formulation plus the three mitigating devices. Added the 1.4.4.3 requirement that affirmation needs knowledge of the facts AND of the legal right to choose, and the rule that an anticipatory breach of a lesser term is not repudiatory. Removed two enumerating tree nodes (breach 'which remedy is always available', frustration 'what can be recovered' - the latter duplicated the recovery grid). KEPT White and Carter v McGregor and its two limits, which the 2026 chapter does not carry but which are real and examinable. Added a 12-case array (Cutter, Hoenig, Bolton, Sumpter, Hochster, White and Carter, Taylor v Caldwell, Krell, Herne Bay, Davis Contractors, Maritime National Fish, Tsakiroglou) - the chapter carries no case names at all. Tip cut 1520->1059 chars. 1312->1235 words.",
+   "default_words": 1235,
+   "needs_format_pass": false,
+   "manual_edition": "SLK CONT1 manual 2026_05_25.pdf"
   },
   {
    "id": "1.5",
@@ -476,11 +477,12 @@
    "id": "6.4",
    "title": "Trustees and Fiduciary Obligations",
    "manual": "SLK TRUS6",
-   "status": "todo",
-   "visuals": "single",
-   "notes": "",
-   "default_words": 1534,
-   "needs_format_pass": true
+   "status": "done",
+   "visuals": "array",
+   "notes": "FULL OVERHAUL - was still on the legacy single grid visual with four table-heavy note blocks. Rebuilt against the 2026 TRUS6. ADDED Recovery Partners GP Ltd v Rukhadze [2026] AC 209; [2025] UKSC 10, new in the 2026 edition, with a CURRENCY line: a fiduciary accounts even where the profit would have been made without the breach, and the duty to account is independent. Added TA 2000 s 31(1) expenses, the four exceptions to the no-profit rule in full, TA 2000 Part V / ss 28-29, and the manual's minor-trustee and trust-corporation rules. FIXED 'TA 1996 s.19' -> TLATA 1996 s 19. FIXED the s 32 advancement ceiling, which was attributed to the TA 2000; it was raised from one half to the whole share by the Inheritance and Trustees' Powers Act 2014. Also corrected the same error in the E-block Precision callout for 6.4, which additionally said the COURT advances capital when it is the TRUSTEES. Removed a duplicate Klug v Klug entry in the cases array. Nine visuals: overview map, two decision trees (fiduciary rules, proper investment), duties map, five grids. KEPT s 36/s 39/s 41/TLATA s 19 section numbers, which the 2026 chapter omits but which are real and examinable. 839->1233 words.",
+   "default_words": 1233,
+   "needs_format_pass": false,
+   "manual_edition": "SLK TRUS6 manual 2026_05_27.pdf"
   },
   {
    "id": "6.5",
@@ -760,9 +762,10 @@
    "manual": "SLK TORT2",
    "status": "done",
    "visuals": "array",
-   "notes": "Invented content removed: Caparo v Dickman (belongs to 2.1, which is done and covers duty), Spartan Steel v Martin, Henderson v Merrett Syndicates and White v Jones - none is in the manual chapter, which cites only Hedley Byrne, JEB Fasteners, Donoghue v Stevenson and Evans v Triplex. Also removed as unsupported: the GBP 275 property-damage threshold, 'importer into the EU', the supplier-who-fails-to-identify-the-producer limb, s 11A Limitation Act 1980, the intermediate-examination gloss on Donoghue, and the claim that the development risks defence is unavailable to pharmaceutical manufacturers (the manual's actual limit is that it fails where a GENERIC defect was or should have been known). Missing manual material added: the contract-first analysis and the buyer's remedy against the seller on express/implied terms, negligent ACTS as distinct from misstatements, the fourth Hedley Byrne requirement plus the separate breach and real-and-substantial-inducement steps from JEB Fasteners, the three extensions of Hedley Byrne (advice, non-performance of will services, pension advice), the whole of 2.4.3 element by element (broad reading of consumer and manufacturer, containers/packaging/instructions, the inferred-breach presumption and its rebuttal, warn-or-recall, the causation and damage points), and on the CPA the s 1(2)/s 45 product and goods definitions, the s 3(2) factors, the claimant's burden of proving the defect, all SIX s 4(1) defences and contributory negligence, and both limitation clocks. Statutes array rebuilt to the eight provisions the manual actually cites. Trap block kept first and rewritten to the manual (nine traps). Single flow replaced with an array of 7 (2 mind maps, 2 decision trees, comparison grid, defences steps, figures grid). 6k -> 21k chars.",
-   "default_words": 1136,
-   "needs_format_pass": true
+   "notes": "Full verification against the 2026 TORT2. Was missing the Spartan Steel three-loss illustration (the manual's central worked example) and the floodgates/contract-territory rationale - both added. s 2 defendants were described as 'some of the categories'; replaced with the manual's FOUR categories and, critically, the condition that a SUPPLIER is only liable where the claimant cannot identify the other three and the supplier fails to provide the information. Replaced the negligence-route tree, whose Q2 enumerated the four elements, with a genuine retailer-v-manufacturer / negligence-v-CPA fork plus a collapsed mind map of the negligence elements. Tip rewritten. 978->1009 words.",
+   "default_words": 1009,
+   "needs_format_pass": false,
+   "manual_edition": "SLK TORT2 manual 2026_05_25.pdf"
   },
   {
    "id": "2.5",
@@ -851,9 +854,10 @@
    "manual": "SLK CRML5",
    "status": "done",
    "visuals": "array",
-   "notes": "Invented content + missing manual detail. Removed R v Shivpuri, the Chan Wing-Siu overruling and 'conditional intent' (none in CRML5 5.4), plus attempt examples and withdrawal-timing propositions the chapter does not contain. Added: co-principals with differing mens rea, charging on the same count and the alternative principal/accessory basis, innocent agency, the requirement of a fully constituted actus reus with conspiracy and SCA 2007 ss 44-46 as the fallback where commission fails, an accessory being convictable of an offence they could not commit as principal, the four mens rea aspects in full with wilful blindness v failure to inquire, the lesser-offence and unlawful-act-manslaughter analysis, s 1(3) legal impossibility and s 1(4). Cases limited to the five the chapter cites. Single grid replaced with an array of 10. 24k. RE-VERIFIED against CRML5 2026_05_25: diff is wording only, no substantive change.",
-   "default_words": 2219,
-   "needs_format_pass": true
+   "notes": "Format pass. Seven decision trees was too many and several were enumerations: the charging point, the lesser-offence tree, the attempt mens rea tree and the impossibility tree all became grids or notes, leaving four genuine forks (role, accessory AR, withdrawal, more than merely preparatory). Trimmed tree answers that duplicated the notes and split the longest bullets. Tip rewritten. 1919->1344 words - still the highest of the six because the chapter carries two whole doctrines, accessorial liability and attempts, and cutting further would have meant dropping content.",
+   "default_words": 1344,
+   "needs_format_pass": false,
+   "manual_edition": "SLK CRML5 manual 2026_05_25.pdf"
   },
   {
    "id": "5.5",
@@ -1051,9 +1055,10 @@
    "manual": "SLK LAND4",
    "status": "done",
    "visuals": "array",
-   "notes": "Invented content + a misclassification + displaced content. Removed cases not in LAND4 4.6 (Prudential Assurance, Ashburn Anstalt, Walsh v Lonsdale, Billson, Sirius International) and LTCA section numbering the manual does not give (s 5, the s 17 notice and its 6 months, s 19 overriding lease, s 25), plus touch-and-concern, LPA ss 141-142, LTA 1985 s 8, non-derogation from grant, FRI/IRI, dilapidations s 18(1) LTA 1927, LTA 1927 s 3, break-clause strict compliance, upward-only rent review, LTA 1985 ss 18-30 service charges, County Courts Act 1984 s 138, remediable v irremediable breaches, s 38A, the (g) five-year rule, 1x/2x rateable value compensation and interim rent. CORRECTED: the manual makes (a)(b)(c)(e) DISCRETIONARY and (d)(f)(g) MANDATORY - the section had grouped (d) with the fault grounds; 6-12 months belongs to the OPPOSED s 25 notice; a s 26 request gives the landlord 2 months. Added the three leasehold estates, formalities for registered and unregistered land (three short-lease conditions, assignment only by deed, 2-month registration out of an unregistered title, C(iv) for an equitable lease), the key leasehold terms block, landlord/tenant express and implied covenants, alienation and alterations, the full remedies table (CRAR from 6 April 2014, Jervis v Harris self-help as a DEBT) and the LTA 1954 machinery end to end. Forfeiture waiver, the 6-month notice to a former tenant and relief from forfeiture MOVED to 12.12, where the PROP12 manual carries them. Single grid replaced with an array of 13. 32k, above the ideal because the chapter runs 13 pages and carries 13 visuals. RE-VERIFIED against LAND4 2026_05_21: 3-7 yr lease binds whether noted or not (7 yrs or less = overriding interest); short lease now FOUR conditions; damages for disrepair capped at the diminution in the reversion (LTA 1927 s 18, which the 2026 edition now gives); s 146 counter-notice where 3+ years unexpired = leave of the court; self-help avoids the damages cap; LTA 1985 s 17 citation dropped from the manual and removed here.",
-   "default_words": 1964,
-   "needs_format_pass": true
+   "notes": "Format pass. Fixed a stale label: the tree was headed 'the three conditions for a short legal lease' when the 2026 LAND4 carries FOUR - content was already right, the heading was not. Split the unregistered-land limb out of that tree into its own grid alongside the registered-land grid. Moved the exposition node out of the lease/licence tree into the notes. Lifted change of use and alterations out of the alienation tree, where they did not belong, into a grid on the other tenant covenants. Converted the LTA 1954 'five ways it can end' node into a numbered list in the notes. Split three over-long bullets. Tip cut 2319->1381 chars. 1742->1223 words.",
+   "default_words": 1223,
+   "needs_format_pass": false,
+   "manual_edition": "SLK LAND4 manual 2026_05_21.pdf"
   },
   {
    "id": "12.1",
@@ -1101,9 +1106,10 @@
    "manual": "SLK PROP12",
    "status": "done",
    "visuals": "array",
-   "notes": "Was labelled aligned-needs-visuals but was badly misaligned on content. Removed invented/displaced material: LLC1/Con29/Con29O/CON29DW/CON29M form names, chancel repair 13 Oct 2013, EPA 1990 Pt IIA, LRA 2002 s 72, Water Industry Act 1991, Local Land Charges Act 1975 and official-v-personal searches (none in PROP12 12.5); the entire pre-completion block (OS1/OS2/K15/K16 priority periods and the Class C/D land-charge tables) DROPPED AS SUPERSEDED - 12.9 already carries the pre-completion searches and 4.3 the land-charge classes, and the manual expressly warns not to confuse the two stages. Added the manual material that was absent: the three surveys and who may rely on each, caveat emptor and physical inspection, the five every-purchase and nine location-dependent searches, cautions against first registration, raising enquiries and the no-exchange rule, TA6/CPSE misrepresentation and 'not so far as the seller is aware', the common issues table, commercial CPSE contents, sale of part (DS1 v DS3, HMLR plan red/blue, TR1 v TP1, rights granted and reserved, covenants) and new build (planning + building regs completion certificate, adoption agreements and bonds, stakeholder v agent deposit, 10-year NHBC warranty with deposit protection). Title corrected to 'Pre-Contract Searches and Enquiries'. Cases array empty - the chapter cites none. Single cards visual replaced with an array of 9. 27k. RE-VERIFIED against PROP12 2026_06_09: s 38 (roads) and s 104 (water/sewers) adoption agreements now named; 'bankruptcy official search' and 'Land Charges official search'; K15 periods of ownership IN THE RELEVANT COUNTY with classes cross-referred to Land Law 4.3.4.2; TA6 named; Conveyancing Protocol (2019); footpath reported to the lender only where also acting for it; warranty 'within' the first 10 years; LPA 1925 s 62 removed.",
-   "default_words": 1256,
-   "needs_format_pass": true
+   "notes": "Format pass. Deleted the 'which extra search' tree outright - it repeated the it-depends grid line for line; its unique content (the three ways a search is defective) moved into the notes as a numbered list. Converted the 'adverse result' tree (five topic nodes, a list in tree clothing) and the enquiries tree to grids. Built one genuine decision tree of the real forks in the results (adopted road, public foul drainage, registered v unregistered title) and one on which survey the buyer needs. Enriched the overview map so the default screen still carries the recall triggers. Split seven over-long bullets. Tip cut 1639->1236 chars. 1256->929 words.",
+   "default_words": 929,
+   "needs_format_pass": false,
+   "manual_edition": "SLK PROP12 manual 2026_06_09.pdf"
   },
   {
    "id": "12.6",
@@ -1215,11 +1221,14 @@
   "source_folder": "Formation Solicitor/Manuals",
   "verified_against_2026": [
    "1.1",
+   "1.4",
    "12.5",
    "2.1",
+   "2.4",
    "3.1",
    "4.6",
    "5.4",
+   "6.4",
    "7.7",
    "8.7",
    "9.5"
@@ -1235,11 +1244,12 @@
   "reference_section": "2.1"
  },
  "examinable_law_updates_checked": {
-  "date": "2026-08-11",
-  "Business to March 2026": "7.7.4.2 register of members - already incorporated into the 2026 BUS7 manual; CURRENCY line kept in 7.7. Nothing else in the update touches 7.7.",
-  "Tort (SQE July 2026)": "Removes the defence of necessity at 2.2.2.4. Does not touch 2.1.",
-  "Dispute Resolution (13 March 2026)": "Entries at 8.4.4.2, 8.8.3.2 and 8.15.2 only. Does not touch 8.7.",
-  "CRMP Sentencing Act 2026": "Entries at 9.3 (bail) and 9.10 (sentencing) only. Does not touch 9.5.",
-  "Contract, Conduct": "No update file exists for CONT1 or COND3."
+  "date": "2026-08-12",
+  "Tort (SQE July 2026)": "Only entry is 2.2.2.4, removing the defence of necessity. Does not touch 2.4.",
+  "Trusts (cut off 13 March 2026)": "Manual updated April 2026, no further changes. The two minor points are at 6.1.5 (National Iranian Oil Co v Crescent Gas: agent signatures insufficient) and 6.1.6.1 (Property (Digital Assets etc) Act 2025). Neither touches 6.4.",
+  "Land (July 2026)": "Checked by content, not page number. Nothing bearing on 4.6 beyond the fourth short-lease condition already carried in the 2026 manual.",
+  "Business to March 2026": "Not relevant to any of today's six.",
+  "Dispute Resolution, Wills, CRMP Sentencing Act": "Not relevant to any of today's six.",
+  "Contract, Conduct, Property": "No update file exists for CONT1, COND3 or PROP12."
  }
 }
