@@ -1,12 +1,12 @@
 {
- "updated": "2026-08-12",
+ "updated": "2026-08-13",
  "rule": "Pick sections by running the REAL buildSchedule() AND buildSecondPass() from SQE1_COLP_Revision.html in node against the server done-set (colp_progress.php), then MERGING both passes by date. SEED_DATES are TEACHING dates, not due dates. As at the Aug 2026 rewrite of that file: no MIN_GAP (eligible the day taught), SCHED_END 2027-01-10 (day before FLK1), isFreeDay also excludes four FULL_PAPER_DAYS Sundays, DEFAULT_DONE CONT1.1-1.3. The first pass assigns ONE new module per free day (75 days); buildSecondPass adds ONE spaced revisit per day (83 entries, 21-day gap, coldest first). BOTH COUNT. getStatus() colours cards from the first pass only and revisits render on the existing card - that is display, not scheduling. Taking the first pass alone sends the overhaul to material 2-3 weeks out and skips the oldest never-overhauled chapters, which is what the second pass exists to rescue. Nothing is ever overdue; the queue drains in TEACHING order. Take Today then Upcoming from the MERGED list, skipping sections already done here. Then: (1) pdftotext the SLK manual chapter, (2) rebuild notes terse (15-25k chars, one point per line, citations only in the cases array, grep every case name back against the manual), (3) visuals array - overview mind map + one per topic + decision trees for confusable doctrines (map: 2-5 branches, grid: 2-4 cols), (4) preserve/relocate MCQ traps, never delete, (5) verify with the node buildVis sweep, (6) push the single file via a /tmp clone.",
  "counts": {
   "total": 119,
-  "done": 55,
+  "done": 59,
   "aligned_needs_visuals": 8,
-  "todo": 56,
-  "needs_format_pass": 107
+  "todo": 60,
+  "needs_format_pass": 101
  },
  "sections": [
   {
@@ -84,11 +84,12 @@
    "id": "8.8",
    "title": "Interim Applications",
    "manual": "SLK DISP8",
-   "status": "todo",
-   "visuals": "single",
-   "notes": "",
-   "default_words": 1097,
-   "needs_format_pass": true
+   "status": "done",
+   "visuals": "array",
+   "notes": "FULL OVERHAUL - was a single cards visual carrying five headline tests, 1097 default words. Rebuilt against the 2026 DISP8. ADDED the full PD 23A para 3 without-notice grounds and the duty of full and frank disclosure, the Denton relief-from-sanctions cross-reference, the bundle, skeleton and statement-of-costs machinery, the five interim costs orders, the American Cyanamid exceptions (restraint of trade, final disposal, no defence) and equitable defences (delay, acquiescence, unclean hands, equity will not act in vain, enforcement), search and imaging orders with the Anton Piller conditions and CPR r 25.17, and the security-for-costs discretion, amount and forms. Dispute Resolution examinable-law update APPLIED: the 8.8.3.2 SLAPP strike-out ground [ECCTA 2023 s 195] and the CPR r 44.2 costs reversal are both carried. Section object is 27.8k characters, above the 12-20k guide, because the chapter covers five separate remedies; the default screen is what was managed instead.",
+   "default_words": 1634,
+   "needs_format_pass": false,
+   "manual_edition": "SLK DISP8 manual 2026_05_29"
   },
   {
    "id": "8.9",
@@ -255,21 +256,23 @@
    "id": "7.8",
    "title": "Company Decision-Making",
    "manual": "SLK BUS7",
-   "status": "todo",
-   "visuals": "single",
-   "notes": "",
-   "default_words": 529,
-   "needs_format_pass": true
+   "status": "done",
+   "visuals": "array",
+   "notes": "FULL OVERHAUL - was a single four-column grid, 529 default words. Rebuilt against the 2026 BUS7. ADDED the 5% requisition route with the 21-day and 28-day timetable and the shareholders' expense recovery, the two-stage short notice test (majority in NUMBER plus 90%, raisable to 95% but never lower), the meaning of a clear day, the manual's own eight key steps of a board meeting, and the 15-day Companies House deadline for special resolutions with the authority-to-allot exception. Business update to March 2026 checked: nothing in it touches 7.8.",
+   "default_words": 1511,
+   "needs_format_pass": false,
+   "manual_edition": "SLK BUS7 manual 2026_05_28"
   },
   {
    "id": "7.9",
-   "title": "Corporate Finance — Share Funding (Equity)",
+   "title": "Share Funding",
    "manual": "SLK BUS7",
-   "status": "todo",
-   "visuals": "single",
-   "notes": "",
-   "default_words": 494,
-   "needs_format_pass": true
+   "status": "done",
+   "visuals": "array",
+   "notes": "FULL OVERHAUL - was a single three-column grid, 494 default words. TITLE CORRECTED to 'Share Funding' to match the manual chapter and the COLP MODULES entry; it was 'Corporate Finance - Share Funding (Equity)'. ADDED variation of class rights (three-quarters in nominal value in writing, or a special resolution of that class), deferred and redeemable shares, the prohibition on allotting at a discount with the private-company valuation loophole, and transmission on death or bankruptcy. KEPT the CA 2006 section numbers the 2026 chapter strips out (ss 550, 551, 561, 562, 564-566, 567, 569-571, 580, 593, 630, 684, 770, 776), each attached to its rule and each with a statutes entry. NOTE for 7.10: section 7.9B in the tool ('Corporate Finance - Debt Finance & Security') carries what the 2026 manual puts in 7.10 - check for duplication when 7.10 comes up on 25 Sep. Business update to March 2026 checked: nothing in it touches 7.9.",
+   "default_words": 1502,
+   "needs_format_pass": false,
+   "manual_edition": "SLK BUS7 manual 2026_05_28"
   },
   {
    "id": "7.9B",
@@ -518,11 +521,12 @@
    "id": "13.3",
    "title": "Personal Representatives and Interpretation of Wills",
    "manual": "SLK WILL13",
-   "status": "todo",
-   "visuals": "single",
-   "notes": "",
-   "default_words": 228,
-   "needs_format_pass": true
+   "status": "done",
+   "visuals": "array",
+   "notes": "FULL OVERHAUL - was the legacy single flow visual with 228 default words. Rebuilt against the 2026 WILL13. ADDED the citation and appearance route where a sole executor will not act [Senior Courts Act 1981 s 112; NCPR rr 20 and 47], the renunciation-v-power-reserved contrast with Form PA15 and Form Cap A5C, the intermeddling lists, class closing with the three worked wordings, and the lapse sub-rules (joint v equal shares, s 33's narrowness and the 'such of my children as survive me' point, commorientes). Wills examinable-law update checked: the Cator & Ors v Thynn [2026] EWHC 1045 (Ch) surrogacy point is for 13.4.2.4, not this section, so nothing applied here.",
+   "default_words": 1332,
+   "needs_format_pass": false,
+   "manual_edition": "SLK WILL13 manual 2026_06_15"
   },
   {
    "id": "13.4",
@@ -650,10 +654,11 @@
    "title": "Evidence and Proof",
    "manual": "SLK CRMP9",
    "status": "done",
-   "visuals": "single",
-   "notes": "",
-   "default_words": 758,
-   "needs_format_pass": true
+   "visuals": "array",
+   "notes": "FULL OVERHAUL - was a single two-column grid, 758 default words. Rebuilt against the 2026 CRMP9. KEPT the burden and standard of proof material: the 2026 chapter body drops it but the chapter's own summary of key principles still carries it, and it is correct examinable law. ADDED the Code D detail the section lacked - the recorded first description, at least twelve photographs for an unknown suspect, the eight-person minimum for a video identification or parade, the order of preference (video, parade, group, confrontation), the common safeguards, and the two situations in which a dock identification is permitted. R v Weeder added alongside R v Turnbull. CRMP Sentencing Act update is irrelevant to this chapter.",
+   "default_words": 1355,
+   "needs_format_pass": false,
+   "manual_edition": "SLK CRMP9 manual 2026_06_04"
   },
   {
    "id": "9.7",
@@ -974,10 +979,11 @@
    "title": "Money Laundering",
    "manual": "SLK SERV10",
    "status": "done",
-   "visuals": "single",
-   "notes": "",
-   "default_words": 399,
-   "needs_format_pass": true
+   "visuals": "array",
+   "notes": "FULL OVERHAUL - was a single cards visual, 399 default words. Rebuilt against the 2026 SERV10. ADDED the Terrorism Act 2000 ss 15-19 offences, the regulation-by-regulation MLR 2017 duties on the firm (regs 18, 19, 21, 24, 26) with the 14-day SRA notification, the NCA clock of 7 working days plus a further 31 if the defence is refused, the three s 330 defences (reasonable excuse, legal professional privilege, insufficient training), and the reg 27 triggers and reg 30 delay exception. The high-risk country list is deliberately NOT memorised - the section points at the FATF list and the HM Treasury Advisory Notice instead, as the manual itself directs. No SERV examinable-law update file exists.",
+   "default_words": 1404,
+   "needs_format_pass": false,
+   "manual_edition": "SLK SERV10 manual 2026_06_05"
   },
   {
    "id": "10.4",
@@ -1222,7 +1228,6 @@
   "verified_against_2026": [
    "1.1",
    "1.4",
-   "12.5",
    "2.1",
    "2.4",
    "3.1",
@@ -1230,8 +1235,15 @@
    "5.4",
    "6.4",
    "7.7",
+   "7.8",
+   "7.9",
    "8.7",
-   "9.5"
+   "8.8",
+   "9.5",
+   "9.6",
+   "10.3",
+   "12.5",
+   "13.3"
   ],
   "warning": "Sections not listed in verified_against_2026 were built against the 2025 manual editions and have NOT been re-checked against the 2026 editions in Formation Solicitor/Manuals."
  },
@@ -1241,7 +1253,22 @@
   "default_screen_target_words": 1200,
   "mcq_traps": "REMOVED from all sections 2026-08-10 - superseded by the FLASH_DATA deck (244 cards, 243 auto-generated from wrong answers). Backup in removed_mcq_traps_backup.json.",
   "decision_trees": "Only for a multi-criteria test where every limb must be worked, or a real fork (if X then this, if not-X then that). Never to enumerate.",
-  "reference_section": "2.1"
+  "reference_section": "2.1",
+  "leaf_rule": {
+   "set": "2026-08-12",
+   "why": "Ghita on 7.7: 'it talks about 7 duties and does not list them, 3 conditions not mentioned, and things like s184 which i don't know what it means'.",
+   "rule_1": "A count never stands in for the content. Name the things. A count is allowed as a BRANCH LABEL only when the leaves beneath it name every item.",
+   "rule_2": "Never a bare section number. Rule first, number in square brackets at the end. If you cannot state what the section says in the leaf, it belongs only in the collapsed statutes panel.",
+   "leaf_length": "No word cap. The old 3-6 word cap was deleted because it was what forced counts and bare numbers to stand in for content.",
+   "regression_scan": "leaves matching \\bx\\d\\b or ^(s|ss|reg|art)\\s?\\d, and branch labels whose count exceeds the items their leaves name",
+   "sweep": "105 leaves and branch labels rewritten across 21 sections on 12 Aug 2026: 1.1 1.4 2.1 2.4 2.5 3.1 4.6 5.1 5.4 6.1 6.3 6.4 7.5 7.6 7.7 8.1 8.2 8.3 8.4 9.5 11.2"
+  },
+  "heavy_default_screens": {
+   "11.2": 2571,
+   "8.4": 1695,
+   "9.5": 1419,
+   "note": "trim these when their scheduled day comes"
+  }
  },
  "examinable_law_updates_checked": {
   "date": "2026-08-12",
@@ -1250,6 +1277,7 @@
   "Land (July 2026)": "Checked by content, not page number. Nothing bearing on 4.6 beyond the fourth short-lease condition already carried in the 2026 manual.",
   "Business to March 2026": "Not relevant to any of today's six.",
   "Dispute Resolution, Wills, CRMP Sentencing Act": "Not relevant to any of today's six.",
-  "Contract, Conduct, Property": "No update file exists for CONT1, COND3 or PROP12."
+  "Contract, Conduct, Property": "No update file exists for CONT1, COND3 or PROP12.",
+  "2026-08-13": "Wills (nothing for 13.3; Cator v Thynn surrogacy is 13.4.2.4), Business to March 2026 (nothing for 7.8 or 7.9), Dispute Resolution (8.8.3.2 SLAPP strike out and CPR r 44.2 costs reversal both applied to 8.8), CRMP Sentencing Act (irrelevant to 9.6). No SERV update file exists for 10.3."
  }
 }
