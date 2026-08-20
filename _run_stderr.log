@@ -1,4 +1,4 @@
-Found 104 PDF files
+Found 109 PDF files
   [dedup] replacing BUS7.1: Business organisations: Ghita Bennis (She:Her).pdf → BUS7.1_ Business organisations_ Ghita Bennis (She_Her).pdf
   [dedup] replacing BUS7.3: Partners' responsibilities and liability: Ghita Bennis (She:Her).pdf → BUS7.3_ Partners' responsibilities and liability.pdf
   [dedup] replacing BUS7.4: Incorporation of a company: Ghita Bennis (She:Her).pdf → BUS7.4_ Incorporation of a company.pdf
@@ -20,8 +20,8 @@ Found 104 PDF files
   [dedup] replacing TORT2.2: Defences: Ghita Bennis (She:Her).pdf → TORT2.2_ Defences.pdf
   [dedup] replacing TRUS6.1: Creation and requirements of express trusts: Ghita Bennis (She:Her).pdf → TRUS6.1_ Creation and requirements of express trusts_ Ghita Bennis (She_Her).pdf
   [dedup] replacing TRUS6.2: Beneficial entitlement: Ghita Bennis (She:Her).pdf → TRUS6.2_ Beneficial entitlement.pdf
-After dedup: 83 unique topics
-Cache loaded: 105 entries from _parse_cache.json
+After dedup: 88 unique topics
+Cache loaded: 110 entries from _parse_cache.json
    10 q  [CACHED]  10.2 v2.pdf
    10 q  [CACHED]  11.2 v2 0708.pdf
    10 q  [CACHED]  12.4 v2 0708.pdf
@@ -45,6 +45,7 @@ Cache loaded: 105 entries from _parse_cache.json
    10 q  [CACHED]  COND3.2_ Overview of Principles and Codes Part 2.pdf
    10 q  [CACHED]  COND3.3_ Code of Conduct for Solicitors, RELs and RFLs.pdf
    10 q  [CACHED]  COND3.4: Code of Conduct for firms: Ghita Bennis (She:Her).pdf
+   10 q  [CACHED]  CONT 1.5.pdf
    10 q  [CACHED]  CONT1.1: Formation: Ghita Bennis (She:Her).pdf
     9 q  [CACHED]  CONT1.2_ Contract terms_ Ghita Bennis (She_Her).pdf
    10 q  [CACHED]  CONT1.3_ Vitiating factors_ Ghita Bennis (She_Her).pdf
@@ -77,6 +78,7 @@ Cache loaded: 105 entries from _parse_cache.json
    10 q  [CACHED]  LAND4.4_ Co-ownership and trusts.pdf
    10 q  [CACHED]  LAND4.5_ Proprietary rights.pdf
     9 q  [CACHED]  LAND4.6_ Leases_ Ghita Bennis (She_Her).pdf
+   10 q  [CACHED]  PROP 12.8.pdf
    10 q  [CACHED]  PROP12.1: Introduction to conveyancing: Ghita Bennis (She:Her).pdf
    10 q  [CACHED]  PROP12.2_ Taxation – property_ Ghita Bennis (She_Her).pdf
     9 q  [CACHED]  PROP12.3_ Preparing the contract of sale_ Ghita Bennis (She_Her).pdf
@@ -84,6 +86,8 @@ Cache loaded: 105 entries from _parse_cache.json
    10 q  [CACHED]  PROP12.5_ Pre-contract searches and enquiries_ Ghita Bennis (She_Her).pdf
    10 q  [CACHED]  PROP12.6_ Core principles of planning law_ Ghita Bennis (She_Her).pdf
    10 q  [CACHED]  PROP12.7_ Finance and acting for a lender _ Ghita Bennis (She_Her).pdf
+   50 q  [CACHED]  Progress Taster 0908 FLK1.pdf
+   50 q  [CACHED]  Progress Taster 0908 FLK2.pdf
    10 q  [CACHED]  SERV10.1_ The regulatory role of the SRA_ Ghita Bennis (She_Her).pdf
    10 q  [CACHED]  SERV10.2: The Equality Act 2010: Ghita Bennis (She:Her).pdf
    10 q  [CACHED]  SERV10.3_ Money laundering_ Ghita Bennis (She_Her).pdf
@@ -94,6 +98,7 @@ Cache loaded: 105 entries from _parse_cache.json
    10 q  [CACHED]  SYS11.1_ The courts.pdf
    10 q  [CACHED]  SYS11.2_ Primary legislation the structure of an Act of Parliament_ Ghita Bennis (She_Her).pdf
    10 q  [CACHED]  SYS11.3_ Core institutions of the state and how they interrelate_ Ghita Bennis (She_Her).pdf
+   10 q  [CACHED]  TORT 2.5 Nuissance.pdf
    10 q  [CACHED]  TORT2.1: Negligence: Ghita Bennis (She:Her).pdf
    10 q  [CACHED]  TORT2.2_ Defences.pdf
    10 q  [CACHED]  TORT2.3: Occupiers’ liability: Ghita Bennis (She:Her).pdf
@@ -105,8 +110,8 @@ Cache loaded: 105 entries from _parse_cache.json
    10 q  [CACHED]  WILL13.1: Validity of wills and codicils: Ghita Bennis (She:Her).pdf
    10 q  [CACHED]  WILL13.2_ Alterations, amendments and revocation of wills_ Ghita Bennis (She_Her).pdf
     9 q  [CACHED]  WILL13.3_ Personal representatives and interpretations of wills_ Ghita Bennis (She_Her).pdf
-Cache: 83 hits, 0 misses
-Cache saved: 105 entries → _parse_cache.json
+Cache: 88 hits, 0 misses
+Cache saved: 110 entries → _parse_cache.json
   [repair] rejoined wrapped options in 9 question(s), 4 awaiting a pinned answer
   [override] 6.3 trust | 'A client was buying a new house and, on the morning of '  cidx 3→3  ('The solicitor is potentially liable for both accessory liabi')
   [override] COND3.2 | 'A solicitor is a partner at a small law firm specialisi'  cidx 0→1  ('The solicitor has breached professional conduct regulations ')
@@ -126,4 +131,4 @@ Cache saved: 105 entries → _parse_cache.json
   [override] WILL13.1 | 'A testator urgently needs to find a second witness to a'  cidx 1→1  ('The testator’s neice who is illiterate.')
   [overrides] applied 16/16 corrections
   [repair] no unresolved answers
-  [dedup] question-level: 867 → 784 (83 repeat(s) removed)
+  [dedup] question-level: 997 → 914 (83 repeat(s) removed)

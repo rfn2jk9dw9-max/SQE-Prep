@@ -1,12 +1,14 @@
 {
- "updated": "2026-08-13",
+ "updated": "2026-08-19",
  "rule": "Pick sections by running the REAL buildSchedule() AND buildSecondPass() from SQE1_COLP_Revision.html in node against the server done-set (colp_progress.php), then MERGING both passes by date. SEED_DATES are TEACHING dates, not due dates. As at the Aug 2026 rewrite of that file: no MIN_GAP (eligible the day taught), SCHED_END 2027-01-10 (day before FLK1), isFreeDay also excludes four FULL_PAPER_DAYS Sundays, DEFAULT_DONE CONT1.1-1.3. The first pass assigns ONE new module per free day (75 days); buildSecondPass adds ONE spaced revisit per day (83 entries, 21-day gap, coldest first). BOTH COUNT. getStatus() colours cards from the first pass only and revisits render on the existing card - that is display, not scheduling. Taking the first pass alone sends the overhaul to material 2-3 weeks out and skips the oldest never-overhauled chapters, which is what the second pass exists to rescue. Nothing is ever overdue; the queue drains in TEACHING order. Take Today then Upcoming from the MERGED list, skipping sections already done here. Then: (1) pdftotext the SLK manual chapter, (2) rebuild notes terse (15-25k chars, one point per line, citations only in the cases array, grep every case name back against the manual), (3) visuals array - overview mind map + one per topic + decision trees for confusable doctrines (map: 2-5 branches, grid: 2-4 cols), (4) preserve/relocate MCQ traps, never delete, (5) verify with the node buildVis sweep, (6) push the single file via a /tmp clone.",
  "counts": {
   "total": 119,
-  "done": 59,
-  "aligned_needs_visuals": 8,
-  "todo": 60,
-  "needs_format_pass": 101
+  "done": 62,
+  "aligned_needs_visuals": 7,
+  "todo": 50,
+  "needs_format_pass": 83,
+  "visuals_array": 48,
+  "note": "Recomputed from the section statuses on 2026-08-19. The previous counts block had drifted from the underlying data - it read done 67 and todo 52 against an actual 61 done and 51 todo."
  },
  "sections": [
   {
@@ -15,9 +17,10 @@
    "manual": "SLK DISP8",
    "status": "done",
    "visuals": "array",
-   "notes": "invented content (Halsey, PGF II, adjudication, CPR r 3.1(2)(m)) removed - Halsey's stated rule was also outdated post-Churchill; whole Arbitration Act 1996 procedure/challenge framework was missing (ss 4-9, 34-48, 52, 54, 65-70) plus the 3-step s 9 stay; single visual replaced with 6 (2 mind maps, 2 decision trees, comparison grid, mediation steps).",
-   "default_words": 1334,
-   "needs_format_pass": true
+   "notes": "The tool said 'most of the 2025 Act not yet in force'. That was WRONG: the Arbitration Act 2025 amendments ARE in force, for arbitrations commenced on or after 1 August 2025. Added the whole 2025 package that was missing: s 6A governing law of the arbitration agreement replacing the Enka v Chubb position, s 23A continuing duty of disclosure, s 39A summary disposal on the CPR r 24.3 threshold, ss 24 and 29 arbitrator immunity, recognition of emergency arbitrators with the s 42 and s 44 extensions, s 61(1A) costs even where the tribunal lacked jurisdiction, and ss 30/32 on who rules on jurisdiction first. Added the Churchill [61] factors as a grid. Renumbered the enforcement note 8.1.4.4 -> 8.1.4.3. The three-step stay procedure was converted from a decision tree to a steps panel - it was a list wearing a tree costume. KEPT the mini-trial, which is real ADR although the 2026 chapter drops it, folded into the notes rather than the tree.",
+   "default_words": 1270,
+   "needs_format_pass": false,
+   "manual_edition": "SLK DISP8 manual 2026_05_29.pdf"
   },
   {
    "id": "8.2",
@@ -95,11 +98,12 @@
    "id": "8.9",
    "title": "Case Management",
    "manual": "SLK DISP8",
-   "status": "todo",
-   "visuals": "single",
-   "notes": "",
-   "default_words": 1243,
-   "needs_format_pass": true
+   "status": "done",
+   "visuals": "array",
+   "notes": "15 Aug 2026 FULL OVERHAUL against the 2026 DISP8; the notes were already accurate and current but the section was on the legacy single four-track grid. Ten visuals: overview map, a track allocation decision tree, a missed-deadline decision tree running extension by agreement then consent order then relief then appeal, the four-track grid, the complexity bands, fast versus intermediate track under CPR Pt 28, the fast track 30-week timetable, typical multi-track directions, costs budgeting deadlines, and disclosure scoping including PD 57AD and the Disclosure Review Document. Removed the 'What you may be asked' note block, which restated the notes. Statutes array rebuilt from 8 to 12 entries. Checked the DR examinable-law update (cut-off 13 March 2026): its three entries land at 8.4.4.2 (Mazur v Charles Russell Speechlys), 8.8.3.2 and 8.15.2 (SLAPPs) - none touches 8.9. KEPT Mitchell v News Group, which the chapter omits but which is the authority Denton clarified. 1243 -> 2158 default words. HIGH BY DESIGN: 8.9 carries one of the largest auto-generated E-blocks in the tool, 6 traps and 5 precision lines that are always visible and account for roughly 750 of those words; the section's own content measures about 1408, in line with 8.7 at 1409.",
+   "default_words": 2158,
+   "needs_format_pass": false,
+   "manual_edition": "SLK DISP8 manual 2026_05_29.pdf"
   },
   {
    "id": "8.10",
@@ -107,9 +111,10 @@
    "manual": "SLK DISP8",
    "status": "done",
    "visuals": "array",
-   "notes": "Prose was aligned but bloated, and carried INVENTED content: Re B (Children) [2008] UKHL 35 and the 'no sliding scale' proposition are not in the manual — removed, cases array now empty. Without-prejudice exceptions rewritten to the manual's own four (8.13.4). Prose condensed; legacy single flow visual replaced with an array of 9.",
-   "default_words": 1547,
-   "needs_format_pass": true
+   "notes": "Format pass, no change of law. Rewrote the overview map and four topic maps under THE LEAF RULE: leaves such as 'Three degrees of hearsay', 'Recipient has 3 options', 'Notice: s 2 / r 33.2', 'PD 32 form requirements', 'SJE preferred' and 'Questions in 28 days' were counts or bare rule numbers standing in for the content, and now name what they label with the rule number in brackets. Split the hearsay-notice tree: kept the two real forks and moved the recipient's three options and the CEA 1995 s 4 weight factors into a collapsed grid. Moved the CPR r 32.1 control-of-evidence node and the 'no real prospect' explanation out of the open trees and into collapsed notes, and split the without prejudice material into its own note. DR examinable-law update checked - it touches 8.4.4.2, 8.8.3.2 and 8.15.2 only, nothing here.",
+   "default_words": 1350,
+   "needs_format_pass": false,
+   "manual_edition": "SLK DISP8 manual 2026_05_29.pdf"
   },
   {
    "id": "8.11",
@@ -187,9 +192,10 @@
    "manual": "SLK BUS7",
    "status": "done",
    "visuals": "array",
-   "notes": "invented content + displaced content + missing visuals. Removed Salomon v Salomon, Prest v Petrodel, CA 2006 ss 3 and 7 and the 'plc min GBP 50k' line - manual 7.1 cites NO cases and none of those provisions, so the cases array is now empty. PA 1890 implied terms, dissolution grounds and outgoing-partner liability DROPPED as superseded: 7.2 and 7.3 already cover them with section numbers. Added everything the chapter was missing: promoters and pre-incorporation contracts, limited partnerships (LPA 1907 as amended by ECCTA 2023, authorised-agent filing), companies limited by guarantee, unlimited companies, IA 1986 s 74(2), the three situations disapplying separate legal personality, maintenance of capital, transparency, factors influencing choice and the full 7.1.7 comparison table. Single grid replaced with an array of 9.",
-   "default_words": 1115,
-   "needs_format_pass": true
+   "notes": "DROPPED the promoters and pre-incorporation contracts steps panel, and the MAINTENANCE OF CAPITAL and TRANSPARENCY branches of the company-law-principles map. None of that sits in 7.1 in the 2026 manual: promoters and pre-incorporation contracts are 7.4.2, and PSC/transparency is 7.4.4. They will be picked up when 7.4 comes round - 7.4 is still a legacy single-visual section and does not cover promoters today, so check it does when its day arrives. Renumbered to the manual's 7.1.2-7.1.6. The veil-piercing decision tree became a grid - it listed three situations, it did not fork. KEPT Insolvency Act 1986 s 74(2), which the chapter does not cite but which is accurate and examinable, attached to the rule it labels.",
+   "default_words": 1073,
+   "needs_format_pass": false,
+   "manual_edition": "SLK BUS7 manual 2026_05_28.pdf"
   },
   {
    "id": "7.2",
@@ -290,9 +296,10 @@
    "manual": "SLK BUS7",
    "status": "done",
    "visuals": "array",
-   "notes": "MISALIGNED: section was titled 'Corporate Insolvency' and held manual 7.13 content, duplicating 7.13/7.14 — that content was MOVED to 7.13 and the section rebuilt against manual 7.10 (loans, four types of security, fixed/floating charges, debentures, s 859A registration, negative pledges, priority, liens, guarantees, equity-v-debt). Manual 7.10 had been missing from the tool entirely. Statutes populated (was empty); single grid replaced with an array of 9.",
-   "default_words": 1088,
-   "needs_format_pass": true
+   "notes": "15 Aug 2026 FORMAT PASS plus 2026 edition check (BUS7 2026_05_28). LEAF RULE fixes: the branch labels 'LOANS x3' and 'SECURITY x4' named out, and the bare leaf 'Pledge' given its substance. REMOVED two claims the 2026 chapter does not support and which are wrong as stated - 'one mortgage per asset' and 'a separate mortgage is required over EACH asset'. SOFTENED the flat assertion that registration of charges is 'VOLUNTARY': the 2026 manual frames delivery as a requirement, so the section now says there is no criminal penalty on the company for non-delivery but the charge is void against a liquidator, administrator and other creditors. Added CA 2006 s 859H and s 859I to the statutes array. Two nodes of the fixed-or-floating tree were enumerations in tree costume - what a debenture is, and who can grant a floating charge - so the debenture material moved to a collapsed grid and the grantor point folded into the asset-type fork, leaving four genuine forks. Checked the Business examinable-law update to March 2026: its entries are at 7.4.4, 7.4.11.6, 7.4.11.7, 7.7.4.2, 7.12.7.3, 7.16-7.19 and 7.20 - nothing lands at 7.10. KEPT the overdraft compound-interest, uncommitted-facility and RCF clean-down points, which are real practice and were in an earlier edition. 1088 -> 1305 default words.",
+   "default_words": 1305,
+   "needs_format_pass": false,
+   "manual_edition": "SLK BUS7 manual 2026_05_28.pdf"
   },
   {
    "id": "7.11",
@@ -442,9 +449,10 @@
    "manual": "SLK CONT1",
    "status": "done",
    "visuals": "array",
-   "notes": "invented content stripped: the CONT1 manual chapter 1.5 cites NO cases at all, yet the section carried 6 in the cases array plus Hadley/Victoria Laundry/Heron II/Ruxley/Makdessi/ParkingEye/Allied Maples/Co-op v Argyll/Lumley/American Cyanamid in the prose - all removed, cases now empty. American Cyanamid interim-injunction test dropped as superseded (8.8 covers interim applications). Whole halves of the chapter were missing: cost of cure, reliance interest, bad bargains, loss of a chance, non-pecuniary loss, third-party loss, indemnity, guarantee (s IV Statute of Frauds 1677), restitution/unjust enrichment, and the anticipatory-breach mitigation rule. Penalty test restated as the manual has it (detriment proportionate to a legitimate interest; penalty clause is ignored and C claims unliquidated damages). All MCQ traps preserved and sharpened. Single flow visual replaced with an array of 7 (3 mind maps, 3 decision trees, 2 grids).",
-   "default_words": 1022,
-   "needs_format_pass": true
+   "notes": "Format pass plus three substantive additions the chapter carries and the tool had lost. 1.5.2.3 gives THREE methods of calculating loss of expectation - loss of profit, difference in value and cost of cure - and the manual's own assessment tip turns on knowing all three; only cost of cure was present, so loss of profit and difference in value (with the GBP 500,000 / GBP 480,000 worked example) were added to the measure map, the tree and the notes. Added the valuation date: damages are calculated AT THE TIME OF THE BREACH, with the court able to choose another date to prevent injustice. Added the intervening act of the innocent party breaking the chain of causation (continuing to use defective equipment knowing of the defects). Corrected the indemnity: it is a PRIMARY obligation and survives the underlying transaction being set aside, where a guarantee is secondary - the tool had it as bare reimbursement. Added that unique goods make specific performance more likely and easily sourced goods less likely. Leaf-rule fixes: 'REMOTENESS - Hadley 2 limbs', 'EQUITABLE x4' and 'Guarantee: writing, s IV 1677'.",
+   "default_words": 964,
+   "needs_format_pass": false,
+   "manual_edition": "SLK CONT1 manual 2026_05_25.pdf"
   },
   {
    "id": "6.1",
@@ -452,9 +460,10 @@
    "manual": "SLK TRUS6",
    "status": "done",
    "visuals": "array",
-   "notes": "invented content removed (Knight v Knight, Quistclose, Re Wait, Palmer v Simmonds, Re Gulbenkian, Gillett v Holt) plus the PAA 2009 s 5 citation the manual never gives; one MCQ trap was legally WRONG - it said 'reasonable income' is uncertain when Re Golay's WT holds it potentially CERTAIN - corrected, and the 'friends' trap re-attributed from Re Gulbenkian to Re Barlow's WT; unincorporated-association trap DROPPED as superseded by 6.3; whole of 6.1.4 interest in possession, 6.1.6.1 transfer-methods table and the Mascall/Pennington/Zeital/Strong v Bird/Re Ralli/DMC material were missing and are now built out; CURRENCY lines added (National Iranian Oil [2025] EWCA Civ 1211; Property (Digital Assets etc) Act 2025); single flow visual replaced with an array of 9.",
-   "default_words": 2231,
-   "needs_format_pass": true
+   "notes": "Note heads were numbered one subsection OUT against the 2026 manual throughout: interest in possession is 6.1.2.3 not 6.1.4, formalities 6.1.4 not 6.1.5, constitution 6.1.5 not 6.1.6. ADDED material the chapter carries and the tool lacked: Rahman v Hassan (no conceptual distinction between registered and unregistered land for DMC), Guest v Guest (the proprietary estoppel remedy undoes unconscionability rather than fulfilling expectations), Palmer v Simmonds, Re Kolb's WT, Peck v Halsey, Re Tuck's ST, Re Harvard Securities, Re Lehman Brothers (Europe), the bare trust definition, capriciousness, and the five situations where s 53(1)(c) does not bite. KEPT both currency points (National Iranian Oil - agent signatures insufficient; Property (Digital Assets etc) Act 2025). Four open decision trees cut to two; fixed-v-discretionary and the s 53 split became collapsed grids.",
+   "default_words": 1179,
+   "needs_format_pass": false,
+   "manual_edition": "SLK TRUS6 manual 2026_05_27.pdf"
   },
   {
    "id": "6.2",
@@ -534,19 +543,21 @@
    "manual": "SLK WILL13",
    "status": "done",
    "visuals": "array",
-   "notes": "Content correct but had NO visuals and duplicated itself in a 'Summary of Key Principles' block — dropped. Added the CURRENCY point from the SLK Wills examinable-law update (Cator v Thynn [2026] EWHC 1045 (Ch), surrogacy and the definition of 'children' at 13.4.2.4). Legacy single ladder replaced with an array of 7.",
-   "default_words": 2589,
-   "needs_format_pass": true
+   "notes": "15 Aug 2026 FORMAT PASS plus 2026 edition check (WILL13 2026_06_15). Law was already right and already carried the surrogacy CURRENCY point, but the section was the third heaviest in the tool at 2589 default words. LEAF RULE fixes on the overview map: the branch label 'WHEN IT APPLIES x2' and the bare leaf 'AEA 1925 s 46' both named out. Tree answers cut to memory triggers, and the four worked examples (William, Roberta, Tanya, Simon) moved out of the decision trees into a collapsed steps panel. Donatio mortis causa split into its own steps panel and the outside-the-estate detail into a collapsed grid, so the two open trees carry only the forks. Added Friendly Societies Act 1974 ss 66-67 and Finance Act 1986 s 102 to the statutes array - both cited in the manual, neither previously recorded. Re-checked the Wills examinable-law update (cut-off 13 March 2026): the surrogacy point at 13.4.2.4 and the Cator v Thynn [2026] EWHC 1045 (Ch) citation are both already correct in the section; the manual itself still describes the point as under review and gives the earlier [2026] EWHC 209 (Ch) reference. 2589 -> 1750 default words, of which about 240 is the auto-generated E-block.",
+   "default_words": 1750,
+   "needs_format_pass": false,
+   "manual_edition": "SLK WILL13 manual 2026_06_15.pdf"
   },
   {
    "id": "13.5",
    "title": "Grants of Representation",
    "manual": "SLK WILL13",
-   "status": "todo",
-   "visuals": "single",
-   "notes": "",
-   "default_words": 211,
-   "needs_format_pass": true
+   "status": "done",
+   "visuals": "array",
+   "notes": "FULL OVERHAUL from a 3,186-character stub with a single flow visual. THREE THINGS WERE WRONG. (1) The NCPR r 20 order of priority was given as 'residuary beneficiaries; specific legatees; creditors' - the real list has six ranks headed by the executor where the residue is intestate, then the trustee of the residuary estate, then residuary beneficiaries with vested preferred to contingent. (2) The r 22 intestacy order stopped at 'siblings; creditors', omitting half-blood siblings, grandparents, uncles and aunts of both bloods and the Crown. (3) 'IHT 205 (IHT421 now)' was wrong twice over: IHT205 is not IHT421; IHT421 was abolished for England and Wales probate applications in January 2024; and IHT205 survives only for excepted estates where death was on or before 31 December 2021. REMOVED: a Business Property Relief renaming note that belongs in 13.8, and the executor's year, which belongs in 13.6 - FLAG THIS WHEN 13.6 IS DONE. DROPPED the cessate grant as superseded by the manual's three named limited grants. KEPT, although the chapter omits them: the caveat warning and the eight-day appearance under NCPR r 44, and the grant in solemn form - both accurate practice that helps her. ADDED: chain of representation, de bonis non, ad colligenda bona, pendente lite, clearing off, the minimum two administrators / maximum four personal representatives rule [Senior Courts Act 1981 s 114], renunciation not lost by an administrator's intermeddling, grant on credit from 1 April 2024, the direct payment scheme and Form IHT423, the co-owned land discount (15% residential, 10% investment, none with a spouse or civil partner), the excepted estate thresholds and further conditions, the full form list, and the Finance Act 2025 move from domicile to long-term residence with a CURRENCY note. Wills examinable-law update checked: it concerns 13.4.2.4 surrogacy and Solicitors Accounts, neither of which touches this chapter.",
+   "default_words": 1366,
+   "needs_format_pass": false,
+   "manual_edition": "SLK WILL13 manual 2026_06_15.pdf"
   },
   {
    "id": "13.6",
@@ -662,13 +673,14 @@
   },
   {
    "id": "9.7",
-   "title": "Hearsay and Opinion Evidence",
+   "title": "Examination of Witnesses, Hearsay and Confessions",
    "manual": "SLK CRMP9",
    "status": "done",
-   "visuals": "single",
-   "notes": "",
-   "default_words": 409,
-   "needs_format_pass": true
+   "visuals": "array",
+   "notes": "FULL OVERHAUL. The section had NO visuals at all and rendered blank above the notes. TITLE CORRECTED from 'Hearsay and Opinion Evidence' to the manual's 'Examination of Witnesses, Hearsay and Confessions' - there is no opinion evidence in this chapter (opinion evidence is DISP 8.10.5.1, a different subject). Built eight visuals: overview map, the four-question hearsay test as a tree, the gateway tree, the confession-exclusion tree, a map of leading and non-leading questions, and grids for original evidence, s 76 against s 78, and the Criminal Procedure Rules Part 20 notice procedure. Added a 15-entry statutes panel and a tip. The existing notes were accurate and were kept, re-headed to mirror the manual's subsections and with a short orientation note put first so the default screen opens on something brief. Cases array left empty - the 2026 chapter names no cases. Runs high on the default screen because the overview map has to name the four gateways and the five s 116 situations rather than count them.",
+   "default_words": 1454,
+   "needs_format_pass": false,
+   "manual_edition": "SLK CRMP9 manual 2026_06_04.pdf"
   },
   {
    "id": "9.8",
@@ -778,9 +790,10 @@
    "manual": "SLK TORT2",
    "status": "done",
    "visuals": "array",
-   "notes": "retitled from 'Nuisance and Other Torts' to 'Nuisance' to match the manual (TORT2 has only 5 chapters; 2.5 is nuisance alone). Invented content removed: Hunter v Canary Wharf, Khorasandjian, Cambridge Water, Transco, St Helen's Smelting, Bridlington Relay, Hollywood Silver Fox, Sedleigh-Denfield, Nichols v Marsland, A-G v PYA Quarries and Gillingham are none of them in the manual - substance kept, names dropped; cases array now holds only Rylands v Fletcher, the one case the manual cites. Corrected a legal error: the old note listed 'overlooking?' as an amenity interference - the manual says being overlooked is NOT actionable, nor is blocked TV reception (no emanation). Missing material added: the 3 types of nuisance, the interference examples (knotweed, tree roots, land slip), planning-permission cases both ways, social utility, who can be liable (owner/occupier/creator), prescription (20 yrs, running from C's awareness), the three INEFFECTIVE defences, abatement/trespass, the HRA 1998 route, no personal injury in private nuisance but yes in public, and the full Rylands natural/non-natural examples plus the 5 defences. Single grid replaced with an array of 8 (3 mind maps, 2 decision trees, 3 grids).",
-   "default_words": 863,
-   "needs_format_pass": true
+   "notes": "Format pass plus one substantive addition. ADDED Fearn v Board of Trustees of the Tate Gallery [2024] AC 1; [2023] UKSC 4, which the 2026 chapter carries and the tool omitted entirely: the tool stated flatly that being overlooked is not an actionable interference, without the Supreme Court's qualification that a defendant's exceptional use of land can still be a substantial interference with a claimant's ordinary use and enjoyment. Added to the private nuisance map, the notes and the cases array. Leaf-rule fix: the overview map's Rylands branch had a leaf reading '4 REQUIREMENTS' and now names all four. Converted the fourth node of the unreasonableness tree - a list of five factors wearing a tree costume - into a collapsed grid. Replaced the six bare '-' placeholders in the defences grid with 'Not a defence to this tort'. Tort examinable-law update checked: it removes necessity at 2.2.2.4 only, which does not touch this chapter.",
+   "default_words": 781,
+   "needs_format_pass": false,
+   "manual_edition": "SLK TORT2 manual 2026_05_25.pdf"
   },
   {
    "id": "3.1",
@@ -799,9 +812,10 @@
    "manual": "SLK COND3",
    "status": "done",
    "visuals": "array",
-   "notes": "prose was largely aligned - the real defects were structural: the cases array used ref/point instead of name/citation/rule so every citation and rule rendered BLANK, and the SRA enforcement strategy quote said 'support a competitive market' when the manual says 'supporting access to affordable legal services, the rule of law and the administration of justice'. Added the Wingate [93] honesty passage, the SRA two-stage dishonesty formulation, the honesty-for-firms requirement and the EDI guidance detail. Single flow visual replaced with an array of 8.",
-   "default_words": 1394,
-   "needs_format_pass": true
+   "notes": "Format pass plus two currency fixes. The SRA enforcement strategy citation was the 15 Feb 2023 version with the old mission statement; the 2026 manual uses the 12 MAY 2025 version ('drive confidence and trust in legal services'). The EDI guidance was the 25 Nov 2019 'SRA's approach to EDI'; the 2026 manual uses 'Complying with Principle 6' (9 SEPT 2025), whose examples are different. Notes renumbered to the manual's 3.2.2-3.2.8. Private-conduct decision tree converted to a grid - it enumerated, it did not fork.",
+   "default_words": 1019,
+   "needs_format_pass": false,
+   "manual_edition": "SLK COND3 manual 2026_05_26.pdf"
   },
   {
    "id": "3.3",
@@ -829,9 +843,10 @@
    "manual": "SLK CRML5",
    "status": "done",
    "visuals": "array",
-   "notes": "Invented content removed - none of these appear in the manual chapter: Woollin, Mohan, R v G and R, Caldwell, Thabo Meli, Sweet v Parsley, Gammon v A-G Hong Kong, Collins v Wilcock, Ireland, Burstow, Mowatt, Pittwood, Stone and Dobinson and R v Miller [1983] (the manual's duty-to-act list is unattributed, and its R v Miller is the 1954 ABH case). Oblique intent / the Woollin direction was DROPPED as superseded: the manual expressly defers intention to the next chapter and 5.2 already covers it. The empty-ish cases array is now the manual's actual thirteen: Miller, Chan-Fook, R (T) v DPP, DPP v Smith, C (a minor) v Eisenhower, Savage, A-G's Reference (No 6 of 1980), Paterson, M (B), White, Smith, Blaue, Jordan. Missing manual material added: the three types of actus reus, voluntariness, the four common law duty situations, the TWO-question recklessness test (subjective AND objective - the old note only gave the subjective half), gross negligence, strict liability and the point that none of the SRA-specified offences is strict liability, transferred mens rea and its same-offence limit, both coincidence theories, the full assault and battery actus reus breakdown, the whole of 5.1.6 consent (three requirements plus the public-interest lists for intended and unintended harm) and the whole of 5.1.7 causation including the four novus actus categories and the manual's warning that this area of law is not consistent. s 47 statute text no longer asserts a five-year maximum, which the manual does not give. MCQ traps de-duplicated from six to seven distinct ones (the wound and transferred-mens-rea traps each appeared twice and were merged, with the manual's same-offence limit folded into the latter). Single flow replaced with an array of 9 (2 mind maps, 3 decision trees, the offence ladder, 3 grids). 8k -> 27k chars.",
-   "default_words": 1903,
-   "needs_format_pass": true
+   "notes": "Law verified as accurate against the 2026 chapter, so this was a format pass. The separate s 18 v s 20 decision tree was merged into the offence tree - the actus reus of the two is identical, so it is one fork, not two. Bare counts in the numbers grid ('3 / 3', '4', '2') replaced with the named items. Overview map leaves that merely duplicated the ladder and the causation tree were cut.",
+   "default_words": 1299,
+   "needs_format_pass": false,
+   "manual_edition": "SLK CRML5 manual 2026_05_25.pdf"
   },
   {
    "id": "5.2",
@@ -899,10 +914,11 @@
    "title": "Core Institutions of the State and How They Interrelate",
    "manual": "SLK SYS11",
    "status": "done",
-   "visuals": "single",
-   "notes": "",
-   "default_words": 766,
-   "needs_format_pass": true
+   "visuals": "array",
+   "notes": "15 Aug 2026 FULL OVERHAUL against the 2026 SYS11. CONTENT GAP: the section carried NOTHING on manual 11.3.3, which the SRA specification lists expressly as 'central government and accountability'. Added collective cabinet responsibility (confidentiality, collective agreement, resignation, and its suspension for the 2016 EU referendum campaign), individual ministerial responsibility (departmental versus personal conduct, the Crichel Down resignation of 1954, the Ministerial Code as a convention that is NOT legally enforceable with the PM as its arbiter, and the seven Nolan Principles), parliamentary scrutiny (questions and PMQs, debates, select committees, the Public Accounts Committee and the National Audit Office, legislation and the Parliament Acts, and the Parliamentary and Health Service Ombudsman) and judicial oversight. ADDED M v Home Office [1994] 1 AC 377 to the cases array and the Dissolution and Calling of Parliament Act 2022 to the statutes array - both are in the 2026 manual and neither was in the tool. Added Jennings' three-part test, which the tool quoted Jennings without stating. Legacy single devolution grid replaced with six visuals, including a rebuilt three-settlement grid carrying the devolved subject lists. KEPT Bill of Rights 1689 Art 9 and Madzimbamuto v Lardner-Burke, which the chapter omits but which are real and examinable. No update file exists for Legal Systems and Public Law. 766 -> 1522 default words.",
+   "default_words": 1522,
+   "needs_format_pass": false,
+   "manual_edition": "SLK SYS11 manual 2026_06_03.pdf"
   },
   {
    "id": "11.4",
@@ -1011,9 +1027,10 @@
    "manual": "SLK LAND4",
    "status": "done",
    "visuals": "array",
-   "notes": "MASSIVE displaced content: the whole of Registered Land, Unregistered Land and Doctrine of Notice sat in 4.1 but belong to 4.2 (Title to Land) and 4.3 (Protecting Third-Party Interests) - both already cover them better, so dropped as SUPERSEDED rather than moved. Invented content removed: the manual chapter cites NO cases at all, so Williams & Glyn's Bank v Boland, Midland Bank v Green, Walsh v Lonsdale, TSB Bank v Botham and Hunt v Luck all went and the cases array is now EMPTY. Statutory numbering not in the manual also removed: LRA 2002 ss 27/29 and Sch 3, LPA 1925 s 205(1)(ix), LPA 1925 s 54(2) (the manual gives the 3-year lease only as an unnumbered exception to s 52) and the LCA 1972 class list. Missing manual material added in full: 4.1.2 terminology table, real v personal property and choses in possession/action, the four exceptions to air-above/ground-below (airspace, things in the ground, wild animals, objects found - with the Treasure Act 1996 rules), 4.1.3.1 use classes and sui generis, legal estate v beneficial interest with the FOUR-legal-owner cap, commonhold, all five legal interests in detail, the three deed-execution requirements, TR1/TP1/conveyance, and the four routes to an equitable interest with the tenant-in-common/joint-tenant assignment rule. CURRENCY lines added from the Land SQE July 2026 update: Use Classes Order 1987 as amended by the 2020 (England) Regs; Family Law Act 1996 as amended by the Civil Partnership Act 2004. MCQ traps: rent-charge/positive-covenant trap kept and sharpened; the 'unregistered land - legal title does not pass on completion' trap DROPPED as superseded - 4.2 already carries the same point sourced from her 04/08 FLK2 mock and states it the OTHER way round (unregistered: title passes on COMPLETION), which is the correct rule. Five new manual-derived traps added. Single table replaced with an array of 10 (3 mind maps, 3 decision trees, 4 grids incl. a figures grid). 11k -> 24k chars.",
-   "default_words": 1444,
-   "needs_format_pass": true
+   "notes": "4.1.4 and 4.1.5 were TRANSPOSED against the manual: fixtures and chattels is 4.1.4, 'what is land?' is 4.1.5. Removed the gloss saying the manual flags home rights as a statutory right rather than a true equitable interest - the 2026 manual treats a home right as an equitable interest protected under 4.3. Terminology moved out of the open first note into a collapsed grid. Three open decision trees cut to two, the formalities tree becoming a grid. KEPT the two July 2026 currency lines (Use Classes Order as amended 2020; FLA 1996 as amended by CPA 2004).",
+   "default_words": 1303,
+   "needs_format_pass": false,
+   "manual_edition": "SLK LAND4 manual 2026_05_21.pdf"
   },
   {
    "id": "4.2",
@@ -1119,23 +1136,25 @@
   },
   {
    "id": "12.6",
-   "title": "Planning Law",
+   "title": "Core Principles of Planning Law",
    "manual": "SLK PROP12",
-   "status": "aligned-needs-visuals",
-   "visuals": "single",
-   "notes": "",
-   "default_words": 372,
-   "needs_format_pass": true
+   "status": "done",
+   "visuals": "array",
+   "notes": "15 Aug 2026 FULL OVERHAUL against the 2026 PROP12; was still on the legacy single flow visual at 372 default words, and the title was 'Planning Law' rather than the manual's chapter title. LEGAL CORRECTION: the section stated planning enforcement was 4 years for building works and change of use to a single dwelling, 'same in England and Wales'. Manual 12.6.4.1 says England was extended to 10 YEARS for breaches occurring on or after 25 APRIL 2024, with 4 years only for earlier breaches; Wales remains 4 years. Verified against Levelling-up and Regeneration Act 2023 s 115. NOTE the manual's own summary of key principles and two of its assessment tips still print the old 4-year England figure - the detailed passage at 12.6.4.1 is the one followed. Six visuals: overview map, a genuine development/permission decision tree, an enforcement time-limit grid split by England and Wales, a building regulations grid, the manual's buyer checklist, and the use classes table. Statutes array built out from 2 to 12 entries, every number stated with what it does. Added outline-v-detailed permission, curtilage, Grade I and II, and the indemnity insurance warning that any approach to the local authority destroys the cover. No update file exists for Property. 372 -> 1334 default words.",
+   "default_words": 1334,
+   "needs_format_pass": false,
+   "manual_edition": "SLK PROP12 manual 2026_06_09.pdf"
   },
   {
    "id": "12.7",
    "title": "Finance and Acting for a Lender",
    "manual": "SLK PROP12",
    "status": "done",
-   "visuals": "single",
-   "notes": "",
-   "default_words": 347,
-   "needs_format_pass": true
+   "visuals": "array",
+   "notes": "15 Aug 2026 FULL OVERHAUL against the 2026 PROP12; was on the legacy single flow visual at 347 default words with sound but unillustrated notes. Five visuals: overview map, a conduct decision tree built round the five real forks (the buyer asking the solicitor to hide an adverse search result, a gifted deposit, a non-owning occupier, a request for suitability advice, and reliance on the valuation report), the Handbook requirements grid, a deadlines grid and the six-stage transaction steps. Added Land Registration Act 2002 s 27 and s 6 to the statutes array, neither previously recorded. Verified against the manual: the 85-year lease residue, the K16 bankruptcy search, the OS1/OS2 30-working-day priority period in the LENDER'S name, 21 days at Companies House and 2 months for first registration all check out. No update file exists for Property. 347 -> 1302 default words.",
+   "default_words": 1302,
+   "needs_format_pass": false,
+   "manual_edition": "SLK PROP12 manual 2026_06_09.pdf"
   },
   {
    "id": "12.8",
@@ -1143,9 +1162,10 @@
    "manual": "SLK PROP12",
    "status": "done",
    "visuals": "array",
-   "notes": "was flagged aligned-needs-visuals but the section was actually BROKEN: every note body was a plain string, not an array, so buildCh's (n.body||[]).map threw and the section would not render. Bodies converted to arrays - it was the only section in the file with this defect. Also removed invented content (Eccles v Bryant, LPA 1925 s.52, LRR 2003 - none in the chapter) and fixed the statutes/cases arrays, which held bare strings instead of {ref,text}/{name,citation,rule} objects and rendered blank. Corrected the postal-exchange rule: binding when the SELLER'S part is posted, not 'on the posting date'. Added the missing manual material: max 4 legal owners/legal estate is always a joint tenancy, overreaching and the second trustee, the full pre-exchange checklists for both solicitors, cleared deposit funds and the SRA Accounts Rules, the redemption-figure undertaking, memorandum contents, implied undertakings, estate contract (notice v C(iv)), risk and the seller's continuing duty, occupation before completion (SC licensee v SCPC silence) and simultaneous exchange and completion. Single steps visual replaced with an array of 8 (3 mind maps, 3 decision trees, 1 grid, 1 steps). Object is 26k chars, above the 15-20k target, because the chapter has 15 subsections and 8 visuals.",
-   "default_words": 1177,
-   "needs_format_pass": true
+   "notes": "Format pass only, no change of law - the content was already complete and accurate against the 2026 chapter. The 'are we ready to exchange?' tree was two long checklists wearing a tree costume: split into a seller's pre-exchange grid and a buyer's pre-exchange grid, both collapsed, leaving a short open tree on when the solicitor must NOT exchange (no authority, unsynchronised chain, uncleared deposit, no redemption figure). Leaf-rule fix: a tree answer keyed 'MEMORANDUM x5' now names the five items instead of counting them. Default screen rose slightly because the stop-tree stays open, which is the point of it.",
+   "default_words": 1065,
+   "needs_format_pass": false,
+   "manual_edition": "SLK PROP12 manual 2026_06_09.pdf"
   },
   {
    "id": "12.9",
@@ -1220,7 +1240,11 @@
  ],
  "gaps": [
   "FORMATTING HAZARD: section 8.4 was serialised with spaces after colons ('\"id\": \"8.4\"') while every other section uses compact JSON ('\"id\":\"8.4\"'). Any grep or script matching the compact form silently skips it. Worth re-running an id audit with a whitespace-tolerant pattern before trusting the counts.",
-  "Non-standard id '7.9B' (Corporate Finance - Debt Finance & Security) also escapes numeric id sweeps. The file holds 119 sections in total, not 117."
+  "Non-standard id '7.9B' (Corporate Finance - Debt Finance & Security) also escapes numeric id sweeps. The file holds 119 sections in total, not 117.",
+  "12.2's overview mind map has SIX branches. Only mm-2 to mm-5 have CSS rules, so it renders wrong. Not fixed on 15 Aug 2026 because 12.2 was outside the six sections handled; fix when 12.2 comes round.",
+  "Leaf-rule scan on 15 Aug 2026 flagged three branch labels whose count exceeds the items their leaves name: 8.7 'MUST BE SPECIFICALLY PLEADED x8' over 5 leaves, 11.2 'STAGES x7' over 6, and 12.5 'IT DEPENDS x8' over 5. Fix each when that section next comes round.",
+  "RENDER DEFECT, found 16 Aug 2026: 12.2 has a SIX-branch overview mind map, so it emits class mm-6, for which there is no rule in <style> - only mm-2 to mm-5 exist. The map degrades rather than blanks. Split it to five branches or fewer when 12.2 comes round. 12.2 was not one of that day's six, so it was left alone.",
+  "MEASUREMENT: the separate E{} extras object renders an open 'Exam Traps' and 'Precision' block under many sections, adding 300-400 words to the default screen that do NOT live in the section object. Measure section content with those extras suppressed or the numbers are not comparable. On 16 Aug 2026, section-only / including-extras: 3.2 1019/1335, 4.1 1303/1607, 5.1 1299/1618, 6.1 1179/1581, 7.1 1073/1389, 8.1 1270/1583. Some extras now duplicate the notes - the 4.1 fixture trap is one."
  ],
  "scheduling": "Run buildSchedule() AND buildSecondPass() from the LIVE SQE1_COLP_Revision.html (github.io == origin/main == local as at 7 Aug 2026, 46,157 bytes) and merge by date. SANITY CHECK, UPDATED: the old 'two modules per free day' check is now WRONG and would fire a false STOP AND ASK - the correct check is ONE first-pass module per free day plus ONE revisit. Merged opening as at 7 Aug 2026 (done-set reconstructed as SEED_DATES[code] < '2026-05-27', 42 modules): 7 Aug PROP12.3 + CONT1.1 | 13 Aug DISP8.6 + TORT2.1 | 14 Aug SYS11.2 + COND3.1 | 16 Aug PROP12.4 + LAND4.1 | 20 Aug WILL13.2 + CRML5.1 | 21 Aug BUS7.7 + TRUS6.1 | 23 Aug DISP8.7 + COND3.2. CORRECTION (Ghita, 7 Aug 2026): the 7 Aug run took 7.7, 8.7 and 1.4 from the first pass alone. Those are due 21, 23 and 28 Aug. The correct three for that day, merging both passes and skipping sections already done here, were 1.1 Formation, 2.1 Negligence and 3.1 Overview of the Principles and Codes Part 1 - all still todo. The page subtitle still reads '14-day gap - Ends 14 Dec 2026'; that text is stale, the JS is authoritative.",
  "manual_editions": {
@@ -1231,12 +1255,18 @@
    "2.1",
    "2.4",
    "3.1",
+   "3.2",
+   "4.1",
    "4.6",
+   "5.1",
    "5.4",
+   "6.1",
    "6.4",
+   "7.1",
    "7.7",
    "7.8",
    "7.9",
+   "8.1",
    "8.7",
    "8.8",
    "9.5",
@@ -1267,17 +1297,22 @@
    "11.2": 2571,
    "8.4": 1695,
    "9.5": 1419,
-   "note": "trim these when their scheduled day comes"
+   "note": "trim these when their scheduled day comes. 8.10 came down to 1350 on 2026-08-19; 11.2 and 9.5 still outstanding."
   }
  },
  "examinable_law_updates_checked": {
-  "date": "2026-08-12",
-  "Tort (SQE July 2026)": "Only entry is 2.2.2.4, removing the defence of necessity. Does not touch 2.4.",
-  "Trusts (cut off 13 March 2026)": "Manual updated April 2026, no further changes. The two minor points are at 6.1.5 (National Iranian Oil Co v Crescent Gas: agent signatures insufficient) and 6.1.6.1 (Property (Digital Assets etc) Act 2025). Neither touches 6.4.",
-  "Land (July 2026)": "Checked by content, not page number. Nothing bearing on 4.6 beyond the fourth short-lease condition already carried in the 2026 manual.",
-  "Business to March 2026": "Not relevant to any of today's six.",
-  "Dispute Resolution, Wills, CRMP Sentencing Act": "Not relevant to any of today's six.",
-  "Contract, Conduct, Property": "No update file exists for CONT1, COND3 or PROP12.",
-  "2026-08-13": "Wills (nothing for 13.3; Cator v Thynn surrogacy is 13.4.2.4), Business to March 2026 (nothing for 7.8 or 7.9), Dispute Resolution (8.8.3.2 SLAPP strike out and CPR r 44.2 costs reversal both applied to 8.8), CRMP Sentencing Act (irrelevant to 9.6). No SERV update file exists for 10.3."
+  "date": "2026-08-16",
+  "Land (SQE July 2026)": "APPLIED to 4.1 - Use Classes Order 1987 as amended by the 2020 Regulations, and FLA 1996 as amended by the Civil Partnership Act 2004. Both currency lines were already present and were retained. The update's page numbers do not match the manual's pagination, so both were resolved by content. The update refers to Sch 2 where the 2026 manual says Sch 1, so no schedule number is asserted in the tool.",
+  "Trusts (cut off 13 March 2026)": "APPLIED to 6.1 - National Iranian Oil Co v Crescent Gas Corp Ltd [2025] EWCA Civ 1211 (an agent's signature is insufficient for s 53) and the Property (Digital Assets etc) Act 2025. Both already present and retained. Note the update cites the OLD subsection numbers (6.1.5, 6.1.6.1); in the April 2026 manual they are 6.1.4 and 6.1.5.1.",
+  "Business to March 2026": "CHECKED, nothing applies to 7.1. The update items are 7.4.4, 7.4.11.6, 7.4.11.7, 7.7.4.2, 7.12.7.3, 7.16-7.20.",
+  "Dispute Resolution (SQE July 2026)": "CHECKED, nothing applies to 8.1. The update items are 8.4.4.2 (Mazur v Charles Russell Speechlys, supervised delegation of litigation tasks), 8.8.3.2 (SLAPP strike out) and 8.15.2 (SLAPP costs under CPR r 44.2). Flag for those sections' days.",
+  "Criminal Liability / Conduct": "No update file exists for CRML5 or COND3. The CRMP Sentencing Act update is criminal PRACTICE and does not touch 5.1.",
+  "2026-08-19": "Dispute Resolution (rows 8.4.4.2, 8.8.3.2, 8.15.2 - none apply to 8.10); Tort (removes necessity at 2.2.2.4 - does not apply to 2.5); Wills (13.4.2.4 surrogacy and Solicitors Accounts - does not apply to 13.5). No update applied to any of today's six."
+ },
+ "defects": {
+  "mm-6": "12.2's overview map has SIX branches, but only .mm-2 to .mm-5 existed, so it had been rendering unstyled. Added a .mm-6 rule (3 columns, dropping to 2 on narrow screens) on 2026-08-19 rather than rewriting 12.2's unverified content. Maps should still be built with 2-5 branches."
+ },
+ "carry_forward": {
+  "13.6": "The executor's year (12 months from death to complete the administration) was removed from 13.5 because it belongs in 13.6 Administration of Estates. Make sure 13.6 carries it when that section is overhauled."
  }
 }
