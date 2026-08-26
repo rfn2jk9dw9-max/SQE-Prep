@@ -1,13 +1,13 @@
 {
- "updated": "2026-08-25",
+ "updated": "2026-08-26",
  "rule": "Pick sections by running the REAL buildSchedule() AND buildSecondPass() from SQE1_COLP_Revision.html in node against the server done-set (colp_progress.php), then MERGING both passes by date. SEED_DATES are TEACHING dates, not due dates. As at the Aug 2026 rewrite of that file: no MIN_GAP (eligible the day taught), SCHED_END 2027-01-10 (day before FLK1), isFreeDay also excludes four FULL_PAPER_DAYS Sundays, DEFAULT_DONE CONT1.1-1.3. The first pass assigns ONE new module per free day (75 days); buildSecondPass adds ONE spaced revisit per day (83 entries, 21-day gap, coldest first). BOTH COUNT. getStatus() colours cards from the first pass only and revisits render on the existing card - that is display, not scheduling. Taking the first pass alone sends the overhaul to material 2-3 weeks out and skips the oldest never-overhauled chapters, which is what the second pass exists to rescue. Nothing is ever overdue; the queue drains in TEACHING order. Take Today then Upcoming from the MERGED list, skipping sections already done here. Then: (1) pdftotext the SLK manual chapter, (2) rebuild notes terse (15-25k chars, one point per line, citations only in the cases array, grep every case name back against the manual), (3) visuals array - overview mind map + one per topic + decision trees for confusable doctrines (map: 2-5 branches, grid: 2-4 cols), (4) preserve/relocate MCQ traps, never delete, (5) verify with the node buildVis sweep, (6) push the single file via a /tmp clone.",
  "counts": {
   "total": 119,
-  "done": 86,
-  "todo": 33,
-  "needs_format_pass": 53,
-  "visuals_array": 77,
-  "note": "Recomputed 2026-08-25 after the 12.11 / 8.14 / 11.6 / 12.12 / 13.8 / 7.15 run."
+  "done": 91,
+  "todo": 28,
+  "needs_format_pass": 47,
+  "visuals_array": 83,
+  "note": "Recomputed 2026-08-26 after the 8.15 / 9.10 / 10.5 / 7.16 / 12.13 / 8.16 run. All six were legacy single-visual sections."
  },
  "sections": [
   {
@@ -163,21 +163,23 @@
    "id": "8.15",
    "title": "Costs",
    "manual": "SLK DISP8",
-   "status": "todo",
-   "visuals": "single",
-   "notes": "",
-   "default_words": 416,
-   "needs_format_pass": true
+   "status": "done",
+   "visuals": "array",
+   "notes": "FULL OVERHAUL - was a single three-column grid, 416 default words. Rebuilt against the 2026 DISP8. ADDED the SLAPP amendment to CPR r 44.2 (Economic Crime and Corporate Transparency Act 2023 s 195), which the 13 Mar 2026 DR update inserted and the 2026 manual now carries; the indemnity principle with the CFA and DBA exception under rr 44.1(3) and 44.18; the r 44.4(3) factors for fixing the amount; the r 44.5 rebuttable presumption for contractual costs; the four intermediate-track stages from PD 45 Table 14; the rule that previously assessed interim costs are excluded from the final assessment; and the r 45.4 two-thirds rule for a litigant in person. Visuals: overview map, Part 36 outcome tree, and four collapsed grids (standard v indemnity, summary v detailed, fixed/FRC/small claims, and what the defendant pays).",
+   "default_words": 1259,
+   "needs_format_pass": false,
+   "manual_edition": "SLK DISP8 manual 2026_05_29.pdf"
   },
   {
    "id": "8.16",
-   "title": "Settlement and Part 36",
+   "title": "Discontinuance and Settlement",
    "manual": "SLK DISP8",
-   "status": "todo",
-   "visuals": "single",
-   "notes": "",
-   "default_words": 403,
-   "needs_format_pass": true
+   "status": "done",
+   "visuals": "array",
+   "notes": "FULL OVERHAUL - was a single cards visual, 403 default words. Rebuilt against the 2026 DISP8. RETITLED from 'Settlement and Part 36' to the manual chapter title 'Discontinuance and Settlement', which also matches MODULES. ADDED the four Part 36 limitations that drive a party to a Calderbank offer instead (no shorter deadline, no instalments or payment beyond 14 days, mandatory unknown costs liability, no use where a perpetual injunction is wanted); the subject-to-contract rule; conditional settlements that revive the claim on non-payment; the warning to keep standing offers under review as the merits shift; and the rule that the judge hearing an offer application should not be the trial judge. Visuals: overview map, withdrawal-and-acceptance tree, Pt 36 v Calderbank grid, Tomlin v consent order grid.",
+   "default_words": 1207,
+   "needs_format_pass": false,
+   "manual_edition": "SLK DISP8 manual 2026_05_29.pdf"
   },
   {
    "id": "8.17",
@@ -363,11 +365,12 @@
    "id": "7.16",
    "title": "Income Tax in England and Wales",
    "manual": "SLK BUS7",
-   "status": "todo",
-   "visuals": "single",
-   "notes": "",
-   "default_words": 225,
-   "needs_format_pass": true
+   "status": "done",
+   "visuals": "array",
+   "notes": "FULL OVERHAUL - was a single ladder, 225 default words. Rebuilt against the 2026 BUS7 and the tax checker 2026_07_24. LEGAL CORRECTIONS: dividend rates were carried as 8.75/33.75/39.35 when the basic and higher rates rose to 10.75% and 35.75% for 2026/27; a note bullet carried literal unresolved editorial text reading 'wait, reversed: basic = GBP 1,000; higher = GBP 500'; and ITA 2007 s 23 was described as setting the rates, when s 23 is the calculation steps and s 6 sets the rates. REMOVED: the National Insurance block, which is not in this chapter's SQE specification and whose figures were stale, and the GBP 150,000 cash-basis threshold, which is not in the manual. ADDED the material the section lacked: the chargeable persons, the eight-step calculation, the marriage allowance and its three conditions, the starting rate band for savings, all five trading loss reliefs behind a decision tree, EIS relief and its claw-back, payments on account, the general anti-abuse rule with the double reasonableness test and the independent advisory panel, the settlement rules, and the whole of Welsh income tax as its own mind map. CURRENCY per the Business update to March 2026: the main pool writing-down allowance is cut from 18% to 14%, which also affects 7.17.2.3. The rates grid is labelled as supplied in the assessment, since the manual says the rates are not to be memorised.",
+   "default_words": 1303,
+   "needs_format_pass": false,
+   "manual_edition": "SLK BUS7 manual 2026_05_28.pdf"
   },
   {
    "id": "7.17",
@@ -722,11 +725,12 @@
    "id": "9.10",
    "title": "Sentencing",
    "manual": "SLK CRMP9",
-   "status": "todo",
-   "visuals": "single",
-   "notes": "",
-   "default_words": 181,
-   "needs_format_pass": true
+   "status": "done",
+   "visuals": "array",
+   "notes": "FULL OVERHAUL - was a single ladder, 181 default words, the thinnest section in the tool. Rebuilt against the 2026 CRMP9 and the CRMP Sentencing Act update (already incorporated in the 2026 manual). LEGAL CORRECTIONS: the purposes of sentencing were attributed to CJA 2003 s 142 and the hostility uplift to CJA 2003 ss 145-146, both repealed and re-enacted in the Sentencing Code, so the CJA references were removed and the rules stated as the manual states them without a section number; the suspended sentence was given as 'up to 2 years suspended for 1-2 years', which the Sentencing Act 2026 raised to 14 days-3 years with an operational period of 6 months-3 years plus a rebuttable presumption in favour of suspending 12 months or less, for anyone convicted on or after 22 March 2026; and the ladder described an absolute discharge as 'no conviction' when it follows conviction. ADDED the whole of the chapter that was missing: TICs, concurrent v consecutive with the manual's worked contrast, totality, magistrates' limits (5 days minimum, 6 months for any number of summary offences, 12 months either-way), 40% served with the two-thirds exceptions, life sentences and minimum terms, mandatory minimums (3 years on a third domestic burglary, 7 years on a third class A trafficking offence, 80% floor with a plea), the three community order levels and the requirement limits, fine levels 1-5, compensation taking precedence over a fine, the Crown Court term in default, the victim surcharge, pre-sentence reports, the order of the sentencing hearing, basis of plea and Newton hearings. Runs at 1501 default words rather than ~1200: this is the largest procedural chapter in CRMP and carries two genuine forks (the guideline walk and the custody/suspension/community fork); the enumerations were pushed into five collapsed grids.",
+   "default_words": 1501,
+   "needs_format_pass": false,
+   "manual_edition": "SLK CRMP9 manual 2026_06_04.pdf"
   },
   {
    "id": "9.11",
@@ -1040,10 +1044,11 @@
    "title": "Funding Options for Legal Services",
    "manual": "SLK SERV10",
    "status": "done",
-   "visuals": "single",
-   "notes": "",
-   "default_words": 452,
-   "needs_format_pass": true
+   "visuals": "array",
+   "notes": "FULL OVERHAUL - was a single cards visual, 452 default words. Rebuilt against the 2026 SERV10. REMOVED as unverifiable and outside this chapter: the Crown Court criminal legal aid contribution figures (disposable household income above GBP 3,398 but below GBP 37,500, contributing 90% for up to 6 months) and the claim that an applicant under 18 automatically passes the interest-of-justice test. The chapter says expressly that criminal legal aid is taught and assessed in Criminal Practice. KEPT though the manual does not spell it out: the CFA success fee capped at 100% of base costs and non-recoverable from the opponent post-LASPO, which DISP 8.15.3 confirms; the ATE premium non-recoverability; and the BTE/ATE labels. ADDED what each DBA cap actually includes (VAT, counsel's fees as a disbursement, exclusion of future pecuniary loss), the 1 April 2013 start for contentious work, why hourly billing is declining, and the LEI panel rule with the right to choose your own solicitor once proceedings have begun. Visuals: overview map, how-will-this-client-pay tree, and four collapsed grids.",
+   "default_words": 1298,
+   "needs_format_pass": false,
+   "manual_edition": "SLK SERV10 manual 2026_06_05.pdf"
   },
   {
    "id": "4.1",
@@ -1238,13 +1243,14 @@
   },
   {
    "id": "12.13",
-   "title": "Procedural Steps for Grant of a Lease",
+   "title": "Procedural Steps for the Grant of a Lease or Underlease",
    "manual": "SLK PROP12",
-   "status": "aligned-needs-visuals",
-   "visuals": "single",
-   "notes": "",
-   "default_words": 452,
-   "needs_format_pass": true
+   "status": "done",
+   "visuals": "array",
+   "notes": "FULL OVERHAUL - was a single ladder, 452 default words. Rebuilt against the 2026 PROP12. RETITLED to the manual chapter title, 'Procedural Steps for the Grant of a Lease or Underlease' - the section previously dropped the underlease. ADDED the head lease and underlease relationship with the rule that an underlease must be SHORTER than the head lease, the full contract pack, the landlord's lender's consent where its title is mortgaged, the new build warranty for residential property under 10 years old, the service charge budget, the management company share, service of notice of the tenant's mortgage on the landlord, deduction of title where the term exceeds 7 years so the tenant can register with title absolute, Form TA13, the Law Society exchange formulae, and the manual's assessment trap on when the lease terms stop being negotiable. KEPT though the chapter omits it: LP(MP)A 1989 s 2, Walsh v Lonsdale and Class C(iv) protection for the agreement for lease, because the SQE specification lists the purpose of an agreement for lease and this is the accurate land law behind it. The undertaking-for-costs point was framed around a licence to assign; it has been generalised here and flagged for 12.14, which is next in the queue.",
+   "default_words": 1340,
+   "needs_format_pass": false,
+   "manual_edition": "SLK PROP12 manual 2026_06_09.pdf"
   },
   {
    "id": "12.14",
@@ -1355,7 +1361,8 @@
   "2026-08-21": "Business to March 2026: 7.12.7.3 thresholds already carried by the 2026 manual, confirmed. Dispute Resolution July 2026: touches 8.4.4.2, 8.8.3.2 and 8.15.2 only, nothing for 8.12. Property July 2026: touches 12.6.4.1 only, nothing for 12.9 or 12.10. No update file exists for Legal Services (SERV10) or Public Law (SYS11).",
   "2026-08-22": "Tort update APPLIED to 2.2 (necessity removed from the syllabus; the tool never carried it, so a CURRENCY line was added rather than a deletion). Land update checked against 4.2 — its three entries bear on 4.1 (Use Classes Order), the home-rights passages at pp 15/32/38/41 and the undue-influence chapter (One Savings Bank v Waller-Edwards), none of which is 4.2; the FLA 1996 statutes entry in 4.2 now records the Civil Partnership Act 2004 amendment. CRMP Sentencing Act 2026 update checked against 9.1 — it changes 9.3 (bail) and 9.10 (suspended sentences) only, nothing in 9.1. No update files exist for Contract (1.2), Criminal Liability (5.2) or Conduct (3.3).",
   "2026-08-23": "Wills (nothing for 13.7); Business to March 2026 (nothing for 7.13 or 7.14); Dispute Resolution July 2026 (nothing for 8.13); CRMP Sentencing Act 2026 (touches 9.3 and 9.10 only, nothing for 9.9). No update file exists for SYS11, so 11.5 rests on the 2026 manual alone.",
-  "2026-08-25": "Business to March 2026, Wills, and Dispute Resolution all read in full. NOTHING APPLIED to the six sections in this run. Business: entries are at 7.4, 7.7, 7.12 and 7.16-7.20, none at 7.15; its rename of BPR to Business relief was applied to 13.8, which is a Wills chapter. Wills: the only substantive entry is 13.4.2.4 surrogacy (Cator v Thynn [2026] EWHC 1045 Ch), plus a note that the Wills manual was updated April 2026 for IHT - relevant to 13.8 only in confirming the 2026 IHT figures are current. Dispute Resolution: entries at 8.4.4.2 (Mazur v Charles Russell Speechlys, conduct of litigation by supervised non-authorised persons), 8.8.3.2 and 8.15.2 (SLAPPs), none at 8.14. Land, Tort, Trusts and CRMP Sentencing not relevant to PROP12, DISP8, SYS11, WILL13 or BUS7."
+  "2026-08-25": "Business to March 2026, Wills, and Dispute Resolution all read in full. NOTHING APPLIED to the six sections in this run. Business: entries are at 7.4, 7.7, 7.12 and 7.16-7.20, none at 7.15; its rename of BPR to Business relief was applied to 13.8, which is a Wills chapter. Wills: the only substantive entry is 13.4.2.4 surrogacy (Cator v Thynn [2026] EWHC 1045 Ch), plus a note that the Wills manual was updated April 2026 for IHT - relevant to 13.8 only in confirming the 2026 IHT figures are current. Dispute Resolution: entries at 8.4.4.2 (Mazur v Charles Russell Speechlys, conduct of litigation by supervised non-authorised persons), 8.8.3.2 and 8.15.2 (SLAPPs), none at 8.14. Land, Tort, Trusts and CRMP Sentencing not relevant to PROP12, DISP8, SYS11, WILL13 or BUS7.",
+  "2026-08-26": "Dispute Resolution (13 Mar 2026): the only entry touching today's sections was 8.15.2 SLAPP, already incorporated in DISP8 2026_05_29 and now added to the tool. Nothing for 8.16. Business to March 2026: 7.16-7.19 point to the tax checker, and the main pool writing-down allowance is cut from 18% to 14% - applied to 7.16 with a CURRENCY line. CRMP Sentencing Act: 9.10.5.4, 9.10.5.5 and the requirements table are all already incorporated in CRMP9 2026_06_04; the tool was the stale copy, not the manual. Wills, Land, Tort and Trusts updates not applicable to today's six."
  },
  "defects": {
   "mm-6": "12.2's overview map has SIX branches, but only .mm-2 to .mm-5 existed, so it had been rendering unstyled. Added a .mm-6 rule (3 columns, dropping to 2 on narrow screens) on 2026-08-19 rather than rewriting 12.2's unverified content. Maps should still be built with 2-5 branches.",
@@ -1370,7 +1377,10 @@
    "Pre-existing and NOT fixed this run: 3.3 and 12.2 overview maps each have 6 branches, which exceeds the mm-2 to mm-5 CSS limit. Fix when their day comes.",
    "Pre-existing and NOT fixed this run: 9.12, 9.13, 11.7 and 11.8 still have no visual and render blank. 9.7, 9.8, 9.9, 11.5 and 11.6 are now done."
   ],
-  "2026-08-25": "Long default screens left deliberately, with reasons: 13.8 (1923), 12.11 (1713), 7.15 (1586) and 8.14 (1355). Each carries a chapter overview map plus one or two GENUINE forks - 12.11 covenant classification and forfeiture, 7.15 creditor petition and claw-back, 13.8 classify the transfer and death within 7 years, 8.14 witness summons - which is the only permitted use of a tree. Every enumerating node was moved out into collapsed grids during the build, and the first note block in each was rewritten as a short six-line spine. 13.8's section object is 42.8k characters against the 12-20k guidance because it is the longest chapter in WILL13, roughly 25 manual pages; the excess is entirely in collapsed panels. STILL OUTSTANDING and untouched because they were not in this run: four sections render with no visual at all - 9.12, 9.13, 11.7 and 11.8 (9.9 and 11.5 are now fixed). Also still outstanding: the leaf-rule breaches in 7.6, 's 169 RIGHTS x3' and 's 6 UNFITNESS'; and the heavy default screens at 11.2 (2733), 5.3 (2565), 8.9 (2158) and 8.6 (2129)."
+  "2026-08-25": "Long default screens left deliberately, with reasons: 13.8 (1923), 12.11 (1713), 7.15 (1586) and 8.14 (1355). Each carries a chapter overview map plus one or two GENUINE forks - 12.11 covenant classification and forfeiture, 7.15 creditor petition and claw-back, 13.8 classify the transfer and death within 7 years, 8.14 witness summons - which is the only permitted use of a tree. Every enumerating node was moved out into collapsed grids during the build, and the first note block in each was rewritten as a short six-line spine. 13.8's section object is 42.8k characters against the 12-20k guidance because it is the longest chapter in WILL13, roughly 25 manual pages; the excess is entirely in collapsed panels. STILL OUTSTANDING and untouched because they were not in this run: four sections render with no visual at all - 9.12, 9.13, 11.7 and 11.8 (9.9 and 11.5 are now fixed). Also still outstanding: the leaf-rule breaches in 7.6, 's 169 RIGHTS x3' and 's 6 UNFITNESS'; and the heavy default screens at 11.2 (2733), 5.3 (2565), 8.9 (2158) and 8.6 (2129).",
+  "2026-08-26": "2026-08-26 scan: three overview mind maps use SIX branches, but the CSS only carries mm-2 to mm-5, so they have no layout rule - 13.8, 3.3 and 12.2. Not touched today; fix when each section comes up. No other render defects: 119 sections, node --check clean, no blank or 'undefined' output, every grid row matches its column count, every CSS class used has a rule, no leaf-rule breaches."
  },
- "carry_forward": {}
+ "carry_forward": {
+  "2026-08-26": "Next in queue after today: 11.7 Human Rights Act 1998 and the ECHR (one of the nine sections with no visual that render blank), then 12.14 Assignment of Lease, Licence to Assign - pick up the undertaking-for-costs point moved out of 12.13. Then 13.9 Solicitors Accounts and 7.17 Corporation Tax, where the 14% writing-down allowance also applies at 7.17.2.3."
+ }
 }
