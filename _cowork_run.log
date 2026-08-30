@@ -2,13 +2,13 @@
   SQE1 Site Updater
 =======================================================
 
-[1/4] Parsing questions from: /sessions/exciting-happy-feynman/mnt/Formation Solicitor/Tests
-  ✓ 924 questions parsed
+[1/4] Parsing questions from: /sessions/exciting-youthful-dijkstra/mnt/Formation Solicitor/Tests
+  ✓ 963 questions parsed
 
 [2/4] Updating COLP question bank in standalone HTML...
-  ✓ QUESTION_BANK (COLP) replaced (924 questions)
+  ✓ QUESTION_BANK (COLP) replaced (963 questions)
   ✓ SRA_BANK and REVISE_BANK left untouched
-  ✓ Standalone HTML written (1,830,331 chars)
+  ✓ Standalone HTML written (1,883,207 chars)
   ✓ Teaching calendar refreshed (117 modules)
 
 [2b/4] Injecting personal mistake flashcards into revision guide...
@@ -18,7 +18,7 @@
   ⚠ Could not reach progress API: <urlopen error Tunnel connection failed: 403 Forbidden>
   Hostinger API: 0 wrong answers
   Canvas PDFs: 66 wrong answers
-  H5P PDFs: 191 wrong answers
+  H5P PDFs: 207 wrong answers
       3 wrong  SQE1 Mock Exam 0807.pdf
       4 wrong  SQE1 Mock Exam FLK 2 0708.pdf
       3 wrong  SQE1 Mock Exam FLK1 0608.pdf
@@ -70,19 +70,19 @@
         bank now says   : A written partnership agreement could provide for both interest on cap
     (report only — nothing was changed. Add an entry to answer_overrides.json to pin any of these.)
   Mock exam PDFs: 39 wrong answers
-  Total wrong answers: 311
-  Mapped to 248 flashcard(s) across 13 deck(s): ['BUS7', 'COND', 'CONT', 'CRML', 'CRMP', 'DISP', 'LAND', 'PROP', 'SERV', 'SYS', 'TORT', 'TRUS', 'WILL']
-  ✓ Injected 20 mistake flashcard(s) into 'TRUS' deck
+  Total wrong answers: 327
+  Mapped to 262 flashcard(s) across 13 deck(s): ['BUS7', 'COND', 'CONT', 'CRML', 'CRMP', 'DISP', 'LAND', 'PROP', 'SERV', 'SYS', 'TORT', 'TRUS', 'WILL']
+  ✓ Injected 22 mistake flashcard(s) into 'TRUS' deck
   ✓ Injected 22 mistake flashcard(s) into 'LAND' deck
   ✓ Injected 27 mistake flashcard(s) into 'CRMP' deck
   ✓ Injected 13 mistake flashcard(s) into 'COND' deck
   ✓ Injected 24 mistake flashcard(s) into 'CONT' deck
-  ✓ Injected 31 mistake flashcard(s) into 'DISP' deck
+  ✓ Injected 33 mistake flashcard(s) into 'DISP' deck
   ✓ Injected 27 mistake flashcard(s) into 'BUS7' deck
-  ✓ Injected 15 mistake flashcard(s) into 'WILL' deck
+  ✓ Injected 17 mistake flashcard(s) into 'WILL' deck
   ✓ Injected 8 mistake flashcard(s) into 'SYS' deck
   ✓ Injected 13 mistake flashcard(s) into 'TORT' deck
-  ✓ Injected 25 mistake flashcard(s) into 'CRML' deck
+  ✓ Injected 33 mistake flashcard(s) into 'CRML' deck
   ✓ Injected 16 mistake flashcard(s) into 'PROP' deck
   ✓ Injected 7 mistake flashcard(s) into 'SERV' deck
   ✓ Revision guide flashcards updated with personal mistakes
@@ -93,7 +93,7 @@
 [3/4] Publishing to GitHub...
 
 [4/4] Publishing 4 file(s) via sandbox clone...
-  ✓ pushed via sandbox clone
+  ✓ no changes to publish (origin already current)
 
 ✓ Done! Site updated at:
   https://rfn2jk9dw9-max.github.io/SQE-Prep/
