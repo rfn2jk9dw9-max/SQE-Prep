@@ -301,11 +301,13 @@ def map_wrong_answers_to_chapters(wrong_answers: list[dict]) -> dict[str, list[s
             continue
         seen.add(key)
 
-        q_short   = q['questionText'][:200].rstrip() + ('…' if len(q['questionText']) > 200 else '')
-        user_ans  = q['userAnswer'][:120].rstrip()   + ('…' if len(q['userAnswer']) > 120 else '')
-        corr_ans  = q['correctAnswer'][:120].rstrip()+ ('…' if len(q['correctAnswer']) > 120 else '')
+        # Full text, never truncated — an SQE1 stem carries the actual question
+        # in its final sentence, so a character cap removes the point of the note.
+        q_full   = _clean_stem(q['questionText'])
+        user_ans = _clean_answer(q['userAnswer'])
+        corr_ans = _clean_answer(q['correctAnswer'])
 
-        note = f"Q: {q_short} — You answered: {user_ans}. Correct: {corr_ans}."
+        note = f"Q: {q_full} — You answered: {user_ans} Correct: {corr_ans}"
         by_chapter[chapter_id].append(note)
 
     return dict(by_chapter)
@@ -414,6 +416,52 @@ def wrong_answer_to_flashcard_key(q: dict) -> str | None:
     return FLASHCARD_KEY_OVERRIDES.get(subj_key, subj_key)
 
 
+# ── Card text hygiene ─────────────────────────────────────────────────────────
+#
+# Three defects used to make the auto-generated cards unreadable:
+#   1. Stems were cut at 220 chars. An SQE1 stem puts the ACTUAL question
+#      ("Which of the following best describes…") at the END, so truncation
+#      reliably removed the only part that matters. Nothing is truncated now.
+#   2. H5P print-to-PDF captures carry a page header — "Quizzes - Results
+#      09/08/2026, 12:17" — glued to the front of the first stem on the page.
+#   3. Option-wrap corruption leaves some parsed options as a bare dash or a
+#      couple of stray characters; rendering those as the "correct answer"
+#      teaches nothing, so they are labelled honestly instead.
+
+# The header is NOT only a prefix. print-to-PDF repeats it at every page break,
+# so it lands mid-sentence ("The victim tries the | Quizzes - Results 09/08/2026,
+# 12:17 | coat on…"). Strip it anywhere, and only when the "Quizzes - Results"
+# marker is present — a bare dd/mm/yyyy could be a real date in a stem.
+_PDF_HEADER_RE = re.compile(
+    r"\s*Quizzes\s*[-–—]\s*Results\s*"
+    r"(?:\d{2}/\d{2}/\d{4},?\s*\d{2}:\d{2})?\s*",
+    re.IGNORECASE,
+)
+
+_DEGENERATE_ANSWER = "(not captured — check the source PDF)"
+
+
+def _clean_stem(text: str) -> str:
+    """Strip print-to-PDF page furniture and collapse runs of whitespace."""
+    text = _PDF_HEADER_RE.sub(" ", text or "")
+    return re.sub(r"\s+", " ", text).strip()
+
+
+def _clean_answer(text: str) -> str:
+    """
+    Normalise an option string for display. Returns a clear placeholder when
+    the parse produced nothing usable rather than a bare '?', '‐' or '(see PDF)'
+    that reads as if it were the real answer.
+    """
+    text = re.sub(r"\s+", " ", (text or "")).strip()
+    if text in ("(see PDF)", "(not recorded)", "?"):
+        return _DEGENERATE_ANSWER
+    # Bare dashes / stray fragments left behind by the option-wrap bug.
+    if len(text.strip(" .-‐–—·•")) < 3:
+        return _DEGENERATE_ANSWER
+    return text.rstrip(" .") + "."
+
+
 def map_wrong_answers_to_flashcards(wrong_answers: list[dict]) -> dict[str, list[dict]]:
     """
     Returns {flashcard_key: [{"q":..., "a":..., "auto": True}, ...]}
@@ -427,23 +475,24 @@ def map_wrong_answers_to_flashcards(wrong_answers: list[dict]) -> dict[str, list
         if not fkey:
             continue
 
-        qtext = (q.get("questionText") or "").strip()
+        qtext = _clean_stem(q.get("questionText") or "")
         if not qtext:
             continue
 
+        # Dedup still keys on the first 80 chars of the QUESTION — never on
+        # answer text, which shares long openings between distractors.
         dedup_key = (fkey, qtext[:80])
         if dedup_key in seen:
             continue
         seen.add(dedup_key)
 
         label = _ORIGIN_LABEL.get(q.get("origin", "h5p"), "Session")
-        q_short = qtext[:220].rstrip() + ("…" if len(qtext) > 220 else "")
-        user_ans = (q.get("userAnswer") or "?")[:150].rstrip()
-        corr_ans = (q.get("correctAnswer") or "?")[:150].rstrip()
+        user_ans = _clean_answer(q.get("userAnswer"))
+        corr_ans = _clean_answer(q.get("correctAnswer"))
 
         by_key[fkey].append({
-            "q": f"⚠ Your mistake — {label}: {q_short}",
-            "a": f"You answered: {user_ans}. Correct answer: {corr_ans}.",
+            "q": f"⚠ Your mistake — {label}: {qtext}",
+            "a": f"You answered: {user_ans} Correct answer: {corr_ans}",
             "auto": True,
         })
 
@@ -549,8 +598,17 @@ def inject_mistake_flashcards(html: str, by_key: dict[str, list[dict]]) -> str:
         )
         scope_clean = auto_pat.sub("", scope)
 
-        insertion = f",{AUTO_MISTAKES_START}{auto_js}{AUTO_MISTAKES_END}"
-        updated_scope = scope_clean[:-1] + insertion + "]"
+        # Splice the auto block in just before the closing bracket. The leading
+        # comma is only correct when the deck already has hand-written cards —
+        # on an EMPTY deck ("cards":[]) it produces "[,{…}]", which JS reads as
+        # an elision: a hole at index 0. cards[0] is then undefined and the
+        # renderer throws, so the whole deck silently does nothing when clicked.
+        body = scope_clean[1:-1].strip()
+        sep = "" if (not body or body.endswith(",")) else ","
+        updated_scope = (
+            "[" + body + sep
+            + AUTO_MISTAKES_START + auto_js + AUTO_MISTAKES_END + "]"
+        )
 
         block = block[:cards_open] + updated_scope + block[cards_close + 1:]
         print(f"  ✓ Injected {len(cards)} mistake flashcard(s) into '{key}' deck")

@@ -1,13 +1,13 @@
 {
- "updated": "2026-08-30",
+ "updated": "2026-09-01",
  "rule": "Pick sections by running the REAL buildSchedule() AND buildSecondPass() from SQE1_COLP_Revision.html in node against the server done-set (colp_progress.php), then MERGING both passes by date. SEED_DATES are TEACHING dates, not due dates. As at the Aug 2026 rewrite of that file: no MIN_GAP (eligible the day taught), SCHED_END 2027-01-10 (day before FLK1), isFreeDay also excludes four FULL_PAPER_DAYS Sundays, DEFAULT_DONE CONT1.1-1.3. The first pass assigns ONE new module per free day (75 days); buildSecondPass adds ONE spaced revisit per day (83 entries, 21-day gap, coldest first). BOTH COUNT. getStatus() colours cards from the first pass only and revisits render on the existing card - that is display, not scheduling. Taking the first pass alone sends the overhaul to material 2-3 weeks out and skips the oldest never-overhauled chapters, which is what the second pass exists to rescue. Nothing is ever overdue; the queue drains in TEACHING order. Take Today then Upcoming from the MERGED list, skipping sections already done here. Then: (1) pdftotext the SLK manual chapter, (2) rebuild notes terse (15-25k chars, one point per line, citations only in the cases array, grep every case name back against the manual), (3) visuals array - overview mind map + one per topic + decision trees for confusable doctrines (map: 2-5 branches, grid: 2-4 cols), (4) preserve/relocate MCQ traps, never delete, (5) verify with the node buildVis sweep, (6) push the single file via a /tmp clone.",
  "counts": {
-  "total": 119,
-  "done": 104,
-  "todo": 15,
-  "needs_format_pass": 23,
-  "visuals_array": 102,
-  "note": "Recomputed 2026-08-30 after the 4.5 / 5.3 / 6.3 / 13.1 / 7.5 / 8.5 run. Four full overhauls (4.5, 5.3, 13.1, 8.5 - all legacy single-visual) and two format passes with a 2026-edition verification (6.3, 7.5). Tool default-screen mean 1206, median 1312, measured with a harness that also strips scen-body - the previous harness did not, which inflated any section carrying micro-scenarios."
+  "total": 118,
+  "done": 115,
+  "todo": 3,
+  "needs_format_pass": 10,
+  "visuals_array": 114,
+  "note": "Recomputed 2026-09-01 after the 11.8 / 7.18 / 7.19 / 12.15 / 9.12 / 13.10 run. All six were legacy single-visual full overhauls, taken in schedule order from the buildSchedule walk (BUS7.9 came first but its only outstanding piece was 7.9B, which was dropped as superseded - see below). TOTAL IS NOW 118, NOT 119: section 7.9B 'Corporate Finance - Debt Finance & Security' duplicated 7.10 'Debt and Security', which covers the same ground better and is already overhauled, so it was dropped as superseded. Future runs should expect 118 sections. Two more of the blank-rendering sections cleared: 11.8 and 9.12 now render. Only 9.13 still renders blank. Tool default-screen mean 1263 across the six, range 1001-1428."
  },
  "sections": [
   {
@@ -190,11 +190,12 @@
    "id": "8.17",
    "title": "Appeals and Enforcement",
    "manual": "SLK DISP8",
-   "status": "todo",
-   "visuals": "single",
-   "notes": "",
-   "default_words": 370,
-   "needs_format_pass": true
+   "status": "done",
+   "visuals": "array",
+   "notes": "31 Aug 2026 FULL OVERHAUL against the 2026 DISP8; was the legacy single destination grid at 370 default words. The existing notes were largely accurate and current, so this was mainly a visuals rebuild plus the gaps. ADDED second appeals and the CPR r 52.7 test, the 28-day route on to the Supreme Court and the Supreme Court Rules 2009, the destination exceptions (insolvency, Companies Act 2006 claims, some IP, family proceedings) and the leapfrog, the PD 52A para 5.1 skeleton argument requirements, the full appeal bundle contents with the 35-day, 42-day and 14-day timetable, the respondent's notice and skeleton timings, the respondent's costs rule at the permission stage and its three exceptions, r 52.5(2) oral hearings in the Court of Appeal, the one-year validity of permission to issue a writ of control, the four ways of taking control of goods and the inventory, the r 85.4 seven-day third-party ownership claim, r 84.11 sale otherwise than at public auction, and the third-party debt order final-stage service timetable (21 days on the third party, 7 days on the debtor, objections 3 days before). Statutes array built from 4 to 18 entries. REMOVED as unverifiable: a bullet about enforcing in 'other foreign jurisdictions' via a certificate 'issued once the time to appeal has expired'. The chapter covers only Scotland and Northern Ireland and the claim could not be checked. Ten visuals; the decision tree was cut from five nodes to four because the destination node was a lookup table in tree clothing and the destination table already carries it. Section object is 33.9k characters, above the 12-20k guide, because the chapter covers appeals AND five enforcement methods; the default screen was managed instead, coming down from a first draft of 2074 to 1392. DR examinable-law update checked: its three entries land at 8.4.4.2, 8.8.3.2 and 8.15.2, none of which touches 8.17.",
+   "default_words": 1392,
+   "needs_format_pass": false,
+   "manual_edition": "SLK DISP8 manual 2026_05_29.pdf"
   },
   {
    "id": "7.1",
@@ -296,16 +297,6 @@
    "manual_edition": "SLK BUS7 manual 2026_05_28.pdf"
   },
   {
-   "id": "7.9B",
-   "title": "Corporate Finance — Debt Finance & Security",
-   "manual": "SLK BUS7",
-   "status": "todo",
-   "visuals": "single",
-   "notes": "Was missing from this tracker - non-standard id ('7.9B') so it fell out of every id sweep. Not yet overhauled.",
-   "default_words": 445,
-   "needs_format_pass": true
-  },
-  {
    "id": "7.10",
    "title": "Debt and Security",
    "manual": "SLK BUS7",
@@ -386,31 +377,34 @@
    "id": "7.17",
    "title": "Corporation Tax",
    "manual": "SLK BUS7",
-   "status": "todo",
-   "visuals": "single",
-   "notes": "",
-   "default_words": 227,
-   "needs_format_pass": true
+   "status": "done",
+   "visuals": "array",
+   "notes": "31 Aug 2026 FULL OVERHAUL against the 2026 BUS7 and the tax checker 2026_07_24; was the legacy single three-column grid at 227 default words. BUSINESS UPDATE TO MARCH 2026 APPLIED: the main pool writing-down allowance has fallen from 18% to 14%, and the section carried 18%. Rates refreshed to FY 2026/2027 throughout: 19% up to £50,000, 25% above £250,000, marginal relief at an effective 26.5% on the band, AIA £1m, special rate pool 6%, 35.75% higher dividend rate on loans to participators, 3.75% official rate on beneficial loans. REMOVED A FABRICATED STATUTE: the statutes array carried 'Taxes Consolidation Act (TCTA 1997 - now CTA 2010)', which is the IRISH Act and does not govern UK group relief; the group relief note built on it went with it, group relief not being part of this chapter or the SRA specification for it. Also removed the 186% SME R&D enhanced deduction, which is neither in the chapter nor current law. Indexation corrected: frozen from 1 JANUARY 2018, not December 2017. ADDED the financial year / accounting period distinction, the three components of taxable profit, the charitable payments deduction before tax, the three-part deductibility test, the green 100% first-year allowance, full expensing and 50% FYAs for NEW machinery only, the AIA no-carry-forward and no-double-claim rules, the full chargeable gains computation with enhancement expenditure and incidental costs, BARR with its two conditions and the 1-year-before / 3-years-after window and the exclusion of shares, capital losses never carried back, close companies with the control test, the loans-to-participators charge with both escapes (money-lending business; £15,000 or less to a full-time employee with 5% or less), beneficial loans, transfer pricing, change of ownership, distributions in specie, and the manual's five-step calculation as a steps panel. KEPT the associated companies rule dividing the £50,000 and £250,000 thresholds, which the 2026 chapter omits but which is real and correct. MANUAL TYPO not reproduced: 7.17.3.2 says 'dividend payments are treated as an expense of the business', contradicting 7.17.3.1, the summary of key principles and the calculation steps, all of which say dividends are NOT deductible.",
+   "default_words": 1385,
+   "needs_format_pass": false,
+   "manual_edition": "SLK BUS7 manual 2026_05_28.pdf"
   },
   {
    "id": "7.18",
    "title": "Capital Gains Tax",
    "manual": "SLK BUS7",
-   "status": "todo",
-   "visuals": "single",
-   "notes": "",
-   "default_words": 253,
-   "needs_format_pass": true
+   "status": "done",
+   "visuals": "array",
+   "notes": "Legacy single-visual (a flow). Rebuilt with an overview map, a decision tree keyed to which relief the facts point at, the six calculation steps, and grids for the figures and for the losses/AEA ordering trap. WRONG BEFORE: rates given as 10%/20% for assets and 18%/24% for residential property, BADR at 10%, and an AEA labelled '2024/25'. Per the Tax Checker 2026_07_24 for 6 Apr 2026 - 5 Apr 2027 there is ONE pair of rates for all assets, 18% within the unused basic rate band and 24% above it, BADR is 18% (14% last year, 10% before), AEA £3,000, BADR lifetime limit £1m. ADDED, all previously missing: incorporation relief, EIS reinvestment relief, the three deemed occupation periods and the last-9-months rule for private residence relief, the wasting chattel and £6,000 chattel exemptions, the bad-bargain-at-arms-length rule, the 60-day reporting deadline for UK residential property, the 31 January payment date with no payments on account, and the loss relief targeted anti-avoidance rule - which is in the SRA specification. Section numbers are NOT in the visuals (the 2026 chapter carries none and she does not need to memorise them); TCGA 1992 ss 1, 152, 162, 165, 169H-169V and 222 sit in the statutes panel only.",
+   "default_words": 1389,
+   "needs_format_pass": false,
+   "manual_edition": "SLK BUS7 manual 2026_05_28.pdf"
   },
   {
    "id": "7.19",
    "title": "Value Added Tax",
    "manual": "SLK BUS7",
-   "status": "todo",
-   "visuals": "single",
-   "notes": "",
-   "default_words": 215,
-   "needs_format_pass": true
+   "status": "done",
+   "visuals": "array",
+   "notes": "Legacy single-visual (a grid). Rebuilt with an overview map, a decision tree on input tax recovery, and collapsed grids for the treatments, the tax point and returns, and the figures and penalties. WRONG BEFORE: 'Residential property: always exempt from VAT'. Residential CONSTRUCTION is zero rated, and the point about the option to tax is that it is available for commercial land and buildings only. ADDED: activities outside the scope (private sale, MOT fee, sale of shares, business as a going concern), the four tax point rules including the 14-day invoice rule, blocked input tax on cars and on business entertaining, the partially exempt trader, the option to tax applying to the WHOLE building and not passing on a disposal, its revocation within 6 months or after 20 years, the VAT invoice and record-keeping requirements, the penalty regime, and the 1/6 and 1/21 VAT fractions. KEPT the 3-year rule for a new commercial building, which the 2026 chapter no longer spells out but which its own worked example depends on. Thresholds from the Tax Checker 2026_07_24: registration £90,000, deregistration £88,000, rates 20/5/0%.",
+   "default_words": 1122,
+   "needs_format_pass": false,
+   "manual_edition": "SLK BUS7 manual 2026_05_28.pdf"
   },
   {
    "id": "7.20",
@@ -623,21 +617,23 @@
    "id": "13.9",
    "title": "Solicitors Accounts – Client Money",
    "manual": "SLK WILL13",
-   "status": "todo",
-   "visuals": "single",
-   "notes": "",
-   "default_words": 256,
-   "needs_format_pass": true
+   "status": "done",
+   "visuals": "array",
+   "notes": "31 Aug 2026 FULL OVERHAUL against the 2026 WILL13; was the legacy single grid at 256 default words. TWO LEGAL CORRECTIONS. First, the section said client money must be paid into the client account 'ON THE DAY RECEIVED or the next working day' and attributed that to r 2.3. That is the old 2011 rule; SRA Accounts Rules r 2.3 says PROMPTLY. Second, the list of r 5 withdrawal grounds was wrong (it read 'to pay client or third party; in lieu of fees with client authority; to pay disbursements; where money incorrectly paid in'). The three actual gateways in r 5.1 are the purpose for which the money is held, the client's or third party's instructions, and the SRA's prior written authorisation or prescribed circumstances. ADDED the four limbs of r 2.1, the r 2.2 exemption and the three r 2.3 exceptions, r 3.1 (bank or building society in England and Wales), r 3.3 (no banking facilities), r 5.2 (authorisation and supervision), r 5.3 (sufficient funds for THAT specific client), r 6.1 (immediate replacement on discovery), the two permitted mixed-payment routes under rr 4.1-4.2, the four-limb business money definition with the professional disbursements exception, the designated client account, the interest received ledger, the five desired outcomes, and the manual's full vocabulary of ledgers. Statutes array built from 2 to 11 entries. MOVED OUT as superseded: the whole 'Records and Reconciliation' block (double entry, monthly reconciliation, the accountant's report threshold, 6-year retention, COFA reporting) is 13.10 material, which 13.10 covers properly; one cross-referring line left in its place. Wills examinable-law update checked: its entries concern IHT, 13.4.2.4 surrogacy and an unreported Solicitors Accounts consultation, so nothing applied.",
+   "default_words": 1466,
+   "needs_format_pass": false,
+   "manual_edition": "SLK WILL13 manual 2026_06_15.pdf"
   },
   {
    "id": "13.10",
    "title": "Solicitors Accounts – Accounting Records and Entries",
    "manual": "SLK WILL13",
-   "status": "todo",
-   "visuals": "single",
-   "notes": "",
-   "default_words": 244,
-   "needs_format_pass": true
+   "status": "done",
+   "visuals": "array",
+   "notes": "Legacy single-visual (a flow). Rebuilt with an overview map, a four-node decision tree (which pair of entries? transfers? mixed cheque? agent or principal?), and collapsed grids for the simple transactions, the buyer's and seller's property transaction entries, VAT, dishonoured cheques and interest, and the financial statement. WRONG BEFORE: 'Monthly reconciliation' - r 8.2 requires reconciliation at a minimum of FIVE-WEEKLY intervals. The whole section used the pre-2026 'office account / office side' vocabulary; the 2026 manual says BUSINESS account and business side, and the section now follows it. The VAT-on-disbursements treatment was too loose ('VAT only if firm's own expense recharged'); replaced with the agency versus principal distinction, which turns on whether the supplier's invoice is addressed to the client or to the firm. ADDED: rr 9, 10 and 11 (joint accounts, the client's own account, third-party managed accounts), r 12 accountant's reports with the 6-month deadline, the qualified-report duty and the Legal Aid Agency and £10,000 average / £250,000 maximum exemptions, r 13 six-year retention, both mixed cheque methods, petty cash, the full buyer and seller property transaction entries, stakeholder versus agent deposits, dishonoured cheques, interest on general and designated client accounts, abatements, bad debts either side of 6 months, and the financial statement contents and column conventions.",
+   "default_words": 1428,
+   "needs_format_pass": false,
+   "manual_edition": "SLK WILL13 manual 2026_06_15.pdf"
   },
   {
    "id": "9.1",
@@ -752,21 +748,23 @@
    "id": "9.11",
    "title": "Appeals",
    "manual": "SLK CRMP9",
-   "status": "todo",
-   "visuals": "single",
-   "notes": "",
-   "default_words": 206,
-   "needs_format_pass": true
+   "status": "done",
+   "visuals": "array",
+   "notes": "31 Aug 2026 FULL OVERHAUL against the 2026 CRMP9; was the legacy single ladder at 206 default words. CORRECTION: the section said case stated bars an appeal to the Crown Court 'for conviction on the same point'. Manual 9.11.3.2 and the summary of key principles are unqualified - using case stated loses the right of appeal to the Crown Court altogether, while the reverse is not true, which is why you appeal to the Crown Court first. ADDED the MCA 1980 s 142 route of asking the Bench to set aside or vary before appealing at all, the 15-business-day notice and the absence of any leave requirement, the Crown Court's inability to decline jurisdiction, the majority decision in which the judge can be outvoted by the lay justices, the Newton hearing point where the Crown Court rejects an accepted factual basis, the full case stated machinery (21-day application, 21 days for the authorised court officer's draft, 15 business days for service, two or three Administrative Court judges who must reach a majority or the appeal fails, decision on the stated facts with power to consider unargued defences, and power to substitute a conviction for an acquittal), the CACD timetable (28 days to the Registrar of Criminal Appeals, 10 business days for the respondent's notice and for renewal to the full court, 21 and 14-day skeletons), the representation order point, the loss of time direction, the fresh evidence test, and the prosecution's terminating ruling appeal with its undertaking to offer no evidence if the appeal fails. Nine visuals including two genuine decision trees. Statutes array built from 1 to 13 entries, every section verified against the provision it labels: Criminal Appeal Act 1968 ss 1, 2, 7, 11(3) and 23; MCA 1980 ss 111 and 142; Senior Courts Act 1981 s 48; CJA 1988 s 36; CJA 1972 s 36; CJA 2003 Part 9 and ss 75-79; Criminal Appeal Act 1995 s 13. KEPT the CJA 2003 double jeopardy retrial and the CCRC, which the 2026 chapter mentions only in passing or not at all, but which are real and examinable, each stated with its rule. CRMP Sentencing Act update checked: its entries land at 9.3.4, 9.3.5, 9.3.8, 9.10.5, 9.10.6 and 9.10.13, none of which touches 9.11.",
+   "default_words": 1490,
+   "needs_format_pass": false,
+   "manual_edition": "SLK CRMP9 manual 2026_06_04.pdf"
   },
   {
    "id": "9.12",
    "title": "Trials of Minors",
    "manual": "SLK CRMP9",
-   "status": "todo",
-   "visuals": "single",
-   "notes": "",
-   "default_words": 195,
-   "needs_format_pass": true
+   "status": "done",
+   "visuals": "array",
+   "notes": "Was a legacy single-visual section that rendered BLANK (no visual at all). Rebuilt with an overview map, a four-node decision tree on venue, and grids for sentencing options by age, the three main sentences compared, the YRO requirements and their limits, and the persistent offender rules. WRONG BEFORE: 'welfare of child paramount (Children Act 1989 s.1)'. Paramountcy is the family jurisdiction; in the criminal courts the duty is to HAVE REGARD to the child's welfare (CYPA 1933 s 44) alongside the principal aim of preventing offending (CDA 1998 s 37). Also corrected the reference to detention under PCC(S)A 2000 s 91, repealed and re-enacted as Sentencing Act 2020 s 250. ADDED: the grave crime test that custody substantially exceeding 2 years must be a realistic possibility; the full set of joint-charge routes including the rule that where the adult is in the magistrates' court and both plead not guilty the adult court MUST try the youth with no interests of justice test; the six interests of justice factors and which one actually decides; the persistent offender table; DTO 4-24 months with no suspended version and the guilty-plea trap; referral order 3-12 months and the four mandatory conditions; the YRO requirement limits and the age gates at 15 and 16. Sentencing Act 2026 checked - its presumption to suspend applies to those 18+ at conviction, so nothing in this chapter changes.",
+   "default_words": 1384,
+   "needs_format_pass": false,
+   "manual_edition": "SLK CRMP9 manual 2026_06_04.pdf"
   },
   {
    "id": "9.13",
@@ -1003,21 +1001,23 @@
    "id": "11.7",
    "title": "Human Rights Act 1998 and the ECHR",
    "manual": "SLK SYS11",
-   "status": "todo",
-   "visuals": "single",
-   "notes": "",
-   "default_words": 393,
-   "needs_format_pass": true
+   "status": "done",
+   "visuals": "array",
+   "notes": "31 Aug 2026 FULL OVERHAUL against the 2026 SYS11; was the legacy single-visual section at 393 default words and one of the nine that rendered thinly. LEGAL CORRECTION: declarations of incompatibility were attributed to 'senior courts (SC, CA, HL)'. Manual 11.7.3.3 says the HIGH COURT AND ABOVE, and the House of Lords no longer exists. ADDED the whole of Sch 1 as a collapsed table (Articles 2-12, 14 and the three First Protocol rights), the absolute/limited/qualified classification as a grid, the secondary-legislation power to quash or amend with its parent-Act limit, the s 10 remedial order procedure including the 60-day laying period and the emergency procedure, the s 7(7)/ECHR art 34 victim test, the ministerial compatibility statement before second reading, and the retrospective assumption of compatibility under s 3. Five visuals: overview map, one genuine decision tree (s 3 then s 4, primary v secondary, which court, what follows), the rights-classification grid, the Schedule 1 table and a section-by-section grid. Statutes array built from 0 to 10 entries. KEPT Ghaidan (which the manual carries), YL v Birmingham City Council and ECHR art 15, all real and examinable and each attached to the rule it labels. REMOVED R (Ullah) and the 'mirror principle' gloss: not in the 2026 chapter and it overstates s 2, which is take into account, not follow. No update file exists for Legal Systems and Public Law.",
+   "default_words": 1261,
+   "needs_format_pass": false,
+   "manual_edition": "SLK SYS11 manual 2026_06_03.pdf"
   },
   {
    "id": "11.8",
    "title": "The Place of EU Law in the UK Constitution",
    "manual": "SLK SYS11",
-   "status": "todo",
-   "visuals": "single",
-   "notes": "",
-   "default_words": 298,
-   "needs_format_pass": true
+   "status": "done",
+   "visuals": "array",
+   "notes": "Was a legacy single-visual section that rendered BLANK (no visual at all). Rebuilt with an overview map, a decision tree on direct applicability v direct effect, a types-of-EU-law grid, the Brexit timeline as steps, and a grid on departing from retained case law. WRONG BEFORE: it said EU case law decided before 31 Dec 2020 is retained as persuasive or binding - RELRRA 2023 provides that courts are NOT bound by retained case law. Added the whole substance of the 2023 Act that was missing: the 587 Sch 1 revocations, the abolition of supremacy and of the general principles, the repeal of EUWA s 4, 'assimilated law', incompatibility orders, and the departure factors for retained EU and retained domestic case law. Added the vertical/horizontal direct effect grid and the treaty/regulation/directive/decision distinctions, which the chapter turns on. KEPT Costa v ENEL and Factortame, which the 2026 chapter does not name: both are real and state the supremacy principle the chapter describes, and both are flagged as historical now that supremacy is abolished. Dropped the UK-EU Trade and Cooperation Agreement line as peripheral.",
+   "default_words": 1001,
+   "needs_format_pass": false,
+   "manual_edition": "SLK SYS11 manual 2026_06_03.pdf"
   },
   {
    "id": "10.1",
@@ -1286,21 +1286,23 @@
    "id": "12.14",
    "title": "Assignment of Lease, Licence to Assign and Licence to Underlet",
    "manual": "SLK PROP12",
-   "status": "aligned-needs-visuals",
-   "visuals": "single",
-   "notes": "",
-   "default_words": 522,
-   "needs_format_pass": true
+   "status": "done",
+   "visuals": "array",
+   "notes": "31 Aug 2026 FULL OVERHAUL against the 2026 PROP12; was on the legacy single two-column grid at 522 default words, status aligned-needs-visuals. LEGAL CORRECTION: the section said the licence to assign creates privity of contract between the landlord and the OUTGOING tenant. Manual 12.14.3.1 says it creates privity of contract between the landlord and the ASSIGNEE, because the landlord and the assignee are the parties to it. ADDED the class-of-title point (good leasehold must be upgraded to absolute BEFORE exchange, producing the freehold register and plan or an epitome), the unregistered-lease fork (more than 7 years to run: TR1 plus compulsory first registration within 2 months; less than 7 years: a deed of assignment is possible but TR1 is used in practice), covenants for title with the extra leasehold warranties and the usual modification excluding the physical state, the Building Safety Act 2022 requirements including the leaseholder deed of certificate and the landlord's certificate and the Mortgage Lenders' Handbook, apportionment on best estimates under SC 6.3.5 with the service charge retention and insurance apportionment, TA10, CPSE for commercial premises, the rent deposit deed and deed of guarantee, and the HMLR fee scale. Eight visuals. MANUAL INCONSISTENCY, resolved not escalated: 12.14.4.6 and the freehold/leasehold comparison table say the buyer receives a 'signed Form TP1', but 12.14.4.4 and the summary of key principles both say Form TR1. TP1 is transfer of PART, so TR1 is correct and is what the section carries. No update file exists for Property.",
+   "default_words": 1461,
+   "needs_format_pass": false,
+   "manual_edition": "SLK PROP12 manual 2026_06_09.pdf"
   },
   {
    "id": "12.15",
    "title": "Security of Tenure Under a Business Lease",
    "manual": "SLK PROP12",
    "status": "done",
-   "visuals": "single",
-   "notes": "",
-   "default_words": 243,
-   "needs_format_pass": true
+   "visuals": "array",
+   "notes": "Legacy single-visual (a flow). Rebuilt with an overview map, a four-node decision tree (protected? contracted out? which notice? mandatory or discretionary?), and grids for the three notices, the court application timing and compensation plus the new lease terms. REMOVED AS UNVERIFIABLE: 'Leisure (UK) Ltd v First Property (Leisure) Ltd [2015]', cited on the landlord's intention under ground (f). No such case could be found. WRONG BEFORE: it said grounds (f) and (g) attract compensation - the no-fault grounds are (e), (f) AND (g). ADDED: the mandatory (d, f, g) versus discretionary (a, b, c, e) split, which was absent entirely; the s 29(2) landlord application and the s 24(1) tenant application and who must challenge whom; the rule that the application must be made by the specified termination date unless extended in writing; that a tenant who serves a s 27 notice cannot later serve a s 26 request; that the court's maximum fixed term is 15 years; and that a court-set lease does not commence until 3 months after the proceedings end. KEPT the rateable-value basis of the statutory compensation formula, which the chapter describes only as 'a statutory formula'.",
+   "default_words": 1255,
+   "needs_format_pass": false,
+   "manual_edition": "SLK PROP12 manual 2026_06_09.pdf"
   }
  ],
  "gaps": [
@@ -1396,7 +1398,15 @@
   "2026-08-27": "Checked Trusts (only 6.1.5 and 6.1.6.1 affected, nothing for 6.2), Land for July 2026 (Family Law Act 1996 as amended by the Civil Partnership Act 2004 applies to 4.3 - CURRENCY line added; the Etridge/One Savings Bank point is 4.5 not 4.3), Business to March 2026 (all entries fall in 7.4, 7.7, 7.12 and 7.16-7.20, nothing for 7.2), Dispute Resolution July 2026 (entries at 8.4.4.2, 8.8.3.2 and 8.15.2, nothing for 8.2 - but note the Mazur decision it inserts at 8.4.4.2 carries the SAME neutral citation as CILEX v Mazur in SERV10 10.1.3), CRMP Sentencing Act 2026 (entries at 9.3 and 9.10 only, nothing for 9.2).",
   "2026-08-28": "Business to March 2026: read, nothing bears on 7.3 (the updates hit 7.4, 7.7.4.2, 7.12.7.3, 7.16-7.20). Dispute Resolution July 2026: read, the three items are 8.4.4.2 Mazur v Charles Russell Speechlys, 8.8.3.2 SLAPPs and 8.15.2 CPR r 44.2 as amended - none touches 8.3. Land July 2026: read; the 'Page 15, 32, 38 and 41' note about the Family Law Act 1996 as amended by the Civil Partnership Act 2004 resolves by CONTENT to home rights, which sit in 4.3 and 4.5, not in 4.4. No update file exists for Conduct and Ethics, Legal Systems or Property Practice.",
   "2026-08-29": "Business to March 2026 (BITES 7.4: mandatory ID verification, PSC register abolished - the 2026 manual has already absorbed them). CRMP Sentencing Act 2026 (BITES 9.3: no-real-prospect-of-IMMEDIATE-custody filter, post-conviction extension, three welfare factors, electronic tagging - already absorbed by the 2026_06_04 manual, but its numbering shifted). Dispute Resolution March 2026 (BITES 8.4: Mazur on who may conduct litigation, already in the manual; its SLAPP items are 8.8 and 8.15). Tort July 2026 (necessity removed - 2.2 only, nothing for 2.3). Property July 2026 (enforcement time limits - 12.6 only, nothing for 12.2). Criminal Liability July 2026 (Lakeman and Sharma - 5.5 only).",
-  "2026-08-30": "Land (bites 4.5: Waller-Edwards hybrid loans, already in the 2026 manual), Wills (does not bite 13.1), Dispute Resolution (does not bite 8.5), Trusts (does not bite 6.3), Business to March 2026 (does not bite 7.5). No CRML5 update file exists."
+  "2026-08-30": "Land (bites 4.5: Waller-Edwards hybrid loans, already in the 2026 manual), Wills (does not bite 13.1), Dispute Resolution (does not bite 8.5), Trusts (does not bite 6.3), Business to March 2026 (does not bite 7.5). No CRML5 update file exists.",
+  "2026-08-31": "Business to March 2026 APPLIED to 7.17 (main pool WDA 18% -> 14%); tax checker 2026_07_24 used for all FY 2026/2027 figures. Wills, Dispute Resolution and CRMP Sentencing Act updates all read: none of their entries lands in 13.9, 8.17 or 9.11. No update file exists for Property or for Legal Systems and Public Law.",
+  "2026-09-01": [
+   "SLK Manual update BUSINESS TO MARCH 2026 - APPLIES to 7.18 and 7.19: the entry for 7.16-7.19 directs to the latest Tax Checker for all rates and worked examples. Figures taken from SLK BUS7 manual tax checker 2026_07_24.pdf, tax year 6 Apr 2026 - 5 Apr 2027.",
+   "CRMP Law Updates SLK - Sentencing Act - CHECKED against 9.12, nothing applies. The Act's changes are to bail (9.3), suspended sentences and community requirements (9.10). The presumption in favour of suspending sentences of 12 months or less is expressly limited to those aged 18 or over at conviction, so youth sentencing is untouched.",
+   "Examinable law Land for SQE July 2026 - CHECKED against 12.15, nothing applies. Its three entries concern the Use Classes Order, the Family Law Act 1996 and One Savings Bank v Waller-Edwards on undue influence.",
+   "SLK PROPERTY update (SLKPRO~1.DOC) - CHECKED against 12.15, nothing applies. Its single entry is on planning enforcement time limits at 12.6.4.1.",
+   "No examinable-law update file exists for SYS11 or for WILL13 solicitors accounts, so 11.8 and 13.10 rest on the manuals alone."
+  ]
  },
  "defects": {
   "mm-6": "12.2's overview map has SIX branches, but only .mm-2 to .mm-5 existed, so it had been rendering unstyled. Added a .mm-6 rule (3 columns, dropping to 2 on narrow screens) on 2026-08-19 rather than rewriting 12.2's unverified content. Maps should still be built with 2-5 branches.",
@@ -1425,7 +1435,13 @@
   "2026-08-29": "(1) CSS RENDER BUG, five sections still affected: 13.8, 3.3, 3.4, 11.1 and 4.4 each have an overview map with SIX branches, but only mm-2 to mm-5 have CSS rules, so the branch row renders unstyled. 12.2 had the same fault and was fixed today. Detect with a scan for map branches>5. (2) LEAF RULE, branch labels whose count exceeds the things their leaves name: 8.7 'MUST BE SPECIFICALLY PLEADED x8' over 5 leaves, 11.2 'STAGES x7' over 6, 12.5 'IT DEPENDS x8' over 5. (3) MEASUREMENT: the default-screen word count must strip <div class=\"...-body\" id=\"...\"> panels - the id attribute is present on note-body, stat-body and case-body as well as vis-body, and a regex that omits it silently strips almost nothing and doubles every figure.",
   "leaf_rule_2026_08_30": "31 leaf-rule breaches remain tool-wide (a leaf matching \\bx\\d\\b or opening with a bare s/ss/reg/art + number), all in sections not yet reached. Zero in 4.5, 5.3, 6.3, 7.5, 8.5 and 13.1.",
   "mm6_is_not_illegal": "CORRECTION to the skill's HARD CSS LIMITS: .mm-6 DOES have a rule (grid-template-columns:repeat(3,1fr), i.e. 3 across x 2 down) and is in the responsive @media block with mm-3/4/5. Six-branch maps in 13.8, 3.3, 3.4, 11.1 and 4.4 therefore render correctly and do NOT need fixing. Only mm-7 and above, and cg-5 and above, are genuinely absent.",
-  "always_open_precision": "E[id].precision renders ALWAYS OPEN and is counted in the default screen. 5.3 carried 596 words there - by far the largest, next is 8.9 at 157 - and it duplicated the visuals. Check E[id].precision for duplication whenever a section is overhauled."
+  "always_open_precision": "E[id].precision renders ALWAYS OPEN and is counted in the default screen. 5.3 carried 596 words there - by far the largest, next is 8.9 at 157 - and it duplicated the visuals. Check E[id].precision for duplication whenever a section is overhauled.",
+  "2026-09-01": [
+   "9.13 Conduct Issues in Criminal Litigation is now the ONLY section that renders blank - it has no visual at all. It is next in line whenever CRMP9.13 comes up.",
+   "Five sections carry a map with SIX branches (3.3, 3.4, 4.4, 11.1, 13.8). The .mm-6 CSS rule DOES exist, so these render - the SKILL's stated 2-5 limit is out of date for maps. Grids are still genuinely limited to cg-2..cg-4.",
+   "The SKILL says section objects live in per-subject arrays named CONT, TORT, COND and so on. They do not: there is a single object literal `const D={\"DISP\":[...],\"BUS\":[...]}` in the first script block, and `const S=[...]` is the SUBJECT list, not the sections. Any verification script must read D, not the bare subject names.",
+   "Script blocks 1 and 2 still fail node --check on the pre-existing quirk. Blocks 0 and 3 pass."
+  ]
  },
  "carry_forward": {
   "2026-08-28": "Next in the merged queue after today, walking buildSchedule + buildSecondPass against the live done-set: BUS7.4 Incorporation of a Company and Formation of LLPs (7.4, legacy single, 548 words), CRMP9.3 First Appearance and Bail (9.3, legacy single, 730), CONT1.3 Vitiating Factors (1.3, legacy single, 881), TORT2.3 Occupiers' Liability (2.3, legacy single, 639), PROP12.2 Taxation - Property (12.2, aligned-needs-visuals, 1041), then DISP8.4 Commencing Court Proceedings (8.4, format pass, 1863 - one of the three heavy default screens). NOTE for 7.4: the Business update to March 2026 DOES bite there - identity verification by directors and PSCs is now mandatory on incorporation (7.4.4) and PSCs must verify with Companies House (7.4.11.6), and the internal PSC register requirement has been abolished (7.4.11.7). NOTE for 12.2: use the PROP12 tax checker 2026_07_24 for rates, not the main manual.",
