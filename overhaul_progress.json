@@ -1,13 +1,13 @@
 {
- "updated": "2026-09-04",
+ "updated": "2026-09-07",
  "rule": "Pick sections by running the REAL buildSchedule() AND buildSecondPass() from SQE1_COLP_Revision.html in node against the server done-set (colp_progress.php), then MERGING both passes by date. SEED_DATES are TEACHING dates, not due dates. As at the Aug 2026 rewrite of that file: no MIN_GAP (eligible the day taught), SCHED_END 2027-01-10 (day before FLK1), isFreeDay also excludes four FULL_PAPER_DAYS Sundays, DEFAULT_DONE CONT1.1-1.3. The first pass assigns ONE new module per free day (75 days); buildSecondPass adds ONE spaced revisit per day (83 entries, 21-day gap, coldest first). BOTH COUNT. getStatus() colours cards from the first pass only and revisits render on the existing card - that is display, not scheduling. Taking the first pass alone sends the overhaul to material 2-3 weeks out and skips the oldest never-overhauled chapters, which is what the second pass exists to rescue. Nothing is ever overdue; the queue drains in TEACHING order. Take Today then Upcoming from the MERGED list, skipping sections already done here. Then: (1) pdftotext the SLK manual chapter, (2) rebuild notes terse (15-25k chars, one point per line, citations only in the cases array, grep every case name back against the manual), (3) visuals array - overview mind map + one per topic + decision trees for confusable doctrines (map: 2-5 branches, grid: 2-4 cols), (4) preserve/relocate MCQ traps, never delete, (5) verify with the node buildVis sweep, (6) push the single file via a /tmp clone.",
  "counts": {
   "total": 118,
-  "done": 116,
-  "todo": 2,
-  "needs_format_pass": 4,
-  "visuals_array": 116,
-  "note": "Recomputed 2026-09-04 after the 9.4 / 10.2 / 7.6 / 12.3 / 8.6 / 11.2 run. The pending COLP queue is now entirely overhauled ahead of schedule, so buildSchedule's Today/Upcoming walk returns nothing that needs work. The six were taken instead from the sections still flagged in this tracker, ordered by SEED_DATE (teaching order), which is the same ordering the schedule walk produces. Two were legacy single-visual full overhauls (9.4, 10.2) and four were format passes that also needed first-time verification against the 2026 editions, since none of them carried a manual_edition. Default-screen mean across the six 1383, range 987-1667. The two heaviest sections in the tool, 11.2 at 2704 and 8.6 at 2165, are now 1639 and 1667. TWO SUBSTANTIVE CORRECTIONS this run, both flagged to Ghita: 9.4 said the magistrates' cap was 6 months per offence when the 2026 CRMP9 says 12, and 8.6 said 'there is no 56-day rule' when the 2026 DISP8 8.6.3.3 carries one."
+  "done": 118,
+  "todo": 0,
+  "needs_format_pass": 0,
+  "visuals_array": 118,
+  "note": "Recomputed 2026-09-07 after the 7.20 / 9.13 / 13.2 / 12.4 / 8.9 / 8.11 run. EVERY section is now done, on the current 2026 edition, with a visuals array and needs_format_pass false. Two were legacy full overhauls (7.20 on a single visual, 9.13 with no visual at all); two were format passes that also needed first-time edition verification (13.2, 12.4); two were pure format passes taken because they were the heaviest default screens left (8.9, 8.11). Default-screen mean across the six 1396, range 985-1871. FOUR SUBSTANTIVE CORRECTIONS, all at 7.20 and 12.4 - see those entries. THE TOOL HAS 118 SECTIONS, NOT 119: 7.9B no longer exists anywhere in the file and 7.9 Share Funding is the only 7.9, so the skill file's '119 sections' and its 7.9B warning are both stale."
  },
  "sections": [
   {
@@ -105,8 +105,8 @@
    "manual": "SLK DISP8",
    "status": "done",
    "visuals": "array",
-   "notes": "15 Aug 2026 FULL OVERHAUL against the 2026 DISP8; the notes were already accurate and current but the section was on the legacy single four-track grid. Ten visuals: overview map, a track allocation decision tree, a missed-deadline decision tree running extension by agreement then consent order then relief then appeal, the four-track grid, the complexity bands, fast versus intermediate track under CPR Pt 28, the fast track 30-week timetable, typical multi-track directions, costs budgeting deadlines, and disclosure scoping including PD 57AD and the Disclosure Review Document. Removed the 'What you may be asked' note block, which restated the notes. Statutes array rebuilt from 8 to 12 entries. Checked the DR examinable-law update (cut-off 13 March 2026): its three entries land at 8.4.4.2 (Mazur v Charles Russell Speechlys), 8.8.3.2 and 8.15.2 (SLAPPs) - none touches 8.9. KEPT Mitchell v News Group, which the chapter omits but which is the authority Denton clarified. 1243 -> 2158 default words. HIGH BY DESIGN: 8.9 carries one of the largest auto-generated E-blocks in the tool, 6 traps and 5 precision lines that are always visible and account for roughly 750 of those words; the section's own content measures about 1408, in line with 8.7 at 1409.",
-   "default_words": 2158,
+   "notes": "FORMAT PASS only - law not re-verified, already on the current edition. 2127 -> 1871 default words. Two tree nodes that were lists moved to collapsed grids: 'what follows from the track' (including the r 26.13 allocation factors and the automatic multi-track categories), and the four ways to move a deadline that has not yet passed. Dropped the fast/intermediate trial-length ceilings from the complexity node, which the four-tracks grid already carries. Tip cut from 205 to about 150 words. STILL THE HEAVIEST OF THE SIX AND ABOVE TARGET, deliberately: the chapter needs two genuine decision trees - which track (a real multi-criteria sort) and the deadline/Denton fork - plus a five-branch overview map, and every further cut would have dropped content rather than words.",
+   "default_words": 1871,
    "needs_format_pass": false,
    "manual_edition": "SLK DISP8 manual 2026_05_29.pdf"
   },
@@ -127,8 +127,8 @@
    "manual": "SLK DISP8",
    "status": "done",
    "visuals": "array",
-   "notes": "20 Aug 2026 FULL OVERHAUL from the legacy single flow (397 default words). Unusually, the law here was already right and detailed - this was mainly a rebuild into visuals. ADDED what was missing: CPR r 31.12A and PD 57AD para 18.5, both new from 6 April 2026, allowing the court to order a PARTY to request a document from another person; the witness summons route (CPR Pt 34) and disclosure ancillary to a freezing order; and the full Norwich Pharmacal package - the five requirements, the mere witness rule, Pt 8 versus Pt 23, the cross-undertaking and the costs position. Built two trees (which order applies, and how to get a document someone is not giving you) with the enumerating nodes moved into collapsed grids.",
-   "default_words": 1885,
+   "notes": "FORMAT PASS only - law not re-verified, already on the current edition. 1861 -> 1394 default words, so it leaves the long_default_screens list. The intermediate/multi-track report-and-menu tree node was a SEQUENCE, not a fork, and became a steps panel. The Business and Property Courts node was an explanation and became a grid. The costs, drafting-point and warning tails were stripped out of the pre-action, non-party and Norwich Pharmacal nodes into one grid, leaving those three as the genuine multi-criteria tests they are (four criteria, two criteria, five requirements). Overview map branches 1 and 4 trimmed from eight and seven leaves to five each by MERGING, not clipping.",
+   "default_words": 1394,
    "needs_format_pass": false,
    "manual_edition": "SLK DISP8 manual 2026_05_29.pdf"
   },
@@ -412,11 +412,12 @@
    "id": "7.20",
    "title": "Inheritance Tax",
    "manual": "SLK BUS7",
-   "status": "todo",
-   "visuals": "single",
-   "notes": "",
-   "default_words": 222,
-   "needs_format_pass": true
+   "status": "done",
+   "visuals": "array",
+   "notes": "FULL OVERHAUL from the legacy single visual (222 -> 1336 default words). THREE SUBSTANTIVE CORRECTIONS. (1) The section gave AIM shares 100% relief; the 2026 BUS7 gives them 50% however low their value. (2) It said the nil rate bands are frozen 'until 2028'; WILL13 2026 says April 2031. (3) It called the relief BPR; the March 2026 business update renames it BUSINESS RELIEF. Added the 2026 package that was wholly missing: the GBP 2.5m rolling 7-year threshold above which 100% drops to 50%, agricultural disposals counting towards that same total, excepted assets cutting relief proportionately, the two exceptions to the 2-year ownership rule (replacement property; property inherited from a spouse on death), and the s 113A withdrawal rules on death. KEPT the NRB/RNRB/PET/CLT/taper framework, which this chapter does not carry but which the manual's own summary sends her to the Wills manual for; verified against WILL13 13.8.",
+   "default_words": 1336,
+   "needs_format_pass": false,
+   "manual_edition": "SLK BUS7 manual 2026_05_28.pdf"
   },
   {
    "id": "1.1",
@@ -545,9 +546,10 @@
    "manual": "SLK WILL13",
    "status": "done",
    "visuals": "array",
-   "notes": "Invented content + missing manual detail. The entire 'Revival' block was removed - revival does not appear in WILL13 - along with Re Goods of Morton, Re Jones, Sugden v Lord St Leonards, Dufour v Pereira and Re Cleaver (none in the manual), and the s.18/s.18A/s.20/s.21/s.22 section numbers, which the manual does not give (it cites only 'Wills Act 1837'). Added from the manual: magnifying-glass-only test for obliterations, the presumption on pre-execution alterations and how to rebut it, codicil republication, four methods of revocation with three deliberate, later will revokes only so far as inconsistent plus the foreign/asset-specific revocation-clause trap, crossing out is not destruction, both rebuttable presumptions, dependent relative revocation, the two contemplation-of-marriage clauses, and the divorce provisions in full. Single visual replaced with an array of 6.",
-   "default_words": 1740,
-   "needs_format_pass": true
+   "notes": "FORMAT PASS plus first verification against the 2026 edition (1823 -> 1487 default words). Overview map leaves were clipped fragments that did not stand alone ('Magnifying glass ONLY', 'Ex treated as HAVING DIED', 'But PRESUMED made after'); all rewritten as complete sentences. The Sachin worked example appeared THREE times (tree node, grid, steps panel) and now appears once. Two tree nodes that were lists in tree costume moved to a collapsed grid: the mutilated/missing rebuttable presumptions with dependent relative revocation, and codicil republication. Dropped a steps panel mislabelled 'Worked example - per stirpes of the revocation rules'; per stirpes is an intestacy concept and had no business here. statutes went from ONE entry to six, so every Wills Act section named anywhere in the section now has its substance beside it (ss 9, 18(1), 18(3)-(4)/18B(3), 18A/18C, 20, 21).",
+   "default_words": 1487,
+   "needs_format_pass": false,
+   "manual_edition": "SLK WILL13 manual 2026_06_15.pdf"
   },
   {
    "id": "13.3",
@@ -773,11 +775,12 @@
    "id": "9.13",
    "title": "Conduct Issues in Criminal Litigation",
    "manual": "SLK CRMP9",
-   "status": "todo",
-   "visuals": "single",
-   "notes": "",
-   "default_words": 255,
-   "needs_format_pass": true
+   "status": "done",
+   "visuals": "array",
+   "notes": "FULL OVERHAUL from a section with NO visual at all (255 -> 985 default words). The section carried none of the para 8 duties to the client: costs information at the outset and throughout, information the client can understand, WRITTEN complaints details including the Legal Ombudsman, and all material information subject to its four exceptions (national security or prevention of crime, written informed consent, serious physical or mental injury, mistakenly disclosed privileged document). Added the CrimPR 2020 overriding objective, the third-party instruction rule, and the manual's IRED structure for conduct questions. KEPT the POCA money-on-account point and the reduced credit for a late guilty plea; neither is in this chapter but both are real examinable law.",
+   "default_words": 985,
+   "needs_format_pass": false,
+   "manual_edition": "SLK CRMP9 manual 2026_06_04.pdf"
   },
   {
    "id": "2.1",
@@ -1185,9 +1188,10 @@
    "manual": "SLK PROP12",
    "status": "done",
    "visuals": "array",
-   "notes": "Visuals pass only - status was aligned-needs-visuals, so the prose was verified as matching manual 12.4 and left untouched. Legacy single grid replaced with an array of 5 (mind map, registered/unregistered decision tree, contrasts grid, numbers grid, working sequence).",
-   "default_words": 677,
-   "needs_format_pass": true
+   "notes": "FORMAT PASS plus first verification against the 2026 edition (1651 -> 1303 default words). BUG FIXED: the overview map was labelled 'Mind map - investigating title', which lacks 'whole of'/'overview', so buildVis rendered the spine of the section COLLAPSED on load - that is why the tracker had recorded only 677 words. Added what the 2026 chapter carries and the section did not: all four classes of title with their UPGRADE routes (possessory upgrades to absolute 12 years after grant; good leasehold upgrades on producing the landlord's freehold title to HMLR; qualified upgrades once rectified), the 1 December 1990 compulsory registration date and the duty to check no triggering event since the root, HMLR's state guarantee and compensation, MapSearch alongside SIM, the undertaking to the lender over the deeds, the K15 15-WORKING-DAY priority period, the red HMRC stamp check on pre-December-2003 documents, uncertified photocopies not being good links, and pre-seller mortgages needing an undertaking. Two checklist tree nodes (the per-register checks; the epitome traps) moved to collapsed grids. KEPT the Sch 3 overriding interests and LCA 1972 material from the Land manual, which the chapter's own assessment tip cross-refers to.",
+   "default_words": 1303,
+   "needs_format_pass": false,
+   "manual_edition": "SLK PROP12 manual 2026_06_09.pdf"
   },
   {
    "id": "12.5",
@@ -1413,7 +1417,8 @@
    "SLK PROPERTY update (SLKPRO~1.DOC) - CHECKED against 12.15, nothing applies. Its single entry is on planning enforcement time limits at 12.6.4.1.",
    "No examinable-law update file exists for SYS11 or for WILL13 solicitors accounts, so 11.8 and 13.10 rest on the manuals alone."
   ],
-  "2026-09-04": "Business to March 2026 (touches 7.4, 7.7, 7.12, 7.16-7.20 only), Dispute Resolution July 2026 (8.4, 8.8, 8.15 only), Property July 2026 (12.6 only), CRMP Sentencing Act (9.3, 9.10 only), Criminal Liability July 2026 (5.5 only). NONE applied to today's six. No update file exists for SERV10 or SYS11."
+  "2026-09-04": "Business to March 2026 (touches 7.4, 7.7, 7.12, 7.16-7.20 only), Dispute Resolution July 2026 (8.4, 8.8, 8.15 only), Property July 2026 (12.6 only), CRMP Sentencing Act (9.3, 9.10 only), Criminal Liability July 2026 (5.5 only). NONE applied to today's six. No update file exists for SERV10 or SYS11.",
+  "2026-09-07": "Business to March 2026: APPLIES at 7.20 - BPR is renamed BUSINESS RELIEF, and 7.16-7.19 are governed by the Tax Checker. Wills (cut-off 13 March 2026): nothing affects 13.2; its only substantive change is 13.4.2.4 on surrogacy and the definition of children for intestacy, plus an unreported consultation on interest on client account. Dispute Resolution (13 March 2026): nothing affects 8.9 or 8.11; its three changes are at 8.4.4.2 (Mazur v Charles Russell Speechlys), 8.8.3.2 and 8.15.2 (SLAPP) - see the slapp_updates_not_applied defect. No Property Practice update exists in the folder, and the only Criminal Practice update is the Sentencing Act, which does not touch 9.13."
  },
  "defects": {
   "mm-6": "12.2's overview map has SIX branches, but only .mm-2 to .mm-5 existed, so it had been rendering unstyled. Added a .mm-6 rule (3 columns, dropping to 2 on narrow screens) on 2026-08-19 rather than rewriting 12.2's unverified content. Maps should still be built with 2-5 branches.",
@@ -1449,7 +1454,13 @@
    "The SKILL says section objects live in per-subject arrays named CONT, TORT, COND and so on. They do not: there is a single object literal `const D={\"DISP\":[...],\"BUS\":[...]}` in the first script block, and `const S=[...]` is the SUBJECT list, not the sections. Any verification script must read D, not the bare subject names.",
    "Script blocks 1 and 2 still fail node --check on the pre-existing quirk. Blocks 0 and 3 pass."
   ],
-  "2026-09-04 checker note": "The regression scan for branch labels carrying a count must compare against the ITEMS NAMED, not the leaf count. 8.4 'BUSINESS AND PROPERTY COURTS x11' over 4 leaves, 8.7 'MUST BE SPECIFICALLY PLEADED x8' over 5 and 12.5 'IT DEPENDS x8' over 5 all name every item, grouped several to a leaf, so they are compliant. Also confirmed: mm-6 HAS a CSS rule, so the map limit is 2-6, and 13.8, 3.3, 3.4, 11.1 and 4.4 with six branches are fine."
+  "2026-09-04 checker note": "The regression scan for branch labels carrying a count must compare against the ITEMS NAMED, not the leaf count. 8.4 'BUSINESS AND PROPERTY COURTS x11' over 4 leaves, 8.7 'MUST BE SPECIFICALLY PLEADED x8' over 5 and 12.5 'IT DEPENDS x8' over 5 all name every item, grouped several to a leaf, so they are compliant. Also confirmed: mm-6 HAS a CSS rule, so the map limit is 2-6, and 13.8, 3.3, 3.4, 11.1 and 4.4 with six branches are fine.",
+  "mm-6_resolved_2026-09-07": "CORRECTION to the 'mm-6' entry and to the skill file: .mm-6 exists in the stylesheet (3 columns, wrapping to 2 on narrow). Six-branch maps at 3.3, 13.8, 4.4, 11.1 and 3.4 render correctly and need no fix. The skill's 'HARD CSS LIMIT ... a map must have 2-5 branches' is stale for maps; the grid limit of 2-4 columns still holds.",
+  "branch_count_false_positives_2026-09-07": "An automated scan comparing a branch label's count against the NUMBER OF LEAVES flags 8.4 ('BUSINESS AND PROPERTY COURTS x11', 4 leaves), 8.7 ('MUST BE SPECIFICALLY PLEADED x8', 5), 12.5 ('IT DEPENDS x8', 5) and 7.7 ('THE SEVEN GENERAL DUTIES', 6). All four were read on 2026-09-07 and are COMPLIANT: the leaves name every item, several to a line. Compare named ITEMS, not leaves, or the scan cries wolf every run.",
+  "collapsed_overview_label_bug_2026-09-07": "FOUND AT 12.4. buildVis opens a map only when /whole of|overview/i matches its LABEL. 12.4's overview map was labelled 'Mind map - investigating title', so the spine of the section rendered COLLAPSED on load and the tracker recorded a misleading 677 default words. Fixed by relabelling to 'Mind map - the whole of 12.4'. Worth grepping every section for a map that is plainly an overview but whose label does not match that pattern.",
+  "no_visual_2026-09-07": "RESOLVED. The 2026-08-21 list is now empty: 9.13 was the last section rendering with no visual and was rebuilt this run. A full sweep of all 118 sections on 2026-09-07 found no blank render, no 'undefined', no grid row/column mismatch, no leaf matching \\bx\\d\\b and no leaf that is a bare section number.",
+  "long_default_screens_2026-09-07": "5.3 is now the heaviest section in the tool at 2795 default words, well clear of the next (3.3 at 1902). It was rebuilt on the five-gate template and was not touched this run - worth a look. 8.9 was trimmed from 2127 to 1871 and left there deliberately: it needs two genuine decision trees plus a five-branch overview. 8.11 came down from 1885 to 1394, so it leaves the 2026-08-20 list.",
+  "slapp_updates_not_applied": "The July 2026 Dispute Resolution examinable-law update adds SLAPP material at 8.8.3.2 (a SLAPP claim is struck out unless the claimant shows it is more likely than not to succeed at trial) and at 8.15.2 (CPR r 44.2 amended so the court may not order a SLAPP defendant to pay the claimant's costs absent misconduct). Neither 8.8 nor 8.15 appears to carry it. Both are marked done, so nothing will pick this up automatically - handle it explicitly."
  },
  "carry_forward": {
   "2026-08-28": "Next in the merged queue after today, walking buildSchedule + buildSecondPass against the live done-set: BUS7.4 Incorporation of a Company and Formation of LLPs (7.4, legacy single, 548 words), CRMP9.3 First Appearance and Bail (9.3, legacy single, 730), CONT1.3 Vitiating Factors (1.3, legacy single, 881), TORT2.3 Occupiers' Liability (2.3, legacy single, 639), PROP12.2 Taxation - Property (12.2, aligned-needs-visuals, 1041), then DISP8.4 Commencing Court Proceedings (8.4, format pass, 1863 - one of the three heavy default screens). NOTE for 7.4: the Business update to March 2026 DOES bite there - identity verification by directors and PSCs is now mandatory on incorporation (7.4.4) and PSCs must verify with Companies House (7.4.11.6), and the internal PSC register requirement has been abolished (7.4.11.7). NOTE for 12.2: use the PROP12 tax checker 2026_07_24 for rates, not the main manual.",
