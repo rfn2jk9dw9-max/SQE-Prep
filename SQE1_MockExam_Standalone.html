@@ -347,15 +347,38 @@ button { cursor: pointer; font-family: inherit; }
       <div class="radio-option">
         <input type="radio" name="paper" id="p-flk1" value="FLK1" checked>
         <label for="p-flk1">FLK1
-          <div class="sub">Business · Dispute · Contract · Tort · Legal Services · Legal System</div>
+          <div class="sub">S1 Business · Dispute · Legal Services — S2 Contract · Tort · Legal System</div>
         </label>
       </div>
       <div class="radio-option">
         <input type="radio" name="paper" id="p-flk2" value="FLK2">
         <label for="p-flk2">FLK2
-          <div class="sub">Property · Wills · Land · Criminal · Trusts · Solicitors Accounts</div>
+          <div class="sub">S1 Wills · Trusts · Land · Accounts — S2 Property · Criminal · Accounts</div>
         </label>
       </div>
+    </div>
+  </div>
+
+  <div class="setup-card" id="sitting-card">
+    <h2>Select Session</h2>
+    <div class="radio-grid">
+      <div class="radio-option">
+        <input type="radio" name="sitting" id="sit-1" value="1" checked>
+        <label for="sit-1">Session 1
+          <div class="sub" id="sit-1-sub">&nbsp;</div>
+        </label>
+      </div>
+      <div class="radio-option">
+        <input type="radio" name="sitting" id="sit-2" value="2">
+        <label for="sit-2">Session 2
+          <div class="sub" id="sit-2-sub">&nbsp;</div>
+        </label>
+      </div>
+    </div>
+    <div class="sub" style="margin-top:.6rem">
+      From January 2027 each subject is fixed to one session rather than spread
+      across both, so a session draws only from its own subjects. Ethics and
+      Professional Conduct remains pervasive and can appear in either.
     </div>
   </div>
 
@@ -371,19 +394,19 @@ button { cursor: pointer; font-family: inherit; }
       <div class="radio-option">
         <input type="radio" name="qsource" id="s-sra" value="sra">
         <label for="s-sra">SRA Official Samples
-          <div class="sub">220 official SRA questions · full set, no sampling (April 2026)</div>
+          <div class="sub">220 official SRA questions · full set, no sampling (April 2026) · pre-2027 format</div>
         </label>
       </div>
       <div class="radio-option">
         <input type="radio" name="qsource" id="s-revise1" value="revise1">
         <label for="s-revise1">Revise SQE Sample — Session 1
-          <div class="sub">FLK1 practice assessment · all 90 questions · answer explanations</div>
+          <div class="sub">FLK1 practice assessment · all 90 questions · answer explanations · pre-2027 format</div>
         </label>
       </div>
       <div class="radio-option">
         <input type="radio" name="qsource" id="s-revise2" value="revise2">
         <label for="s-revise2">Revise SQE Sample — Session 2
-          <div class="sub">FLK1 practice assessment · all 90 questions · answer explanations</div>
+          <div class="sub">FLK1 practice assessment · all 90 questions · answer explanations · pre-2027 format</div>
         </label>
       </div>
     </div>
@@ -404,19 +427,19 @@ button { cursor: pointer; font-family: inherit; }
     <div class="radio-grid cols4">
       <div class="radio-option">
         <input type="radio" name="duration" id="d-30" value="30" checked>
-        <label for="d-30">30 min<div class="sub">~18 questions</div></label>
+        <label for="d-30">30 min<div class="sub">~17 questions</div></label>
       </div>
       <div class="radio-option">
         <input type="radio" name="duration" id="d-60" value="60">
-        <label for="d-60">60 min<div class="sub">~35 questions</div></label>
+        <label for="d-60">60 min<div class="sub">~33 questions</div></label>
       </div>
       <div class="radio-option">
         <input type="radio" name="duration" id="d-90" value="90">
-        <label for="d-90">90 min<div class="sub">~53 questions</div></label>
+        <label for="d-90">90 min<div class="sub">~50 questions</div></label>
       </div>
       <div class="radio-option">
         <input type="radio" name="duration" id="d-full" value="153">
-        <label for="d-full">Full<div class="sub">90 q · 153 min</div></label>
+        <label for="d-full">Full session<div class="sub">85 q · 153 min</div></label>
       </div>
     </div>
   </div>
@@ -756,15 +779,21 @@ function renderDashboard(sessions) {
   const progCol = prog === null ? "#64748b" : prog >= 0 ? "#16a34a" : "#dc2626";
 
   // ── FLK1 / FLK2 breakdown ─────────────────────────────────
+  // Keyed by paper AND session, since from January 2027 the two sessions of a
+  // paper test different subjects and averaging them together hides where the
+  // weakness is. Records saved before the change carry no `sitting` and are
+  // grouped as the whole paper.
   const papers = {};
+  const paperKeys = [];
   for (const s of sorted) {
-    const p = s.paper || "—";
-    if (!papers[p]) papers[p] = {n:0, sum:0, last:null};
+    const p = (s.paper || "—") + (s.sitting ? " S" + s.sitting : "");
+    if (!papers[p]) { papers[p] = {n:0, sum:0, last:null, paper:s.paper||"—"}; paperKeys.push(p); }
     papers[p].n++; papers[p].sum += s.percentage;
     if (papers[p].last === null) papers[p].last = s.percentage; // sorted desc → first seen = latest
   }
+  paperKeys.sort();
   const flkHtml = "<div style='display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:10px 0'>"+
-    ["FLK1","FLK2"].filter(p=>papers[p]).map(p=>{
+    paperKeys.map(p=>{
       const d=papers[p], a=Math.round(d.sum/d.n), col=a>=60?"#16a34a":"#dc2626";
       return "<div style='background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:10px 14px'>"+
         "<div style='font-weight:700;font-size:0.85rem'>"+p+"</div>"+
@@ -823,7 +852,7 @@ function renderDashboard(sessions) {
 
     return "<div class='dash-row' style='cursor:pointer;flex-wrap:wrap' onclick=\"document.getElementById('"+rowId+"')&&(document.getElementById('"+rowId+"').style.display=document.getElementById('"+rowId+"').style.display==='none'?'block':'none')\">"+
       "<span class='dash-date'>"+lbl+"</span>"+
-      "<span class='dash-paper "+s.paper+"'>"+s.paper+srcTag(s.source)+"</span>"+
+      "<span class='dash-paper "+s.paper+"'>"+s.paper+(s.sitting?" S"+s.sitting:"")+srcTag(s.source)+"</span>"+
       "<div class='dash-bar-wrap'><div class='dash-bar-fill "+(pass?"":"low")+"' style='width:"+s.percentage+"%'></div></div>"+
       "<span class='dash-pct "+(pass?"pass":"fail")+"'>"+s.percentage+"%</span>"+
       "<button onclick=\"event.stopPropagation();deleteSession('"+s.datetime+"')\" style='background:none;border:none;color:#94a3b8;cursor:pointer;font-size:0.85rem;padding:0 4px' title='Delete'>✕</button>"+
@@ -870,29 +899,98 @@ document.addEventListener('DOMContentLoaded', () => {
 // ══════════════════════════════════════════════════════════
 //  CONFIGURATION
 // ══════════════════════════════════════════════════════════
-const PAPER_SUBJECTS = {
+// ── Subject allocation, SRA announcement of 10 September 2026 ─────────────
+// From the January 2027 sitting each FLK is 170 questions sat as two sessions
+// of 85, and each subject belongs to ONE session:
+//   FLK1 S1  Business Law and Practice · Dispute Resolution · Legal Services
+//   FLK1 S2  Tort · Contract Law · Legal System (incl. Constitutional/Admin/EU)
+//   FLK2 S1  Wills and Administration · Solicitors Accounts (wills) · Trusts · Land
+//   FLK2 S2  Property Law and Practice · Solicitors Accounts (property)
+//            · Criminal Liability · Criminal Law and Practice
+// Ethics and Professional Conduct is pervasive and can be tested in any session.
+//
+// The weights below are ESTIMATES. The SRA publishes no per-subject question
+// count — the blueprint gives proportions only — so these keep the relative
+// weights the tool used before and renormalise them inside each session to 85.
+// Consequence worth knowing: a subject that used to be a small slice of a whole
+// paper is now a large slice of one session. Legal Services and Legal System go
+// from roughly 12% of FLK1 to roughly 22% of the session they sit in. Treat the
+// per-subject numbers as indicative, not as an SRA figure.
+const SESSION_SUBJECTS = {
   FLK1: {
-    "Business Law and Practice":          20,
-    "Dispute Resolution":                  20,
-    "Contract Law":                        18,
-    "Tort":                                16,
-    "Legal Services":                      14,
-    "Legal System":                        12,
-    "Ethics and Professional Conduct":     15,
+    1: {
+      "Business Law and Practice":        27,
+      "Dispute Resolution":               27,
+      "Legal Services":                   20,
+      "Ethics and Professional Conduct":  11,
+    },
+    2: {
+      "Contract Law":                     29,
+      "Tort":                             26,
+      "Legal System":                     19,
+      "Ethics and Professional Conduct":  11,
+    }
   },
   FLK2: {
-    "Property Law and Practice":           20,
-    "Wills and Administration of Estates": 18,
-    "Land Law":                            16,
-    "Criminal Law and Practice":           16,
-    "Trusts Law":                          14,
-    "Solicitors Accounts":                  8,
-    "Criminal Liability":                   8,
-    "Ethics and Professional Conduct":     15,
+    1: {
+      "Wills and Administration of Estates": 26,
+      "Land Law":                            22,
+      "Trusts Law":                          20,
+      "Solicitors Accounts":                  6,
+      "Ethics and Professional Conduct":     11,
+    },
+    2: {
+      "Property Law and Practice":           31,
+      "Criminal Law and Practice":           25,
+      "Criminal Liability":                  12,
+      "Solicitors Accounts":                  6,
+      "Ethics and Professional Conduct":     11,
+    }
   }
 };
 
-const DURATION_TO_QS = { "30": 18, "60": 35, "90": 53, "153": 90 };
+// Subject -> the session(s) it is tested in, derived from the table above so
+// there is one source of truth. A subject can belong to BOTH sessions of a
+// paper: the SRA tests Solicitors Accounts in FLK2 session 1 in a wills context
+// and again in session 2 in a property context. Mapping it to a single session
+// would silently drop those questions from the other one.
+const SUBJECT_SESSION = (() => {
+  const m = {};
+  for (const paper of Object.keys(SESSION_SUBJECTS))
+    for (const sit of ["1", "2"])
+      for (const subj of Object.keys(SESSION_SUBJECTS[paper][sit]))
+        if (subj !== "Ethics and Professional Conduct") {
+          const k = paper + "|" + subj;
+          (m[k] = m[k] || []).push(sit);
+        }
+  return m;
+})();
+
+function sessionWeights(paper, sitting) {
+  return SESSION_SUBJECTS[paper][String(sitting)];
+}
+
+// Questions that may appear in any session: ethics, and anything the parser
+// could not attribute to a subject ("Unknown", "Mixed Practice") which is only
+// ever used to fill a shortfall.
+function isPervasive(q) {
+  return q.subject === "Ethics and Professional Conduct"
+      || q.paper === "BOTH"
+      || !q.subject
+      || q.subject === "Unknown"
+      || q.subject === "Mixed Practice";
+}
+
+function inSession(q, paper, sitting) {
+  if (isPervasive(q)) return true;
+  const sits = SUBJECT_SESSION[paper + "|" + q.subject];
+  return sits ? sits.indexOf(String(sitting)) !== -1 : false;
+}
+
+// SQE1 from January 2027: 85 questions in 2h33 per session = 1.8 min/question
+// (it was 90 in 2h33, i.e. 1.7 min). The short options are scaled to the same
+// pace so timed practice stays honest.
+const DURATION_TO_QS = { "30": 17, "60": 33, "90": 50, "153": 85 };
 const LETTERS = ["A","B","C","D","E"];
 
 // COLP teaching calendar, rewritten from SQE1_COLP_Revision.html on every
@@ -959,11 +1057,43 @@ function getSource() {
 
 const SOURCE_LABEL = { sra: 'SRA Official Samples', revise1: 'Revise SQE — Session 1', revise2: 'Revise SQE — Session 2' };
 
-function getPool(paper, source) {
+function getSitting() {
+  const el = document.querySelector('input[name="sitting"]:checked');
+  return el ? el.value : '1';
+}
+
+// The SRA and Revise sets are published papers in the pre-2027 structure: 90
+// questions drawn across the whole FLK, with explanations that refer to fixed
+// option letters. They are sat as printed and are NOT split by session — doing
+// so would break the papers. Only the COLP bank, which we sample ourselves, is
+// session-aware.
+function getPool(paper, source, sitting) {
   if (source === 'sra')     return SRA_BANK.filter(q => q.paper === paper || q.paper === "BOTH");
   if (source === 'revise1') return REVISE_BANK.filter(q => q.session === 1 && q.paper === paper);
   if (source === 'revise2') return REVISE_BANK.filter(q => q.session === 2 && q.paper === paper);
-  return QUESTION_BANK.filter(q => q.paper === paper || q.paper === "BOTH");
+  const base = QUESTION_BANK.filter(q => q.paper === paper || q.paper === "BOTH");
+  return sitting ? base.filter(q => inSession(q, paper, sitting)) : base;
+}
+
+// Show which subjects each session covers, on the session radio labels.
+function refreshSittingLabels() {
+  const paperEl = document.querySelector('input[name="paper"]:checked');
+  if (!paperEl) return;
+  const paper = paperEl.value;
+  for (const sit of ['1', '2']) {
+    const el = document.getElementById('sit-' + sit + '-sub');
+    if (!el) continue;
+    el.textContent = Object.keys(SESSION_SUBJECTS[paper][sit])
+      .filter(x => x !== 'Ethics and Professional Conduct')
+      .join(' · ');
+  }
+  // The fixed sample sets predate the session split, so the choice is inert there.
+  const card = document.getElementById('sitting-card');
+  if (card) {
+    const fixed = getSource() !== 'bank';
+    card.style.opacity = fixed ? '0.5' : '';
+    card.querySelectorAll('input[name="sitting"]').forEach(i => { i.disabled = fixed; });
+  }
 }
 
 function buildBankSummary() {
@@ -971,10 +1101,12 @@ function buildBankSummary() {
   const dur   = document.querySelector('input[name="duration"]:checked').value;
   const totalQ = DURATION_TO_QS[dur];
   const source = getSource();
+  const sitting = getSitting();
   const banner = document.getElementById('coverage-banner');
+  refreshSittingLabels();
 
   if (source !== 'bank') {
-    const pool = getPool(paper, source);
+    const pool = getPool(paper, source, null);
     const bySubj = {};
     for (const q of pool) bySubj[q.subject] = (bySubj[q.subject]||0) + 1;
     let html = '';
@@ -988,15 +1120,15 @@ function buildBankSummary() {
       banner.textContent = '⚠ The Revise SQE sample covers FLK1 only. Select FLK1 to sit this paper.';
     } else {
       banner.style.display = 'block';
-      banner.textContent = `ℹ Full set: all ${pool.length} questions will be included in book order — the duration you pick only sets the timer.`;
+      banner.textContent = `ℹ Pre-2027 paper: this published set is 90 questions across the whole of ${paper}, so it is sat in book order and the session choice does not apply. The duration you pick only sets the timer.`;
     }
     return;
   }
 
-  const weights = PAPER_SUBJECTS[paper];
+  const weights = sessionWeights(paper, sitting);
 
-  // Pool: paper-specific + BOTH (ethics)
-  const pool = QUESTION_BANK.filter(q => q.paper === paper || q.paper === "BOTH");
+  // Pool: this session's subjects, plus ethics and untagged fill
+  const pool = getPool(paper, source, sitting);
 
   // Count available per subject
   const available = {};
@@ -1040,14 +1172,14 @@ function buildBankSummary() {
   }
 }
 
-document.querySelectorAll('input[name="paper"], input[name="duration"], input[name="qsource"]')
+document.querySelectorAll('input[name="paper"], input[name="duration"], input[name="qsource"], input[name="sitting"]')
   .forEach(el => el.addEventListener('change', buildBankSummary));
 buildBankSummary();
 
 document.getElementById('btn-start').addEventListener('click', () => {
   const paper    = document.querySelector('input[name="paper"]:checked').value;
   const durStr   = document.querySelector('input[name="duration"]:checked').value;
-  startSession(paper, parseInt(durStr), getSource());
+  startSession(paper, parseInt(durStr), getSource(), getSitting());
 });
 
 // ══════════════════════════════════════════════════════════
@@ -1070,11 +1202,11 @@ function attachShuffledOptions(selected) {
   });
 }
 
-function selectQuestions(paper, totalQ, source) {
+function selectQuestions(paper, totalQ, source, sitting) {
   if (source && source !== 'bank') {
     // Fixed sets: full set, original question order AND original option order —
     // Q numbers and letters match the book/PDF (explanations refer to these letters).
-    let fixed = [...getPool(paper, source)];
+    let fixed = [...getPool(paper, source, null)];
     // Optionally drop questions on subjects not yet studied. Without this the
     // Revise sets are unusable mid-course — a wrong answer on an untaught
     // subject is noise, and worse, it becomes a mistake flashcard for material
@@ -1097,8 +1229,8 @@ function selectQuestions(paper, totalQ, source) {
     }));
   }
 
-  const weights  = PAPER_SUBJECTS[paper];
-  const pool     = QUESTION_BANK.filter(q => q.paper===paper || q.paper==="BOTH");
+  const weights  = sessionWeights(paper, sitting);
+  const pool     = getPool(paper, 'bank', sitting);
 
   // Bucket by subject
   const buckets = {};
@@ -1165,19 +1297,21 @@ function refreshStudiedSummary() {
     : 'Filter off — the Revise sets will include subjects you have not been taught yet. (SRA sets are never filtered.)';
 }
 
-function startSession(paper, durationMinutes, source) {
+function startSession(paper, durationMinutes, source, sitting) {
   source = source || 'bank';
-  const totalQ = DURATION_TO_QS[String(durationMinutes)] || 18;
-  const qs     = selectQuestions(paper, totalQ, source);
+  // The fixed sample sets predate the session split and are sat whole.
+  sitting = (source === 'bank') ? String(sitting || '1') : null;
+  const totalQ = DURATION_TO_QS[String(durationMinutes)] || 17;
+  const qs     = selectQuestions(paper, totalQ, source, sitting);
 
   if (qs.length === 0) {
     alert(source === 'bank'
-      ? "No questions available for this paper. Add PDFs to the Tests folder and regenerate the exam."
+      ? "No questions available for this session. Add PDFs to the Tests folder and regenerate the exam."
       : "This sample set has no questions for this paper. The Revise SQE sample is FLK1 only."); return;
   }
 
   session = {
-    paper, source, totalMinutes: durationMinutes,
+    paper, sitting, source, totalMinutes: durationMinutes,
     questions: qs, answers: Array(qs.length).fill(null),
     flags: Array(qs.length).fill(false),
     currentIdx: 0, timerInterval: null,
@@ -1226,7 +1360,8 @@ function renderQuestion(idx) {
   const q = session.questions[idx];
   session.currentIdx = idx;
 
-  document.getElementById('exam-title').textContent = `SQE1 ${session.paper} Mock Exam` +
+  document.getElementById('exam-title').textContent =
+    `SQE1 ${session.paper}${session.sitting ? ' Session ' + session.sitting : ''} Mock Exam` +
     (session.source === 'sra' ? ' — SRA Official' : session.source === 'revise1' ? ' — Revise SQE S1' : session.source === 'revise2' ? ' — Revise SQE S2' : '');
   document.getElementById('exam-progress').textContent =
     `Question ${idx+1} of ${session.questions.length}`;
@@ -1340,6 +1475,10 @@ function submitExam() {
   const result = {
     datetime:     new Date().toISOString(),
     paper:        session.paper,
+    // Which of the two SQE1 sessions this was (SRA structure from Jan 2027).
+    // null for the pre-2027 fixed sample sets, and absent on records saved
+    // before 10 Sep 2026 — the dashboard treats both as "whole paper".
+    sitting:      session.sitting || null,
     source:       session.source || 'bank',
     durationMode: String(session.totalMinutes),
     totalQ:       qs.length,

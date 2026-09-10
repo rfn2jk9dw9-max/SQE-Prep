@@ -354,7 +354,7 @@ function todayYMD(){ return toYMD(new Date()); }
 let FULL_PAPER_DAYS = {};
 function isFreeDay(s){
   const d = parseDate(s);
-  // Full-paper Sundays are not free: 180 questions across two 2h33m sittings
+  // Full-paper Sundays are not free: 170 questions across two 2h33m sittings
   // plus a break is most of the day, so nothing else is scheduled on them.
   return d.getDay() !== 6 && !COLP_BUSY.has(s) && !FULL_PAPER_DAYS[s];
 }
@@ -646,9 +646,12 @@ function buildSecondPass(assignment, doneSet) {
 }
 
 // ── Full-length paper days ─────────────────────────────────────────────────
-// SQE1 is 180 questions per FLK, sat as two 90-question sittings of 2h33m on
-// non-consecutive days. Short mocks never rehearse that, and endurance is a
-// separate skill — the COLP exam on 15 Dec should not be the first time.
+// SQE1 from the January 2027 sitting is 170 questions per FLK, sat as two
+// 85-question sessions of 2h33m on non-consecutive days (SRA announcement of
+// 10 September 2026; it was 180 as two of 90). Each session now tests a fixed
+// subset of subjects rather than the whole paper. Short mocks never rehearse
+// the length, and endurance is a separate skill — the COLP exam on 15 Dec
+// should not be the first time.
 const FULL_PAPER_START = '2026-10-01';
 const FULL_PAPER_END   = '2026-12-12';
 const FULL_PAPER_COUNT = 4;
@@ -860,12 +863,13 @@ function makeFullPaperRow(flk, status) {
   el.innerHTML =
     '<div class="card-head">'+
       '<span class="card-code" style="color:#f59e0b">⏱ '+flk+'</span>'+
-      '<span class="card-title">Full paper — 180 questions in two sittings</span>'+
+      '<span class="card-title">Full paper — 170 questions in two sessions</span>'+
       '<span class="card-check"></span>'+
       '<span class="badge">Mock exam</span>'+
     '</div>'+
-    '<div class="card-sub"><span style="opacity:.8">90 questions in 2h33m, break, '
-      + 'then 90 more. No answer-checking in between — the endurance is the point.</span></div>';
+    '<div class="card-sub"><span style="opacity:.8">Session 1: 85 questions in 2h33m, '
+      + 'break, then session 2: 85 more on the other half of the subjects. '
+      + 'No answer-checking in between — the endurance is the point.</span></div>';
   return el;
 }
 
