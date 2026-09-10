@@ -1020,14 +1020,37 @@ def parse_canvas_pdf(pdf_path, subject, paper):
         end   = matches[i + 1].start() if i + 1 < len(matches) else len(all_text)
         block = all_text[start:end]
 
-        # Trim at the Feedback section
+        # Trim at the Feedback section — but KEEP the text. Canvas feedback is
+        # the only per-question explanation these PDFs carry ("Incorrect. Arson
+        # does not require foresight of fire ... See 5.2.3.3"), and without it a
+        # wrong answer in a later mock is countable but not diagnosable: the
+        # printed mock PDF shows no reason, so the error can never be traced to
+        # a chapter. Carried into the bank as `explanation`, it reaches the mock
+        # exam review screen (which already renders .review-expl) and therefore
+        # the printed PDF too.
         fb = re.search(r'\n\s{7,}Feedback\s*\n', block)
+        explanation = ""
         if fb:
+            explanation = clean_text(block[fb.end():])
             block = block[:fb.start()]
+
+        # Strip Canvas page furniture that rides along in the feedback region.
+        explanation = re.sub(r'https?://\S+', '', explanation)
+        explanation = re.sub(r'Page \d+ of \d+', '', explanation)
+        explanation = re.sub(r'Quizzes\s*-\s*Results', '', explanation)
+        explanation = re.sub(r'\s{2,}', ' ', explanation).strip()
+        # "Based on your answer" prefixes the per-option feedback; drop it.
+        explanation = re.sub(r'^Based on your answer\s*', '', explanation).strip()
+
+        chap = re.search(r'See (\d+\.\d+(?:\.\d+)*)', explanation)
 
         result = _parse_canvas_block(block, score)
         if result:
             result.update({"subject": subject, "paper": paper, "source": source})
+            if explanation:
+                result["explanation"] = explanation
+            if chap:
+                result["chapter"] = chap.group(1)
             questions.append(result)
         else:
             _dbg(f"  CANVAS SKIP Q{q_num} in {Path(pdf_path).name}")
