@@ -1,5 +1,5 @@
 {
- "updated": "2026-09-10",
+ "updated": "2026-09-11",
  "rule": "Pick sections by running the REAL buildSchedule() AND buildSecondPass() from SQE1_COLP_Revision.html in node against the server done-set (colp_progress.php), then MERGING both passes by date. SEED_DATES are TEACHING dates, not due dates. As at the Aug 2026 rewrite of that file: no MIN_GAP (eligible the day taught), SCHED_END 2027-01-10 (day before FLK1), isFreeDay also excludes four FULL_PAPER_DAYS Sundays, DEFAULT_DONE CONT1.1-1.3. The first pass assigns ONE new module per free day (75 days); buildSecondPass adds ONE spaced revisit per day (83 entries, 21-day gap, coldest first). BOTH COUNT. getStatus() colours cards from the first pass only and revisits render on the existing card - that is display, not scheduling. Taking the first pass alone sends the overhaul to material 2-3 weeks out and skips the oldest never-overhauled chapters, which is what the second pass exists to rescue. Nothing is ever overdue; the queue drains in TEACHING order. Take Today then Upcoming from the MERGED list, skipping sections already done here. Then: (1) pdftotext the SLK manual chapter, (2) rebuild notes terse (15-25k chars, one point per line, citations only in the cases array, grep every case name back against the manual), (3) visuals array - overview mind map + one per topic + decision trees for confusable doctrines (map: 2-5 branches, grid: 2-4 cols), (4) preserve/relocate MCQ traps, never delete, (5) verify with the node buildVis sweep, (6) push the single file via a /tmp clone.",
  "counts": {
   "total": 118,
@@ -7,7 +7,7 @@
   "todo": 0,
   "needs_format_pass": 0,
   "visuals_array": 118,
-  "note": "Maintenance run 10 Sep 2026 - the overhaul stays complete, so this run worked from the live defect scan. TWO OVERVIEW MAPS RENDERED COLLAPSED (1.4, 9.5): buildVis opens a map only when /whole of|overview/i matches its LABEL, so the spine of each chapter sat behind a click - the same bug found at 12.4 on 7 Sep. Both relabelled. ONE SUBSTANTIVE ERROR: 4.6 said a short lease needs THREE conditions; the 2026 LAND4 manual lists FOUR. Fifteen leaves let a count stand in for the content and were rewritten to name the things, each verified against the 2026 manual; four map labels stated a count that did not match the map and were relabelled. Ten tips cut from chapter summaries to spines; tip mean 154 -> 143, median 147 -> 135. Tool mean default screen 1317 -> 1311."
+  "note": "Maintenance run 11 Sep 2026. The six scheduled sections (13.3, 7.8, 8.8, 9.6, 10.3, 7.9) were all already overhauled and all already on the current 2026 manual editions, so this was a defect pass and no law changed. TWO LEAF RULE BREACHES, both in the 13.3 gift-failure tree: a count standing in for the content, and a bare section number used as the recall trigger. Both rewritten to name the thing and to put the number in brackets after the rule. THREE TIPS were still chapter summaries - 7.8 (198w), 7.9 (217w) and 13.3 (209w) - because the 9 and 10 Sep tip sweeps did not reach them; all three cut to spines after confirming every dropped fact is carried elsewhere in the section. STALE DEFECTS CLEARED from the tracker: the six sections recorded as rendering with no visual (9.9, 9.12, 9.13, 11.5, 11.7, 11.8) all now carry full visual arrays, and 7.9B no longer exists - 7.10 carries that material - so the tool holds 118 sections. Tool-wide verification clean: all 118 render, no 'undefined', no grid row/column mismatch, every CSS class used has a rule, every map within 2-6 branches, and no overview map anywhere is rendering collapsed."
  },
  "sections": [
   {
@@ -98,9 +98,10 @@
    "status": "done",
    "visuals": "array",
    "notes": "FULL OVERHAUL - was a single cards visual carrying five headline tests, 1097 default words. Rebuilt against the 2026 DISP8. ADDED the full PD 23A para 3 without-notice grounds and the duty of full and frank disclosure, the Denton relief-from-sanctions cross-reference, the bundle, skeleton and statement-of-costs machinery, the five interim costs orders, the American Cyanamid exceptions (restraint of trade, final disposal, no defence) and equitable defences (delay, acquiescence, unclean hands, equity will not act in vain, enforcement), search and imaging orders with the Anton Piller conditions and CPR r 25.17, and the security-for-costs discretion, amount and forms. Dispute Resolution examinable-law update APPLIED: the 8.8.3.2 SLAPP strike-out ground [ECCTA 2023 s 195] and the CPR r 44.2 costs reversal are both carried. Section object is 27.8k characters, above the 12-20k guide, because the chapter covers five separate remedies; the default screen is what was managed instead. || 9 Sep 2026 tip cut from a chapter summary to a spine, 230 -> 121 words; every fact dropped was confirmed present elsewhere in the section first Default screen 1489 -> 1380.",
-   "default_words": 1380,
+   "default_words": 1525,
    "needs_format_pass": false,
-   "manual_edition": "SLK DISP8 manual 2026_05_29.pdf"
+   "manual_edition": "SLK DISP8 manual 2026_05_29.pdf",
+   "note_2026_09_11": "11 Sep 2026 defect pass, on the current DISP8 2026_05_29 edition, no law changed. Nothing to fix. The American Cyanamid tree's node 5 ('Everything else - the other factors, and the tie-break') was reviewed as a possible list wearing a tree costume and KEPT: it is the ordered tie-break sequence of the test itself (other factors, then the status quo ante, then the merits), not an enumeration. Tip already a spine at 121 words. Default screen 1525, above the ~1200 diagnostic and left long for the reason already recorded - the chapter covers five separate remedies."
   },
   {
    "id": "8.9",
@@ -287,9 +288,10 @@
    "status": "done",
    "visuals": "array",
    "notes": "FULL OVERHAUL - was a single four-column grid, 529 default words. Rebuilt against the 2026 BUS7. ADDED the 5% requisition route with the 21-day and 28-day timetable and the shareholders' expense recovery, the two-stage short notice test (majority in NUMBER plus 90%, raisable to 95% but never lower), the meaning of a clear day, the manual's own eight key steps of a board meeting, and the 15-day Companies House deadline for special resolutions with the authority-to-allot exception. Business update to March 2026 checked: nothing in it touches 7.8.",
-   "default_words": 1511,
+   "default_words": 1473,
    "needs_format_pass": false,
-   "manual_edition": "SLK BUS7 manual 2026_05_28.pdf"
+   "manual_edition": "SLK BUS7 manual 2026_05_28.pdf",
+   "note_2026_09_11": "11 Sep 2026 defect pass, on the current BUS7 2026_05_28 edition, no law changed. Content and visuals verified clean: no leaf-rule breach, no tree-costume node, grids within the column limits. Tip cut from a chapter summary to a spine, 198->160 words; every fact dropped is carried in the overview map or the numbers grid. Default screen 1511->1473."
   },
   {
    "id": "7.9",
@@ -298,9 +300,10 @@
    "status": "done",
    "visuals": "array",
    "notes": "FULL OVERHAUL - was a single three-column grid, 494 default words. TITLE CORRECTED to 'Share Funding' to match the manual chapter and the COLP MODULES entry; it was 'Corporate Finance - Share Funding (Equity)'. ADDED variation of class rights (three-quarters in nominal value in writing, or a special resolution of that class), deferred and redeemable shares, the prohibition on allotting at a discount with the private-company valuation loophole, and transmission on death or bankruptcy. KEPT the CA 2006 section numbers the 2026 chapter strips out (ss 550, 551, 561, 562, 564-566, 567, 569-571, 580, 593, 630, 684, 770, 776), each attached to its rule and each with a statutes entry. NOTE for 7.10: section 7.9B in the tool ('Corporate Finance - Debt Finance & Security') carries what the 2026 manual puts in 7.10 - check for duplication when 7.10 comes up on 25 Sep. Business update to March 2026 checked: nothing in it touches 7.9.",
-   "default_words": 1502,
+   "default_words": 1442,
    "needs_format_pass": false,
-   "manual_edition": "SLK BUS7 manual 2026_05_28.pdf"
+   "manual_edition": "SLK BUS7 manual 2026_05_28.pdf",
+   "note_2026_09_11": "11 Sep 2026 defect pass, on the current BUS7 2026_05_28 edition, no law changed. Content and visuals verified clean. Tip cut from a chapter summary to a spine, 217->157 words; every fact dropped is carried in the overview map or a grid. Default screen 1502->1442. The 7.9B duplication warning left by the overhaul run is DISCHARGED: 7.9B no longer exists as a separate section and 7.10 'Debt and Security' now carries that material, so the tool holds 118 sections, not 119."
   },
   {
    "id": "7.10",
@@ -568,9 +571,10 @@
    "status": "done",
    "visuals": "array",
    "notes": "FULL OVERHAUL - was the legacy single flow visual with 228 default words. Rebuilt against the 2026 WILL13. ADDED the citation and appearance route where a sole executor will not act [Senior Courts Act 1981 s 112; NCPR rr 20 and 47], the renunciation-v-power-reserved contrast with Form PA15 and Form Cap A5C, the intermeddling lists, class closing with the three worked wordings, and the lapse sub-rules (joint v equal shares, s 33's narrowness and the 'such of my children as survive me' point, commorientes). Wills examinable-law update checked: the Cator & Ors v Thynn [2026] EWHC 1045 (Ch) surrogacy point is for 13.4.2.4, not this section, so nothing applied here.",
-   "default_words": 1332,
+   "default_words": 1350,
    "needs_format_pass": false,
-   "manual_edition": "SLK WILL13 manual 2026_06_15.pdf"
+   "manual_edition": "SLK WILL13 manual 2026_06_15.pdf",
+   "note_2026_09_11": "11 Sep 2026 defect pass, on the current WILL13 2026_06_15 edition, no law changed. TWO LEAF RULE BREACHES in the gift-failure decision tree, both fixed: 'TWO WAYS TO SAVE IT' let a count stand in for the content and now names them ('A CODICIL, OR A DESCRIPTION THAT MOVES WITH THE ASSET'); 's 33 IS NARROW' was a bare section number as the recall trigger and is now 'THE ISSUE SAVING IS NARROW [Wills Act 1837 s 33]'. Tip cut from a chapter summary to a spine, 209->159 words; the joint-v-equal-shares point dropped from the tip is carried in note 13.3.8.2. Default screen 1389->1350."
   },
   {
    "id": "13.4",
@@ -718,7 +722,8 @@
    "default_words": 1229,
    "needs_format_pass": false,
    "manual_edition": "SLK CRMP9 manual 2026_06_04.pdf",
-   "note_2026_09_10": "Tip cut from a chapter summary to a spine, 221->95 words."
+   "note_2026_09_10": "Tip cut from a chapter summary to a spine, 221->95 words.",
+   "note_2026_09_11": "11 Sep 2026 defect pass, on the current CRMP9 2026_06_04 edition, no law changed. Nothing to fix: no leaf-rule breach, both trees are genuine multi-criteria sequences, tip already a spine at 95 words. Default screen 1229, unchanged."
   },
   {
    "id": "9.7",
@@ -1076,7 +1081,8 @@
    "default_words": 1275,
    "needs_format_pass": false,
    "manual_edition": "SLK SERV10 manual 2026_06_05.pdf",
-   "note_2026_09_10": "Tip cut from a chapter summary to a spine, 227->98 words."
+   "note_2026_09_10": "Tip cut from a chapter summary to a spine, 227->98 words.",
+   "note_2026_09_11": "11 Sep 2026 defect pass, on the current SERV10 2026_06_05 edition, no law changed. Nothing to fix. The 220-character 'WHO IS CAUGHT' answer in the due-diligence tree was reviewed against the ~120-character diagnostic and KEPT: it names the caught activities, and shortening it would replace the list with a count, which the leaf rule forbids. Tip already a spine at 98 words. Default screen 1275, unchanged."
   },
   {
    "id": "10.4",
@@ -1515,6 +1521,13 @@
    "NOT FIXED, cosmetic: the 3.4 leaf 'Para 7 applies specified solicitor standards to firms: ...' leads with the paragraph number, but it names every item and reads as a sentence.",
    "NOT FIXED, needs Ghita: the prec-sec Precision callouts still render OPEN with no toggle on every section, 5,463 words tool-wide. Making them collapsible is a one-line change to buildCh and is the single biggest remaining reduction. Carried from 9 Sep, still undecided.",
    "STALE SKILL FILE, still: it says 119 sections (there are 118), warns about id 7.9B (gone), lists 9.7-9.13 and 11.5-11.8 as rendering blank (all now render), and states a map limit of 2-5 branches (mm-6 exists, so it is 2-6). Its leaf-rule regex is also too narrow - see above."
+  ],
+  "2026-09-11": [
+   "Tip length is the tool's remaining systematic drift, not a one-off: 45 of 118 tips are still over 150 words (tool median 138, mean 144). The heaviest are 1.4 (221), 7.9 pre-fix (217), 8.3 and 8.17 (214), 9.5 (210), 8.11 and 13.3 pre-fix (209), 11.1 (208), 7.10 and 13.6 (207). Cut each one when its section comes round rather than sweeping, because every dropped fact has to be checked as present elsewhere first.",
+   "RESOLVED - the six no-visual sections (9.9, 9.12, 9.13, 11.5, 11.7, 11.8) all carry full visual arrays now and were removed from the outstanding list.",
+   "RESOLVED - 7.9B is gone and 7.10 'Debt and Security' carries that material. The tool has 118 sections; any note saying 119 is stale.",
+   "STILL OUTSTANDING, untouched because not in this run: the two leaf-rule breaches in 7.6 ('s 169 RIGHTS x3' and 's 6 UNFITNESS'), and the branch-label count breaches in 8.7, 11.2 and 12.5.",
+   "MEASUREMENT NOTE: this run's default-screen word counts run about 105 words higher than earlier runs' figures for the same unchanged sections, because the collapsed-panel stripper here matches nested divs. Tool mean is 1416 on this method. Compare like with like before reading drift into the numbers."
   ]
  },
  "carry_forward": {
