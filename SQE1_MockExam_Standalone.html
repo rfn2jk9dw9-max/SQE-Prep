@@ -702,20 +702,47 @@ function rescoreSessions(sessions) {
     .replace(/\s*Question Score:\s*\d+\s*\/\s*\d+\s*$/i, '')
     .toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
   const norm = s => normAns(s).slice(0, 60);
+  // A 60-char bucket can hold MORE THAN ONE question: two PROP12.5 items are
+  // identical until "C(i)" vs "D(ii)", well past char 60. Keying answer-by-stem
+  // let the last one loaded overwrite the other, so a correct answer rescored
+  // as wrong (a 17/17 sitting displayed as 94%). Buckets now keep every
+  // candidate; ambiguity is resolved on the FULL stem, and anything still
+  // ambiguous is left at its stored mark rather than guessed.
   (typeof QUESTION_BANK !== 'undefined' ? QUESTION_BANK : []).forEach(q => {
     const opts = q.options || [];
     if (q.correct_index != null && opts[q.correct_index]) {
-      key[norm(q.question_text)] = normAns(opts[q.correct_index]);
+      const k = norm(q.question_text);
+      (key[k] = key[k] || []).push({
+        stem: normAns(q.question_text),
+        ans:  normAns(opts[q.correct_index])
+      });
     }
   });
   if (!Object.keys(key).length) return sessions;
+
+  function lookupAns(stem) {
+    const bucket = key[norm(stem)];
+    if (!bucket || !bucket.length) return null;
+    if (new Set(bucket.map(e => e.ans)).size === 1) return bucket[0].ans;
+    const full  = normAns(stem);
+    const exact = bucket.filter(e => e.stem === full);
+    if (exact.length && new Set(exact.map(e => e.ans)).size === 1) return exact[0].ans;
+    const shared = e => { let i = 0; while (i < e.stem.length && i < full.length && e.stem[i] === full[i]) i++; return i; };
+    let bestE = null, bestS = -1, tie = false;
+    bucket.forEach(e => {
+      const sc = shared(e);
+      if (sc > bestS) { bestS = sc; bestE = e; tie = false; }
+      else if (sc === bestS && bestE && e.ans !== bestE.ans) { tie = true; }
+    });
+    return tie ? null : (bestE ? bestE.ans : null);
+  }
 
   return (sessions || []).map(s => {
     const qs = s.questions || [];
     if (!qs.length) return s;
     let correct = 0, changed = 0;
     qs.forEach(q => {
-      const current = key[norm(q.questionText)];
+      const current = lookupAns(q.questionText);
       let ok = !!q.isCorrect;
       if (current && q.userAnswer) {
         const now = normAns(q.userAnswer) === current;
