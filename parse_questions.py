@@ -101,7 +101,26 @@ _FOOTER_RE = re.compile(
     r'|End\s+Time[^\n]*'
     r'|Spent\s+(Time?|\d)[^\n]*'            # "Spent Time: ..." or "Spent 2 hours ..." 
     r'|H5P\.com[^\n]*'
-    r'|5P\.com[^\n]*',
+    r'|5P\.com[^\n]*'
+    # ── H5P page HEADER, which lands mid-option ─────────────────────────────
+    # "Attempt by Ghita Bennis for UK SLK LAND4.6 Multiple-choice test -
+    #  07/09/2026, 11:" is printed at the top of every page. When an option
+    # straddles a page break the header is spliced into the middle of the
+    # option text, so the stored option reads "...the label given to tempt by
+    # Ghita Bennis for UK SLK LAND4.6 Multiple-choice test - 07/09/2026, 11:
+    # the arrangement is irrelevant." The leading "At" is often eaten by the
+    # column clip, hence \w*tempt. Six options were nothing BUT the header.
+    r'|\w*tempt\s+by\s+[^\n]{0,160}?Multiple[-\s]?choice\s+test\s*[-–—]\s*'
+    r'\d{1,2}/\d{1,2}/\d{4},?\s*\d{0,2}:?\d{0,2}'
+    # The header is also clipped mid-word ("...Attempt by Ghita Bennis for U"),
+    # so the trailing part is matched token by token against the words the
+    # header actually uses — never a blanket \S+, which would eat real option
+    # text when the header is clipped early and the option resumes after it.
+    r'|\w*tempt\s+by\s+Ghita\s+Bennis'
+    r'(?:\s+for(?:\s+UK?)?(?:\s+SLK\s*\S*)?'
+    r'(?:\s+Multiple[-\s]?choice(?:\s+test)?)?)?'
+    r'|Multiple[-\s]?choice\s+test\s*[-–—]\s*'
+    r'\d{1,2}/\d{1,2}/\d{4},?\s*\d{0,2}:?\d{0,2}',
     re.I,
 )
 
@@ -1419,6 +1438,30 @@ def parse_all(tests_dir, cache_file=None):
             _dbg(f"Cache saved: {len(cache)} entries → {cache_file.name}")
         except Exception as e:
             _dbg(f"Cache save error (ignored): {e}")
+
+    # ── 3b. Re-scrub every option, cached ones included ────────────────────
+    # The footer/header pattern gets extended when a new form of page
+    # furniture turns up in an option. Cached entries were scrubbed by the
+    # OLD pattern and would keep their pollution until their PDF changed
+    # size, so re-apply the current pattern to everything on load. This is
+    # pure string work — no re-parse, no cache invalidation.
+    #
+    # An option that is empty after scrubbing was nothing but page furniture:
+    # its real text never made it through the column clip. The question is
+    # unanswerable, so drop it rather than serve a blank choice.
+    cleaned, dropped = [], 0
+    for q in all_q:
+        opts = q.get("options")
+        if opts:
+            q["options"] = [scrub_option(o) for o in opts]
+            if any(not o for o in q["options"]):
+                dropped += 1
+                continue
+        cleaned.append(q)
+    if dropped:
+        _dbg(f"  [scrub] dropped {dropped} question(s) with an option that was "
+             f"page furniture only")
+    all_q = cleaned
 
     all_q = repair_wrapped_options(all_q)
     all_q = apply_overrides(all_q)
