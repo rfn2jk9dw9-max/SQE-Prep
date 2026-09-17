@@ -1,0 +1,1203 @@
+{
+ "source": "https://collegalpractice.instructure.com/courses/1153/grades (Canvas API, submission history)",
+ "exported_at": "2026-09-17",
+ "note": "Every graded attempt per assignment: [score, submitted date]. Score is out of 'points'.",
+ "assignments": [
+  {
+   "name": "SLK Progress Taster A",
+   "points": 20,
+   "attempts": [
+    {
+     "score": 12,
+     "date": "2026-05-05"
+    }
+   ]
+  },
+  {
+   "name": "SLK Progress Taster B",
+   "points": 20,
+   "attempts": [
+    {
+     "score": 12,
+     "date": "2026-05-08"
+    }
+   ]
+  },
+  {
+   "name": "SLK Progress Test 1A",
+   "points": 25,
+   "attempts": [
+    {
+     "score": 17,
+     "date": "2026-06-10"
+    }
+   ]
+  },
+  {
+   "name": "SLK Progress Test 1B",
+   "points": 25,
+   "attempts": [
+    {
+     "score": 15,
+     "date": "2026-06-11"
+    }
+   ]
+  },
+  {
+   "name": "SLK Progress Test 2A",
+   "points": 50,
+   "attempts": [
+    {
+     "score": 37,
+     "date": "2026-08-09"
+    }
+   ]
+  },
+  {
+   "name": "SLK Progress Test 2B",
+   "points": 50,
+   "attempts": [
+    {
+     "score": 31,
+     "date": "2026-08-09"
+    }
+   ]
+  },
+  {
+   "name": "CONT1.1: Formation",
+   "points": 10,
+   "attempts": [
+    {
+     "score": 10,
+     "date": "2026-03-13"
+    },
+    {
+     "score": 8,
+     "date": "2026-04-14"
+    },
+    {
+     "score": 9,
+     "date": "2026-05-25"
+    },
+    {
+     "score": 10,
+     "date": "2026-08-07"
+    }
+   ]
+  },
+  {
+   "name": "CONT1.2: Contract terms",
+   "points": 10,
+   "attempts": [
+    {
+     "score": 10,
+     "date": "2026-04-05"
+    },
+    {
+     "score": 7.778,
+     "date": "2026-06-01"
+    }
+   ]
+  },
+  {
+   "name": "CONT1.3: Vitiating factors",
+   "points": 10,
+   "attempts": [
+    {
+     "score": 9,
+     "date": "2026-05-08"
+    },
+    {
+     "score": 7,
+     "date": "2026-06-09"
+    }
+   ]
+  },
+  {
+   "name": "CONT1.4: Termination",
+   "points": 10,
+   "attempts": [
+    {
+     "score": 7,
+     "date": "2026-06-10"
+    },
+    {
+     "score": 9,
+     "date": "2026-08-30"
+    }
+   ]
+  },
+  {
+   "name": "CONT1.5: Remedies",
+   "points": 10,
+   "attempts": [
+    {
+     "score": 4,
+     "date": "2026-08-10"
+    }
+   ]
+  },
+  {
+   "name": "TORT2.1: Negligence",
+   "points": 10,
+   "attempts": [
+    {
+     "score": 10,
+     "date": "2026-03-17"
+    },
+    {
+     "score": 10,
+     "date": "2026-06-11"
+    },
+    {
+     "score": 10,
+     "date": "2026-08-11"
+    }
+   ]
+  },
+  {
+   "name": "TORT2.2: Defences",
+   "points": 10,
+   "attempts": [
+    {
+     "score": 9,
+     "date": "2026-04-06"
+    },
+    {
+     "score": 9,
+     "date": "2026-07-01"
+    }
+   ]
+  },
+  {
+   "name": "TORT2.3: Occupiers’ liability",
+   "points": 10,
+   "attempts": [
+    {
+     "score": 10,
+     "date": "2026-05-11"
+    },
+    {
+     "score": 10,
+     "date": "2026-07-26"
+    }
+   ]
+  },
+  {
+   "name": "TORT2.4: Pure economic loss and product liability",
+   "points": 10,
+   "attempts": [
+    {
+     "score": 6,
+     "date": "2026-06-11"
+    },
+    {
+     "score": 8,
+     "date": "2026-09-03"
+    }
+   ]
+  },
+  {
+   "name": "TORT2.5: Nuisance",
+   "points": 10,
+   "attempts": [
+    {
+     "score": 7,
+     "date": "2026-08-11"
+    }
+   ]
+  },
+  {
+   "name": "COND3.1: Overview of Principles and Codes Part 1",
+   "points": 10,
+   "attempts": [
+    {
+     "score": 9,
+     "date": "2026-03-19"
+    },
+    {
+     "score": 10,
+     "date": "2026-06-12"
+    },
+    {
+     "score": 10,
+     "date": "2026-08-30"
+    }
+   ]
+  },
+  {
+   "name": "COND3.2: Overview of Principles and Codes Part 2",
+   "points": 10,
+   "attempts": [
+    {
+     "score": 8,
+     "date": "2026-03-25"
+    },
+    {
+     "score": 8,
+     "date": "2026-06-29"
+    }
+   ]
+  },
+  {
+   "name": "COND3.3: Code of Conduct for Solicitors, RELs and RFLs",
+   "points": 10,
+   "attempts": [
+    {
+     "score": 8,
+     "date": "2026-04-07"
+    },
+    {
+     "score": 9,
+     "date": "2026-07-02"
+    }
+   ]
+  },
+  {
+   "name": "COND3.4: Code of Conduct for firms",
+   "points": 10,
+   "attempts": [
+    {
+     "score": 9,
+     "date": "2026-04-22"
+    },
+    {
+     "score": 10,
+     "date": "2026-07-12"
+    }
+   ]
+  },
+  {
+   "name": "LAND4.1: Nature of land",
+   "points": 10,
+   "attempts": [
+    {
+     "score": 9,
+     "date": "2026-03-19"
+    },
+    {
+     "score": 7,
+     "date": "2026-06-12"
+    },
+    {
+     "score": 8,
+     "date": "2026-08-30"
+    }
+   ]
+  },
+  {
+   "name": "LAND4.2: Title to land",
+   "points": 10,
+   "attempts": [
+    {
+     "score": 9,
+     "date": "2026-04-11"
+    },
+    {
+     "score": 7,
+     "date": "2026-07-02"
+    }
+   ]
+  },
+  {
+   "name": "LAND4.3: Methods to protect and enforce third party interest",
+   "points": 10,
+   "attempts": [
+    {
+     "score": 8,
+     "date": "2026-04-13"
+    },
+    {
+     "score": 9,
+     "date": "2026-07-05"
+    }
+   ]
+  },
+  {
+   "name": "LAND4.4: Co-ownership and trusts",
+   "points": 10,
+   "attempts": [
+    {
+     "score": 10,
+     "date": "2026-04-29"
+    },
+    {
+     "score": 8,
+     "date": "2026-07-21"
+    }
+   ]
+  },
+  {
+   "name": "LAND4.5: Proprietary rights",
+   "points": 10,
+   "attempts": [
+    {
+     "score": 6,
+     "date": "2026-05-12"
+    },
+    {
+     "score": 8,
+     "date": "2026-07-28"
+    }
+   ]
+  },
+  {
+   "name": "LAND4.6: Leases",
+   "points": 9,
+   "attempts": [
+    {
+     "score": 8,
+     "date": "2026-06-23"
+    },
+    {
+     "score": 8,
+     "date": "2026-09-07"
+    }
+   ]
+  },
+  {
+   "name": "CRML5.1: Understanding and analysing criminal liability",
+   "points": 10,
+   "attempts": [
+    {
+     "score": 7,
+     "date": "2026-03-23"
+    },
+    {
+     "score": 9,
+     "date": "2026-03-24"
+    },
+    {
+     "score": 9,
+     "date": "2026-06-24"
+    },
+    {
+     "score": 10,
+     "date": "2026-09-03"
+    }
+   ]
+  },
+  {
+   "name": "CRML5.2: Understanding fault and blame",
+   "points": 10,
+   "attempts": [
+    {
+     "score": 10,
+     "date": "2026-04-12"
+    },
+    {
+     "score": 8,
+     "date": "2026-07-03"
+    }
+   ]
+  },
+  {
+   "name": "CRML5.3: Defences and their impact on criminal liability",
+   "points": 10,
+   "attempts": [
+    {
+     "score": 5,
+     "date": "2026-05-13"
+    },
+    {
+     "score": 3,
+     "date": "2026-07-31"
+    }
+   ]
+  },
+  {
+   "name": "CRML5.4: Criminal liability for others and incomplete acts",
+   "points": 10,
+   "attempts": [
+    {
+     "score": 6.667,
+     "date": "2026-06-23"
+    },
+    {
+     "score": 6.667,
+     "date": "2026-09-08"
+    }
+   ]
+  },
+  {
+   "name": "CRML5.5: Bringing concepts together offences of dishonesty",
+   "points": 10,
+   "attempts": [
+    {
+     "score": 2,
+     "date": "2026-08-20"
+    }
+   ]
+  },
+  {
+   "name": "TRUS6.1: Creation and requirements of express trusts",
+   "points": 10,
+   "attempts": [
+    {
+     "score": 8,
+     "date": "2026-03-24"
+    },
+    {
+     "score": 8,
+     "date": "2026-06-26"
+    },
+    {
+     "score": 8,
+     "date": "2026-09-04"
+    }
+   ]
+  },
+  {
+   "name": "TRUS6.2: Beneficial entitlement",
+   "points": 10,
+   "attempts": [
+    {
+     "score": 10,
+     "date": "2026-04-13"
+    },
+    {
+     "score": 9,
+     "date": "2026-07-03"
+    }
+   ]
+  },
+  {
+   "name": "TRUS6.3: Special types of trusts",
+   "points": 10,
+   "attempts": [
+    {
+     "score": 6,
+     "date": "2026-05-15"
+    },
+    {
+     "score": 8,
+     "date": "2026-08-03"
+    }
+   ]
+  },
+  {
+   "name": "TRUS6.4: Trustees and fiduciary obligations",
+   "points": 10,
+   "attempts": [
+    {
+     "score": 8,
+     "date": "2026-06-24"
+    },
+    {
+     "score": 7,
+     "date": "2026-09-10"
+    }
+   ]
+  },
+  {
+   "name": "TRUS6.5: Liability of trustees",
+   "points": 10,
+   "attempts": [
+    {
+     "score": 8,
+     "date": "2026-08-22"
+    }
+   ]
+  },
+  {
+   "name": "BUS7.1: Business organisations",
+   "points": 10,
+   "attempts": [
+    {
+     "score": 9,
+     "date": "2026-03-27"
+    },
+    {
+     "score": 10,
+     "date": "2026-06-29"
+    },
+    {
+     "score": 10,
+     "date": "2026-09-08"
+    }
+   ]
+  },
+  {
+   "name": "BUS7.2: Partnership agreement",
+   "points": 10,
+   "attempts": [
+    {
+     "score": 10,
+     "date": "2026-04-14"
+    },
+    {
+     "score": 10,
+     "date": "2026-07-05"
+    }
+   ]
+  },
+  {
+   "name": "BUS7.3: Partners' responsibilities and liability",
+   "points": 10,
+   "attempts": [
+    {
+     "score": 8.889,
+     "date": "2026-04-21"
+    },
+    {
+     "score": 7.778,
+     "date": "2026-07-12"
+    }
+   ]
+  },
+  {
+   "name": "BUS7.4: Incorporation of a company",
+   "points": 10,
+   "attempts": [
+    {
+     "score": 10,
+     "date": "2026-05-05"
+    },
+    {
+     "score": 7,
+     "date": "2026-07-23"
+    }
+   ]
+  },
+  {
+   "name": "BUS7.5: Shareholder rights",
+   "points": 10,
+   "attempts": [
+    {
+     "score": 9,
+     "date": "2026-05-20"
+    },
+    {
+     "score": 8.75,
+     "date": "2026-08-04"
+    }
+   ]
+  },
+  {
+   "name": "BUS7.6: Directors' appointment and removal",
+   "points": 10,
+   "attempts": [
+    {
+     "score": 8.889,
+     "date": "2026-05-29"
+    },
+    {
+     "score": 8.889,
+     "date": "2026-08-05"
+    }
+   ]
+  },
+  {
+   "name": "BUS7.7: Directors' duties",
+   "points": 10,
+   "attempts": [
+    {
+     "score": 8,
+     "date": "2026-06-05"
+    },
+    {
+     "score": 10,
+     "date": "2026-08-12"
+    }
+   ]
+  },
+  {
+   "name": "BUS7.8: Company decision-making",
+   "points": 10,
+   "attempts": [
+    {
+     "score": 8,
+     "date": "2026-06-30"
+    }
+   ]
+  },
+  {
+   "name": "BUS7.9: Share funding",
+   "points": 10,
+   "attempts": [
+    {
+     "score": 7,
+     "date": "2026-07-13"
+    }
+   ]
+  },
+  {
+   "name": "BUS7.10: Debt and security",
+   "points": 10,
+   "attempts": [
+    {
+     "score": 8,
+     "date": "2026-07-27"
+    }
+   ]
+  },
+  {
+   "name": "BUS7.11: Dividends and other uses of profits",
+   "points": 10,
+   "attempts": [
+    {
+     "score": 10,
+     "date": "2026-08-26"
+    }
+   ]
+  },
+  {
+   "name": "BUS7.12: Accounts and requirements",
+   "points": 10,
+   "attempts": [
+    {
+     "score": 7,
+     "date": "2026-09-02"
+    }
+   ]
+  },
+  {
+   "name": "DISP8.1: Options for dispute resolution",
+   "points": 10,
+   "attempts": [
+    {
+     "score": 10,
+     "date": "2026-03-29"
+    },
+    {
+     "score": 9,
+     "date": "2026-06-30"
+    },
+    {
+     "score": 10,
+     "date": "2026-09-11"
+    }
+   ]
+  },
+  {
+   "name": "DISP8.2: Building a claim",
+   "points": 10,
+   "attempts": [
+    {
+     "score": 9,
+     "date": "2026-04-15"
+    },
+    {
+     "score": 8,
+     "date": "2026-07-06"
+    }
+   ]
+  },
+  {
+   "name": "DISP8.3: Pre-action conduct",
+   "points": 10,
+   "attempts": [
+    {
+     "score": 9,
+     "date": "2026-04-23"
+    },
+    {
+     "score": 9,
+     "date": "2026-07-13"
+    }
+   ]
+  },
+  {
+   "name": "DISP8.4: Commencing court proceedings",
+   "points": 10,
+   "attempts": [
+    {
+     "score": 7,
+     "date": "2026-05-05"
+    },
+    {
+     "score": 8,
+     "date": "2026-07-23"
+    }
+   ]
+  },
+  {
+   "name": "DISP8.5: Service of proceedings",
+   "points": 10,
+   "attempts": [
+    {
+     "score": 6.667,
+     "date": "2026-05-24"
+    },
+    {
+     "score": 8.889,
+     "date": "2026-08-04"
+    }
+   ]
+  },
+  {
+   "name": "DISP8.6: Responding to a claim",
+   "points": 10,
+   "attempts": [
+    {
+     "score": 6,
+     "date": "2026-06-01"
+    },
+    {
+     "score": 9,
+     "date": "2026-08-06"
+    }
+   ]
+  },
+  {
+   "name": "DISP8.7: Statements of case",
+   "points": 10,
+   "attempts": [
+    {
+     "score": 9,
+     "date": "2026-06-09"
+    },
+    {
+     "score": 7,
+     "date": "2026-08-27"
+    }
+   ]
+  },
+  {
+   "name": "DISP8.8: Interim applications",
+   "points": 10,
+   "attempts": [
+    {
+     "score": 8,
+     "date": "2026-07-06"
+    }
+   ]
+  },
+  {
+   "name": "DISP8.9: Case management",
+   "points": 10,
+   "attempts": [
+    {
+     "score": 8,
+     "date": "2026-07-15"
+    }
+   ]
+  },
+  {
+   "name": "DISP8.10: Evidence",
+   "points": 10,
+   "attempts": [
+    {
+     "score": 7,
+     "date": "2026-07-28"
+    }
+   ]
+  },
+  {
+   "name": "DISP8.11: Disclosure – an overview",
+   "points": 10,
+   "attempts": [
+    {
+     "score": 9,
+     "date": "2026-08-27"
+    }
+   ]
+  },
+  {
+   "name": "DISP8.12: Electronic disclosure",
+   "points": 10,
+   "attempts": [
+    {
+     "score": 5,
+     "date": "2026-09-08"
+    }
+   ]
+  },
+  {
+   "name": "CRMP9.1: At the police station – rights and processes",
+   "points": 10,
+   "attempts": [
+    {
+     "score": 6,
+     "date": "2026-03-31"
+    },
+    {
+     "score": 10,
+     "date": "2026-03-31"
+    },
+    {
+     "score": 9,
+     "date": "2026-07-01"
+    }
+   ]
+  },
+  {
+   "name": "CRMP9.2: At the police station – interviews and advice",
+   "points": 10,
+   "attempts": [
+    {
+     "score": 10,
+     "date": "2026-04-16"
+    },
+    {
+     "score": 10,
+     "date": "2026-07-09"
+    }
+   ]
+  },
+  {
+   "name": "CRMP9.3: First appearance and bail",
+   "points": 10,
+   "attempts": [
+    {
+     "score": 9,
+     "date": "2026-05-06"
+    },
+    {
+     "score": 7,
+     "date": "2026-07-24"
+    }
+   ]
+  },
+  {
+   "name": "CRMP9.4: Early trial procedures",
+   "points": 10,
+   "attempts": [
+    {
+     "score": 7,
+     "date": "2026-05-25"
+    },
+    {
+     "score": 8,
+     "date": "2026-08-05"
+    }
+   ]
+  },
+  {
+   "name": "CRMP9.5: Trials and trial procedure",
+   "points": 10,
+   "attempts": [
+    {
+     "score": 6,
+     "date": "2026-06-09"
+    },
+    {
+     "score": 9.091,
+     "date": "2026-08-30"
+    }
+   ]
+  },
+  {
+   "name": "CRMP9.6: Evidence and proof",
+   "points": 10,
+   "attempts": [
+    {
+     "score": 5,
+     "date": "2026-07-08"
+    }
+   ]
+  },
+  {
+   "name": "CRMP9.7: Hearsay and opinion evidence",
+   "points": 10,
+   "attempts": [
+    {
+     "score": 7,
+     "date": "2026-07-30"
+    }
+   ]
+  },
+  {
+   "name": "CRMP9.8: Character evidence and fairness",
+   "points": 10,
+   "attempts": [
+    {
+     "score": 7,
+     "date": "2026-09-01"
+    }
+   ]
+  },
+  {
+   "name": "SERV10.1: The regulatory role of the SRA",
+   "points": 10,
+   "attempts": [
+    {
+     "score": 9,
+     "date": "2026-04-20"
+    },
+    {
+     "score": 9,
+     "date": "2026-07-09"
+    }
+   ]
+  },
+  {
+   "name": "SERV10.2: The Equality Act 2010",
+   "points": 10,
+   "attempts": [
+    {
+     "score": 8,
+     "date": "2026-05-25"
+    },
+    {
+     "score": 8,
+     "date": "2026-08-04"
+    }
+   ]
+  },
+  {
+   "name": "SERV10.3: Money laundering",
+   "points": 10,
+   "attempts": [
+    {
+     "score": 9,
+     "date": "2026-07-08"
+    }
+   ]
+  },
+  {
+   "name": "SERV10.4: Financial services",
+   "points": 10,
+   "attempts": [
+    {
+     "score": 5.556,
+     "date": "2026-09-01"
+    }
+   ]
+  },
+  {
+   "name": "SYS11.1: The courts",
+   "points": 10,
+   "attempts": [
+    {
+     "score": 9,
+     "date": "2026-04-27"
+    },
+    {
+     "score": 9,
+     "date": "2026-07-14"
+    },
+    {
+     "score": 9,
+     "date": "2026-07-14"
+    }
+   ]
+  },
+  {
+   "name": "SYS11.2: Primary legislation the structure of an Act of Parliament",
+   "points": 10,
+   "attempts": [
+    {
+     "score": 9,
+     "date": "2026-06-02"
+    },
+    {
+     "score": 8,
+     "date": "2026-08-07"
+    }
+   ]
+  },
+  {
+   "name": "SYS11.3: Core institutions of the state and how they interrelate",
+   "points": 10,
+   "attempts": [
+    {
+     "score": 9,
+     "date": "2026-07-21"
+    }
+   ]
+  },
+  {
+   "name": "SYS11.4: Legitimacy, separation of powers and the rule of law",
+   "points": 10,
+   "attempts": [
+    {
+     "score": 7,
+     "date": "2026-09-10"
+    }
+   ]
+  },
+  {
+   "name": "PROP12.1: Introduction to conveyancing",
+   "points": 10,
+   "attempts": [
+    {
+     "score": 10,
+     "date": "2026-04-29"
+    },
+    {
+     "score": 9,
+     "date": "2026-07-15"
+    }
+   ]
+  },
+  {
+   "name": "PROP12.2: Taxation – property",
+   "points": 10,
+   "attempts": [
+    {
+     "score": 7,
+     "date": "2026-05-11"
+    },
+    {
+     "score": 10,
+     "date": "2026-07-26"
+    }
+   ]
+  },
+  {
+   "name": "PROP12.3: Preparing the contract of sale",
+   "points": 10,
+   "attempts": [
+    {
+     "score": 8.889,
+     "date": "2026-05-29"
+    },
+    {
+     "score": 10,
+     "date": "2026-08-06"
+    }
+   ]
+  },
+  {
+   "name": "PROP12.4: Investigation of a registered and unregistered freehold title",
+   "points": 10,
+   "attempts": [
+    {
+     "score": 8,
+     "date": "2026-06-03"
+    },
+    {
+     "score": 8,
+     "date": "2026-08-07"
+    }
+   ]
+  },
+  {
+   "name": "PROP12.5: Pre-contract searches and enquiries",
+   "points": 10,
+   "attempts": [
+    {
+     "score": 7,
+     "date": "2026-06-20"
+    },
+    {
+     "score": 9,
+     "date": "2026-09-04"
+    }
+   ]
+  },
+  {
+   "name": "PROP12.6: Core principles of planning law",
+   "points": 10,
+   "attempts": [
+    {
+     "score": 7,
+     "date": "2026-07-14"
+    }
+   ]
+  },
+  {
+   "name": "PROP12.7: Finance and acting for a lender",
+   "points": 10,
+   "attempts": [
+    {
+     "score": 9,
+     "date": "2026-07-21"
+    }
+   ]
+  },
+  {
+   "name": "PROP12.8: Preparation for and exchange of contracts",
+   "points": 10,
+   "attempts": [
+    {
+     "score": 10,
+     "date": "2026-08-12"
+    }
+   ]
+  },
+  {
+   "name": "PROP12.9: Pre-completion, completion and post-completion",
+   "points": 10,
+   "attempts": [
+    {
+     "score": 10,
+     "date": "2026-09-07"
+    }
+   ]
+  },
+  {
+   "name": "PROP12.10: Remedies for delayed completion",
+   "points": 10,
+   "attempts": [
+    {
+     "score": 10,
+     "date": "2026-09-14"
+    }
+   ]
+  },
+  {
+   "name": "WILL13.1: Validity of wills and codicils",
+   "points": 10,
+   "attempts": [
+    {
+     "score": 7,
+     "date": "2026-05-18"
+    },
+    {
+     "score": 10,
+     "date": "2026-08-03"
+    }
+   ]
+  },
+  {
+   "name": "WILL13.2: Alterations, amendments and revocation of wills",
+   "points": 10,
+   "attempts": [
+    {
+     "score": 8,
+     "date": "2026-06-03"
+    },
+    {
+     "score": 10,
+     "date": "2026-08-10"
+    }
+   ]
+  },
+  {
+   "name": "WILL13.3: Personal representatives and interpretations of wills",
+   "points": 10,
+   "attempts": [
+    {
+     "score": 4.444,
+     "date": "2026-06-25"
+    },
+    {
+     "score": 6.667,
+     "date": "2026-09-11"
+    }
+   ]
+  },
+  {
+   "name": "WILL13.4: Intestacy and assets passing outside the estate",
+   "points": 10,
+   "attempts": [
+    {
+     "score": 10,
+     "date": "2026-07-22"
+    }
+   ]
+  },
+  {
+   "name": "WILL13.5: Grants of representation",
+   "points": 9,
+   "attempts": [
+    {
+     "score": 7.2,
+     "date": "2026-08-20"
+    }
+   ]
+  },
+  {
+   "name": "WILL13.6: Administration of estates",
+   "points": 10,
+   "attempts": [
+    {
+     "score": 8,
+     "date": "2026-08-25"
+    }
+   ]
+  }
+ ]
+}

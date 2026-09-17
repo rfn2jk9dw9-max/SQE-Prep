@@ -400,6 +400,18 @@ def main():
     except Exception as e:
         print(f"  ⚠ Could not refresh teaching calendar: {e}")
 
+    # The COLP revision schedule ranks its final-phase revisits (from 16 Dec)
+    # by how often each chapter is answered wrongly. Mock sessions it reads
+    # live; the topic-test record it can only get from here, so refresh it on
+    # every run.
+    try:
+        import colp_weak_stats
+        n = colp_weak_stats.update_colp_html(SCRIPT_DIR / "SQE1_COLP_Revision.html",
+                                             cache_file, TESTS_DIR)
+        print(f"  ✓ Topic-test record refreshed in revision schedule ({n} attempts)")
+    except Exception as e:
+        print(f"  ⚠ Could not refresh topic-test record: {e}")
+
     # ── 2b. Inject personal mistakes into revision guide FLASHCARDS ──
     # (Mistakes belong in the flip-card flashcard deck, NOT woven into the
     # chapter notes prose — see extract_mistakes.inject_mistake_flashcards.)
