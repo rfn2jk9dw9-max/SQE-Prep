@@ -898,10 +898,9 @@ function buildSecondPass(assignment, doneSet) {
   // off instead of restarting at CONT1.1 on every page load.
   const visits = {};
   Object.entries(revisitLog).forEach(([c, a]) => { visits[c] = a.length; });
-  // Today's slot is already served if a revisit was ticked today; scheduling a
-  // new one would make ticking a revisit produce another one straight away.
-  const today = todayYMD();
-  const servedToday = Object.values(revisitLog).some(a => a.includes(today));
+  // Ticking today's revisit frees today's slot, so the next revisit moves up
+  // into today and everything after it shifts forward — the same as ticking a
+  // chapter in the first pass. The ticked one stays on today's list as done.
   // Revisits already made in the final phase, so one weak chapter does not
   // take every slot: its priority halves with each final-phase visit.
   const finalVisits = {};
@@ -910,7 +909,6 @@ function buildSecondPass(assignment, doneSet) {
   });
   const weakPriority = c => (weakness[c] ? weakness[c].score : 0) / (1 + (finalVisits[c] || 0));
   for (const day of days) {
-    if (day === today && servedToday) continue;
     // After FLK1 is sat, FLK1 material is finished — that week belongs to FLK2
     // and to ethics, which is examined in both papers.
     const flk2Only = day > FLK1_EXAM;
