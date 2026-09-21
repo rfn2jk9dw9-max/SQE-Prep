@@ -479,8 +479,11 @@ async function flushPending(){
   flushing = false;
 }
 
-// Tick / untick today's revisit. Only today's row is tickable: the slot is one
-// revisit a day, and the date recorded is the day the revisit was actually done.
+// Tick / untick a revisit. Any upcoming revisit can be ticked — doing one ahead
+// of its day is normal (and on COLP days there is no revisit slot at all). The
+// date recorded is always today, the day it was actually done, and the rest of
+// the schedule moves up. A done revisit shows in today's group and can be
+// unticked there.
 function toggleRevisit(code){
   const t = todayYMD();
   const arr = revisitLog[code] || [];
@@ -1239,15 +1242,14 @@ function makeFullPaperRow(flk, status) {
 function makeRevisitRow(code, status, date) {
   const m = MODULES.find(x => x.code === code) || { code: code, title: '' };
   const ticked = status === 'done';
-  const tickable = date === todayYMD();
+  const tickable = true;
   const el = document.createElement('div');
   el.className = 'card s-' + status;
   el.style.cssText = 'opacity:.9;cursor:' + (tickable ? 'pointer' : 'default')
     + ';border-left:3px solid ' + codeColour(code);
   // Ticking records today's date in the revisit history (synced to the server)
   // and restarts the chapter's 21-day clock. It does NOT touch the chapter's
-  // own done flag — that tracks the first pass. Future rows are not tickable:
-  // the day's slot is one revisit, done on the day.
+  // own done flag — that tracks the first pass.
   if (tickable) el.addEventListener('click', e => {
     if (e.target.closest('a')) return;   // let the COLP link through
     toggleRevisit(code);
