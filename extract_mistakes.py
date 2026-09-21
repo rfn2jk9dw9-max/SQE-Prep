@@ -50,19 +50,61 @@ def subject_to_key(subject_name: str) -> str:
 
 # ── Source → chapter ID mapping ───────────────────────────────────────────────
 
+# Subject code → SLK module number. Used to validate a chapter id parsed out of
+# a filename: "WILL13.3" is only 13.3 because WILL really is module 13. "CRM" is
+# ambiguous between CRML (5) and CRMP (9), so it is resolved by the number.
+CODE_TO_MODULE = {
+    "CONT": 1, "TORT": 2, "COND": 3, "LAND": 4, "CRML": 5, "TRUS": 6,
+    "BUS": 7, "DISP": 8, "CRMP": 9, "SERV": 10, "SYS": 11, "PROP": 12,
+    "WILL": 13, "WILLS": 13,
+}
+
+# A subject code (optional) glued or spaced against a chapter number, ANYWHERE in
+# the string — not just at the start.
+_CODE_CHAPTER_RE = re.compile(r'\b([A-Z]{2,6})\s*(\d{1,2})\.(\d{1,2})(?!\d)', re.I)
+# A bare chapter number opening the filename: "10.2 v2", "9.4 v2 0508".
+_BARE_CHAPTER_RE = re.compile(r'^\W*(\d{1,2})\.(\d{1,2})(?!\d)')
+
+
 def source_to_chapter_id(source: str) -> str | None:
     """
     Extract chapter ID from source strings like:
       'DISP8.4: Commencing court proceedings: Ghita Bennis'
       'CONT1.3: Vitiating factors: Ghita Bennis'
-      'SLK DISP8 manual 2025_12_15'   ← Canvas PDF source (subject-level only)
+      'CRML 5.5'                       ← space between code and number
+      'Attempt by Ghita Bennis for UK SLK WILL13.3 Multiple-choice test'
+      '10.2 v2'                        ← bare chapter number, no subject code
+      'SLK DISP8 manual 2025_12_15'    ← Canvas PDF source (subject-level only)
     Returns '8.4', '1.3', etc., or None if not parseable.
+
+    The old version anchored on `re.match(r'[A-Z]{2,6}(\\d+\\.\\d+)')`, which
+    required the code to be flush against the number AND at the very start of
+    the string. That silently dropped 87 of 250 recorded wrong answers (35%) —
+    including every mistake from CRML 5.5, CONT 1.5 and CRM 5.3, the three
+    lowest-scoring chapter tests — because those PDFs were saved under ad-hoc
+    filenames. An unparseable filename produced no error, just a missing
+    "⚠ Your Personal Mistakes" block.
     """
-    # Pattern 1: SUBJECT + chapter digits  e.g. DISP8.4, CONT1.3
-    m = re.match(r'[A-Z]{2,6}(\d+\.\d+)', source.strip(), re.I)
-    if m:
-        return m.group(1)
-    # Pattern 2: SLK DISP8 → subject level only, no specific chapter
+    source = (source or "").strip()
+
+    # Pattern 1: optional SUBJECT code + chapter digits, anywhere in the string.
+    # Accept only when the module number is real (1-13) and, where the code is
+    # known, agrees with it.
+    for m in _CODE_CHAPTER_RE.finditer(source):
+        code, mod, sub = m.group(1).upper(), int(m.group(2)), m.group(3)
+        if not 1 <= mod <= 13:
+            continue
+        expected = CODE_TO_MODULE.get(code)
+        if expected is not None and expected != mod:
+            continue
+        return f"{mod}.{int(sub)}"
+
+    # Pattern 2: bare chapter number opening the filename.
+    m = _BARE_CHAPTER_RE.match(source)
+    if m and 1 <= int(m.group(1)) <= 13:
+        return f"{int(m.group(1))}.{int(m.group(2))}"
+
+    # Pattern 3: SLK DISP8 → subject level only, no specific chapter
     return None
 
 
