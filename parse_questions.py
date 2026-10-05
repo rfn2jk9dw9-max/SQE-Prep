@@ -78,7 +78,8 @@ def _is_canvas_name(stem: str) -> bool:
     "SLK ...", but COLP now exports them as "Progress Taster <ddmm> FLK<n>".
     """
     stem = stem.upper()
-    return stem.startswith("SLK") or "PROGRESS TASTER" in stem or "PROGRESS TEST" in stem
+    return (stem.startswith("SLK") or "PROGRESS TASTER" in stem or "PROGRESS TEST" in stem
+            or (stem.startswith("QUIZZES") and "TASTER" in stem))
 
 def clean_text(text):
     """Remove H5P/Canvas icon glyphs and collapse whitespace."""
