@@ -827,7 +827,7 @@ def _parse_canvas_block(block, score):
             continue
 
         # Tests format A: "Correct   [answer text on same line]"
-        if ind <= 8 and re.match(r'Correct\s+(?!An)', txt, re.I):
+        if ind <= 8 and re.match(r'Correct\s+(?!An)', txt):  # case-sensitive: a wrapped body line 'correct defendant?' is not the label
             after = re.sub(r'^Correct\s+', '', txt, flags=re.I).strip()
             if after:
                 correct_parts.append(after)
@@ -835,7 +835,7 @@ def _parse_canvas_block(block, score):
             continue
 
         # Tests format B: "Correct" standalone, answer on next high-indent line
-        if ind <= 8 and re.match(r'Correct\s*$', txt, re.I):
+        if ind <= 8 and re.match(r'Correct\s*$', txt):
             state = 'correct'
             continue
 
