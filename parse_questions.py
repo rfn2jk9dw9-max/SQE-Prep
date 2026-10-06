@@ -50,6 +50,64 @@ MODULE_SUBJECT_OVERRIDES = (
 )
 
 
+
+# Manual number -> SUBJECT_MAP prefix (CONT1, TORT2, COND3, LAND4, CRML5, TRUS6,
+# BUS7, DISP8, CRMP9, SERV10, SYS11, PROP12, WILL13). The leading digit of a
+# Canvas "See 5.2.4.3" reference and of a bare "10.2 v2" filename IS this number.
+NUM_TO_PREFIX = {1: "CONT", 2: "TORT", 3: "COND", 4: "LAND", 5: "CRML", 6: "TRUS",
+                 7: "BUS", 8: "DISP", 9: "CRMP", 10: "SERV", 11: "SYS",
+                 12: "PROP", 13: "WILL"}
+MODULE_PREFIX_NUM = {"CONT": 1, "TORT": 2, "COND": 3, "LAND": 4, "CRML": 5,
+                     "CRMP": 9, "TRUS": 6, "BUS": 7, "DISP": 8, "SERV": 10,
+                     "LSYS": 11, "SYS": 11, "PROP": 12, "WILL": 13, "SLAC": 0}
+_MODULE_CODE_RE = re.compile(
+    r'(CRML|CRMP|BUS|CONT|TORT|DISP|SERV|LSYS|SYS|PROP|WILL|LAND|TRUS|SLAC|COND)\s*(\d+)\.\d+')
+
+
+def _subject_for_module(num, minor):
+    """(subject, paper) for manual number `num`, chapter `minor`; None if unknown."""
+    for prefix, info in MODULE_SUBJECT_OVERRIDES:
+        m = re.match(r'([A-Z]+)(\d+)\.(\d+)$', prefix)
+        if m and NUM_TO_PREFIX.get(num) == m.group(1) and num == int(m.group(2)) \
+                and minor == int(m.group(3)):
+            return info[0], info[1]
+    pre = NUM_TO_PREFIX.get(num)
+    if not pre:
+        return None
+    info = SUBJECT_MAP[pre]
+    return info[0], info[1]
+
+
+def reclassify_subjects(questions):
+    """
+    Give every question a real subject. Applied after the cache load so cached
+    entries parsed under the old (prefix-only) rule are corrected without a
+    re-parse. Per-question Canvas `chapter` ("5.2.4.3") wins over the filename,
+    because tasters mix subjects; otherwise the source name decides.
+    Must run BEFORE question-level dedup: dedup keeps the first copy of a
+    repeated question, so an "Unknown" copy sorted ahead of its properly-named
+    twin used to evict the tagged one.
+    """
+    fixed = 0
+    for q in questions:
+        if q.get("subject") not in ("Unknown", "Mixed Practice", "", None):
+            continue
+        res = None
+        chap = q.get("chapter")
+        if chap:
+            parts = str(chap).split(".")
+            if len(parts) >= 2 and parts[0].isdigit() and parts[1].isdigit():
+                res = _subject_for_module(int(parts[0]), int(parts[1]))
+        if res is None:
+            sub, pap = subject_from_filename((q.get("source") or "") + ".pdf")
+            if sub not in ("Unknown", "Mixed Practice"):
+                res = (sub, pap)
+        if res:
+            q["subject"], q["paper"] = res
+            fixed += 1
+    return questions, fixed
+
+
 def subject_from_filename(name):
     stem = Path(name).stem.upper()
     for prefix, info in MODULE_SUBJECT_OVERRIDES:
@@ -60,6 +118,22 @@ def subject_from_filename(name):
     for prefix, info in SUBJECT_MAP.items():
         if stem.startswith(prefix):
             return info[0], info[1]
+    # The module code is not always at the start of the name: COLP exports
+    # "Attempt by Ghita Bennis for UK SLK CRML5.2 Multiple-choice test",
+    # "SLK CRMP9.5 Multiple-choice test", "ADISP8.12 ...", and re-sits named
+    # only by number ("10.2 v2", "CRM 5.3"). Those all fell through to
+    # "Unknown"/"Mixed Practice", which is why only the few files whose names
+    # START with a code counted towards a subject (Criminal Liability: 21).
+    m = _MODULE_CODE_RE.search(stem)
+    if m:
+        info = SUBJECT_MAP[m.group(1)]
+        sub = _subject_for_module(int(MODULE_PREFIX_NUM[m.group(1)]), int(m.group(2)))
+        return sub if sub else (info[0], info[1])
+    m = re.match(r'^[A-Z]{0,4}\s*(\d{1,2})\.(\d+)(?!\d)', stem)
+    if m:
+        sub = _subject_for_module(int(m.group(1)), int(m.group(2)))
+        if sub:
+            return sub
     if stem.startswith("SLK"):
         return "Mixed Practice", "BOTH"
     # Canvas taster/progress exports whose filename carries the paper, e.g.
@@ -1439,6 +1513,10 @@ def parse_all(tests_dir, cache_file=None):
             _dbg(f"Cache saved: {len(cache)} entries → {cache_file.name}")
         except Exception as e:
             _dbg(f"Cache save error (ignored): {e}")
+
+    # ── 3a. Re-attribute subjects (cached entries included) ────────────────
+    all_q, _n_fixed = reclassify_subjects(all_q)
+    _dbg(f"  [subject] re-attributed {_n_fixed} question(s) from Unknown/Mixed Practice")
 
     # ── 3b. Re-scrub every option, cached ones included ────────────────────
     # The footer/header pattern gets extended when a new form of page
