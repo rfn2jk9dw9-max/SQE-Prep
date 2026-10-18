@@ -195,7 +195,13 @@ _FOOTER_RE = re.compile(
     r'(?:\s+for(?:\s+UK?)?(?:\s+SLK\s*\S*)?'
     r'(?:\s+Multiple[-\s]?choice(?:\s+test)?)?)?'
     r'|Multiple[-\s]?choice\s+test\s*[-–—]\s*'
-    r'\d{1,2}/\d{1,2}/\d{4},?\s*\d{0,2}:?\d{0,2}',
+    r'\d{1,2}/\d{1,2}/\d{4},?\s*\d{0,2}:?\d{0,2}'
+    # Since mid-Sept 2026 the column clip often removes the whole
+    # "Attempt by … Multiple-choice test" part and leaves ONLY the tail,
+    # e.g. "...ensure the client does - 21/09/2026, 16: not take action".
+    # 35 bank options carried it. Anchored on dash + full date + comma +
+    # hour + colon, which real option text never contains.
+    r'|(?<!\S)[-–—]\s*\d{1,2}/\d{1,2}/20\d{2},\s*\d{1,2}:\d{0,2}',
     re.I,
 )
 
@@ -1410,6 +1416,61 @@ def _topic_key(stem):
     return m.group(1).lower() if m else stem.lower()
 
 
+def _is_question_like(stem):
+    """True when the stem's closing words read as a question being asked."""
+    tail = stem[-250:]
+    return ("?" in tail) or bool(re.search(
+        r"\b(which|what|whether|how|when|who|best describes|most accurate|"
+        r"advise|explain|identify)\b", tail, re.I))
+
+
+def drop_garbled_stems(questions):
+    """Drop questions whose STEM is not a question at all.
+
+    Seen 15 Oct 2026 (mock FLK1 S1, Q72): the parser sometimes loses a
+    question's real stem and stores in its place the OPTION text of the
+    neighbouring question ("Shareholders bring the claim in the company's
+    name..." — the five answers of a derivative-claim question — sitting on
+    top of a members'-documents question's options). Also: a lone "-", a
+    stem that is just the page header, or a stem starting mid-sentence
+    ("the 3-year period immediately before the death...").
+
+    Such a question is unanswerable, so it is dropped from the bank. The
+    real question usually survives elsewhere (7.5 v2 #54 → BUS7.5).
+    Flashcards are unaffected (extract_mistakes reads the PDFs itself).
+
+    Rules, any one suffices:
+      • normalised stem under 25 chars
+      • stem starts lower-case (it began mid-sentence)
+      • stem contains ≥2 option prefixes (30 chars) from the bank AND does
+        not read as a question. The second half matters: real stems in
+        SYS11.1 / COND3.4 / 9.4 legitimately quote phrases that are also
+        options elsewhere, but they still end by asking something.
+    """
+    n = lambda s: re.sub(r'\W+', '', (s or '').lower())
+    prefixes = set()
+    for q in questions:
+        for o in q.get('options') or []:
+            k = n(o)[:30]
+            if len(k) >= 20:
+                prefixes.add(k)
+    kept, dropped = [], []
+    for q in questions:
+        stem = (q.get('question_text') or '').strip()
+        ns = n(stem)
+        bad = (len(ns) < 25 or stem[:1].islower())
+        if not bad:
+            hits = sum(1 for k in prefixes if k in ns)
+            bad = hits >= 2 and not _is_question_like(stem)
+        (dropped if bad else kept).append(q)
+    if dropped:
+        _dbg(f"  [garbled] dropped {len(dropped)} question(s) whose stem is "
+             f"option text / a fragment:")
+        for q in dropped:
+            _dbg(f"      {q.get('source','?')[:34]} | {q.get('question_text','')[:60]!r}")
+    return kept
+
+
 def parse_all(tests_dir, cache_file=None):
     """
     Parse all PDFs in tests_dir, deduplicate by topic key (keeping the most
@@ -1530,6 +1591,8 @@ def parse_all(tests_dir, cache_file=None):
     # unanswerable, so drop it rather than serve a blank choice.
     cleaned, dropped = [], 0
     for q in all_q:
+        if q.get("question_text"):
+            q["question_text"] = scrub_option(q["question_text"])
         opts = q.get("options")
         if opts:
             q["options"] = [scrub_option(o) for o in opts]
@@ -1542,6 +1605,7 @@ def parse_all(tests_dir, cache_file=None):
              f"page furniture only")
     all_q = cleaned
 
+    all_q = drop_garbled_stems(all_q)
     all_q = repair_wrapped_options(all_q)
     all_q = apply_overrides(all_q)
 
@@ -1604,8 +1668,27 @@ def parse_all(tests_dir, cache_file=None):
             return ''                    # unanswered / unparsed — no evidence
         return _norm(opts[ci])[:40]
 
+    # Second rule — REWORDED repeats (added 15 Oct 2026). Re-sit files and
+    # SLK progress tests reword the same question ("businessperson" →
+    # "doctor", "advertising" → "marketing", a clause added mid-stem), so the
+    # 150-char prefix differs and rule 1 misses them. 13 such pairs reached
+    # the bank; SERV10.4's two "40% shareholding in X PLC" variants were
+    # served in the SAME mock (Q2 + Q34, 15 Oct). A pair is a repeat when:
+    #   same correct answer (40-char prefix) AND ≥3 shared options AND
+    #   whole-stem similarity ≥ 0.70.
+    # All three are required. Same-answer protects LAND4.5's "shortcut"
+    # pair and PROP12.7 (different answers). The similarity floor protects
+    # LAND4.6-style pairs that share an option list but ask different
+    # things (similarity ~0.1). Pairs at 0.4–0.6 with identical options
+    # (9.4 v2 vs CRMP9.4) are deliberately NOT merged — facts differ enough
+    # that they may test a different point.
+    import difflib
+    def _words(s):
+        return re.sub(r'[^a-z0-9]+', ' ', (s or '').lower()).strip()
+
     by_stem = defaultdict(list)      # stem prefix -> [(opt_set, answer)]
-    deduped = []
+    by_answer = defaultdict(list)    # answer prefix -> [(opt_set, stem words)]
+    deduped, fuzzy = [], 0
     for q in all_q:
         stem = _norm(q.get('question_text'))[:150]
         opts, ans = _opt_set(q), _answer(q)
@@ -1617,10 +1700,22 @@ def parse_all(tests_dir, cache_file=None):
                 is_repeat = bool(opts & prev_opts) or (ans and ans == prev_ans)
             if is_repeat:
                 break
+        if not is_repeat and ans:
+            words = _words(q.get('question_text'))
+            for prev_opts, prev_words in by_answer[ans]:
+                if (len(opts & prev_opts) >= 3 and
+                        difflib.SequenceMatcher(None, words, prev_words).ratio() >= 0.70):
+                    is_repeat = True
+                    fuzzy += 1
+                    break
         if is_repeat:
             continue
         by_stem[stem].append((opts, ans))
+        if ans:
+            by_answer[ans].append((opts, _words(q.get('question_text'))))
         deduped.append(q)
+    if fuzzy:
+        _dbg(f"  [dedup] {fuzzy} reworded repeat(s) removed")
 
     if len(deduped) != len(all_q):
         _dbg(f"  [dedup] question-level: {len(all_q)} → {len(deduped)} "
