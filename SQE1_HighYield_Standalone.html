@@ -2466,10 +2466,60 @@ function startFlash(subjIdx){
   renderFlash();
 }
 
+// ── Deleted cards ──────────────────────────────────────────────────
+// Kept in this browser's localStorage, keyed on the card's question text
+// (minus the "⚠ Your mistake ×N — …:" label) plus its correct answer, so a
+// deleted card stays deleted when update_site.py rebuilds the mistake cards.
+const FL_DEL_KEY = 'sqe1_flash_deleted_v1';
+function flNorm(t){ return String(t||'').toLowerCase().replace(/<[^>]*>/g,' ').replace(/[^a-z0-9]+/g,' ').trim(); }
+function flCardKey(c){
+  const stem = String(c.q||'').replace(/^\s*⚠\s*(?:Your mistake[^:]*|Session mistake)\s*:\s*/,'');
+  const a = String(c.a||''); const i = a.lastIndexOf('Correct answer:');
+  const corr = i >= 0 ? a.slice(i + 15) : a;
+  const k = flNorm(stem).slice(0,200) + '|' + flNorm(corr).slice(0,80);
+  let h = 5381; for(let j=0;j<k.length;j++){ h = ((h<<5) + h + k.charCodeAt(j)) >>> 0; }
+  return h.toString(36) + k.length.toString(36);
+}
+function flGetDeleted(){ try{ return JSON.parse(localStorage.getItem(FL_DEL_KEY)) || {}; }catch(e){ return {}; } }
+function flSetDeleted(d){ try{ localStorage.setItem(FL_DEL_KEY, JSON.stringify(d)); }catch(e){} }
+function flDeletedCount(subjKey){ const d = flGetDeleted(); return Object.values(d).filter(r=>r.s===subjKey).length; }
+
+function deleteCard(btn){
+  if(!btn.dataset.armed){
+    btn.dataset.armed = '1'; btn.textContent = 'Tap again to delete';
+    setTimeout(()=>{ if(btn.isConnected){ delete btn.dataset.armed; btn.textContent = '🗑 Delete card'; } }, 3000);
+    return;
+  }
+  const fd = FLASH_DATA[FL.subj], card = FL.deck[FL.idx];
+  if(!card) return;
+  const k = flCardKey(card), d = flGetDeleted();
+  d[k] = {s: fd.key, q: String(card.q).slice(0,140), t: new Date().toISOString().slice(0,10)};
+  flSetDeleted(d);
+  FL.lastDel = {k, card, idx: FL.idx, againIdx: FL.again.indexOf(card)};
+  FL.deck.splice(FL.idx, 1);
+  if(FL.lastDel.againIdx >= 0) FL.again.splice(FL.lastDel.againIdx, 1);
+  renderFlash();
+}
+function undoDelete(){
+  const u = FL.lastDel; if(!u) return;
+  const d = flGetDeleted(); delete d[u.k]; flSetDeleted(d);
+  FL.deck.splice(u.idx, 0, u.card);
+  if(u.againIdx >= 0) FL.again.splice(u.againIdx, 0, u.card);
+  FL.idx = u.idx; FL.lastDel = null;
+  renderFlash();
+}
+function restoreDeleted(){
+  const fd = FLASH_DATA[FL.subj], d = flGetDeleted();
+  Object.keys(d).forEach(k=>{ if(d[k].s === fd.key) delete d[k]; });
+  flSetDeleted(d);
+  buildFlashDeck(FL.subj); renderFlash();
+}
+
 function buildFlashDeck(si){
   const fd = FLASH_DATA[si];
-  FL.deck = fd ? [...fd.cards] : [];
-  FL.idx = 0; FL.known = 0; FL.again = [];
+  const del = flGetDeleted();
+  FL.deck = fd ? fd.cards.filter(c => c && !del[flCardKey(c)]) : [];
+  FL.idx = 0; FL.known = 0; FL.again = []; FL.lastDel = null;
 }
 
 function renderFlash(){
@@ -2486,11 +2536,23 @@ function renderFlash(){
   });
   tabs += '</div>';
 
-  const deck = FL.again.length ? FL.again : FL.deck;
+  const deck = FL.deck;
   const done = FL.idx >= deck.length;
+  const nDel = flDeletedCount(fd.key);
+  const undoBar = FL.lastDel
+    ? '<div style="display:flex;justify-content:center;align-items:center;gap:10px;margin:0 0 10px;font-size:12px;color:#64748b">Card deleted <button class="flash-nav-btn flash-btn-again" style="padding:5px 12px" onclick="undoDelete()">Undo</button></div>'
+    : '';
+  const restoreLink = nDel
+    ? '<div style="text-align:center;margin-top:10px"><button class="flash-nav-btn flash-btn-skip" onclick="restoreDeleted()">Restore '+nDel+' deleted card'+(nDel>1?'s':'')+' in this deck</button></div>'
+    : '';
 
   if(done){
     const total = FL.deck.length;
+    if(!total){
+      v.innerHTML = '<div class="flash-hdr"><span class="flash-hdr-title">🃏 Flashcards · '+fd.label+'</span><button class="flash-back-btn" onclick="backToGuide()">← Guide</button></div>'
+        + tabs + undoBar + '<div class="flash-result"><div class="flash-result-label">No cards left in this deck.</div></div>' + restoreLink;
+      return;
+    }
     const pct = Math.round(FL.known/total*100);
     v.innerHTML = '<div class="flash-hdr"><span class="flash-hdr-title">🃏 Flashcards · '+fd.label+'</span><button class="flash-back-btn" onclick="backToGuide()">← Guide</button></div>'
       + tabs
@@ -2501,7 +2563,7 @@ function renderFlash(){
       + '<button class="flash-restart-btn" onclick="reviewAgain()">Review missed cards</button>'
       + '<button class="flash-restart-btn" style="background:#22c55e" onclick="buildFlashDeck(FL.subj);renderFlash()">Restart deck</button>'
       + '<button class="flash-back-btn" onclick="backToGuide()">← Back to guide</button>'
-      + '</div>';
+      + '</div>' + undoBar + restoreLink;
     return;
   }
 
@@ -2510,7 +2572,7 @@ function renderFlash(){
   const pct = (FL.idx/total*100).toFixed(0);
 
   v.innerHTML = '<div class="flash-hdr"><span class="flash-hdr-title">🃏 Flashcards · '+fd.label+'</span><button class="flash-back-btn" onclick="backToGuide()">← Guide</button></div>'
-    + tabs
+    + tabs + undoBar
     + '<div class="flash-progress-bar"><div class="flash-progress-fill" style="width:'+pct+'%"></div></div>'
     + '<div class="flash-counter">Card '+(FL.idx+1)+' of '+total+(FL.again.length?' · '+FL.again.length+' to review':'')+' · Tap card to reveal</div>'
     + '<div class="flip-wrap" onclick="flipCard(this)">'
@@ -2526,7 +2588,10 @@ function renderFlash(){
     + '<div class="flash-nav-row">'
     + '  <button class="flash-nav-btn flash-btn-skip" onclick="prevCard()"'+(FL.idx===0?' disabled style="opacity:.35;cursor:default"':'')+'>← Prev</button>'
     + '  <button class="flash-nav-btn flash-btn-skip" onclick="nextCard()">Next →</button>'
-    + '</div>';
+    + '</div>'
+    + '<div class="flash-nav-row">'
+    + '  <button class="flash-nav-btn flash-btn-skip" style="color:#dc2626" onclick="deleteCard(this)">🗑 Delete card</button>'
+    + '</div>' + restoreLink;
 }
 
 function flipCard(wrap){
@@ -2535,7 +2600,7 @@ function flipCard(wrap){
 }
 
 function markCard(knew){
-  const deck = FL.again.length ? FL.again : FL.deck;
+  const deck = FL.deck;
   if(knew){ FL.known++; }
   else { FL.again.push(deck[FL.idx]); }
   FL.idx++;
