@@ -483,9 +483,14 @@ _PDF_HEADER_RE = re.compile(
 _DEGENERATE_ANSWER = "(not captured — check the source PDF)"
 
 
+# H5P/Canvas captures append "Question Score: 1 / 1" to the stem.
+_QSCORE_RE = re.compile(r"\s*Question Score:\s*\d+\s*/\s*\d+\s*", re.IGNORECASE)
+
+
 def _clean_stem(text: str) -> str:
     """Strip print-to-PDF page furniture and collapse runs of whitespace."""
     text = _PDF_HEADER_RE.sub(" ", text or "")
+    text = _QSCORE_RE.sub(" ", text)
     return re.sub(r"\s+", " ", text).strip()
 
 
@@ -504,41 +509,112 @@ def _clean_answer(text: str) -> str:
     return text.rstrip(" .") + "."
 
 
+# ── One card per question (merge, never drop) ────────────────────────────────
+#
+# Rule (Ghita, Aug 2026): every wrong answer from every sitting must reach the
+# flashcards. Rule (Ghita, 19 Oct 2026): the same question must not appear as
+# two cards. So repeat mistakes on the same question are MERGED into one card
+# that lists each wrong answer — never silently dropped.
+#
+# The old key (first 80 raw chars of the stem) missed repeats whenever the
+# wording drifted between sittings ("GBH" vs "grievous bodily harm", "in
+# England" added, "5 years" vs "five years", reworded scenarios). Matching is
+# now token-bigram Dice on the stem AND the correct answer:
+#   - stem alone is unsafe: PROP12.7 holds two different questions with a
+#     word-for-word identical stem;
+#   - a shared 60-char opening is unsafe: "Two former business partners…"
+#     opens two unrelated DISP questions.
+# Calibrated 19 Oct 2026 on the 410 live auto cards: catches all 8 true repeats,
+# no merge between different questions (closest different pair: corr 0.31).
+
+def _bigrams(text: str) -> set:
+    w = _norm_answer(text).split()
+    return set(zip(w, w[1:])) if len(w) > 1 else set(w)
+
+
+def _dice(a: str, b: str) -> float:
+    A, B = _bigrams(a), _bigrams(b)
+    return 2 * len(A & B) / (len(A) + len(B)) if A and B else 0.0
+
+
+def _same_question(x: dict, y: dict) -> bool:
+    s = _dice(x["stem"], y["stem"])
+    if s < 0.4:
+        return False
+    if _DEGENERATE_ANSWER in (x["corr"], y["corr"]):
+        # No usable answer to tell identical-stem questions apart (PROP12.7).
+        return s >= 0.95 and _dice(x["user"], y["user"]) >= 0.8
+    c = _dice(x["corr"], y["corr"])
+    if s >= 0.85 and c >= 0.6:
+        return True
+    if len(_norm_answer(x["corr"]).split()) < 4:
+        return False            # "Yes." / "2 years." prove nothing on their own
+    return c >= 0.8 or (c >= 0.4 and _dice(x["user"], y["user"]) >= 0.8)
+
+
+# Auto cards whose question already has a richer HAND-WRITTEN card in the same
+# deck. Matched on the start of the normalised stem.
+_COVERED_BY_HANDWRITTEN_CARD = (
+    "a software engineer makes offensive comments about a colleague s sexual orientation",  # SERV, EA 2010 s 26
+    "during a rally the defendant fires off a gun",                                       # CRML, R v Steer
+)
+
+
 def map_wrong_answers_to_flashcards(wrong_answers: list[dict]) -> dict[str, list[dict]]:
     """
     Returns {flashcard_key: [{"q":..., "a":..., "auto": True}, ...]}
     flashcard_key matches a FLASH_DATA deck's `key` (e.g. 'CONT', 'BUS7').
+    One card per question: repeat mistakes are merged, not dropped. Input
+    order matters — the first entry's deck and correct answer win, so live
+    session data (loaded first) beats old mock PDFs.
     """
-    by_key = defaultdict(list)
-    seen = set()
+    clusters = defaultdict(list)          # fkey -> [cluster, ...]
 
     for q in wrong_answers:
         fkey = wrong_answer_to_flashcard_key(q)
         if not fkey:
             continue
-
-        qtext = _clean_stem(q.get("questionText") or "")
-        if not qtext:
+        stem = _clean_stem(q.get("questionText") or "")
+        if not stem:
             continue
-
-        # Dedup still keys on the first 80 chars of the QUESTION — never on
-        # answer text, which shares long openings between distractors.
-        dedup_key = (fkey, qtext[:80])
-        if dedup_key in seen:
+        if _norm_answer(stem).startswith(_COVERED_BY_HANDWRITTEN_CARD):
             continue
-        seen.add(dedup_key)
+        entry = {
+            "stem": stem,
+            "user": _clean_answer(q.get("userAnswer")),
+            "corr": _clean_answer(q.get("correctAnswer")),
+            "label": _ORIGIN_LABEL.get(q.get("origin", "h5p"), "Session"),
+        }
+        for cl in clusters[fkey]:
+            if any(_same_question(entry, e) for e in cl):
+                cl.append(entry)
+                break
+        else:
+            clusters[fkey].append([entry])
 
-        label = _ORIGIN_LABEL.get(q.get("origin", "h5p"), "Session")
-        user_ans = _clean_answer(q.get("userAnswer"))
-        corr_ans = _clean_answer(q.get("correctAnswer"))
+    by_key = {}
+    for fkey, cls in clusters.items():
+        cards = []
+        for cl in cls:
+            stem = max((e["stem"] for e in cl), key=len)   # fullest wording
+            corr = next((e["corr"] for e in cl if e["corr"] != _DEGENERATE_ANSWER),
+                        cl[0]["corr"])
+            labels = list(dict.fromkeys(e["label"] for e in cl))
+            answers = []
+            for e in cl:
+                if not any(_dice(e["user"], a) >= 0.8 for a in answers):
+                    answers.append(e["user"])
+            times = f" ×{len(cl)}" if len(cl) > 1 else ""
+            you = (f"You answered: {answers[0]}" if len(answers) == 1 else
+                   "You answered: " + " | Another time: ".join(answers))
+            cards.append({
+                "q": f"⚠ Your mistake{times} — {', '.join(labels)}: {stem}",
+                "a": f"{you} Correct answer: {corr}",
+                "auto": True,
+            })
+        by_key[fkey] = cards
 
-        by_key[fkey].append({
-            "q": f"⚠ Your mistake — {label}: {qtext}",
-            "a": f"You answered: {user_ans} Correct answer: {corr_ans}",
-            "auto": True,
-        })
-
-    return dict(by_key)
+    return by_key
 
 
 def _find_matching_bracket(text: str, open_idx: int, open_ch="[", close_ch="]") -> int:
