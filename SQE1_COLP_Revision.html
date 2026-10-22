@@ -861,7 +861,7 @@ function renderWeakPanel() {
     + '<span class="wn">' + Math.round(weakness[m.code].wrong) + '/' + Math.round(weakness[m.code].answered) + ' wrong</span></div>').join('')
     + '<div class="weak-note">Recalculated each time the page opens, from your COLP topic tests (retakes count half) and '
     + (mockEvents.length ? mockEvents.length + ' mock-exam answers' : 'mock exams (loading…)')
-    + '. Recent answers count more. From 16 Dec, revisits take this order.</div>';
+    + '. Recent answers count more. From 16 Dec, revisits take this order; the daily 🃏 flashcard slot follows it by subject from today.</div>';
 }
 
 function buildSecondPass(assignment, doneSet) {
@@ -1003,6 +1003,89 @@ function buildFullPaperDays() {
 // be set before anything builds a schedule.
 FULL_PAPER_DAYS = buildFullPaperDays();
 
+// ── Weak-spot flashcards ───────────────────────────────────────────────────
+// A short third slot on every free day: one subject's MISTAKE flashcards (the
+// cards update_site.py builds from every wrong answer in topic tests and
+// mocks), opened straight on that deck in the revision guide. The deck is the
+// subject's weakness — the same recency-weighted ranking as the weak-spot
+// revisits, averaged over its chapters — multiplied by the days since that
+// deck last came up. So the weakest subjects recur every two or three days and
+// no subject is starved. After FLK1 is sat, FLK1 decks drop out. Recomputed on
+// every page load, so a new mock moves the rotation the same day.
+const FLASH_GUIDE = 'https://rfn2jk9dw9-max.github.io/SQE-Prep/SQE1_HighYield_Standalone.html';
+const FLASH_DECK_OF = { CONT:'CONT', TORT:'TORT', COND:'COND', LAND:'LAND', CRML:'CRML',
+  TRUS:'TRUS', BUS:'BUS7', DISP:'DISP', CRMP:'CRMP', SERV:'SERV', SYS:'SYS', PROP:'PROP', WILL:'WILL' };
+const FLASH_SUBJECT = { CONT:'Contract', TORT:'Tort', COND:'Ethics and professional conduct',
+  LAND:'Land law', CRML:'Criminal liability', TRUS:'Trusts', BUS:'Business law and practice',
+  DISP:'Dispute resolution', CRMP:'Criminal practice', SERV:'Legal services', SYS:'Legal system',
+  PROP:'Property practice', WILL:'Wills and administration of estates' };
+const FLASH_MINUTES = 15;
+const prefixOf = code => (String(code).match(/^[A-Z]+/) || [''])[0];
+
+function subjectWeakness() {
+  const sum = {}, n = {};
+  MODULES.forEach(m => {
+    if (!SEED_DATES[m.code] || !weakness[m.code]) return;
+    const p = prefixOf(m.code);
+    sum[p] = (sum[p] || 0) + weakness[m.code].score;
+    n[p] = (n[p] || 0) + 1;
+  });
+  const out = {};
+  Object.keys(sum).forEach(p => { out[p] = sum[p] / n[p]; });
+  return out;
+}
+
+function buildFlashDays() {
+  const days = freeDaysBetween(todayYMD(), FLK2_EXAM);
+  const w = subjectWeakness();
+  const firstTaught = {};
+  Object.entries(SEED_DATES).forEach(([c, d]) => {
+    const p = prefixOf(c);
+    if (!firstTaught[p] || d < firstTaught[p]) firstTaught[p] = d;
+  });
+  const last = {};   // prefix -> index of the day its deck last came up
+  const out = {};
+  days.forEach((day, i) => {
+    const flk2Only = day > FLK1_EXAM;
+    const cands = Object.keys(w).filter(p => FLASH_DECK_OF[p]
+      && firstTaught[p] && firstTaught[p] <= day
+      && !(flk2Only && paperOf(p) === 'FLK1'));
+    if (!cands.length) return;
+    const pri = p => w[p] * (i - (p in last ? last[p] : -7));
+    cands.sort((a, b) => pri(b) - pri(a) || a.localeCompare(b));
+    out[day] = cands[0];
+    last[cands[0]] = i;
+  });
+  return out;
+}
+
+// Not tickable: it is not a module, and ticking would write a bogus code into
+// the done set. The link opens the guide on that deck, mistake cards only.
+function makeFlashRow(prefix, status) {
+  const weakest = MODULES
+    .filter(m => prefixOf(m.code) === prefix && SEED_DATES[m.code]
+      && weakness[m.code] && weakness[m.code].answered)
+    .sort((a, b) => weakness[b.code].score - weakness[a.code].score)
+    .slice(0, 2)
+    .map(m => m.code + ' (' + weakLabel(m.code) + ')');
+  const el = document.createElement('div');
+  el.className = 'card s-' + status;
+  el.style.cssText = 'cursor:default;opacity:.9;border-left:3px solid #8b5cf6;background:rgba(139,92,246,.06)';
+  el.innerHTML =
+    '<div class="card-head">'+
+      '<span class="card-code" style="color:#a78bfa">🃏 '+prefix+'</span>'+
+      '<span class="card-title">Weak-spot flashcards — '+(FLASH_SUBJECT[prefix] || prefix)+'</span>'+
+      '<span class="card-check"></span>'+
+      '<span class="badge">'+FLASH_MINUTES+' min</span>'+
+    '</div>'+
+    '<div class="card-sub">'+
+      '<span style="opacity:.75">Your mistake cards only — say the answer before you flip'+
+        (weakest.length ? ' · weakest: ' + weakest.join(' · ') : '')+'</span>'+
+      '<a class="card-link" href="'+FLASH_GUIDE+'#flash='+FLASH_DECK_OF[prefix]+'&mistakes" target="_blank" rel="noopener">↗ Open deck</a>'+
+    '</div>';
+  return el;
+}
+
 // ── Render ─────────────────────────────────────────────────────────────────
 let activeFilter = 'all';
 
@@ -1130,6 +1213,14 @@ function render() {
       });
     }
 
+    // Weak-spot flashcards: the short third slot on each free day.
+    if (['all','today','upcoming'].includes(activeFilter)) {
+      Object.entries(buildFlashDays()).forEach(([date, p]) => {
+        if (activeFilter === 'today' && date !== TODAY) return;
+        bucketFor(date).flash = p;
+      });
+    }
+
     // Revisit-only days need a group of their own, or they vanish entirely.
     if (['all','today','overdue','upcoming'].includes(activeFilter)) {
       Object.entries(revisitsByDate).forEach(([date, codes]) => {
@@ -1156,6 +1247,7 @@ function render() {
       bucket.modules.forEach(i => cardsEl.appendChild(makeCard(i)));
       (bucket.revisitsDone || []).forEach(c => cardsEl.appendChild(makeRevisitRow(c, 'done', date)));
       bucket.revisits.forEach(c => cardsEl.appendChild(makeRevisitRow(c, st, date)));
+      if (bucket.flash) cardsEl.appendChild(makeFlashRow(bucket.flash, st));
       section.appendChild(cardsEl);
       root.appendChild(section);
     });

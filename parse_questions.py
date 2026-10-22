@@ -438,6 +438,15 @@ def _extract_orphan_qtxts(page):
                 # anything else is leftover option text from an earlier question.
                 if not overflows and not re.match(r"\s*Question \d+", raw):
                     continue
+                # Overflowing tables too: the first visible cell can be the
+                # tail OPTION of the previous question carried onto this page
+                # (seen 22 Oct 2026, 12.4 v2 0708 p6: "No one, the property
+                # will pass to the Crown." was queued ahead of Q8's real stem
+                # and Q8's table popped it). Accept only a cell labelled
+                # "Question N" or one that reads as a question.
+                if (overflows and not re.match(r"\s*Question \d+", raw)
+                        and not _is_question_like(clean_text(raw))):
+                    continue
                 raw = re.sub(r"^\s*Question \d+\s*\n?", "", raw).strip()
                 raw = re.sub(r"\s*Question Score:\s*[\d.]+\s*/\s*\d+\s*$", "", raw).strip()
                 raw = _FOOTER_RE.sub(" ", raw).strip()
@@ -449,7 +458,8 @@ def _extract_orphan_qtxts(page):
                             r'Spent\s+\d|Total\s+Score|Out\s+of\s+\d+'
                             r'|Time\s+for\s+this|Attempt\s+\d',
                             txt, re.I)):
-                    orphans.append(txt)
+                    if txt not in orphans:   # one stem can surface via two tables
+                        orphans.append(txt)
                     break
             except Exception:
                 pass
@@ -1454,6 +1464,8 @@ def drop_garbled_stems(questions):
             k = n(o)[:30]
             if len(k) >= 20:
                 prefixes.add(k)
+    full_opts = {n(o) for q in questions for o in (q.get('options') or [])
+                 if len(n(o)) >= 20}
     kept, dropped = [], []
     for q in questions:
         stem = (q.get('question_text') or '').strip()
@@ -1462,6 +1474,18 @@ def drop_garbled_stems(questions):
         if not bad:
             hits = sum(1 for k in prefixes if k in ns)
             bad = hits >= 2 and not _is_question_like(stem)
+        if not bad:
+            # 22 Oct 2026: stem IS another question's option, word for word
+            # ("No one, the property will pass to the Crown." over an
+            # epitome-of-title question's options).
+            bad = ns in full_opts and not _is_question_like(stem)
+        if not bad:
+            # 22 Oct 2026: the question sentence leaked into the OPTIONS —
+            # stem ends "...specifies:" and an option ends "...Act 1890?".
+            # Real stems may have '?' options (WILL13.7), so only when the
+            # stem itself asks nothing.
+            bad = (not _is_question_like(stem)
+                   and any('?' in (o or '') for o in (q.get('options') or [])))
         (dropped if bad else kept).append(q)
     if dropped:
         _dbg(f"  [garbled] dropped {len(dropped)} question(s) whose stem is "
