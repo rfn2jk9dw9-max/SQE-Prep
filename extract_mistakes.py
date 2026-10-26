@@ -504,9 +504,267 @@ def _clean_answer(text: str) -> str:
     if text in ("(see PDF)", "(not recorded)", "?"):
         return _DEGENERATE_ANSWER
     # Bare dashes / stray fragments left behind by the option-wrap bug.
-    if len(text.strip(" .-‐–—·•")) < 3:
+    # Judge by alphanumerics, not length: "£0" and "No" are real answers.
+    if not re.search(r"[A-Za-z0-9]", text):
         return _DEGENERATE_ANSWER
     return text.rstrip(" .") + "."
+
+
+# ── Correct answer + "why" resolution ────────────────────────────────────────
+#
+# Rule (Ghita, 26 Oct 2026): every mistake card must show the CORRECT ANSWER
+# and WHY. Each source used to rebuild the correct answer itself, from a rough
+# scrape of its own PDF — the Canvas text scrape left a stray "‐" in front of
+# the answer or dropped it altogether, and the H5P path read the raw parse
+# cache, skipping the option-wrap repair and answer_overrides. Result: 67 of
+# 426 cards said "(not captured — check the source PDF)" and none had a why.
+#
+# Now every wrong answer is matched back to a clean question — the whole parse
+# cache (every sitting, scrubbed, repaired, overrides applied) plus the mock
+# exam's QUESTION_BANK / SRA_BANK / REVISE_BANK — and the card takes the
+# correct option text and the explanation from there:
+#   1. the source's own explanation (Canvas feedback, Revise SQE answers);
+#   2. otherwise mistake_explanations.json (hand-written, keyed by stem).
+# Cards still lacking a why are listed at the end of the run.
+
+_EXPLANATIONS_FILE = "mistake_explanations.json"
+_HERE = Path(__file__).resolve().parent
+
+
+def _bg(text: str) -> set:
+    w = _norm_answer(text).split()
+    return set(zip(w, w[1:])) if len(w) > 1 else set(w)
+
+
+def _dice_sets(A: set, B: set) -> float:
+    return 2 * len(A & B) / (len(A) + len(B)) if A and B else 0.0
+
+
+def _option_score(ans: str, opt: str) -> float:
+    """How well a recorded answer string identifies one option (0–1)."""
+    a, o = _norm_answer(ans), _norm_answer(opt)
+    if not a or not o:
+        return 0.0
+    if a == o:
+        return 1.0
+    d = _dice_sets(_bg(ans), _bg(opt))
+    if len(a) > 15 and (a in o or o in a):
+        ratio = min(len(a), len(o)) / max(len(a), len(o))
+        d = max(d, 0.9 if ratio > 0.6 else 0.7)
+    return d
+
+
+def _clean_explanation(text: str) -> str:
+    text = re.sub(r"\s+", " ", text or "").strip()
+    text = _PDF_HEADER_RE.sub(" ", text).strip()
+    # Canvas feedback opens with the verdict on HER pick — noise on a card.
+    text = re.sub(r"^(?:Incorrect|Correct|Wrong)\s*[.!:,-]\s*", "", text, flags=re.I)
+    text = re.sub(r"^Based on your answer\s*", "", text, flags=re.I)
+    return text.strip()
+
+
+def _trim_merged(opt: str, siblings: list) -> str:
+    """Option-wrap corruption can leave the tail of another option glued onto
+    this one ('…only an estimate. Yes, as the hotel owner had been…'). Cut at
+    the point where a sibling option's opening words reappear."""
+    # Only cut where the tail really IS a sibling's opening — at least 8 words
+    # in common. Options often repeat a shared phrase legitimately ("If the
+    # transaction was with an unconnected person … If the transaction was with
+    # a connected person …"), and a 5-word probe chopped those in half.
+    best = len(opt)
+    for s in siblings:
+        if not s or s == opt:
+            continue
+        sw = s.split()
+        if len(sw) < 8:
+            continue
+        head = " ".join(sw[:4])
+        k = opt.find(head, 20)
+        while k != -1:
+            if opt[k:].split()[:8] == sw[:8]:
+                best = min(best, k)
+                break
+            k = opt.find(head, k + 1)
+    return opt[:best].rstrip(" ,;") if best < len(opt) else opt
+
+
+class AnswerLookup:
+    def __init__(self, questions: list):
+        self.qs = [q for q in questions if q.get("question_text") and q.get("options")]
+        self.big = [_bg(q["question_text"]) for q in self.qs]
+        self.inv = defaultdict(set)
+        for i, B in enumerate(self.big):
+            for g in B:
+                self.inv[g].add(i)
+        # explanations from ANY copy of the question (re-sits, other banks)
+        self.expl = defaultdict(list)
+        for q in self.qs:
+            e = _clean_explanation(q.get("explanation", ""))
+            if e:
+                self.expl[_norm_answer(q["question_text"])[:150]].append((q, e))
+
+    def match(self, w: dict):
+        B = _bg(_clean_stem(w.get("questionText", "")))
+        if not B:
+            return None
+        cnt = defaultdict(int)
+        for g in B:
+            for i in self.inv.get(g, ()):
+                cnt[i] += 1
+        best = None
+        for i, c in sorted(cnt.items(), key=lambda kv: (-kv[1], kv[0]))[:60]:
+            s = 2 * c / (len(B) + len(self.big[i]))
+            if s < 0.6:
+                continue
+            q = self.qs[i]
+            ci = q.get("correct_index")
+            if ci is None or ci >= len(q["options"]) or q.get("answer_ambiguous"):
+                continue
+            u = max(_option_score(w.get("userAnswer", ""), o) for o in q["options"])
+            c2 = max(_option_score(w.get("correctAnswer", ""), o) for o in q["options"])
+            score = s + 0.5 * u + 0.3 * c2
+            if best is None or score > best[0]:
+                best = (score, q)
+        if best:
+            return best[1]
+        # Stem too different to match (old mock-exam sessions stored short
+        # paraphrased stems). Fall back to the OPTIONS: a question whose option
+        # list contains both the recorded answer and the recorded key is the
+        # same question.
+        ua, ca = w.get("userAnswer", ""), w.get("correctAnswer", "")
+        if len(_norm_answer(ua)) < 25 or len(_norm_answer(ca)) < 25:
+            return None         # short answers ("Yes", "£0") prove nothing
+        for q in self.qs:
+            ci = q.get("correct_index")
+            if ci is None or ci >= len(q["options"]) or q.get("answer_ambiguous"):
+                continue
+            u = max(_option_score(ua, o) for o in q["options"])
+            c2 = max(_option_score(ca, o) for o in q["options"])
+            if u >= 0.8 and c2 >= 0.8 and (best is None or u + c2 > best[0]):
+                best = (u + c2, q)
+        return best[1] if best else None
+
+    def explanation_for(self, q: dict, correct: str) -> str:
+        own = _clean_explanation(q.get("explanation", ""))
+        if own:
+            return own
+        for q2, e in self.expl.get(_norm_answer(q["question_text"])[:150], []):
+            c2 = q2["options"][q2["correct_index"]] if q2.get("correct_index") is not None \
+                and q2["correct_index"] < len(q2["options"]) else ""
+            if _option_score(correct, c2) >= 0.6:
+                return e
+        return ""
+
+
+def build_answer_lookup(cache_file: Path = None, bank: list = None) -> AnswerLookup:
+    """Every clean question we know of: the whole parse cache (all sittings,
+    scrubbed + repaired + overrides) and the mock exam's three banks."""
+    sys.path.insert(0, str(_HERE))
+    import io, contextlib
+    import parse_questions as pq
+
+    qs = []
+    cf = Path(cache_file) if cache_file else _HERE / "_parse_cache.json"
+    if cf.exists():
+        try:
+            cache = json.loads(cf.read_text(encoding="utf-8"))
+        except Exception:
+            cache = {}
+        raw = []
+        for entry in cache.values():
+            for q in entry.get("questions", []):
+                q = dict(q)
+                q["question_text"] = pq.scrub_option(q.get("question_text", ""))
+                q["options"] = [pq.scrub_option(o) for o in (q.get("options") or [])]
+                raw.append(q)
+        with contextlib.redirect_stderr(io.StringIO()), contextlib.redirect_stdout(io.StringIO()):
+            raw = pq.repair_wrapped_options(raw)
+            raw = pq.apply_overrides(raw, str(_HERE))
+        qs.extend(raw)
+    if bank:
+        qs.extend(dict(q) for q in bank)
+    mock_html = _HERE / "SQE1_MockExam_Standalone.html"
+    if mock_html.exists():
+        h = mock_html.read_text(encoding="utf-8")
+        dec = json.JSONDecoder()
+        for name in ("QUESTION_BANK", "SRA_BANK", "REVISE_BANK"):
+            m = re.search(r"const " + name + r"\s*=\s*", h)
+            if not m:
+                continue
+            try:
+                arr, _ = dec.raw_decode(h, m.end())
+                qs.extend(dict(q) for q in arr if isinstance(q, dict))
+            except Exception:
+                pass
+    return AnswerLookup(qs)
+
+
+def load_explanations_file() -> list:
+    """Hand-written whys: [{"stem":…, "correct":…, "why":…}, …]."""
+    p = _HERE / _EXPLANATIONS_FILE
+    if not p.exists():
+        return []
+    try:
+        data = json.loads(p.read_text(encoding="utf-8"))
+    except Exception as e:
+        print(f"  ⚠ Could not read {_EXPLANATIONS_FILE}: {e}")
+        return []
+    for d in data:
+        d["_b"] = _bg(d.get("stem", ""))
+    return data
+
+
+def _why_from_file(entries: list, stem: str, correct: str, field: str = "why") -> str:
+    """Look up a hand-written field for this question. field="question" holds
+    the real question text where the PDF parser garbled the stem."""
+    B = _bg(stem)
+    best = (0.0, "")
+    for d in entries:
+        s = _dice_sets(B, d["_b"])
+        if s < 0.8:
+            continue
+        if d.get("correct") and _option_score(correct, d["correct"]) < 0.6:
+            continue        # identical stem, different question (PROP12.7)
+        if s > best[0] and d.get(field):
+            best = (s, d.get(field, ""))
+    return best[1]
+
+
+def resolve_wrong_answers(wrong: list, lookup: AnswerLookup) -> list:
+    """Replace each entry's correct/user answer with clean option text from the
+    matched question and attach its explanation. Drops entries where, on the
+    current key, the pick she made IS the correct answer."""
+    out, fixed, dropped = [], 0, 0
+    for w in wrong:
+        q = lookup.match(w)
+        if q is None:
+            out.append(w)
+            continue
+        opts = q["options"]
+        ci = q["correct_index"]
+        scores = [_option_score(w.get("userAnswer", ""), o) for o in opts]
+        if w.get("origin") == "canvas_pdf":
+            # Canvas scored it 0/1, so she did NOT pick the key — and its text
+            # scrape often glues her pick and the correct option together.
+            scores[ci] = -1.0
+        ui = max(range(len(opts)), key=lambda i: scores[i])
+        if scores[ui] >= 0.5 and ui == ci and sum(1 for s in scores if s >= scores[ui] - 0.15) == 1:
+            dropped += 1            # she was right on the current key
+            continue
+        w = dict(w)
+        sib = [o for o in opts]
+        correct = _trim_merged(opts[ci], sib)
+        if _clean_answer(w.get("correctAnswer")) != correct.rstrip(" .") + ".":
+            fixed += 1
+        w["correctAnswer"] = correct
+        if scores[ui] >= 0.5 and ui != ci:
+            w["userAnswer"] = _trim_merged(opts[ui], sib)
+        w["questionText"] = max((w.get("questionText") or "", q["question_text"]), key=len)
+        w["explanation"] = lookup.explanation_for(q, opts[ci]) or _clean_explanation(w.get("feedback", ""))
+        out.append(w)
+    print(f"  Answers resolved against the question bank: {fixed} corrected, "
+          f"{dropped} dropped (current key says she was right)")
+    return out
 
 
 # ── One card per question (merge, never drop) ────────────────────────────────
@@ -560,7 +818,26 @@ _COVERED_BY_HANDWRITTEN_CARD = (
 )
 
 
-def map_wrong_answers_to_flashcards(wrong_answers: list[dict]) -> dict[str, list[dict]]:
+def _h(t: str) -> str:
+    # Card text is rendered as HTML. Neutralise tags only — escaping '&' would
+    # change flCardKey() and resurrect cards she has deleted.
+    return (t or "").replace("<", "‹").replace(">", "›")
+
+
+def _card_answer_html(answers: list, corr: str, why: str) -> str:
+    """Back of a mistake card. 'Correct answer:' must stay the LAST occurrence
+    of that label and the correct text must run up to the next '<' — the
+    page's flCardKey() keys deleted cards on it."""
+    you = (answers[0] if len(answers) == 1 else
+           " | Another time: ".join(answers))
+    out = ('<div class="fc-ans"><div class="fc-corr">✓ Correct answer: ' + _h(corr) + '</div>'
+           '<div class="fc-you">✗ You answered: ' + _h(you) + '</div>')
+    if why:
+        out += '<div class="fc-why"><b>Why:</b> ' + _h(why) + '</div>'
+    return out + '</div>'
+
+
+def map_wrong_answers_to_flashcards(wrong_answers: list[dict], why_file: list = None) -> dict[str, list[dict]]:
     """
     Returns {flashcard_key: [{"q":..., "a":..., "auto": True}, ...]}
     flashcard_key matches a FLASH_DATA deck's `key` (e.g. 'CONT', 'BUS7').
@@ -575,8 +852,8 @@ def map_wrong_answers_to_flashcards(wrong_answers: list[dict]) -> dict[str, list
         if not fkey:
             continue
         stem = _clean_stem(q.get("questionText") or "")
-        if not stem:
-            continue
+        if len(re.findall(r"[A-Za-z]{2,}", stem)) < 4:
+            continue            # parse debris ("-") — not a question
         if _norm_answer(stem).startswith(_COVERED_BY_HANDWRITTEN_CARD):
             continue
         entry = {
@@ -584,6 +861,7 @@ def map_wrong_answers_to_flashcards(wrong_answers: list[dict]) -> dict[str, list
             "user": _clean_answer(q.get("userAnswer")),
             "corr": _clean_answer(q.get("correctAnswer")),
             "label": _ORIGIN_LABEL.get(q.get("origin", "h5p"), "Session"),
+            "why":   q.get("explanation") or "",
         }
         for cl in clusters[fkey]:
             if any(_same_question(entry, e) for e in cl):
@@ -601,17 +879,24 @@ def map_wrong_answers_to_flashcards(wrong_answers: list[dict]) -> dict[str, list
                         cl[0]["corr"])
             labels = list(dict.fromkeys(e["label"] for e in cl))
             answers = []
-            for e in cl:
+            real = [e for e in cl if e["user"] != _DEGENERATE_ANSWER] or cl[:1]
+            for e in real:
                 if not any(_dice(e["user"], a) >= 0.8 for a in answers):
                     answers.append(e["user"])
             times = f" ×{len(cl)}" if len(cl) > 1 else ""
-            you = (f"You answered: {answers[0]}" if len(answers) == 1 else
-                   "You answered: " + " | Another time: ".join(answers))
-            cards.append({
+            why = next((e["why"] for e in cl if e["why"]), "")
+            if not why and why_file:
+                why = _why_from_file(why_file, stem, corr)
+            if why_file:
+                stem = _why_from_file(why_file, stem, corr, "question") or stem
+            card = {
                 "q": f"⚠ Your mistake{times} — {', '.join(labels)}: {stem}",
-                "a": f"{you} Correct answer: {corr}",
+                "a": _card_answer_html(answers, corr, why),
                 "auto": True,
-            })
+            }
+            if not why:
+                card["nowhy"] = True
+            cards.append(card)
         by_key[fkey] = cards
 
     return by_key
@@ -1206,9 +1491,19 @@ def get_personal_mistake_flashcards(tests_dir: Path, progress_file: Path, cache_
     old mock-exam PDFs are checked against the current answer key.
     """
     wrong = _gather_all_wrong_answers(tests_dir, progress_file, cache_file, bank=bank)
-    by_key = map_wrong_answers_to_flashcards(wrong)
+    wrong = resolve_wrong_answers(wrong, build_answer_lookup(cache_file, bank))
+    by_key = map_wrong_answers_to_flashcards(wrong, load_explanations_file())
     total = sum(len(v) for v in by_key.values())
     print(f"  Mapped to {total} flashcard(s) across {len(by_key)} deck(s): {sorted(by_key.keys())}")
+    nowhy = [c for v in by_key.values() for c in v if c.get("nowhy")]
+    n_deg = sum(1 for v in by_key.values() for c in v if _DEGENERATE_ANSWER in c["a"])
+    print(f"  Cards with a why: {total - len(nowhy)}/{total}"
+          + (f" — {len(nowhy)} still need one in {_EXPLANATIONS_FILE}" if nowhy else ""))
+    if n_deg:
+        print(f"  ⚠ {n_deg} card(s) still have no correct answer captured")
+    for v in by_key.values():
+        for c in v:
+            c.pop("nowhy", None)
     return by_key
 
 
