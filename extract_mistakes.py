@@ -776,6 +776,28 @@ def _mock_subject_from_header(header_tail: str) -> str:
     return ""
 
 
+def _asks(stem: str) -> bool:
+    """True when a stem's closing words read as a question (as in parse_questions)."""
+    tail = (stem or "")[-250:]
+    return ("?" in tail) or bool(re.search(
+        r"\b(which|what|whether|how|when|who|best describes|most accurate|"
+        r"advise|explain|identify)\b", tail, re.I))
+
+
+def _stem_by_options(bank: list, picked: str, correct: str):
+    """Stem of the single bank question whose options contain both answers."""
+    n = lambda s: re.sub(r"\W+", "", (s or "").lower())[:40]
+    a, b = n(picked), n(correct)
+    if len(a) < 15 or len(b) < 15:
+        return None
+    hits = []
+    for q in bank:
+        opts = {n(o) for o in (q.get("options") or [])}
+        if a in opts and b in opts:
+            hits.append(q.get("question_text") or "")
+    return hits[0] if len(set(hits)) == 1 else None
+
+
 def load_mock_pdf_wrong_answers(mock_dir: Path, bank: list = None) -> list[dict]:
     """
     Parse the mock-exam results PDFs in `mock_dir` and return the questions the
@@ -835,6 +857,17 @@ def load_mock_pdf_wrong_answers(mock_dir: Path, bank: list = None) -> list[dict]
         kept = 0
         for e in entries:
             stem = _norm_stem(e["questionText"])
+            # 22 Oct 2026: a mock printed with a broken stem (Q44 showed the
+            # option "No one, the property will pass to the Crown." as its
+            # question). The PDF is a record of what was on screen, so the
+            # card would teach the broken stem. If the stem is not in the bank
+            # and does not ask anything, recover the real stem from the bank
+            # question whose options hold BOTH her pick and the correct answer.
+            if bank and stem not in bank_key and not _asks(e["questionText"]):
+                real = _stem_by_options(bank, e["userAnswer"], e["correctAnswer"])
+                if real:
+                    e["questionText"] = real
+                    stem = _norm_stem(real)
             correct = e["correctAnswer"]
             current = bank_key.get(stem)
             if stem in disputed:
