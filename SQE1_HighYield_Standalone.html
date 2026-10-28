@@ -2465,6 +2465,7 @@ function startFlash(subjIdx){
   document.getElementById('hdr').style.display='none';
   document.getElementById('flash-view').classList.add('visible');
   FL.subj = subjIdx !== undefined ? subjIdx : 0;
+  FL.showAll = false;
   // Build deck weighted to weak: repeat cards for score<9 subjects
   buildFlashDeck(FL.subj);
   renderFlash();
@@ -2487,6 +2488,47 @@ function flCardKey(c){
 function flGetDeleted(){ try{ return JSON.parse(localStorage.getItem(FL_DEL_KEY)) || {}; }catch(e){ return {}; } }
 function flSetDeleted(d){ try{ localStorage.setItem(FL_DEL_KEY, JSON.stringify(d)); }catch(e){} }
 function flDeletedCount(subjKey){ const d = flGetDeleted(); return Object.values(d).filter(r=>r.s===subjKey).length; }
+
+// ── Where you stopped ──────────────────────────────────────────────
+// Each card's last result is kept in this browser: 'got' (rests 14 days, then
+// comes back) or 'again' (comes first next time). Opening a deck therefore
+// resumes: cards you missed, then cards not yet seen, then rested cards that
+// are due again. Sessions pause every 15 marked cards, the size of the
+// revision calendar's flashcard slot.
+const FL_PROG_KEY = 'sqe1_flash_progress_v1';
+const FL_SUM_KEY  = 'sqe1_flash_summary_v1';   // read by SQE1_COLP_Revision.html
+const FL_BATCH = 15, FL_REST_DAYS = 14;
+function flYMD(d){ d = d || new Date(); return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'); }
+function flPlusDays(ymd, n){ const d = new Date(ymd+'T12:00:00'); d.setDate(d.getDate()+n); return flYMD(d); }
+function flGetProg(){ try{ return JSON.parse(localStorage.getItem(FL_PROG_KEY)) || {}; }catch(e){ return {}; } }
+function flSetProg(p){ try{ localStorage.setItem(FL_PROG_KEY, JSON.stringify(p)); }catch(e){} }
+function flRested(rec){ return !!rec && rec.r === 'got' && flPlusDays(rec.d, FL_REST_DAYS) > flYMD(); }
+function flRestedCount(cards){ const p = flGetProg(); return (cards||[]).filter(c => flRested(p[flCardKey(c)])).length; }
+// Mistake-card counts per deck, for the calendar slot ("27 of 45 still to master").
+function flSaveSummary(){
+  if (typeof FLASH_DATA === 'undefined') return;
+  const prog = flGetProg(), del = flGetDeleted(), out = {};
+  FLASH_DATA.forEach(fd => {
+    const mine = (fd.cards||[]).filter(c => c && c.auto && !del[flCardKey(c)]);
+    if (!mine.length) return;
+    const rested = mine.filter(c => flRested(prog[flCardKey(c)])).length;
+    out[fd.key] = { total: mine.length, left: mine.length - rested, d: flYMD() };
+  });
+  try{ localStorage.setItem(FL_SUM_KEY, JSON.stringify(out)); }catch(e){}
+}
+function flResetDeck(btn){
+  if(!btn.dataset.armed){
+    btn.dataset.armed = '1'; btn.textContent = 'Tap again to reset this deck';
+    setTimeout(()=>{ if(btn.isConnected){ delete btn.dataset.armed; btn.textContent = '↺ Reset my progress in this deck'; } }, 3000);
+    return;
+  }
+  const prog = flGetProg();
+  (FLASH_DATA[FL.subj].cards||[]).forEach(c => { if (c) delete prog[flCardKey(c)]; });
+  flSetProg(prog); FL.showAll = false; buildFlashDeck(FL.subj); renderFlash();
+}
+function flReviewAll(){ FL.showAll = true; buildFlashDeck(FL.subj); renderFlash(); }
+function flKeepGoing(){ FL.paused = false; FL.batchGot = 0; FL.batchAgain = 0; renderFlash(); }
+setTimeout(flSaveSummary, 800);
 
 function deleteCard(btn){
   if(!btn.dataset.armed){
@@ -2530,12 +2572,24 @@ function buildFlashDeck(si){
     const mine = FL.deck.filter(c => c.auto);
     if (mine.length) FL.deck = mine;
   }
+  // Resume where she stopped: missed cards first, then unseen, then rested
+  // cards that are due again. Cards got right in the last 14 days rest.
+  FL.pool = FL.deck.slice();
+  if (!FL.showAll) {
+    const prog = flGetProg(), K = c => prog[flCardKey(c)];
+    const again = FL.deck.filter(c => K(c) && K(c).r === 'again');
+    const fresh = FL.deck.filter(c => !K(c));
+    const due   = FL.deck.filter(c => K(c) && K(c).r === 'got' && !flRested(K(c)));
+    FL.deck = [...again, ...fresh, ...due];
+  }
   FL.idx = 0; FL.known = 0; FL.again = []; FL.lastDel = null;
+  FL.marked = 0; FL.paused = false; FL.batchGot = 0; FL.batchAgain = 0;
+  flSaveSummary();
 }
 
 function flModeBtn(){
   return ' <button class="flash-back-btn" style="margin-left:8px;padding:2px 8px;font-size:10px" '
-    + 'onclick="FL.mistakesOnly=!FL.mistakesOnly;buildFlashDeck(FL.subj);renderFlash()">'
+    + 'onclick="FL.mistakesOnly=!FL.mistakesOnly;FL.showAll=false;buildFlashDeck(FL.subj);renderFlash()">'
     + (FL.mistakesOnly ? '⚠ My mistakes only · show all' : 'All cards · my mistakes only') + '</button>';
 }
 
@@ -2578,6 +2632,33 @@ function renderFlash(){
     ? '<div style="text-align:center;margin-top:10px"><button class="flash-nav-btn flash-btn-skip" onclick="restoreDeleted()">Restore '+nDel+' deleted card'+(nDel>1?'s':'')+' in this deck</button></div>'
     : '';
 
+  const pool = FL.pool || deck, mastered = flRestedCount(pool);
+  const resetBtn = '<div style="text-align:center;margin-top:10px"><button class="flash-nav-btn flash-btn-skip" onclick="flResetDeck(this)">↺ Reset my progress in this deck</button></div>';
+  const hdr = '<div class="flash-hdr"><span class="flash-hdr-title">🃏 Flashcards · '+fd.label+flModeBtn()+'</span><button class="flash-back-btn" onclick="backToGuide()">← Guide</button></div>';
+
+  // Everything got right recently: say so instead of "no cards".
+  if(!deck.length && pool.length && !FL.showAll){
+    v.innerHTML = hdr + tabs + undoBar
+      + '<div class="flash-result"><div class="flash-result-score">✓</div>'
+      + '<div class="flash-result-label">All '+pool.length+' cards mastered for now</div>'
+      + '<p style="font-size:12px;color:#64748b;margin-bottom:14px">A card you got right comes back '+FL_REST_DAYS+' days later.</p>'
+      + '<button class="flash-restart-btn" onclick="flReviewAll()">Review all anyway</button>'
+      + '<button class="flash-back-btn" onclick="backToGuide()">← Back to guide</button></div>' + resetBtn + restoreLink;
+    return;
+  }
+
+  // Pause after each batch of 15: the place is saved, so stopping is safe.
+  if(FL.paused && !done){
+    v.innerHTML = hdr + tabs
+      + '<div class="flash-result"><div class="flash-result-score">'+FL_BATCH+'</div>'
+      + '<div class="flash-result-label">cards done · '+FL.batchGot+' got it, '+FL.batchAgain+' again</div>'
+      + '<p style="font-size:12.5px;color:#64748b;margin:6px 0 14px;line-height:1.5">Your place is saved. Next time you open this deck it starts at the next card.<br>'
+      + mastered+' of '+pool.length+' cards mastered.</p>'
+      + '<button class="flash-restart-btn" style="background:#22c55e" onclick="flKeepGoing()">Keep going</button>'
+      + '<button class="flash-back-btn" onclick="backToGuide()">Stop here</button></div>';
+    return;
+  }
+
   if(done){
     const total = FL.deck.length;
     if(!total){
@@ -2595,7 +2676,8 @@ function renderFlash(){
       + '<button class="flash-restart-btn" onclick="reviewAgain()">Review missed cards</button>'
       + '<button class="flash-restart-btn" style="background:#22c55e" onclick="buildFlashDeck(FL.subj);renderFlash()">Restart deck</button>'
       + '<button class="flash-back-btn" onclick="backToGuide()">← Back to guide</button>'
-      + '</div>' + undoBar + restoreLink;
+      + '<p style="font-size:12px;color:#64748b;margin-top:12px">'+mastered+' of '+pool.length+' cards mastered (they rest '+FL_REST_DAYS+' days)</p>'
+      + '</div>' + undoBar + restoreLink + resetBtn;
     return;
   }
 
@@ -2606,7 +2688,7 @@ function renderFlash(){
   v.innerHTML = '<div class="flash-hdr"><span class="flash-hdr-title">🃏 Flashcards · '+fd.label+flModeBtn()+'</span><button class="flash-back-btn" onclick="backToGuide()">← Guide</button></div>'
     + tabs + undoBar
     + '<div class="flash-progress-bar"><div class="flash-progress-fill" style="width:'+pct+'%"></div></div>'
-    + '<div class="flash-counter">Card '+(FL.idx+1)+' of '+total+(FL.again.length?' · '+FL.again.length+' to review':'')+' · Tap card to reveal</div>'
+    + '<div class="flash-counter">Card '+(FL.idx+1)+' of '+total+' to go · '+mastered+'/'+pool.length+' mastered · this batch '+(FL.marked % FL_BATCH)+'/'+FL_BATCH+(FL.again.length?' · '+FL.again.length+' to review':'')+'</div>'
     + '<div class="flip-wrap" onclick="flipCard(this)">'
     + '  <div class="flip-inner" id="flip-inner">'
     + '    <div class="flip-front"><div class="flip-tag">Question</div><div class="flip-q">'+card.q+'</div><div class="flip-hint">Tap to reveal answer</div></div>'
@@ -2632,10 +2714,17 @@ function flipCard(wrap){
 }
 
 function markCard(knew){
-  const deck = FL.deck;
-  if(knew){ FL.known++; }
-  else { FL.again.push(deck[FL.idx]); }
-  FL.idx++;
+  const deck = FL.deck, card = deck[FL.idx];
+  if(card){
+    const prog = flGetProg();
+    prog[flCardKey(card)] = { r: knew ? 'got' : 'again', d: flYMD() };
+    flSetProg(prog);
+  }
+  if(knew){ FL.known++; FL.batchGot++; }
+  else { FL.again.push(card); FL.batchAgain++; }
+  FL.idx++; FL.marked++;
+  if (FL.marked % FL_BATCH === 0 && FL.idx < deck.length) FL.paused = true;
+  flSaveSummary();
   renderFlash();
 }
 

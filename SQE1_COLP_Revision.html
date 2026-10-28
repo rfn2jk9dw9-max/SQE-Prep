@@ -429,6 +429,42 @@ function saveRevisitLogLocal(){
   try { localStorage.setItem(REVISIT_KEY, JSON.stringify(revisitLog)); } catch {}
 }
 
+// Weak-spot flashcard sessions ride on the revisits store under pseudo-codes
+// FLASH<n>.0 (n = SLK manual number), because colp_progress.php only accepts
+// chapter-shaped codes. They are split out of revisitLog everywhere it is
+// loaded, so they never count as chapter revisits or move the rotation.
+const FLASH_NUM = { CONT:1, TORT:2, COND:3, LAND:4, CRML:5, TRUS:6, BUS:7, DISP:8,
+  CRMP:9, SERV:10, SYS:11, PROP:12, WILL:13 };
+const flashCode = p => 'FLASH' + FLASH_NUM[p] + '.0';
+const FLASH_LOG_KEY = STORE_KEY + '_flash';
+function takeFlash(log){
+  const out = {};
+  Object.keys(log).forEach(c => { if (/^FLASH/.test(c)) { out[c] = log[c]; delete log[c]; } });
+  return out;
+}
+function saveFlashLocal(){
+  try { localStorage.setItem(FLASH_LOG_KEY, JSON.stringify(flashLog)); } catch {}
+}
+function loadFlashLog(){
+  try { return normRevisits(JSON.parse(localStorage.getItem(FLASH_LOG_KEY))); }
+  catch { return {}; }
+}
+// Ticking a flashcard slot records THAT slot's date (not today), so a slot done
+// early stays ticked where it sits.
+function toggleFlash(prefix, date){
+  const c = flashCode(prefix), arr = flashLog[c] || [];
+  if (arr.includes(date)) {
+    flashLog[c] = arr.filter(d => d !== date);
+    if (!flashLog[c].length) delete flashLog[c];
+    queueOp({ unrevisit: [{ code: c, date: date }] });
+  } else {
+    flashLog[c] = [...arr, date].sort();
+    queueOp({ revisits: { [c]: [date] } });
+  }
+  saveFlashLocal();
+  render();
+}
+
 function lastRevisit(code){
   const a = revisitLog[code];
   return a && a.length ? a[a.length - 1] : null;
@@ -579,6 +615,8 @@ async function syncFromServer(){
     }
     Object.keys(doneDates).forEach(c => { if (!done.has(c)) delete doneDates[c]; });
     try { localStorage.setItem(DONE_DATES_KEY, JSON.stringify(doneDates)); } catch {}
+    flashLog = takeFlash(revisitLog);   // server copy (+ queued ticks) is authoritative
+    saveFlashLocal();
     saveRevisitLogLocal();
     render();
   } catch {}
@@ -587,6 +625,7 @@ async function syncFromServer(){
 let done = loadDone();
 let doneDates = loadDoneDates();
 let revisitLog = loadRevisitLog();
+let flashLog = Object.assign(loadFlashLog(), takeFlash(revisitLog));
 
 // ── Core: build spread schedule ────────────────────────────────────────────
 // Returns {code: revDate | null}
@@ -1019,7 +1058,12 @@ const FLASH_SUBJECT = { CONT:'Contract', TORT:'Tort', COND:'Ethics and professio
   LAND:'Land law', CRML:'Criminal liability', TRUS:'Trusts', BUS:'Business law and practice',
   DISP:'Dispute resolution', CRMP:'Criminal practice', SERV:'Legal services', SYS:'Legal system',
   PROP:'Property practice', WILL:'Wills and administration of estates' };
-const FLASH_MINUTES = 15;
+const FLASH_BATCH = 15;     // cards per slot; the deck remembers where you stopped
+const FLASH_SUMMARY_KEY = 'sqe1_flash_summary_v1';   // written by the revision guide (same origin)
+function flashSummary(prefix){
+  try { return (JSON.parse(localStorage.getItem(FLASH_SUMMARY_KEY)) || {})[FLASH_DECK_OF[prefix]] || null; }
+  catch { return null; }
+}
 const prefixOf = code => (String(code).match(/^[A-Z]+/) || [''])[0];
 
 function subjectWeakness() {
@@ -1059,28 +1103,43 @@ function buildFlashDays() {
   return out;
 }
 
-// Not tickable: it is not a module, and ticking would write a bogus code into
-// the done set. The link opens the guide on that deck, mistake cards only.
-function makeFlashRow(prefix, status) {
+// Tickable, but NOT into the done set: a ticked slot is stored as a FLASH<n>.0
+// pseudo-revisit for that slot's date (see toggleFlash). The link opens the
+// guide on that deck, mistake cards only, at the card where she stopped.
+function makeFlashRow(prefix, status, date) {
   const weakest = MODULES
     .filter(m => prefixOf(m.code) === prefix && SEED_DATES[m.code]
       && weakness[m.code] && weakness[m.code].answered)
     .sort((a, b) => weakness[b.code].score - weakness[a.code].score)
     .slice(0, 2)
     .map(m => m.code + ' (' + weakLabel(m.code) + ')');
+  const ticked = (flashLog[flashCode(prefix)] || []).includes(date);
+  const sum = flashSummary(prefix);
   const el = document.createElement('div');
-  el.className = 'card s-' + status;
-  el.style.cssText = 'cursor:default;opacity:.9;border-left:3px solid #8b5cf6;background:rgba(139,92,246,.06)';
+  el.className = 'card s-' + (ticked ? 'done' : status);
+  el.style.cssText = 'cursor:pointer;opacity:.9;border-left:3px solid #8b5cf6;background:rgba(139,92,246,.06)';
+  el.addEventListener('click', e => {
+    if (e.target.closest('a')) return;   // let the deck link through
+    toggleFlash(prefix, date);
+  });
+  const progress = sum
+    ? (sum.left ? sum.left + ' of ' + sum.total + ' cards still to master' : 'all ' + sum.total + ' mastered for now')
+    : '';
   el.innerHTML =
     '<div class="card-head">'+
       '<span class="card-code" style="color:#a78bfa">🃏 '+prefix+'</span>'+
       '<span class="card-title">Weak-spot flashcards — '+(FLASH_SUBJECT[prefix] || prefix)+'</span>'+
-      '<span class="card-check"></span>'+
-      '<span class="badge">'+FLASH_MINUTES+' min</span>'+
+      '<span class="card-check">'+(ticked ? '✓' : '')+'</span>'+
+      '<span class="badge">'+(ticked ? '✓ Done' : FLASH_BATCH+' cards')+'</span>'+
     '</div>'+
     '<div class="card-sub">'+
-      '<span style="opacity:.75">Your mistake cards only — say the answer before you flip'+
-        (weakest.length ? ' · weakest: ' + weakest.join(' · ') : '')+'</span>'+
+      '<span style="opacity:.75">'+
+        (ticked
+          ? 'Done · tap to undo' + (progress ? ' · ' + progress : '')
+          : 'Next '+FLASH_BATCH+' of your mistake cards — the deck picks up where you stopped'+
+            (progress ? ' · ' + progress : '')+
+            (weakest.length ? ' · weakest: ' + weakest.join(' · ') : ''))+
+      '</span>'+
       '<a class="card-link" href="'+FLASH_GUIDE+'#flash='+FLASH_DECK_OF[prefix]+'&mistakes" target="_blank" rel="noopener">↗ Open deck</a>'+
     '</div>';
   return el;
@@ -1199,6 +1258,14 @@ function render() {
       (dayBuckets[d] = dayBuckets[d] || {modules:[], revisits:[], fullPaper:null});
 
     sorted.forEach(item => {
+      // A chapter ticked TODAY stays in today's group as done, even if it was
+      // scheduled for a later day. Otherwise it silently vanished into the
+      // Completed list and the next chapter slid into its place, which looked
+      // as if the tick had done nothing.
+      if (item.status === 'done' && doneDates[item.code] === TODAY
+          && ['all','today'].includes(activeFilter)) {
+        bucketFor(TODAY).modules.push(item); return;
+      }
       if (!item.revDate) { tail.push(item); return; }
       bucketFor(item.revDate).modules.push(item);
     });
@@ -1247,7 +1314,7 @@ function render() {
       bucket.modules.forEach(i => cardsEl.appendChild(makeCard(i)));
       (bucket.revisitsDone || []).forEach(c => cardsEl.appendChild(makeRevisitRow(c, 'done', date)));
       bucket.revisits.forEach(c => cardsEl.appendChild(makeRevisitRow(c, st, date)));
-      if (bucket.flash) cardsEl.appendChild(makeFlashRow(bucket.flash, st));
+      if (bucket.flash) cardsEl.appendChild(makeFlashRow(bucket.flash, st, date));
       section.appendChild(cardsEl);
       root.appendChild(section);
     });
