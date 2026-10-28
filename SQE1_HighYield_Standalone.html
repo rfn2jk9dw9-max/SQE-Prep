@@ -2526,6 +2526,18 @@ function flResetDeck(btn){
   (FLASH_DATA[FL.subj].cards||[]).forEach(c => { if (c) delete prog[flCardKey(c)]; });
   flSetProg(prog); FL.showAll = false; buildFlashDeck(FL.subj); renderFlash();
 }
+// For a deck gone through elsewhere (paper, another device, before tracking
+// existed): every card in the current view counts as got today and rests.
+function flMarkDeckDone(btn){
+  if(!btn.dataset.armed){
+    btn.dataset.armed = '1'; btn.textContent = 'Tap again to mark all '+(FL.pool||[]).length+' cards done today';
+    setTimeout(()=>{ if(btn.isConnected){ delete btn.dataset.armed; btn.textContent = '✓ I did this whole deck today'; } }, 3000);
+    return;
+  }
+  const prog = flGetProg(), t = flYMD();
+  (FL.pool||[]).forEach(c => { prog[flCardKey(c)] = { r: 'got', d: t }; });
+  flSetProg(prog); FL.showAll = false; buildFlashDeck(FL.subj); renderFlash();
+}
 function flReviewAll(){ FL.showAll = true; buildFlashDeck(FL.subj); renderFlash(); }
 function flKeepGoing(){ FL.paused = false; FL.batchGot = 0; FL.batchAgain = 0; renderFlash(); }
 setTimeout(flSaveSummary, 800);
@@ -2705,7 +2717,8 @@ function renderFlash(){
     + '</div>'
     + '<div class="flash-nav-row">'
     + '  <button class="flash-nav-btn flash-btn-skip" style="color:#dc2626" onclick="deleteCard(this)">🗑 Delete card</button>'
-    + '</div>' + restoreLink;
+    + '</div>' + restoreLink
+    + '<div style="text-align:center;margin-top:18px"><button class="flash-nav-btn flash-btn-skip" style="color:#16a34a" onclick="flMarkDeckDone(this)">✓ I did this whole deck today</button></div>';
 }
 
 function flipCard(wrap){
