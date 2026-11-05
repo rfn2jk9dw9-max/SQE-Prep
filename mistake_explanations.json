@@ -1792,5 +1792,17 @@
   "stem": "There are two trustees managing an estate. The trust arose three years ago. So far, the beneficiaries of the trust have received no financial benefits from the trust and have received no information from the trustees. Which of the following duties may the trustees have breached?",
   "correct": "The duty to provide accounts and information and the duty to distribute to the correct beneficiaries.",
   "why": "Trustees must keep and provide ACCOUNTS and information to beneficiaries, and must DISTRIBUTE to the right beneficiaries in accordance with the trust. Three years with no information AND no distribution suggests breach of both duties, not just the information duty (your pick). Nothing suggests secret profits or a fair-dealing problem."
+ },
+ {
+  "deck": "COND",
+  "stem": "An in-house solicitor’s employer, X Plc, asks the solicitor to advise on the acquisition of a private company. The solicitor’s aunt, whom the solicitor has not spoken to for over 5 years and has no relationship with, is a member of the board of directors of that private company. The solicitor has disclosed the connection with the target company to the employer and the employer is happy for the solicitor to continue to act. What should the solicitor do?",
+  "correct": "The solicitor can advise on the matter as there is no own interest.",
+  "why": "No own-interest conflict exists. A relative on the other side is not automatically an own interest: this aunt is estranged (no contact for 5+ years) and nothing suggests the solicitor stands to gain from the deal. The only check is that the solicitor holds no information from the aunt they would feel unable to disclose to the employer (none on the facts). An own-interest conflict could NOT be cured by the employer's consent, so the question turns entirely on whether one exists — not on 'under any circumstances' (your pick). See 3.3.5."
+ },
+ {
+  "deck": "WILL",
+  "stem": "A person dies in 2023/2024 when the nil rate band (NRB) is £325,000 and the residence NRB is £175,000. The person’s spouse died in 2006. They left their estate which consisted only of cash (value £100,000) to the person. The person’s estate consists of their main residence (valued at £250,000 with a mortgage of £30,000), cash (£300,000) and investments in quoted companies (£600,000). Debts and funeral expenses are £10,000. The person has made no lifetime transfers which are chargeable to inheritance tax and leaves their entire estate to their child. Which of the following statements correctly states the amount of the person’s estate which is chargeable to inheritance tax at 40%?",
+  "correct": "£240,000",
+  "why": "Net estate £1,110,000 (house £250k − £30k mortgage + £300k cash + £600k shares − £10k debts). The spouse's estate passed wholly to the person (spouse-exempt), so 100% of the spouse's NRB transfers: NRB £650,000. The spouse died before 6 April 2017, so their RNRB is treated as 100% unused and transfers too: up to £350,000 — but RNRB is capped at the net value of the home passing to a direct descendant, £220,000. Chargeable: £1,110,000 − £650,000 − £220,000 = £240,000. Your £285,000 used a single £175,000 RNRB and missed the transferred one."
  }
 ]
