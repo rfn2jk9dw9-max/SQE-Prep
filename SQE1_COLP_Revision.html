@@ -92,6 +92,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-seri
 <div class="stats" id="stats"></div>
 <div class="progress-bar-wrap"><div class="progress-bar-fill" id="pbFill" style="width:0%"></div></div>
 <div class="progress-label" id="pbLabel">Loading…</div>
+<div class="progress-bar-wrap"><div class="progress-bar-fill" id="rvFill" style="width:0%;background:linear-gradient(90deg,#34d399,#60a5fa)"></div></div>
+<div class="progress-label" id="rvLabel"></div>
 <details class="weak-panel" id="weakPanel"><summary>⚑ Weakest chapters right now</summary><div id="weakList"></div></details>
 
 <div class="filters" id="filters">
@@ -1201,12 +1203,23 @@ function render() {
   document.getElementById('pbLabel').textContent =
     doneCount+' of '+totalModules+' topics revised ('+pct+'%)';
 
+  // Revisit progress: chapters revisited at least once, and planned revisit
+  // sessions still to run (one per free day through to the FLK2 exam).
+  const revisitedChapters = Object.keys(revisitLog).filter(c => MODULE_ORDER[c] !== undefined).length;
+  const revPct = Math.round(revisitedChapters/totalModules*100);
+  const sessionsToGo = revisitList.length;
+  document.getElementById('rvFill').style.width = revPct+'%';
+  document.getElementById('rvLabel').textContent =
+    revisitedChapters+' of '+totalModules+' topics revisited ('+revPct+'%) · '+sessionsToGo+' revisit session'+(sessionsToGo===1?'':'s')+' still to go';
+
   document.getElementById('stats').innerHTML =
     '<div class="stat"><div class="stat-n">'+freeDays.length+'</div><div class="stat-l">Free days left</div></div>'+
     (overdueCount ? '<div class="stat" style="border-color:rgba(239,68,68,.4)"><div class="stat-n" style="color:#ef4444">'+overdueCount+'</div><div class="stat-l">Overdue</div></div>' : '')+
     (todayCount ? '<div class="stat" style="border-color:rgba(250,204,21,.4)"><div class="stat-n" style="color:#fbbf24">'+todayCount+'</div><div class="stat-l">Today</div></div>' : '')+
     '<div class="stat"><div class="stat-n">'+doneCount+'</div><div class="stat-l">Done</div></div>'+
-    '<div class="stat"><div class="stat-n">'+revDoneTotal+'</div><div class="stat-l">Revisits done</div></div>';
+    '<div class="stat"><div class="stat-n">'+revDoneTotal+'</div><div class="stat-l">Revisits done</div></div>'+
+    '<div class="stat"><div class="stat-n">'+revPct+'%</div><div class="stat-l">Revisited</div></div>'+
+    '<div class="stat"><div class="stat-n">'+sessionsToGo+'</div><div class="stat-l">Sessions to go</div></div>';
 
   // Update filter button counts
   document.querySelectorAll('.filter-btn').forEach(btn => {
