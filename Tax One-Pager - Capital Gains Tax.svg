@@ -1,0 +1,182 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2000" height="1414" viewBox="0 0 2000 1414" font-family="Inter, Helvetica, Arial, sans-serif" xmlns:c2pa="http://c2pa.org/manifest">
+<rect width="2000" height="1414" fill="white"/>
+<rect x="0" y="0" width="2000" height="10" fill="#6B3FA0"/>
+<text x="40" y="78" font-size="50" font-weight="800" fill="#1F2328">CAPITAL GAINS TAX</text>
+<text x="40" y="116" font-size="21" font-weight="500" fill="#5A6068">SQE1 Business 7.18 · the rate depends on the INCOME tax position, so run income tax first</text>
+<rect x="840" y="56" width="26" height="26" rx="6" fill="#F2ECFA" stroke="#6B3FA0" stroke-width="2"/>
+<text x="876" y="76" font-size="19" font-weight="600" fill="#1F2328">THE PRINCIPLE</text>
+<rect x="1050" y="58" width="62" height="24" rx="12" fill="#C9711F"/>
+<text x="1081" y="76" font-size="15" font-weight="800" fill="white" text-anchor="middle">BUT</text>
+<text x="1124" y="76" font-size="19" font-weight="600" fill="#1F2328">what must be taken into account</text>
+<rect x="40" y="150.0" width="720" height="244.0" rx="16" fill="#F2ECFA" stroke="#6B3FA0" stroke-width="2"/>
+<circle cx="102" cy="272.0178666666667" r="40" fill="#6B3FA0"/>
+<rect x="86.0" y="252.8" width="32.0" height="38.4" rx="3.2" stroke="white" stroke-width="3.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M92.4,261.6 L95.6,264.8 L100.4,259.2" stroke="white" stroke-width="3.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="104.4" y1="262.4" x2="112.4" y2="262.4" stroke="white" stroke-width="3.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M92.4,272.8 L95.6,276.0 L100.4,270.4" stroke="white" stroke-width="3.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="104.4" y1="273.6" x2="112.4" y2="273.6" stroke="white" stroke-width="3.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M92.4,284.0 L95.6,287.2 L100.4,281.6" stroke="white" stroke-width="3.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="104.4" y1="284.8" x2="112.4" y2="284.8" stroke="white" stroke-width="3.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="168" y="233.7" font-size="18.1" font-weight="800" fill="#6B3FA0" letter-spacing="0.6">STEP 1 · IS THERE A CHARGE?</text>
+<text x="168.0" y="271.6" font-size="21.0" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>A </tspan><tspan font-weight="700" fill="#1F2328">chargeable person </tspan><tspan>(individual, trustee, PR) makes a</tspan></text>
+<text x="168.0" y="298.5" font-size="21.0" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan font-weight="700" fill="#1F2328">chargeable disposal </tspan><tspan>(sale, GIFT, part disposal, loss or</tspan></text>
+<text x="168.0" y="325.4" font-size="21.0" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>destruction) of a </tspan><tspan font-weight="700" fill="#1F2328">chargeable asset</tspan><tspan>.</tspan></text>
+<line x1="760" y1="272.0" x2="840" y2="272.0" stroke="#C9711F" stroke-width="3" stroke-dasharray="7 5"/>
+<path d="M828,264.0 L840,272.0 L828,280.0" fill="#C9711F"/>
+<rect x="772.0" y="258.0" width="56" height="28" rx="14" fill="#C9711F"/>
+<text x="800.0" y="278.0" font-size="15" font-weight="800" fill="white" text-anchor="middle">BUT</text>
+<rect x="840" y="150.0" width="610" height="244.0" rx="16" fill="#FFF5E6" stroke="#E8B266" stroke-width="2"/>
+<circle cx="864" cy="185.4" r="4.5" fill="#C9711F"/>
+<text x="880.0" y="191.8" font-size="19.3" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>A </tspan><tspan font-weight="700" fill="#8A3E00">company </tspan><tspan>pays CORPORATION TAX on its gains, not CGT.</tspan></text>
+<circle cx="864" cy="218.2" r="4.5" fill="#C9711F"/>
+<text x="880.0" y="224.5" font-size="19.3" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan font-weight="700" fill="#8A3E00">DEATH </tspan><tspan>is not a disposal: the heir takes at probate value.</tspan></text>
+<text x="880.0" y="249.3" font-size="19.3" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan font-weight="700" fill="#8A3E00">SPOUSE </tspan><tspan>transfers are no-gain, no-loss.</tspan></text>
+<circle cx="864" cy="275.6" r="4.5" fill="#C9711F"/>
+<text x="880.0" y="282.0" font-size="19.3" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan font-weight="700" fill="#8A3E00">Exempt assets</tspan><tspan>: main residence, private car, ISA, wasting</tspan></text>
+<text x="880.0" y="306.7" font-size="19.3" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>chattel (life 50 years or less), chattel sold for £6,000 or less,</tspan></text>
+<text x="880.0" y="331.5" font-size="19.3" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>government bonds.</tspan></text>
+<circle cx="864" cy="357.8" r="4.5" fill="#C9711F"/>
+<text x="880.0" y="364.2" font-size="19.3" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan font-weight="700" fill="#8A3E00">Non-resident</tspan><tspan>: only UK land is caught.</tspan></text>
+<path d="M90,396.0 L102,406.0 L114,396.0" fill="none" stroke="#6B3FA0" stroke-width="3" stroke-linecap="round"/>
+<rect x="40" y="408.0" width="720" height="161.8" rx="16" fill="#F2ECFA" stroke="#6B3FA0" stroke-width="2"/>
+<circle cx="102" cy="488.9592" r="40" fill="#6B3FA0"/>
+<line x1="102.0" y1="469.8" x2="102.0" y2="506.6" stroke="white" stroke-width="3.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="92.4" y1="506.6" x2="111.6" y2="506.6" stroke="white" stroke-width="3.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="84.4" y1="476.2" x2="119.6" y2="476.2" stroke="white" stroke-width="3.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M77.2,492.2 L84.4,476.2 L91.6,492.2 Z" stroke="white" stroke-width="3.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M112.4,492.2 L119.6,476.2 L126.8,492.2 Z" stroke="white" stroke-width="3.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="168" y="464.1" font-size="18.1" font-weight="800" fill="#6B3FA0" letter-spacing="0.6">STEP 2 · THE GAIN</text>
+<text x="168.0" y="502.0" font-size="21.0" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan font-weight="700" fill="#1F2328">Proceeds </tspan><tspan>minus acquisition cost and its fees (legal fees,</tspan></text>
+<text x="168.0" y="528.9" font-size="21.0" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>SDLT), </tspan><tspan font-weight="700" fill="#1F2328">enhancement </tspan><tspan>spend and disposal costs.</tspan></text>
+<line x1="760" y1="489.0" x2="840" y2="489.0" stroke="#C9711F" stroke-width="3" stroke-dasharray="7 5"/>
+<path d="M828,481.0 L840,489.0 L828,497.0" fill="#C9711F"/>
+<rect x="772.0" y="475.0" width="56" height="28" rx="14" fill="#C9711F"/>
+<text x="800.0" y="495.0" font-size="15" font-weight="800" fill="white" text-anchor="middle">BUT</text>
+<rect x="840" y="408.0" width="610" height="161.8" rx="16" fill="#FFF5E6" stroke="#E8B266" stroke-width="2"/>
+<circle cx="864" cy="443.5" r="4.5" fill="#C9711F"/>
+<text x="880.0" y="449.9" font-size="19.3" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan font-weight="700" fill="#8A3E00">GIFT </tspan><tspan>or sale to a </tspan><tspan font-weight="700" fill="#8A3E00">CONNECTED </tspan><tspan>person: use MARKET VALUE.</tspan></text>
+<circle cx="864" cy="476.2" r="4.5" fill="#C9711F"/>
+<text x="880.0" y="482.6" font-size="19.3" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>Bad bargain at </tspan><tspan font-weight="700" fill="#8A3E00">arm's length</tspan><tspan>: use the actual price.</tspan></text>
+<circle cx="864" cy="508.9" r="4.5" fill="#C9711F"/>
+<text x="880.0" y="515.3" font-size="19.3" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>Enhancement counts only if still </tspan><tspan font-weight="700" fill="#8A3E00">reflected in the asset </tspan><tspan>at</tspan></text>
+<text x="880.0" y="540.0" font-size="19.3" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>disposal. Demolished extension: no deduction.</tspan></text>
+<path d="M90,571.9 L102,581.9 L114,571.9" fill="none" stroke="#6B3FA0" stroke-width="3" stroke-linecap="round"/>
+<rect x="40" y="583.9" width="720" height="211.3" rx="16" fill="#F2ECFA" stroke="#6B3FA0" stroke-width="2"/>
+<circle cx="102" cy="689.5357333333333" r="40" fill="#6B3FA0"/>
+<path d="M81.2,689.5 Q102.0,662.3 122.8,689.5 Z" stroke="white" stroke-width="3.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M102.0,689.5 L102.0,703.9 Q102.0,708.7 97.2,708.7 Q94.0,708.7 94.0,704.7" stroke="white" stroke-width="3.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="168" y="624.3" font-size="18.1" font-weight="800" fill="#6B3FA0" letter-spacing="0.6">STEP 3 · RELIEFS: MATCH THE FACTS</text>
+<text x="168.0" y="662.3" font-size="21.0" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan font-weight="700" fill="#1F2328">Giving </tspan><tspan>a business asset away: HOLD-OVER. </tspan><tspan font-weight="700" fill="#1F2328">Selling and</tspan></text>
+<text x="168.0" y="689.2" font-size="21.0" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan font-weight="700" fill="#1F2328">buying </tspan><tspan>business assets: ROLL-OVER. </tspan><tspan font-weight="700" fill="#1F2328">Business into a</tspan></text>
+<text x="168.0" y="716.0" font-size="21.0" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan font-weight="700" fill="#1F2328">company for shares</tspan><tspan>: INCORPORATION. </tspan><tspan font-weight="700" fill="#1F2328">Any gain </tspan><tspan>put</tspan></text>
+<text x="168.0" y="742.9" font-size="21.0" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>into EIS shares: EIS deferral. </tspan><tspan font-weight="700" fill="#1F2328">Home</tspan><tspan>: PRIVATE RESIDENCE</tspan></text>
+<text x="168.0" y="769.8" font-size="21.0" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>RELIEF.</tspan></text>
+<line x1="760" y1="689.5" x2="840" y2="689.5" stroke="#C9711F" stroke-width="3" stroke-dasharray="7 5"/>
+<path d="M828,681.5 L840,689.5 L828,697.5" fill="#C9711F"/>
+<rect x="772.0" y="675.5" width="56" height="28" rx="14" fill="#C9711F"/>
+<text x="800.0" y="695.5" font-size="15" font-weight="800" fill="white" text-anchor="middle">BUT</text>
+<rect x="840" y="583.9" width="610" height="211.3" rx="16" fill="#FFF5E6" stroke="#E8B266" stroke-width="2"/>
+<circle cx="864" cy="619.3" r="4.5" fill="#C9711F"/>
+<text x="880.0" y="625.7" font-size="19.3" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>Roll-over: reinvest </tspan><tspan font-weight="700" fill="#8A3E00">1 year before to 3 years after</tspan><tspan>; land,</tspan></text>
+<text x="880.0" y="650.4" font-size="19.3" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>buildings, plant and machinery, NOT shares. Full relief only if</tspan></text>
+<text x="880.0" y="675.2" font-size="19.3" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>ALL proceeds reinvested.</tspan></text>
+<circle cx="864" cy="701.5" r="4.5" fill="#C9711F"/>
+<text x="880.0" y="707.9" font-size="19.3" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>Private residence relief: exempt share = occupation ÷</tspan></text>
+<text x="880.0" y="732.6" font-size="19.3" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>ownership. The </tspan><tspan font-weight="700" fill="#8A3E00">last 9 months </tspan><tspan>always count.</tspan></text>
+<circle cx="864" cy="759.0" r="4.5" fill="#C9711F"/>
+<text x="880.0" y="765.3" font-size="19.3" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>BADR is </tspan><tspan font-weight="700" fill="#8A3E00">not </tspan><tspan>a step 3 relief. It is a RATE, used at step 6.</tspan></text>
+<path d="M90,797.2 L102,807.2 L114,797.2" fill="none" stroke="#6B3FA0" stroke-width="3" stroke-linecap="round"/>
+<rect x="40" y="809.2" width="720" height="129.1" rx="16" fill="#F2ECFA" stroke="#6B3FA0" stroke-width="2"/>
+<circle cx="102" cy="873.7474666666666" r="40" fill="#6B3FA0"/>
+<polyline points="82.8,859.3 94.0,870.5 102.0,864.1 119.6,884.9" stroke="white" stroke-width="3.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<polyline points="110.0,884.9 119.6,884.9 119.6,875.3" stroke="white" stroke-width="3.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="81.2" y1="892.9" x2="122.8" y2="892.9" stroke="white" stroke-width="3.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="168" y="848.9" font-size="18.1" font-weight="800" fill="#6B3FA0" letter-spacing="0.6">STEP 4 · LOSSES</text>
+<text x="168.0" y="886.8" font-size="21.0" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>Same-year losses come off gains </tspan><tspan font-weight="700" fill="#1F2328">automatically</tspan><tspan>. Any</tspan></text>
+<text x="168.0" y="913.7" font-size="21.0" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>excess is carried </tspan><tspan font-weight="700" fill="#1F2328">forward indefinitely</tspan><tspan>.</tspan></text>
+<line x1="760" y1="873.7" x2="840" y2="873.7" stroke="#C9711F" stroke-width="3" stroke-dasharray="7 5"/>
+<path d="M828,865.7 L840,873.7 L828,881.7" fill="#C9711F"/>
+<rect x="772.0" y="859.7" width="56" height="28" rx="14" fill="#C9711F"/>
+<text x="800.0" y="879.7" font-size="15" font-weight="800" fill="white" text-anchor="middle">BUT</text>
+<rect x="840" y="809.2" width="610" height="129.1" rx="16" fill="#FFF5E6" stroke="#E8B266" stroke-width="2"/>
+<circle cx="864" cy="844.6" r="4.5" fill="#C9711F"/>
+<text x="880.0" y="851.0" font-size="19.3" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>Aim losses at gains taxed at </tspan><tspan font-weight="700" fill="#8A3E00">24%</tspan><tspan>, not at BADR gains.</tspan></text>
+<circle cx="864" cy="877.4" r="4.5" fill="#C9711F"/>
+<text x="880.0" y="883.7" font-size="19.3" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>Never carried </tspan><tspan font-weight="700" fill="#8A3E00">back</tspan><tspan>. A loss from arrangements aimed at a tax</tspan></text>
+<text x="880.0" y="908.5" font-size="19.3" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>advantage is </tspan><tspan font-weight="700" fill="#8A3E00">disallowed</tspan><tspan>.</tspan></text>
+<path d="M90,940.3 L102,950.3 L114,940.3" fill="none" stroke="#6B3FA0" stroke-width="3" stroke-linecap="round"/>
+<rect x="40" y="952.3" width="720" height="124.9" rx="16" fill="#F2ECFA" stroke="#6B3FA0" stroke-width="2"/>
+<circle cx="102" cy="1014.7703999999999" r="40" fill="#6B3FA0"/>
+<path d="M81.2,1003.6 L122.8,1003.6 L122.8,1010.8 Q118.0,1014.8 122.8,1018.8 L122.8,1026.0 L81.2,1026.0 L81.2,1018.8 Q86.0,1014.8 81.2,1010.8 Z" stroke="white" stroke-width="3.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="102.0" y="1019.6" font-size="11.2" font-weight="800" fill="white" text-anchor="middle">£3k</text>
+<text x="168" y="1003.3" font-size="18.1" font-weight="800" fill="#6B3FA0" letter-spacing="0.6">STEP 5 · ANNUAL EXEMPT AMOUNT £3,000</text>
+<text x="168.0" y="1041.3" font-size="21.0" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>Deduct it </tspan><tspan font-weight="700" fill="#1F2328">after </tspan><tspan>the losses.</tspan></text>
+<line x1="760" y1="1014.8" x2="840" y2="1014.8" stroke="#C9711F" stroke-width="3" stroke-dasharray="7 5"/>
+<path d="M828,1006.8 L840,1014.8 L828,1022.8" fill="#C9711F"/>
+<rect x="772.0" y="1000.8" width="56" height="28" rx="14" fill="#C9711F"/>
+<text x="800.0" y="1020.8" font-size="15" font-weight="800" fill="white" text-anchor="middle">BUT</text>
+<rect x="840" y="952.3" width="610" height="124.9" rx="16" fill="#FFF5E6" stroke="#E8B266" stroke-width="2"/>
+<circle cx="864" cy="998.0" r="4.5" fill="#C9711F"/>
+<text x="880.0" y="1004.4" font-size="19.3" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan font-weight="700" fill="#8A3E00">Use it or lose it</tspan><tspan>: no carry forward, no transfer.</tspan></text>
+<circle cx="864" cy="1030.7" r="4.5" fill="#C9711F"/>
+<text x="880.0" y="1037.1" font-size="19.3" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>Aim it at the 24% gains as well.</tspan></text>
+<path d="M90,1079.2 L102,1089.2 L114,1079.2" fill="none" stroke="#6B3FA0" stroke-width="3" stroke-linecap="round"/>
+<rect x="40" y="1091.2" width="720" height="260.8" rx="16" fill="#F2ECFA" stroke="#6B3FA0" stroke-width="2"/>
+<circle cx="102" cy="1221.6173333333331" r="40" fill="#6B3FA0"/>
+<circle cx="92.4" cy="1212.0" r="5.6" stroke="white" stroke-width="3.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="111.6" cy="1231.2" r="5.6" stroke="white" stroke-width="3.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="114.8" y1="1205.6" x2="89.2" y2="1237.6" stroke="white" stroke-width="3.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="168" y="1196.7" font-size="18.1" font-weight="800" fill="#6B3FA0" letter-spacing="0.6">STEP 6 · THE RATE</text>
+<text x="168.0" y="1234.7" font-size="21.0" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan font-weight="700" fill="#1F2328">18% </tspan><tspan>on gains within the UNUSED basic rate band. </tspan><tspan font-weight="700" fill="#1F2328">24%</tspan></text>
+<text x="168.0" y="1261.6" font-size="21.0" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>above it.</tspan></text>
+<line x1="760" y1="1221.6" x2="840" y2="1221.6" stroke="#C9711F" stroke-width="3" stroke-dasharray="7 5"/>
+<path d="M828,1213.6 L840,1221.6 L828,1229.6" fill="#C9711F"/>
+<rect x="772.0" y="1207.6" width="56" height="28" rx="14" fill="#C9711F"/>
+<text x="800.0" y="1227.6" font-size="15" font-weight="800" fill="white" text-anchor="middle">BUT</text>
+<rect x="840" y="1091.2" width="610" height="260.8" rx="16" fill="#FFF5E6" stroke="#E8B266" stroke-width="2"/>
+<circle cx="864" cy="1126.7" r="4.5" fill="#C9711F"/>
+<text x="880.0" y="1133.1" font-size="19.3" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>Find the unused band from the </tspan><tspan font-weight="700" fill="#8A3E00">income tax </tspan><tspan>figures. A higher</tspan></text>
+<text x="880.0" y="1157.8" font-size="19.3" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>rate taxpayer pays 24% on all gains.</tspan></text>
+<circle cx="864" cy="1184.1" r="4.5" fill="#C9711F"/>
+<text x="880.0" y="1190.5" font-size="19.3" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan font-weight="700" fill="#8A3E00">BADR </tspan><tspan>18%, up to £1m of gains in a lifetime: sole trade or</tspan></text>
+<text x="880.0" y="1215.2" font-size="19.3" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>partnership share held 2 years; shares with 5%+ of the votes</tspan></text>
+<text x="880.0" y="1240.0" font-size="19.3" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>AND officer or employee for 2 years; assets used by that</tspan></text>
+<text x="880.0" y="1264.7" font-size="19.3" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>business. One asset on its own does not qualify.</tspan></text>
+<circle cx="864" cy="1291.1" r="4.5" fill="#C9711F"/>
+<text x="880.0" y="1297.4" font-size="19.3" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>BADR (18%) equals the lower rate, so it only helps a </tspan><tspan font-weight="700" fill="#8A3E00">higher</tspan></text>
+<text x="880.0" y="1322.2" font-size="19.3" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan font-weight="700" fill="#8A3E00">rate </tspan><tspan>taxpayer.</tspan></text>
+<rect x="1480" y="150.0" width="480" height="246.7" rx="16" fill="#F5F5F2" stroke="#D3D3CD" stroke-width="2"/>
+<text x="1498" y="178.0" font-size="17.2" font-weight="800" fill="#6B3FA0" letter-spacing="0.6">FIGURES 2026/27</text>
+<rect x="1498" y="215.2" width="7" height="7" rx="1.5" fill="#6B3FA0"/>
+<text x="1514.0" y="225.2" font-size="18.1" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>Annual exempt amount </tspan><tspan font-weight="700" fill="#1F2328">£3,000</tspan></text>
+<rect x="1498" y="244.3" width="7" height="7" rx="1.5" fill="#6B3FA0"/>
+<text x="1514.0" y="254.3" font-size="18.1" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan font-weight="700" fill="#1F2328">18% </tspan><tspan>within the unused basic rate band, </tspan><tspan font-weight="700" fill="#1F2328">24%</tspan></text>
+<text x="1514.0" y="277.4" font-size="18.1" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>above</tspan></text>
+<rect x="1498" y="296.6" width="7" height="7" rx="1.5" fill="#6B3FA0"/>
+<text x="1514.0" y="306.5" font-size="18.1" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>BADR </tspan><tspan font-weight="700" fill="#1F2328">18%</tspan><tspan>, £1m lifetime limit</tspan></text>
+<rect x="1498" y="325.7" width="7" height="7" rx="1.5" fill="#6B3FA0"/>
+<text x="1514.0" y="335.6" font-size="18.1" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>Non-wasting chattel exempt if sold for </tspan><tspan font-weight="700" fill="#1F2328">£6,000 </tspan><tspan>or</tspan></text>
+<text x="1514.0" y="358.7" font-size="18.1" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>less</tspan></text>
+<rect x="1480" y="408.7" width="480" height="188.5" rx="16" fill="#F5F5F2" stroke="#D3D3CD" stroke-width="2"/>
+<text x="1498" y="436.7" font-size="17.2" font-weight="800" fill="#6B3FA0" letter-spacing="0.6">PAYMENT</text>
+<rect x="1498" y="473.9" width="7" height="7" rx="1.5" fill="#6B3FA0"/>
+<text x="1514.0" y="483.9" font-size="18.1" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan font-weight="700" fill="#1F2328">31 January </tspan><tspan>after the tax year. No payments on</tspan></text>
+<text x="1514.0" y="507.0" font-size="18.1" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>account.</tspan></text>
+<rect x="1498" y="526.2" width="7" height="7" rx="1.5" fill="#6B3FA0"/>
+<text x="1514.0" y="536.1" font-size="18.1" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>UK </tspan><tspan font-weight="700" fill="#1F2328">residential property</tspan><tspan>: report and pay within </tspan><tspan font-weight="700" fill="#1F2328">60</tspan></text>
+<text x="1514.0" y="559.2" font-size="18.1" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan font-weight="700" fill="#1F2328">days </tspan><tspan>of completion.</tspan></text>
+<rect x="1480" y="609.2" width="480" height="269.8" rx="16" fill="#F5F5F2" stroke="#D3D3CD" stroke-width="2"/>
+<text x="1498" y="637.2" font-size="17.2" font-weight="800" fill="#6B3FA0" letter-spacing="0.6">WORKED ORDER · BARRY, HIGHER RATE</text>
+<rect x="1498" y="674.4" width="7" height="7" rx="1.5" fill="#6B3FA0"/>
+<text x="1514.0" y="684.3" font-size="18.1" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>Gains: shares £30,000 + property £87,300 =</tspan></text>
+<text x="1514.0" y="707.4" font-size="18.1" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>£117,300</tspan></text>
+<rect x="1498" y="726.6" width="7" height="7" rx="1.5" fill="#6B3FA0"/>
+<text x="1514.0" y="736.6" font-size="18.1" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>Less painting loss £15,000 = £102,300</tspan></text>
+<rect x="1498" y="755.7" width="7" height="7" rx="1.5" fill="#6B3FA0"/>
+<text x="1514.0" y="765.7" font-size="18.1" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>Less AEA £3,000 = </tspan><tspan font-weight="700" fill="#1F2328">£99,300 × 24% = £23,832</tspan></text>
+<rect x="1498" y="784.9" width="7" height="7" rx="1.5" fill="#6B3FA0"/>
+<text x="1514.0" y="794.8" font-size="18.1" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>If the shares qualified for BADR: aim the loss and</tspan></text>
+<text x="1514.0" y="817.9" font-size="18.1" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>AEA at the property. £69,300 × 24% + £30,000 ×</tspan></text>
+<text x="1514.0" y="841.0" font-size="18.1" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>18% = </tspan><tspan font-weight="700" fill="#1F2328">£22,032</tspan></text>
+<text x="1000.0" y="1390" font-size="20" font-weight="700" fill="#6B3FA0" text-anchor="middle" letter-spacing="0.8">CHARGE?  ›  GAIN  ›  RELIEFS  ›  LOSSES  ›  £3,000 EXEMPT  ›  RATE</text>
+<metadata><c2pa:manifest>AAAWgmp1bWIAAAAeanVtZGMycGEAEQAQgAAAqgA4m3EDYzJwYQAAABZcanVtYgAAAEdqdW1kYzJtYQARABCAAACqADibcQN1cm46YzJwYTowMTBhNWZmNS0wMjJjLTQ0ZmMtODlkMy0wMGE0ODE3YmQ4YjMAAAADl2p1bWIAAAApanVtZGMyYXMAEQAQgAAAqgA4m3EDYzJwYS5hc3NlcnRpb25zAAAAALxqdW1iAAAARGp1bWRjYm9yABEAEIAAAKoAOJtxE2MycGEuaW5ncmVkaWVudC52MwAAAAAYYzJzaPZHK38ayCGEj59MaQEoxkMAAABwY2JvcqNpZGM6Zm9ybWF0bWltYWdlL3N2Zyt4bWxqaW5zdGFuY2VJRHgseG1wOmlpZDpjOTZlYTYwNC02ODM5LTQzMWItOTI5NC01YjRjY2ZkYWM2ZDBscmVsYXRpb25zaGlwaHBhcmVudE9mAAAB4mp1bWIAAABBanVtZGNib3IAEQAQgAAAqgA4m3ETYzJwYS5hY3Rpb25zLnYyAAAAABhjMnNoD30tLTAWHi9GMUj5ZdEbZwAAAZljYm9yomdhY3Rpb25zgqJmYWN0aW9ua2MycGEub3BlbmVkanBhcmFtZXRlcnOha2luZ3JlZGllbnRzgaJjdXJseC1zZWxmI2p1bWJmPWMycGEuYXNzZXJ0aW9ucy9jMnBhLmluZ3JlZGllbnQudjNkaGFzaFgg/riIkLBbtWJbsvxeX96yTKAkZcx29O2LzkpmW6xVPRmkZmFjdGlvbngdY29tLmFudGhyb3BpYy5jbGF1ZGUucHJvdmlkZWRqcGFyYW1ldGVyc6F4H2NvbS5hbnRocm9waWMub3JpZ2luLWNvbmZpZGVuY2VndW5rbm93bmtkZXNjcmlwdGlvbnhmQ2xhdWRlIHByb3ZpZGVkIHRoaXMgZmlsZSBhdCB0aGUgcmVxdWVzdCBvZiBhIHVzZXIgYW5kIG1heSBoYXZlIGNyZWF0ZWQgb3IgbW9kaWZpZWQgdGhlIGZpbGUgY29udGVudHMubXNvZnR3YXJlQWdlbnShZG5hbWVmQ2xhdWRlcmFsbEFjdGlvbnNJbmNsdWRlZPUAAADIanVtYgAAAEBqdW1kY2JvcgARABCAAACqADibcRNjMnBhLmhhc2guZGF0YQAAAAAYYzJzaI38ACRKs6hXR4n/Dgv7NdoAAACAY2JvcqVjYWxnZnNoYTI1NmNwYWRMAAAAAAAAAAAAAAAAZGhhc2hYIG226j7hYwb6H62cjopAQJ4rt7tZQgUOwsjslFCfJ1QpZG5hbWVuanVtYmYgbWFuaWZlc3RqZXhjbHVzaW9uc4GiZXN0YXJ0GWBIZmxlbmd0aBkeBAAAAj5qdW1iAAAAJ2p1bWRjMmNsABEAEIAAAKoAOJtxA2MycGEuY2xhaW0udjIAAAACD2Nib3KlY2FsZ2ZzaGEyNTZpc2lnbmF0dXJleE1zZWxmI2p1bWJmPS9jMnBhL3VybjpjMnBhOjAxMGE1ZmY1LTAyMmMtNDRmYy04OWQzLTAwYTQ4MTdiZDhiMy9jMnBhLnNpZ25hdHVyZWppbnN0YW5jZUlEeCx4bXA6aWlkOjZiZTgyNzU5LTJkZmYtNGJhMi1hYWEzLTU3OTgxZTgwZjRjN3JjcmVhdGVkX2Fzc2VydGlvbnODomN1cmx4LXNlbGYjanVtYmY9YzJwYS5hc3NlcnRpb25zL2MycGEuaW5ncmVkaWVudC52M2RoYXNoWCD+uIiQsFu1Yluy/F5f3rJMoCRlzHb07YvOSmZbrFU9GaJjdXJseCpzZWxmI2p1bWJmPWMycGEuYXNzZXJ0aW9ucy9jMnBhLmFjdGlvbnMudjJkaGFzaFggC0Sp/xuaqgFWM3PtB3zMRPPsBlv63keB5Ryq/H3x1gaiY3VybHgpc2VsZiNqdW1iZj1jMnBhLmFzc2VydGlvbnMvYzJwYS5oYXNoLmRhdGFkaGFzaFgg9oU/jFRw/YkSTmUXlIZrqGcYmo7RvcD0ri0nIL/6mbt0Y2xhaW1fZ2VuZXJhdG9yX2luZm+jZG5hbWVvQW50aHJvcGljIEZpbGVzZ3ZlcnNpb25lMS4wLjBrc3BlY1ZlcnNpb25lMi40LjAAABA4anVtYgAAAChqdW1kYzJjcwARABCAAACqADibcQNjMnBhLnNpZ25hdHVyZQAAABAIY2JvctKEWQISogEmGCFZAgowggIGMIIBjaADAgECAhRA5aAK7sI50L64g/oGQgU9Z1UTADAKBggqhkjOPQQDAzBJMRcwFQYDVQQKEw5BbnRocm9waWMsIFBCQzEuMCwGA1UEAxMlQW50aHJvcGljIENvbnRlbnQgQ3JlZGVudGlhbHMgUm9vdCBDQTAeFw0yNjA4MDcxODQzNTZaFw0yODA4MDYxOTQzNTZaMEQxFzAVBgNVBAoTDkFudGhyb3BpYywgUEJDMSkwJwYDVQQDEyBBbnRocm9waWMgQ2xhdWRlIENvbnRlbnQgU2lnbmluZzBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABJh6CmvLUBgFFNU0vUKlOVtE6djd17L5SuwX0LemFisBM3dkd/3cyjxFA3Qo5S46fX0/ihY0VZ7mfb9KF703t5OjWDBWMA4GA1UdDwEB/wQEAwIHgDAVBgNVHSUEDjAMBgorBgEEAYPoXgIBMAwGA1UdEwEB/wQCMAAwHwYDVR0jBBgwFoAUzlHiBIFOZFsj+OPEz5o+nMHXXMIwCgYIKoZIzj0EAwMDZwAwZAIwMXMdFJ4BetLLVY7ORuE9noqbbAZOZn/aArXyTwFAZfKrPzxF2vPoJNf1+UCdg1XGAjBwX1zd9WGqYkqmL5SFqw1QySjr1zJfpJM9+1rdDwSPLMOPOjKuiXjoU/pUUeG9RwmhY3BhZFkNngAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPZYQChSr5B55x79T2hH0x/vPC30E6bJWNR7uLftOpvjlj25p+ZRceu6EtOor2Nhc268hFfBmUOINUk2OlrmJ+lEa0I=</c2pa:manifest></metadata></svg>

@@ -1,0 +1,2575 @@
+{
+ "7.16": {
+  "id": "7.16",
+  "title": "Income Tax in England and Wales",
+  "visuals": [
+   {
+    "label": "Mind map - the whole of 7.16 Income tax",
+    "type": "map",
+    "centre": "7.16 INCOME TAX IN ENGLAND AND WALES",
+    "branches": [
+     {
+      "label": "WHO IS TAXED, AND ON WHAT",
+      "leaves": [
+       "EMPLOYEES and company directors, on salary, bonuses and taxable benefits in kind such as a car or private medical insurance",
+       "SOLE TRADERS and PARTNERS in any kind of partnership, on taxable trading profits whether or not the profits are withdrawn",
+       "SHAREHOLDERS on dividends, and LENDERS and DEBENTURE HOLDERS on the interest they receive",
+       "OWNERS OF RENTAL PROPERTY on property income, and savers on bank and bond interest",
+       "EXEMPT: many social security benefits, tax credits, interest on national savings certificates and income from an ISA",
+       "The tax year runs from 6 April to 5 April"
+      ]
+     },
+     {
+      "label": "THE CALCULATION, IN ORDER",
+      "leaves": [
+       "TOTAL income is every gross non-exempt source added together",
+       "NET income is total income less personal pension contributions and interest on QUALIFYING LOANS, meaning loans to make capital contributions to an unincorporated business or to buy shares in a company",
+       "TAXABLE income is net income less the personal allowance",
+       "The three types are taxed in a fixed ORDER: non-savings first, then savings, then dividends as the top slice",
+       "Add the tax on each type together, then deduct tax already paid at source such as PAYE"
+      ]
+     },
+     {
+      "label": "TRADING PROFITS, CAPITAL ALLOWANCES AND LOSSES",
+      "leaves": [
+       "Deductible expenses must be INCOME related rather than capital, and incurred WHOLLY AND EXCLUSIVELY for the business",
+       "A dual-purpose expense is deductible as to the business proportion, provided the business and non-business parts can be separated",
+       "Capital allowances are a form of tax-approved depreciation, deducted as an expense in arriving at taxable trading profits",
+       "Each partner is taxed on their own share, set by the agreement or equally if there is none, and the partnership itself pays no income tax",
+       "The agreement can give a partner a preferential allocation as salary or interest on capital before the balance is shared",
+       "A trading LOSS is never relieved automatically: the taxpayer must claim, and the decision tree below picks the relief"
+      ]
+     },
+     {
+      "label": "PAYING, AND ANTI-AVOIDANCE",
+      "leaves": [
+       "Employees have tax deducted at source under PAYE, using a tax code HMRC sends to the employer",
+       "Anyone whose tax is not all deducted at source must SELF-ASSESS, filing online by 31 January after the tax year, or on paper by 31 October",
+       "Payments on account fall due on 31 January in the tax year and 31 July after it, each 50% of last year's liability, with a balancing payment on 31 January",
+       "TAX PLANNING is lawful, TAX EVASION is illegal, and TAX AVOIDANCE is lawful but artificial and done only to pay less tax",
+       "The GENERAL ANTI-ABUSE RULE lets HMRC set aside an arrangement that cannot reasonably be regarded as a reasonable course of action"
+      ]
+     }
+    ]
+   },
+   {
+    "label": "Decision tree - which loss relief is available for this trading loss?",
+    "type": "branch",
+    "nodes": [
+     {
+      "q": "1. Is the loss in one of the first four tax years of the trade?",
+      "a": [
+       {
+        "k": "YES",
+        "v": "EARLY TRADE LOSSES RELIEF carries the loss back against the net income of the three preceding tax years, taking the EARLIEST year first."
+       },
+       {
+        "k": "NO",
+        "v": "Go to question 2."
+       }
+      ]
+     },
+     {
+      "q": "2. Has the trader ceased trading?",
+      "a": [
+       {
+        "k": "YES",
+        "v": "TERMINAL LOSS RELIEF deducts the loss from trading profits in the tax year of cessation, then carries it back three years taking the LATEST year first."
+       },
+       {
+        "k": "NO",
+        "v": "Go to question 3."
+       }
+      ]
+     },
+     {
+      "q": "3. Has the business been transferred to a company in return for shares?",
+      "a": [
+       {
+        "k": "YES",
+        "v": "Unused losses stay with the trader and are set against salary or dividends from the company for any year the shares are held."
+       },
+       {
+        "k": "NO",
+        "v": "Go to question 4."
+       }
+      ]
+     },
+     {
+      "q": "4. Is there income now to absorb the loss?",
+      "a": [
+       {
+        "k": "CURRENT OR PRIOR YEAR",
+        "v": "Set the loss against net income of the current tax year or the previous one, and the taxpayer chooses which to take first."
+       },
+       {
+        "k": "NO INCOME",
+        "v": "Carry the loss forward against future profits of the SAME trade. This is a last resort because it delays the relief."
+       }
+      ]
+     },
+     {
+      "q": "5. Any loss still unrelieved?",
+      "a": [
+       {
+        "k": "AGAINST GAINS",
+        "v": "The balance can be used as an allowable loss to reduce capital gains and so save capital gains tax."
+       },
+       {
+        "k": "NO PART CLAIMS",
+        "v": "A claim must use all the loss available or absorb all the available income, so the personal allowance can be wasted."
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "label": "The eight steps of an income tax calculation",
+    "type": "steps",
+    "data": [
+     "Calculate TOTAL income, meaning every source of gross non-exempt income including non-savings, savings and dividend income.",
+     "Calculate NET income, being total income less allowable deductions for interest on qualifying loans and for personal pension contributions.",
+     "Calculate TAXABLE income, being net income less the personal allowance where one is available.",
+     "Split taxable income into its three types: non-savings, savings and dividend income.",
+     "Consider the reliefs available, chiefly the personal savings allowance and the dividend allowance.",
+     "Apply the tax rates to each type in the fixed order of non-savings income, then savings income, then dividend income.",
+     "Add the amounts calculated for each type together to give the total tax liability.",
+     "Deduct tax already paid at source, such as under PAYE, to show how much tax is still due."
+    ]
+   },
+   {
+    "label": "The three types of income and the order they are taxed",
+    "type": "grid",
+    "cols": [
+     "1. NON-SAVINGS INCOME",
+     "2. SAVINGS INCOME",
+     "3. DIVIDEND INCOME"
+    ],
+    "rows": [
+     [
+      "Employment income, profits of self-employment after expenses and capital allowances, pension income and rental income",
+      "Interest on bank and building society accounts, and on government or company bonds",
+      "Dividends on shares the taxpayer holds as a shareholder"
+     ],
+     [
+      "Taxed FIRST, so at least some of it falls in the basic rate band",
+      "Taxed SECOND, so if non-savings income has already used the basic rate band it is taxed at higher or additional rates",
+      "Taxed LAST as the top slice, which often means the higher or even additional rate applies"
+     ],
+     [
+      "No special allowance beyond the personal allowance",
+      "The personal savings allowance depends on the highest band the taxpayer's income reaches, and a 0% starting rate covers up to £5,000 where taxable non-savings income is below that",
+      "The dividend allowance applies at the same flat amount to every taxpayer, unlike the savings allowance"
+     ],
+     [
+      "Welsh taxpayers pay the Welsh rate on this type of income",
+      "Savings income stays on UK rates for Welsh taxpayers",
+      "Dividend income stays on UK rates for Welsh taxpayers"
+     ]
+    ]
+   },
+   {
+    "label": "Rates, bands and allowances for 2026/27 - supplied in the assessment, not memorised",
+    "type": "grid",
+    "cols": [
+     "BAND, BY TAXABLE INCOME",
+     "NON-SAVINGS",
+     "SAVINGS",
+     "DIVIDENDS"
+    ],
+    "rows": [
+     [
+      "Basic rate, up to £37,700",
+      "20%",
+      "20%",
+      "10.75%"
+     ],
+     [
+      "Higher rate, £37,701 to £125,140",
+      "40%",
+      "40%",
+      "35.75%"
+     ],
+     [
+      "Additional rate, above £125,140",
+      "45%",
+      "45%",
+      "39.35%"
+     ],
+     [
+      "The tax-free amount that comes first",
+      "Personal allowance of £12,570, reduced by £1 for every £2 of net income above £100,000 and gone entirely at £125,140",
+      "Personal savings allowance of £1,000 for a basic rate taxpayer, £500 for a higher rate taxpayer and nothing for an additional rate taxpayer",
+      "Dividend allowance of £500, at the same flat rate for every taxpayer"
+     ],
+     [
+      "Other allowances",
+      "Blind person's allowance of £3,250, added to the personal allowance and deductible from income of any kind",
+      "A 0% starting rate on up to £5,000 of savings income, reduced by £1 for every £1 of taxable non-savings income",
+      "Marriage allowance of £1,260 transferred, cutting the recipient's tax by up to £252"
+     ]
+    ]
+   },
+   {
+    "label": "Capital allowances on plant, machinery and buildings",
+    "type": "grid",
+    "cols": [
+     "THE ALLOWANCE",
+     "WHAT IT COVERS",
+     "THE DEDUCTION"
+    ],
+    "rows": [
+     [
+      "First-year allowance for green items",
+      "Environmentally friendly products such as electric and zero-emission vehicles and electric vehicle charging points",
+      "100% of the cost deducted in the accounting period it is incurred, with no limit on the qualifying spend"
+     ],
+     [
+      "Annual investment allowance",
+      "Plant and machinery, but excluding cars",
+      "100% up to the annual limit, currently £1m; anything above it goes to writing-down allowances, and an unused balance cannot be carried forward"
+     ],
+     [
+      "Writing-down allowance, main pool",
+      "Plant and machinery not covered by the first-year allowance or the annual investment allowance",
+      "14% a year on a reducing balance, with assets pooled rather than tracked one by one"
+     ],
+     [
+      "Writing-down allowance, special rate pool",
+      "Long-life assets, integral features in a building and some cars",
+      "6% a year on a reducing balance"
+     ],
+     [
+      "Structures and buildings",
+      "Buildings and other structures used by the business where construction began on or after 29 October 2018",
+      "Relief for the construction cost"
+     ]
+    ]
+   },
+   {
+    "label": "Planning, avoidance and evasion",
+    "type": "grid",
+    "cols": [
+     "TAX PLANNING",
+     "TAX AVOIDANCE",
+     "TAX EVASION"
+    ],
+    "rows": [
+     [
+      "Using the legislation as it stands to pay less tax",
+      "Reducing liability by lawful means however contrived, through an arrangement that is artificial rather than genuine",
+      "Paying less tax or none through illegal methods"
+     ],
+     [
+      "Usually done after a genuine situation has arisen, such as splitting income between spouses once a couple is married",
+      "Usually planned in advance and carried out only to pay less tax",
+      "Not a question of degree: it is a crime"
+     ],
+     [
+      "Opening an individual savings account, or running a business through a company for tax reasons",
+      "Caught by targeted anti-avoidance rules and, above them, by the general anti-abuse rule",
+      "Prosecuted, with penalties under the general tax laws"
+     ],
+     [
+      "Entirely lawful",
+      "Lawful, but liable to be set aside and adjusted",
+      "Unlawful"
+     ]
+    ]
+   },
+   {
+    "label": "Mind map - Welsh income tax",
+    "type": "map",
+    "centre": "WELSH INCOME TAX",
+    "branches": [
+     {
+      "label": "WHAT THE WELSH RATES APPLY TO",
+      "leaves": [
+       "Income from employment",
+       "Profits from self-employment",
+       "Income from rentals",
+       "Income from pensions",
+       "Taxable social security benefits",
+       "SAVINGS and DIVIDEND income remain subject to UK rates"
+      ]
+     },
+     {
+      "label": "WHO IS A WELSH TAXPAYER",
+      "leaves": [
+       "A UK resident for income tax purposes who has a close connection with Wales in that tax year",
+       "A UK resident with no close connection anywhere in the UK who spends more days in Wales than in any other part of the UK",
+       "A member of Parliament for a Welsh constituency, or a Welsh politician, for all or part of the year",
+       "A day counts as spent in a part of the UK if the person is there at the end of it, unless merely travelling through"
+      ]
+     },
+     {
+      "label": "CLOSE CONNECTION",
+      "leaves": [
+       "One UK residence, situated in Wales, lived in for part of the year",
+       "More than one UK residence: the MAIN residence is in Wales and more time is spent there than at residences elsewhere in the UK",
+       "The main residence is usually where the person lives and spends most time",
+       "It may still be the main residence despite less time spent there, where most possessions are, where the family lives, where the registered address is, or where the clubs and societies are",
+       "Typical cases are offshore workers, lorry drivers and members of the armed forces"
+      ]
+     },
+     {
+      "label": "HOW IT WORKS IN PRACTICE",
+      "leaves": [
+       "The Senedd has set a proportion of income tax since 6 April 2019, by resolution before each tax year on the Welsh government's proposal",
+       "The UK rate is reduced by a specified percentage and the Welsh rate is paid in addition to that reduced rate",
+       "The order of taxation is unchanged: non-savings and non-dividend income first, then savings, then dividends",
+       "HMRC administers and collects it, giving employees a PAYE code beginning with the letter C",
+       "Outside PAYE the taxpayer ticks the Welsh taxpayer box on the self-assessment return",
+       "Allowances and reliefs work as they do for UK taxpayers, and National Insurance contributions are unaffected"
+      ]
+     }
+    ]
+   }
+  ],
+  "notes": [
+   {
+    "head": "7.16.2 Basis of charge and the chargeable persons",
+    "body": [
+     "The overview map names who is taxed and on what. These are the points the map does not carry.",
+     "Do NOT try to memorise the rates. The manual says explicitly that rates, allowances and bands will be supplied in the assessment. Concentrate on who is taxed, what is taxed, and whether there is a lawful way to reduce the bill.",
+     "Rates, allowances and reliefs normally change in April each year, to coincide with the start of the tax year.",
+     "Sole traders and partners are taxed on the profits of a trade or profession whether or not the profits are actually drawn out of the business.",
+     "In a partnership each partner is taxed on their total share of the partnership income. The share follows the partnership agreement, or is equal if there is no agreement.",
+     "The agreement may give one or more partners a PREFERENTIAL allocation, categorised as salary or as interest on capital, with the balance then shared in the agreed proportions.",
+     "Worked example: on profits of £205,000 where Rod takes a salary of £20,000 and Jane £5,000 as interest, the residual £180,000 splits equally at £60,000 each. Rod is taxed on £80,000, Jane on £65,000 and Freddy on £60,000.",
+     "The partnership itself is not liable to income tax. Each partner is individually liable for their own tax and not for their partners'.",
+     "The WHOLLY AND EXCLUSIVELY test is applied strictly. Where an expense is materially for a personal or non-business purpose, HMRC disallows it entirely rather than apportioning it.",
+     "CURRENCY: the writing-down allowance for main pool assets has been reduced from 18% to 14%, which also affects capital allowances for corporation tax at 7.17.2.3."
+    ]
+   },
+   {
+    "head": "7.16.3 Calculating the tax, and the Enterprise Investment Scheme",
+    "body": [
+     "The eight steps are in the steps panel above, and the order in which income is taxed is in the grid above.",
+     "If the personal allowance exceeds net income the excess cannot be carried forward to another tax year, because the allowance is annual only. The taxpayer simply pays no income tax that year.",
+     "Spouses and civil partners each have their own personal allowance.",
+     {
+      "type": "ol",
+      "head": "The three conditions for the marriage allowance",
+      "items": [
+       "The couple are married or in a civil partnership.",
+       "The transferring spouse or civil partner has income of less than the personal allowance.",
+       "The recipient spouse or civil partner is a basic rate taxpayer."
+      ]
+     },
+     "The transferor's personal allowance is reduced by the amount transferred, but the recipient does not simply add it to their own allowance. Instead the recipient's tax liability is reduced by an amount equal to 20% of the transferred allowance.",
+     "Income tax is PROGRESSIVE: the higher the taxable income, the higher the rate on the top slice.",
+     "ENTERPRISE INVESTMENT SCHEME: a taxpayer who subscribes for new shares in a qualifying unquoted trading company may deduct 30% of the value of the shares from their income tax liability.",
+     "The deduction can be taken for the tax year of purchase or for the previous one, and split between the two years in any proportion.",
+     "The annual ceiling is £1m of subscriptions, giving relief of up to £300,000, rising to £2m and £600,000 for a knowledge-intensive company.",
+     "The taxpayer must not be CONNECTED with the company: they must not own more than 30% of the ordinary shares, and must not be an employee or an associate of one.",
+     "Relief cannot create a negative income tax figure, so it cannot generate a repayment, though it can be set against a liability in the previous tax year."
+    ]
+   },
+   {
+    "head": "7.16.4 Payment, collection and trading losses",
+    "body": [
+     "Employees and company directors have tax deducted from their pay under PAYE and paid over to HMRC, which is deduction at source. HMRC sends the employer a tax code showing the tax-free allowance and rate for that employee.",
+     "PAYE is not always accurate, so some employees still have to file a return, and any tax deducted under PAYE is then offset against the liability for the year.",
+     "Sole traders and partners are taxed on the profits made during the TAX year, whatever accounting year they have chosen. Where the accounting year differs, profits from two accounting years must be apportioned.",
+     "Apportionment is normally by days, remembering 366 days in a leap year, though another reasonable method such as months or weeks may be used. Where the profits are not yet known, a provisional estimate goes in the return and is amended later.",
+     "Most self-employed people and landlords will increasingly have to submit quarterly updates to HMRC of income and expenses drawn from their digital records.",
+     {
+      "type": "ol",
+      "head": "When payments on account are required",
+      "items": [
+       "The taxpayer is self-employed with a tax bill of £1,000 or more, or has had 80% or less of their tax deducted at source.",
+       "The first payment on account falls due on 31 January in the tax year in question.",
+       "The second falls due on 31 July after the end of the tax year.",
+       "Each payment on account is 50% of the previous year's liability after credit for tax deducted at source, and any balancing payment is due on 31 January with the return."
+      ]
+     },
+     "Penalties are payable for a late return, and for late or non-payment of balancing payments. Some penalties are behaviour related, turning on whether an error was careless or deliberate.",
+     "The loss relief decision tree above works through the options. Two points bind them all: relief is not automatic and must be claimed, and no partial claims are allowed, so a claim must use all of the loss or absorb all of the available income.",
+     "Worked example of the current year rule: a trading loss of £40,000 against rental income of £27,000 absorbs the whole £27,000 even though the personal allowance would otherwise have covered part of it, leaving £13,000 to carry back to the previous year.",
+     "Worked example of the spill-over into gains: a trading loss of £30,000 set against property income of £25,000 leaves £5,000, which can reduce capital gains of £18,000 down to £13,000, before the annual exemption is applied."
+    ]
+   },
+   {
+    "head": "7.16.5 to 7.16.6 Anti-avoidance",
+    "body": [
+     "The grid above separates planning, avoidance and evasion. Parliament attacks avoidance on two fronts.",
+     "The FIRST is specific provision in the tax legislation, spelling out precisely which transactions are unacceptable and what follows. Some of these are called targeted anti-avoidance rules.",
+     "The SECOND is the GENERAL ANTI-ABUSE RULE, an overriding rule covering income tax, capital gains tax, corporation tax, inheritance tax and others.",
+     "It sits above the specific legislation, so it can be used even where an abusive arrangement exploits a targeted anti-avoidance rule.",
+     "The DOUBLE REASONABLENESS TEST is the threshold. HMRC may set an arrangement aside only if it can prove the arrangement cannot reasonably be regarded as a reasonable course of action, which is a high bar to clear.",
+     "HMRC must obtain the opinion of an INDEPENDENT ADVISORY PANEL on the reasonableness of the arrangement before treating it as abusive.",
+     "The remedy is a just and reasonable tax adjustment, such as taxing the income in a legitimate way. The rule itself carries no separate penalty, but a taxpayer in an abusive scheme can be penalised under the general tax laws for filing an inaccurate return.",
+     "An ENABLER, meaning someone who in the course of their business enables an abusive arrangement, can be made to pay a penalty equal to the value of the benefit they received for facilitating it. There is a right of appeal to a tax tribunal.",
+     "EIS ANTI-AVOIDANCE: the shares must be held for at least 3 years, and disposal within 3 years of issue claws the relief back, unless the taxpayer dies or gifts the shares to a spouse or civil partner.",
+     "Claw-back also follows if the scheme conditions cease to be met, for instance because the taxpayer becomes an employee or acquires more than 30% of the ordinary share capital.",
+     "SETTLEMENT RULES: a parent cannot shift income to a minor unmarried child to use the child's personal allowance or lower rates of tax.",
+     "Where a parent's gift produces more than £100 of income in a tax year, the whole of the income arising from that gift is taxed as the parent's. Gifts to minor grandchildren, nieces, nephews or friends are not caught."
+    ]
+   },
+   {
+    "head": "7.16.7 Welsh income tax",
+    "body": [
+     "The Welsh income tax map above carries the substance. Two points are worth stating separately.",
+     "The mechanism is subtraction and addition: the UK income tax rate is reduced by a specified percentage, and the Welsh rate of income tax is then paid on top of that reduced UK rate.",
+     "Where a taxpayer has residences in more than one part of the UK, the days spent in each of England, Scotland and Northern Ireland are counted SEPARATELY when testing which connection is closest."
+    ]
+   }
+  ],
+  "statutes": [
+   {
+    "ref": "Income Tax Act 2007 s 23",
+    "text": "Sets out the step-by-step calculation of an individual's income tax liability, from total income through net income and taxable income to the tax due. The 2026 BUS7 chapter presents the same sequence as eight steps without citing the section."
+   },
+   {
+    "ref": "Income Tax Act 2007 s 6",
+    "text": "Provides for the basic, higher and additional rates of income tax. The actual percentages and band limits are set annually and will be supplied in the assessment."
+   },
+   {
+    "ref": "Government of Wales Act 2006 (as amended by the Wales Act 2014)",
+    "text": "Gives the Senedd power, exercised since 6 April 2019, to set a proportion of the income tax paid by Welsh taxpayers on non-savings and non-dividend income, by resolution before each tax year."
+   },
+   {
+    "ref": "The general anti-abuse rule",
+    "text": "An overriding rule covering income tax, capital gains tax, corporation tax and inheritance tax. HMRC may set aside abusive tax arrangements only where it proves they cannot reasonably be regarded as a reasonable course of action, after obtaining the opinion of an independent advisory panel. The remedy is a just and reasonable tax adjustment, and an enabler can be penalised to the value of the benefit received."
+   },
+   {
+    "ref": "The settlement rules",
+    "text": "Anti-avoidance provision preventing a parent from shifting income to a minor unmarried child. Income of more than £100 a year arising from a parent's gift is taxed as the parent's income. Gifts to minor grandchildren, nieces, nephews or friends are outside the rule."
+   }
+  ],
+  "cases": [],
+  "tip": "⚡ 7.16 spine. You are not asked to memorise the figures, only the machinery. Work the calculation in order: total income, then net income, then taxable income after the personal allowance, then split it into non-savings, savings and dividends and tax them in that order, with dividends always the top slice. The personal allowance tapers away above £100,000. A trading deduction must be INCOME rather than capital, and wholly and exclusively for the business. Losses need a claim and allow no partial claims. Planning is lawful, avoidance is lawful but artificial, and evasion is a crime."
+ },
+ "7.17": {
+  "id": "7.17",
+  "title": "Corporation Tax",
+  "visuals": [
+   {
+    "label": "Mind map — the whole of 7.17",
+    "type": "map",
+    "centre": "7.17 CORPORATION TAX",
+    "branches": [
+     {
+      "label": "WHO PAYS, ON WHAT, AND FOR WHICH PERIOD",
+      "leaves": [
+       "Companies pay corporation tax on their TAXABLE PROFITS for their accounting period, at the rate applicable to the relevant financial years",
+       "Taxable profits are made up of three things: TRADING INCOME PROFITS, NON-TRADING INCOME PROFITS and CAPITAL GAINS",
+       "The FINANCIAL YEAR runs 1 April to 31 March; the ACCOUNTING PERIOD is the company's own elected period, and it is on that period that it pays",
+       "Before the total profit is taxed the company may deduct any payments made to NATIONAL CHARITIES",
+       "Companies pay corporation tax on their chargeable gains — there is no capital gains tax on a company"
+      ]
+     },
+     {
+      "label": "STEP 1 — INCOME PROFITS",
+      "leaves": [
+       "Start with TURNOVER, then deduct legitimate expenses (the cost of sales) and capital allowances",
+       "An expense is deductible only if it is WHOLLY AND EXCLUSIVELY for the purposes of the business, is NOT PROHIBITED BY STATUTE, and is of an INCOME NATURE with an element of regularity",
+       "Business entertainment, doubtful debt provisions and depreciation are NOT deductible",
+       "Add other non-trading income such as RENT RECEIPTS and INTEREST; DIVIDENDS received from another company are usually exempt and do not count",
+       "Dividends the company PAYS are not an allowable expense — they come out of post-tax profits"
+      ]
+     },
+     {
+      "label": "CAPITAL ALLOWANCES ARE TAX-APPROVED DEPRECIATION",
+      "leaves": [
+       "100% FIRST-YEAR ALLOWANCE for environmentally friendly items such as energy-efficient heating, water-saving machinery, charging points and zero-emission vehicles",
+       "100% FULL EXPENSING and 50% first-year allowances for other plant and machinery, uncapped but available only for NEW, not second-hand or refurbished, machinery",
+       "ANNUAL INVESTMENT ALLOWANCE gives a 100% deduction on plant and machinery excluding cars, up to £1m; it cannot be carried forward and a new allowance arises each accounting period",
+       "A first-year allowance cannot be claimed IN ADDITION to the AIA on the same expenditure — where both are available the company chooses",
+       "WRITING-DOWN ALLOWANCES on a reducing balance: 14% a year for the main pool, 6% a year for the special rate pool of long-life assets, integral features and some cars"
+      ]
+     },
+     {
+      "label": "STEP 2 — CHARGEABLE GAINS",
+      "leaves": [
+       "Take the proceeds of sale, or market value, and deduct the acquisition cost and the costs of acquisition such as legal fees",
+       "Then deduct ENHANCEMENT EXPENDITURE reflected in the value of the asset on disposal, and the INCIDENTAL COSTS OF DISPOSAL",
+       "INDEXATION ALLOWANCE is available only for assets owned before 1 January 2018 and has been FROZEN from that date",
+       "BUSINESS ASSETS ROLL-OVER RELIEF defers the gain where the proceeds are reinvested in other qualifying assets, between 1 YEAR BEFORE and 3 YEARS AFTER the sale",
+       "CAPITAL LOSSES can only be set against capital gains, in the current year or carried forward — never carried back, and never against income"
+      ]
+     },
+     {
+      "label": "CLOSE COMPANIES AND ANTI-AVOIDANCE",
+      "leaves": [
+       "A CLOSE COMPANY is UK-resident and controlled by FIVE OR FEWER PARTICIPATORS, or by any number of participators who are also DIRECTORS",
+       "A loan to a participator makes the company pay HMRC tax at the HIGHER DIVIDEND RATE, refunded when the loan is repaid or written off — a pure cash-flow cost",
+       "A cheap or interest-free loan to an EMPLOYEE creates a taxable benefit measured by the official rate of interest",
+       "TRANSFER PRICING: a transaction between group companies not at arm's length that produces a tax advantage is adjusted to the arm's-length outcome",
+       "CHANGE OF OWNERSHIP: carried-forward trading losses are blocked where HMRC considers there has been a major change in the nature or conduct of the trade after the acquisition"
+      ]
+     }
+    ]
+   },
+   {
+    "label": "Decision tree — which rate, and what can be done with a loss?",
+    "type": "branch",
+    "nodes": [
+     {
+      "q": "1. What are the company's total taxable profits for the accounting period?",
+      "a": [
+       {
+        "k": "£50,000 OR LESS",
+        "v": "The small profits rate of 19% applies to the whole of the taxable profit."
+       },
+       {
+        "k": "OVER £250,000",
+        "v": "The main rate of 25% applies to the whole of the taxable profit."
+       },
+       {
+        "k": "BETWEEN £50,000 AND £250,000",
+        "v": "The main rate of 25% applies but can be reduced by claiming marginal relief, which gives a gradual increase in the effective rate from 19% up to 25%. The marginal effective rate on the band itself is 26.5%."
+       }
+      ]
+     },
+     {
+      "q": "2. The company has made a TRADING loss. What can it do with it?",
+      "a": [
+       {
+        "k": "SET IT AGAINST TOTAL PROFITS OF THE CURRENT PERIOD",
+        "v": "Against all profits of the period, income and capital alike, if there are any."
+       },
+       {
+        "k": "CARRY IT BACK 12 MONTHS",
+        "v": "Against total profits of the preceding 12 months, but only AFTER a current-period offset has been made."
+       },
+       {
+        "k": "CARRY IT FORWARD",
+        "v": "Against total profits of a later accounting period, with no time limit."
+       }
+      ]
+     },
+     {
+      "q": "3. The loss is a CAPITAL loss instead. Does the same apply?",
+      "a": [
+       {
+        "k": "NO — GAINS ONLY",
+        "v": "A capital loss can only be offset against chargeable gains. It can never be used against income profits."
+       },
+       {
+        "k": "CURRENT YEAR AND FORWARD ONLY",
+        "v": "It can be set against gains in the current tax year and carried forward against future gains, but it can never be carried back."
+       }
+      ]
+     },
+     {
+      "q": "4. When is the tax due?",
+      "a": [
+       {
+        "k": "9 MONTHS AND 1 DAY AFTER THE END OF THE ACCOUNTING PERIOD",
+        "v": "That is the normal rule for payment."
+       },
+       {
+        "k": "12 MONTHS AFTER THE END OF THE PERIOD",
+        "v": "That is the deadline for the corporation tax RETURN, not the payment."
+       },
+       {
+        "k": "EARLIER, BY QUARTERLY INSTALMENTS",
+        "v": "Companies or groups with larger profits must pay in instalments rather than under the normal rule. Underpaid or overdue tax attracts interest and penalties."
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "label": "Steps — the five steps of a corporation tax calculation, in order",
+    "type": "steps",
+    "data": [
+     "Identify income profits: turnover, less expenditure wholly and exclusively incurred for the purposes of the business, less capital allowances, plus other income such as rent and interest but not dividends received, less trading losses.",
+     "Identify capital profits: disposal value, less (indexed) allowable expenditure such as the acquisition cost, considering business assets roll-over relief to postpone the gain, less capital and trading losses.",
+     "Cumulate the income profits and the capital profits, unless the gain has been rolled over.",
+     "Deduct any qualifying payments to charity.",
+     "Apply the appropriate rate or rates to the resulting taxable profits, according to the size of the company."
+    ]
+   },
+   {
+    "label": "Grid — rates and allowances for FY 2026/2027",
+    "type": "grid",
+    "cols": [
+     "ITEM",
+     "FIGURE",
+     "NOTE"
+    ],
+    "rows": [
+     [
+      "Small profits rate",
+      "19%",
+      "Applies where total taxable profits are £50,000 or less."
+     ],
+     [
+      "Main rate",
+      "25%",
+      "Applies where total taxable profits exceed £250,000."
+     ],
+     [
+      "Marginal relief",
+      "Effective rate 26.5% on the band",
+      "For profits between £50,000 and £250,000, giving a gradual rise in the overall effective rate from 19% to 25%."
+     ],
+     [
+      "Annual investment allowance",
+      "£1m",
+      "100% deduction on plant and machinery excluding cars. Unused allowance cannot be carried forward."
+     ],
+     [
+      "Writing-down allowance, main pool",
+      "14% a year",
+      "Reduced from 18% for the current tax year. Reducing balance basis."
+     ],
+     [
+      "Writing-down allowance, special rate pool",
+      "6% a year",
+      "Long-life assets, integral features in a building and some cars."
+     ],
+     [
+      "Loan to a participator in a close company",
+      "35.75%",
+      "The current higher rate for dividends, paid by the company on the amount of the loan."
+     ],
+     [
+      "Official rate on beneficial loans",
+      "3.75%",
+      "Used to measure the taxable benefit of a cheap or interest-free loan to an employee."
+     ],
+     [
+      "Payment of corporation tax",
+      "9 months and 1 day",
+      "After the end of the accounting period. The return is due 12 months after the end of the period."
+     ]
+    ]
+   },
+   {
+    "label": "Grid — capital allowances compared",
+    "type": "grid",
+    "cols": [
+     "ALLOWANCE",
+     "WHAT IT COVERS",
+     "THE CATCH"
+    ],
+    "rows": [
+     [
+      "100% first-year allowance for green items",
+      "Energy-efficient heating and air conditioning, water-saving machinery, electric vehicle charging points and zero-emission vehicles.",
+      "The whole cost is deducted in the accounting period in which the expenditure is incurred."
+     ],
+     [
+      "100% full expensing and 50% first-year allowances",
+      "Other plant and machinery, depending on the nature of the business. Uncapped.",
+      "Only available for new machinery, not second-hand or refurbished."
+     ],
+     [
+      "Annual investment allowance",
+      "Plant and machinery excluding cars, up to £1m.",
+      "Unused allowance cannot be carried forward, and expenditure above the limit goes into writing-down allowances."
+     ],
+     [
+      "Writing-down allowances",
+      "Everything not covered by a first-year allowance or the AIA.",
+      "Reducing balance. Main pool 14%, special rate pool 6%. Assets of the same type are pooled and the rate applies to the whole pool."
+     ]
+    ]
+   },
+   {
+    "label": "Grid — trading losses compared with capital losses",
+    "type": "grid",
+    "cols": [
+     "QUESTION",
+     "TRADING LOSS",
+     "CAPITAL LOSS"
+    ],
+    "rows": [
+     [
+      "Against what",
+      "Total profits of the period, income and capital alike.",
+      "Chargeable gains only. Never against income profits."
+     ],
+     [
+      "Current period",
+      "Yes, against all other profits of the period.",
+      "Yes, against gains in the current tax year."
+     ],
+     [
+      "Carry back",
+      "Yes, 12 months, but only after a current-period offset has been made.",
+      "Never."
+     ],
+     [
+      "Carry forward",
+      "Yes, against total profits of a later accounting period.",
+      "Yes, against gains in future tax years."
+     ]
+    ]
+   },
+   {
+    "label": "Grid — loans to participators in a close company",
+    "type": "grid",
+    "cols": [
+     "POINT",
+     "THE RULE"
+    ],
+    "rows": [
+     [
+      "Which companies",
+      "Close companies only. The rule exists because there is normally no tax on a loan, so a participator could take value out untaxed."
+     ],
+     [
+      "The charge",
+      "The company must pay HMRC an amount equal to the higher rate of tax for dividends on the loan, currently 35.75%, unless the loan has already been repaid."
+     ],
+     [
+      "When",
+      "9 months and 1 day after the end of the accounting period in which the loan was made."
+     ],
+     [
+      "Getting it back",
+      "HMRC refunds the notional tax 9 months and 1 day after the end of the accounting period in which the loan is repaid or written off. The real cost to the company is cash flow."
+     ],
+     [
+      "What happens to the participator",
+      "If the loan is written off, the amount written off is taxed on the participator as an income receipt, akin to a dividend. If it is repaid, there is no further taxable benefit."
+     ],
+     [
+      "Escape 1",
+      "The loan was made in the ordinary course of a money-lending business, such as a bank loan."
+     ],
+     [
+      "Escape 2",
+      "The loan, together with any other loans, is £15,000 or less, the borrower is a full-time employee of the company, and they have no material interest, meaning they own 5% or less of the ordinary shares."
+     ],
+     [
+      "Not deductible",
+      "The notional tax is not deductible as an expense for the company."
+     ]
+    ]
+   },
+   {
+    "label": "Grid — extracting profit from a company",
+    "type": "grid",
+    "cols": [
+     "METHOD",
+     "TREATMENT IN THE COMPANY",
+     "TREATMENT FOR THE RECIPIENT"
+    ],
+    "rows": [
+     [
+      "Dividend in cash",
+      "Not deductible. Paid out of distributable profits, meaning profits after tax.",
+      "Charged to income tax at the shareholder's marginal rate, after non-savings and savings income have been taxed. No National Insurance is due, even if the shareholder is also an employee or director."
+     ],
+     [
+      "Dividend in specie",
+      "A sale, transfer or other disposition of a non-cash asset, for example property or machinery, instead of a cash dividend.",
+      "Taxed as a distribution in the same way, so that value given to a shareholder without full consideration is taxed as income."
+     ],
+     [
+      "Salary, bonuses and benefits in kind",
+      "Allowable deductions against taxable trading profits, as are employers' National Insurance contributions.",
+      "Taxed as employment income and subject to National Insurance."
+     ],
+     [
+      "Pension contributions, rent for a building owned by a shareholder-director, or interest on a director's loan to the company",
+      "Other recognised methods of extracting profit.",
+      "Because dividend rates are lower than the rates for non-savings and savings income, owner-directors typically take a small salary and the majority of their remuneration as dividends."
+     ]
+    ]
+   }
+  ],
+  "notes": [
+   {
+    "head": "7.17.2 Basis of charge",
+    "body": [
+     "Two periods matter. The financial year runs from 1 April to 31 March annually. The company's accounting period is its own elected or chosen period, and it is on that period annually that the company pays corporation tax.",
+     "Companies are charged corporation tax on their taxable profits for the accounting period, at the rate applicable to the relevant financial years.",
+     "Taxable profits comprise trading income profits, non-trading income profits and capital gains.",
+     "These are cumulated to give total profit, but before that total is taxed the company may deduct any payments made to national charities.",
+     "The current financial year is 1 April 2026 to 31 March 2027, FY 2026/2027, and all the corporation tax rates are the same as for FY 2025/2026."
+    ]
+   },
+   {
+    "head": "7.17.2.1 Step 1 — income receipts",
+    "body": [
+     "Trading income is usually where most company income comes from. The calculation of trading profits for companies, sole traders and partnerships is broadly similar: from turnover the company deducts legitimate expenses, sometimes called its cost of sales, and capital allowances.",
+     "A company also pays corporation tax on non-trading income, for example rent receipts and interest income, which is added to its taxable trading income.",
+     "Dividend income received as a shareholder in another company is usually exempt and so does not count towards taxable income.",
+     "To be deductible, expenditure must be wholly and exclusively incurred for the purpose of the business. Raw materials for production qualify; most business entertainment costs do not.",
+     "It must not be prohibited by statute, which rules out a doubtful debt provision and depreciation.",
+     "It must be of an income nature, with an element of regularity, such as rent or wages paid to employees or directors.",
+     "Dividends a company pays to its shareholders are not an allowable trading expense; they are paid from post-tax profits.",
+     "Capital allowances are a form of tax-approved depreciation for certain capital expenditure, deducted from trading profits as though they were an expense. They exist to encourage investment.",
+     {
+      "type": "ol",
+      "head": "The manual's worked example",
+      "items": [
+       "Newco has turnover of £1,300,000. It deducts stock purchases of £580,000, salaries of £120,000 and utilities of £20,000, reducing taxable profits to £580,000.",
+       "Its business entertainment costs of £5,000 are not deductible and must be paid out of taxed profits.",
+       "It deducts a first-year allowance of £160,000 for qualifying green plant and machinery, reducing taxable profits to £420,000."
+      ]
+     },
+     "Structures and buildings allowances also exist for buildings and other structures used by a business, but the detail is outside the scope of the manual."
+    ]
+   },
+   {
+    "head": "7.17.2.2 Trading loss relief",
+    "body": [
+     "A trading loss can be set against total profits of the current accounting period, if there are any other profits, whether income or capital.",
+     "It can be carried back and set against total profits of the preceding 12 months, but only after a current-period offset has been made.",
+     "It can be carried forward and set against total profits of a later accounting period.",
+     "The manual's example: Hogg Foods Ltd has a trading loss of £85,000, chargeable gains of £20,000 and property income of £17,000. The loss is offset against all profits of £37,000 for the year, leaving £48,000, which can then be carried back 12 months or carried forward."
+    ]
+   },
+   {
+    "head": "7.17.2.3 Step 2 — taxable chargeable gains",
+    "body": [
+     "A corporate gain arises where an asset increases in value while the company owns it. Companies pay corporation tax on chargeable gains, not capital gains tax.",
+     "First take the proceeds of sale, or the market value, and deduct the original acquisition cost together with any associated expenditure incurred on acquisition, such as legal fees.",
+     "Then deduct enhancement expenditure reflected in the value of the asset on disposal, for example an extension to a building, and the incidental costs of disposal such as legal, surveyor or auctioneer fees.",
+     "For assets owned before 1 January 2018 an indexation allowance gives a further deduction for inflationary increases. It has been frozen from that date, so assets acquired afterwards get nothing. The calculation itself is outside the scope of the manual.",
+     "Business assets roll-over relief lets a company defer a chargeable gain, and so the tax on it, where it disposes of a qualifying business asset. Qualifying assets include land, buildings and plant and machinery, but NOT shares.",
+     "Two conditions apply to the relief: the proceeds of sale must be reinvested in other qualifying assets, which need not be the same kind, and the business must have been trading both when the old assets were sold and when the new ones were bought.",
+     "The reinvestment must be made within 1 year before or 3 years after the asset is sold. The charge is deferred until the new asset is disposed of and no new qualifying assets are purchased.",
+     "Capital losses can only be offset against chargeable gains, never against income profits. They can be used against gains in the current tax year and carried forward against future gains, but they cannot be carried back."
+    ]
+   },
+   {
+    "head": "7.17.2.4 Steps 3 to 5 — calculation, payment and collection",
+    "body": [
+     "Once taxable income profits and taxable chargeable gains, less losses, have been calculated for the accounting period, they are added together.",
+     "Any qualifying payments to charity are then deducted from the total profit.",
+     "The relevant corporation tax rate is applied to the taxable profit. The rate depends on whether the company qualifies as a small company.",
+     "Corporation tax is due 9 months and 1 day after the end of the accounting period. The corporation tax return for the same period is due 12 months after the end of the period.",
+     "Any corporation tax underpaid or overdue is subject to interest and penalties.",
+     "Companies or groups of companies with larger profits must pay earlier than the normal rule, in quarterly instalments.",
+     "Where a company has one or more associated companies, meaning companies under common control, the £50,000 and £250,000 thresholds are divided by the number of associated companies, so a company with one associated company divides them by two."
+    ]
+   },
+   {
+    "head": "7.17.3 Company distributions and other extraction of profits",
+    "body": [
+     "The taxation of distributions is designed to ensure that any value given to a shareholder that they have not paid for through full consideration is taxed as a dividend, that is, as income received by the shareholder.",
+     "Dividends are not tax-deductible as an expense for the company and are paid from distributable profits, meaning profits after tax.",
+     "A distribution in specie, also called a dividend in kind, arises from a sale, transfer or other disposition by a company of a non-cash asset, for example a transfer of property or machinery to a shareholder instead of a cash dividend.",
+     "Dividends received by a shareholder are chargeable to income tax in England and Wales at the shareholder's marginal rate, after any non-savings and savings income has been taxed.",
+     "Dividends are not earnings for National Insurance purposes, so no National Insurance contributions are due, even where the shareholder is also an employee or director of the company.",
+     "That is why owner-directors of smaller companies typically pay themselves a small salary and extract the majority of their remuneration as dividends: dividend tax rates are lower than the rates for non-savings and savings income.",
+     "Salary, bonuses and other benefits in kind paid to directors and employees are allowable deductions against the taxable trading profits of the company, as are employers' National Insurance contributions.",
+     "Profits can also be extracted through company pension contributions, rent paid for the use of a building owned by a shareholder-director, or interest on a loan made to the company by a shareholder-director."
+    ]
+   },
+   {
+    "head": "7.17.4 Close companies",
+    "body": [
+     "A close company is a company resident in the UK which is controlled by five or fewer participators, or by any number of participators who are also directors, including shadow directors.",
+     "A participator is a shareholder or a person with the right to acquire shares.",
+     "Control means ownership of more than 50% of the shares, more than half of the voting power, or the right to acquire over 50% of the shares."
+    ]
+   },
+   {
+    "head": "7.17.5 Anti-avoidance provisions",
+    "body": [
+     "HMRC is aware that companies, especially those controlled by a limited number of individuals, can be used to get profits into the hands of those individuals without tax being paid, in particular by loans that are interest-free or later written off.",
+     "The loans-to-participators rule applies only to close companies. See the grid above for the charge, the timing, the refund and the two escapes.",
+     "Separately, where a company makes a loan to an employee, who may also be a shareholder, a taxable benefit arises if no interest is charged, or if interest is charged below the official rate of interest on beneficial loans set by HMRC. The official rate is currently 3.75%.",
+     "The manual's example: Henry borrows £80,000 from his own company, of which he is the sole director and employee and one of four shareholders, and pays no interest. He is deemed to receive a benefit of £80,000 at the official rate, on which he pays income tax, and the company pays National Insurance on the value of that benefit. Because Henry is also a participator in a close company, the close company rules apply as well.",
+     "Transfer pricing: where goods or services pass between group companies, prices could be set so that the profit lands in the company with the lowest corporation tax rate, if the companies are in different countries, or with the most brought-forward losses, if they are both in the UK.",
+     "Where a transaction is found not to be at arm's length and a tax advantage results from it, anti-avoidance legislation adjusts the outcome to what would have happened on an arm's-length basis, removing the advantage.",
+     "Change of ownership: rules prevent a company carrying forward its trading losses where ownership has changed and the new owner acquired the company only in order to use those losses.",
+     "If HMRC considers that a major change in the nature or conduct of the trade or business has taken place after the acquisition, it will stop the carried-forward losses from being used."
+    ]
+   }
+  ],
+  "statutes": [
+   {
+    "ref": "Corporation Tax Act 2009",
+    "text": "The main charging statute for corporation tax on the income profits of companies, including the rules on trading income, non-trading income and deductible expenditure."
+   },
+   {
+    "ref": "Corporation Tax Act 2010",
+    "text": "Carries the rates of corporation tax, the small profits rate and marginal relief, the associated companies rules, trading loss relief, and the close company rules including loans to participators."
+   },
+   {
+    "ref": "Taxation of Chargeable Gains Act 1992",
+    "text": "Governs the computation of chargeable gains, allowable expenditure, indexation allowance for assets held before 1 January 2018, business assets roll-over relief and the treatment of capital losses."
+   },
+   {
+    "ref": "Capital Allowances Act 2001",
+    "text": "Governs capital allowances: first-year allowances, full expensing, the annual investment allowance, and writing-down allowances on the main pool and the special rate pool."
+   },
+   {
+    "ref": "Income Tax (Trading and Other Income) Act 2005",
+    "text": "Charges dividends and other distributions received by an individual shareholder to income tax, at the dividend rates and after non-savings and savings income."
+   },
+   {
+    "ref": "Taxation (International and Other Provisions) Act 2010",
+    "text": "Contains the transfer pricing rules, which substitute the arm's-length result where a transaction between connected parties produces a tax advantage."
+   }
+  ],
+  "cases": [],
+  "tip": "⚡ 7.17 SPINE — five steps in order: income profits, capital gains, cumulate, deduct charitable payments, apply the rate. Dividends RECEIVED are exempt and dividends PAID are not deductible. Take the capital allowances before the rate — the annual investment allowance, full expensing for NEW machinery only, then writing down on the reducing balance. Split the losses, because they behave differently: a TRADING loss goes against total profits, back twelve months or forward indefinitely, while a CAPITAL loss goes against gains only and can NEVER go back. Pay nine months and a day after the accounting period ends and file at twelve months. Finish by asking whether it is a CLOSE company, because a loan to a participator carries its own charge."
+ },
+ "7.18": {
+  "id": "7.18",
+  "title": "Capital Gains Tax",
+  "visuals": [
+   {
+    "label": "Mind map — the whole of 7.18",
+    "type": "map",
+    "centre": "7.18 CAPITAL GAINS TAX",
+    "branches": [
+     {
+      "label": "WHEN THE CHARGE ARISES",
+      "leaves": [
+       "A CHARGEABLE PERSON: an individual, a trustee or a personal representative",
+       "A CHARGEABLE DISPOSAL: a sale, a gift, a disposal of part, or the loss or destruction of the asset",
+       "A CHARGEABLE ASSET: most commonly land, buildings, goodwill or an interest in a business, and shares",
+       "A company making a gain pays CORPORATION TAX on it, not capital gains tax",
+       "A UK resident is charged on worldwide assets; a non-resident only on disposals of interests in UK land, residential or commercial"
+      ]
+     },
+     {
+      "label": "WHAT ESCAPES THE CHARGE ALTOGETHER",
+      "leaves": [
+       "The taxpayer's MAIN RESIDENCE, through private residence relief",
+       "PRIVATE CARS, including classic and vintage models",
+       "Gains made inside an INDIVIDUAL SAVINGS ACCOUNT",
+       "WASTING CHATTELS — tangible moveable property with a predictable life of 50 years or less",
+       "GOVERNMENT BONDS, and a non-wasting chattel sold for £6,000 or less",
+       "DEATH is not an occasion of charge: the beneficiary inherits at probate value, the market value at the date of death",
+       "Transfers between SPOUSES or CIVIL PARTNERS pass on a no-gain, no-loss basis, and gifts to registered charities are normally exempt"
+      ]
+     },
+     {
+      "label": "CALCULATING THE GAIN",
+      "leaves": [
+       "Start with the CONSIDERATION actually received on a sale at arm's length",
+       "Use MARKET VALUE instead where the disposal is a gift or is made to a connected person",
+       "A BAD BARGAIN made at arm's length is taken at the actual price, because there may be a sound commercial reason for it",
+       "Deduct the ACQUISITION COST and expenses — the purchase price or market value on acquisition, legal fees and stamp duty land tax",
+       "Deduct INCIDENTAL COSTS OF DISPOSAL such as legal fees, valuation fees and advertising",
+       "Deduct ENHANCEMENT EXPENDITURE, but only if it is still reflected in the asset at the date of disposal"
+      ]
+     },
+     {
+      "label": "THE SIX RELIEFS",
+      "leaves": [
+       "BUSINESS ASSET DISPOSAL RELIEF taxes qualifying gains at a lower rate, up to a lifetime limit",
+       "GIFT HOLD-OVER RELIEF lets the donor give a business asset away and passes the gain to the donee",
+       "BUSINESS ASSETS ROLL-OVER RELIEF defers the gain where the proceeds are reinvested in new qualifying assets",
+       "INCORPORATION RELIEF defers the gain when a business is transferred to a company in exchange for shares",
+       "ENTERPRISE INVESTMENT SCHEME RELIEF defers a gain of any kind that is reinvested in qualifying unquoted shares",
+       "PRIVATE RESIDENCE RELIEF exempts the gain on the taxpayer's home, wholly or in part"
+      ]
+     },
+     {
+      "label": "LOSSES, ALLOWANCE, RATE AND PAYMENT",
+      "leaves": [
+       "Losses of the same tax year MUST be set against that year's gains, automatically",
+       "Unused losses are carried forward INDEFINITELY, but the annual exempt amount can never be carried forward",
+       "Both losses and the annual exempt amount should be aimed at the gains taxed at the HIGHER rate",
+       "The rate turns on the taxpayer's INCOME: gains within the unused basic rate band are taxed at the lower rate",
+       "Capital gains tax is payable on 31 JANUARY after the tax year, with no payments on account",
+       "A disposal of UK RESIDENTIAL PROPERTY must be reported and paid within 60 DAYS of completion"
+      ]
+     }
+    ]
+   },
+   {
+    "label": "Decision tree — which relief is this question about?",
+    "type": "branch",
+    "nodes": [
+     {
+      "q": "1. The taxpayer is GIVING the asset away",
+      "a": [
+       {
+        "k": "GIFT HOLD-OVER RELIEF",
+        "v": "Donor and donee elect jointly. The donor's gain is not taxed now; instead the donee's acquisition cost is reduced by that gain, so the donee pays on both gains when they eventually dispose of it."
+       },
+       {
+        "k": "WHICH ASSETS QUALIFY",
+        "v": "Assets used in a trade or profession carried on by the transferor or by their personal company, meaning a holding of at least 5% of the voting rights; shares in an unquoted trading company; shares in the transferor's personal company; and assets qualifying for agricultural property relief."
+       },
+       {
+        "k": "IF THE DONEE IS A SPOUSE",
+        "v": "No relief is needed — the transfer is automatically no-gain, no-loss, and the recipient takes the donor's original cost."
+       }
+      ]
+     },
+     {
+      "q": "2. The taxpayer is SELLING and buying something else",
+      "a": [
+       {
+        "k": "BUSINESS ASSETS ROLL-OVER RELIEF",
+        "v": "Available to a sole trader or partner who reinvests the proceeds in other qualifying business assets. Qualifying assets include land, buildings and plant and machinery, but NOT shares."
+       },
+       {
+        "k": "THE TIMING WINDOW",
+        "v": "The reinvestment must be made within 1 year before, or 3 years after, the sale of the old asset. The business must have been trading both when the old asset was sold and when the new one was bought."
+       },
+       {
+        "k": "HOW MUCH RELIEF",
+        "v": "Full relief only if ALL the proceeds are reinvested. Partial relief where only part is reinvested, where the old asset was only partly used in the business, or where the replacement is a depreciating asset."
+       },
+       {
+        "k": "ENTERPRISE INVESTMENT SCHEME RELIEF",
+        "v": "The gain can be on ANY type of asset, not just a business asset. Invest it in shares in an EIS qualifying unquoted trading company, up to 1 year before or 3 years after the gain, and the tax on the amount invested is deferred until the EIS shares are sold."
+       }
+      ]
+     },
+     {
+      "q": "3. The taxpayer is selling or giving away the BUSINESS ITSELF",
+      "a": [
+       {
+        "k": "BUSINESS ASSET DISPOSAL RELIEF",
+        "v": "A lower rate on qualifying gains, up to a lifetime limit of £1m of gains for each individual."
+       },
+       {
+        "k": "THE THREE QUALIFYING DISPOSALS",
+        "v": "All or part of a trading business carried on as a sole trader or in partnership for at least 2 years; shares in a trading company where the individual owns at least 5% of the ordinary voting shares AND was an officer or employee for 2 years; and assets owned by the individual and used by the trading business in the 2 years before disposal. Selling one asset on its own does not qualify unless it falls within those provisions."
+       },
+       {
+        "k": "INCORPORATION RELIEF",
+        "v": "A different relief. Where an individual transfers their business or partnership interest as a going concern to a company and takes shares in exchange, the gain is deferred by reducing the acquisition cost of those shares."
+       }
+      ]
+     },
+     {
+      "q": "4. The asset is the taxpayer's HOME",
+      "a": [
+       {
+        "k": "PRIVATE RESIDENCE RELIEF",
+        "v": "If the taxpayer lived there as their home throughout their ownership, 100% of the gain is exempt. The relief covers land or garden of up to half a hectare, and more in some cases."
+       },
+       {
+        "k": "THE FORMULA",
+        "v": "Exempt gain = gain × (period of occupation ÷ period of ownership). Only absence during ownership can make any part of the gain chargeable."
+       },
+       {
+        "k": "THE LAST 9 MONTHS ARE ALWAYS OCCUPATION",
+        "v": "The taxpayer is deemed to be living there for the final 9 months of ownership whether they were or not, provided only that they occupied it as their home at some time."
+       },
+       {
+        "k": "THREE FURTHER DEEMED PERIODS",
+        "v": "Each must be sandwiched between periods of actual occupation: absence abroad by reason of employment, which is unlimited; absence working elsewhere, employed or self-employed, up to 4 years; and absence for ANY reason at all, up to 3 years. They can be added together."
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "label": "The six steps of a capital gains tax calculation, in order",
+    "type": "steps",
+    "data": [
+     "Identify a chargeable asset that is the subject of a chargeable disposal by a chargeable person",
+     "Calculate the gain: consideration, actual or deemed, less allowable deductions such as acquisition costs and other permitted expenditure",
+     "Consider the deferral and exemption reliefs — roll-over, hold-over, incorporation, EIS and private residence relief. Business asset disposal relief is NOT applied here; it is a rate, applied at step 6",
+     "Deduct any allowable losses, aiming them at the gains that will be taxed at the higher rate",
+     "Deduct the annual exempt amount, again aiming it at the gains that will be taxed at the higher rate",
+     "Calculate the tax, checking first whether the taxpayer is a basic or higher rate income taxpayer, and applying the business asset disposal relief rate to qualifying assets"
+    ]
+   },
+   {
+    "label": "The figures to memorise, and where the rate comes from",
+    "type": "grid",
+    "cols": [
+     "ITEM",
+     "THE POSITION FOR 6 APRIL 2026 TO 5 APRIL 2027"
+    ],
+    "rows": [
+     [
+      "Annual exempt amount",
+      "£3,000. The same as the previous tax year, having fallen gradually from a high of £12,300. It cannot be carried forward or transferred if it goes unused."
+     ],
+     [
+      "Rate within the unused basic rate band",
+      "18% on gains up to the amount of basic rate band left after the taxpayer's taxable income has been taxed."
+     ],
+     [
+      "Rate above the unused basic rate band",
+      "24%. A higher rate income taxpayer therefore pays 24% on all their gains, subject to business asset disposal relief."
+     ],
+     [
+      "Business asset disposal relief rate",
+      "18% on qualifying gains. It was 14% in the previous tax year and 10% before that."
+     ],
+     [
+      "Business asset disposal relief lifetime limit",
+      "£1m of gains for each individual, over their lifetime."
+     ],
+     [
+      "Non-wasting chattel exemption",
+      "The gain is exempt if the disposal proceeds are £6,000 or less."
+     ],
+     [
+      "Payment date",
+      "31 January following the tax year in which the gain was made. There are no payments on account, unlike income tax."
+     ],
+     [
+      "UK residential property",
+      "The tax must be reported and paid within 60 days of completion."
+     ]
+    ]
+   },
+   {
+    "label": "Losses and the annual exempt amount — the ordering trap",
+    "type": "grid",
+    "cols": [
+     "RULE",
+     "WHY IT MATTERS"
+    ],
+    "rows": [
+     [
+      "Same-year losses are set off automatically",
+      "A gain of £12,000 and a loss of £3,000 in the same year net to £9,000. The taxpayer has no choice about this."
+     ],
+     [
+      "Losses can still be steered",
+      "Where there are several gains, losses should be allocated to the gains NOT eligible for business asset disposal relief, because those carry the higher rate."
+     ],
+     [
+      "Excess losses carry forward indefinitely",
+      "If the year's losses exceed the year's gains, the chargeable gain is nil and the unused loss is carried forward without time limit. Losses brought forward can also be steered."
+     ],
+     [
+      "But the annual exempt amount is lost",
+      "If reliefs or losses leave nothing chargeable, the annual exempt amount for that year simply disappears. It cannot be carried forward or transferred."
+     ],
+     [
+      "The anti-avoidance rule on losses",
+      "A loss cannot be set against a gain if it arose from arrangements whose main purpose was to secure a tax advantage — paying less tax, obtaining a relief or deferral, or a larger repayment. The classic example is a circular transaction that leaves the taxpayer owning the same asset."
+     ]
+    ]
+   }
+  ],
+  "notes": [
+   {
+    "head": "7.18.2 Who pays, and on what",
+    "body": [
+     "Capital gains tax bites when a chargeable person makes a chargeable disposal of a chargeable asset.",
+     "Individuals, trustees and personal representatives pay capital gains tax. A company pays CORPORATION TAX on its chargeable gains instead.",
+     "A UK resident individual is chargeable on the disposal of worldwide assets.",
+     "A non-resident is generally not chargeable, even on an asset situated here. The main exception is a disposal of an interest in UK land, whether residential or commercial."
+    ]
+   },
+   {
+    "head": "7.18.2.2 Disposals that are easy to miss",
+    "body": [
+     "A GIFT is a disposal, and so is the disposal of only part of an asset.",
+     "The LOSS or DESTRUCTION of an asset can be a disposal, particularly where an insurance claim produces a payment.",
+     "DEATH is not an occasion of charge. The person left the asset inherits it at market value at the date of death, the probate value.",
+     "SPOUSES and CIVIL PARTNERS transfer between themselves with no charge. The recipient is deemed to acquire at the same cost as the transferor, which is what no-gain, no-loss means."
+    ]
+   },
+   {
+    "head": "7.18.3 Consideration, market value and the bad bargain",
+    "body": [
+     "Start with the consideration received. A property bought for £100,000 and sold for £250,000 produces a gain of £150,000.",
+     "If the asset is GIVEN away, or sold to a CONNECTED PERSON, substitute the market value. A sale to a connected person for £200,000 where the market value is £250,000 is still taxed on a gain of £150,000.",
+     "A BAD BARGAIN at arm's length is different. A sale to an unconnected third party for £200,000 is taxed on the actual gain of £100,000, because there may be a sound commercial reason such as the need for a quick sale."
+    ]
+   },
+   {
+    "head": "7.18.3.1 Allowable expenditure",
+    "body": [
+     "The purchase price, or the market value at acquisition if the asset was received as a gift or on a death.",
+     "Acquisition expenses, such as legal fees and stamp duty land tax.",
+     "Incidental costs of disposal, such as legal fees, valuation fees and advertising costs.",
+     "Enhancement expenditure, most commonly building costs on an extension. It must still be reflected in the state or nature of the asset at the date of disposal — if the extension has been demolished by the time of sale, its cost is not allowable."
+    ]
+   },
+   {
+    "head": "7.18.6 Anti-avoidance",
+    "body": [
+     "The government uses two methods: specific provisions inside the tax legislation, and the general anti-abuse rule.",
+     "The targeted anti-avoidance rule on losses is the example the SRA specification points to. A loss cannot be offset if it arose from arrangements whose main purpose was to secure a tax advantage.",
+     "A tax advantage means paying less tax or no tax, enjoying a relief or a deferral, or receiving an increased repayment.",
+     "The give-away is a circular transaction: the taxpayer sells the loss-making asset, a spouse buys an identical holding the same day, and gifts it back on a no-gain, no-loss basis, so nothing changes except the manufactured loss."
+    ]
+   },
+   {
+    "head": "CURRENCY",
+    "body": [
+     "The 2026 manual moved every rate and threshold out of the chapter and into the separate Tax Checker, and the March 2026 business update confirms that the Tax Checker governs for 7.16 to 7.19. The figures above are from the Tax Checker of 24 July 2026, for the tax year 6 April 2026 to 5 April 2027.",
+     "The old split between a lower rate for ordinary assets and a higher rate for residential property has gone. There is now one pair of rates, 18% and 24%, for all assets, and the business asset disposal relief rate has risen from 10% to 14% and now to 18%."
+    ]
+   }
+  ],
+  "statutes": [
+   {
+    "ref": "Taxation of Chargeable Gains Act 1992, s 1",
+    "text": "Capital gains tax is charged on chargeable gains accruing to a person on the disposal of assets. Companies are charged to corporation tax on their chargeable gains rather than to capital gains tax."
+   },
+   {
+    "ref": "TCGA 1992, s 152",
+    "text": "Business assets roll-over relief on the replacement of business assets. Where the proceeds of a qualifying business asset are reinvested in other qualifying assets within one year before or three years after the disposal, the gain is rolled into the cost of the new asset and deferred."
+   },
+   {
+    "ref": "TCGA 1992, s 162",
+    "text": "Incorporation relief. Where an individual transfers a business as a going concern, with the whole of its assets, to a company wholly or partly in exchange for shares, the gain is deferred by reducing the acquisition cost of those shares."
+   },
+   {
+    "ref": "TCGA 1992, s 165",
+    "text": "Gift hold-over relief on gifts of business assets. On a joint claim by transferor and transferee, the transferor's gain is held over and the transferee's acquisition cost is reduced by the amount of that gain."
+   },
+   {
+    "ref": "TCGA 1992, ss 169H–169V",
+    "text": "Business asset disposal relief. Sets out the qualifying disposals, the 5% shareholding and 2-year officer or employee conditions, the 2-year trading condition, the lifetime limit on qualifying gains and the reduced rate."
+   },
+   {
+    "ref": "TCGA 1992, s 222",
+    "text": "Private residence relief. A gain accruing on the disposal of a dwelling house that is or has been the individual's only or main residence, together with land occupied as its garden or grounds up to the permitted area, is relieved in the proportion that the period of occupation bears to the period of ownership."
+   }
+  ],
+  "cases": [],
+  "tip": "⚡ SQE: Chargeable person + chargeable disposal + chargeable asset. Gift or connected person = MARKET VALUE; bad bargain at arm's length = actual price. Death is not a disposal and the beneficiary takes probate value; spouses transfer no-gain, no-loss. Reliefs: hold-over for gifts of business assets, roll-over for reinvestment 1 year before to 3 years after, incorporation for business-into-shares, EIS for any gain reinvested in unquoted shares, private residence for the home. Business asset disposal relief is a RATE applied at the end, not a step 3 relief. 2026/27: annual exempt amount £3,000; 18% within the unused basic rate band, 24% above it; business asset disposal relief 18% up to £1m lifetime. Pay by 31 January, but UK residential property within 60 days of completion."
+ },
+ "7.19": {
+  "id": "7.19",
+  "title": "Value Added Tax",
+  "visuals": [
+   {
+    "label": "Mind map — the whole of 7.19",
+    "type": "map",
+    "centre": "7.19 VALUE ADDED TAX",
+    "branches": [
+     {
+      "label": "WHEN VAT IS CHARGED",
+      "leaves": [
+       "There must be a SUPPLY of goods or services, made in the UK",
+       "It must be made by a TAXABLE PERSON — someone who makes or intends to make taxable supplies and is required to be registered",
+       "It must be made while CARRYING ON A BUSINESS, which includes any trade, profession or vocation",
+       "A price is deemed to INCLUDE VAT unless it says otherwise",
+       "A person can be a company, a partnership or an LLP, and a partnership registers in the partnership's own name"
+      ]
+     },
+     {
+      "label": "OUTPUT TAX AND INPUT TAX",
+      "leaves": [
+       "OUTPUT TAX is the VAT the business charges its own customers on what it supplies",
+       "INPUT TAX is the VAT the business itself pays on what it buys",
+       "The business pays HMRC the difference, and is REIMBURSED where the input tax exceeds the output tax",
+       "The effect is that VAT is borne by the FINAL CONSUMER, not by the businesses in the chain"
+      ]
+     },
+     {
+      "label": "REGISTRATION",
+      "leaves": [
+       "COMPULSORY where taxable supplies in the previous 12 months exceed the registration threshold — a rolling test done at the end of every month",
+       "COMPULSORY also where there are reasonable grounds to believe the next 30 DAYS alone will exceed the threshold",
+       "VOLUNTARY registration is allowed below the threshold, and lets the business recover its input tax",
+       "The price of voluntary registration is that the business must charge output tax, a real cost to an unregistered customer",
+       "DEREGISTRATION is allowed once turnover falls below the deregistration threshold for 12 months, and is compulsory within 30 days of ceasing to make taxable supplies"
+      ]
+     },
+     {
+      "label": "HOW A SUPPLY IS TREATED",
+      "leaves": [
+       "STANDARD RATED at 20% — most goods and services",
+       "REDUCED RATED at 5% — domestic fuel, installation of energy-saving materials, child car seats",
+       "ZERO RATED at 0% — food other than catering, books and newspapers, water and sewerage, transport, residential construction",
+       "EXEMPT — insurance, financial services, education, and normally the sale, lease and letting of commercial land and buildings",
+       "OUTSIDE THE SCOPE — a private sale, an MOT fee, the sale of shares, and the sale of a business as a going concern"
+      ]
+     },
+     {
+      "label": "OPTING TO TAX LAND",
+      "leaves": [
+       "The sale or lease of land is normally an EXEMPT supply, so the input tax on it cannot be recovered",
+       "The owner of COMMERCIAL land or buildings may OPT TO TAX, which makes the supply standard rated and unlocks input tax recovery",
+       "The option applies to that individual building, but once made it applies to the WHOLE of it",
+       "It binds all FUTURE supplies of that property, whether sale or lease",
+       "It does NOT pass with the land: it belongs to the person who made it"
+      ]
+     }
+    ]
+   },
+   {
+    "label": "Decision tree — can this business recover its input tax?",
+    "type": "branch",
+    "nodes": [
+     {
+      "q": "1. What kind of supplies does the business make?",
+      "a": [
+       {
+        "k": "TAXABLE SUPPLIES — STANDARD OR REDUCED RATE",
+        "v": "It charges output tax at 20% or 5%, deducts the input tax it has paid, and pays HMRC the difference."
+       },
+       {
+        "k": "ZERO-RATED SUPPLIES",
+        "v": "Zero rating is still a TAXABLE supply. The business charges 0% output tax but recovers its input tax in full, so it is usually in repayment and often makes monthly claims to help cashflow."
+       },
+       {
+        "k": "EXEMPT SUPPLIES ONLY",
+        "v": "It cannot register, and so cannot reclaim any VAT. The input tax it pays is simply a cost of doing business."
+       },
+       {
+        "k": "A MIXTURE OF ZERO-RATED AND EXEMPT",
+        "v": "A partially exempt trader. Normally only a proportion of its input tax is recoverable."
+       }
+      ]
+     },
+     {
+      "q": "2. What was the purchase for?",
+      "a": [
+       {
+        "k": "A NON-BUSINESS ACTIVITY",
+        "v": "No recovery. VAT on supplies relating to non-business activity cannot be reclaimed."
+       },
+       {
+        "k": "BOTH BUSINESS AND PERSONAL USE",
+        "v": "Only the business proportion is recoverable — a computer used partly at home is the standard example."
+       },
+       {
+        "k": "A CAR",
+        "v": "In most cases the input VAT on the purchase of a car cannot be reclaimed at all, because of the potential for personal use."
+       },
+       {
+        "k": "BUSINESS ENTERTAINING",
+        "v": "Blocked. VAT on business entertaining cannot be reclaimed."
+       },
+       {
+        "k": "AND WITHOUT AN INVOICE",
+        "v": "No recovery either way. A person deducting input tax in a VAT return must hold tax invoices to back the claim up."
+       }
+      ]
+     },
+     {
+      "q": "3. The purchase is a commercial property — should the owner opt to tax?",
+      "a": [
+       {
+        "k": "THE PROBLEM",
+        "v": "Buying a new commercial building is a taxable transaction, so the landlord pays standard rate VAT on it. Renting it out would be an exempt supply, which makes that large input tax irrecoverable."
+       },
+       {
+        "k": "THE ANSWER",
+        "v": "Opting to tax converts the letting into a taxable supply, so the input tax on the purchase price becomes recoverable, along with inputs on heating, cleaning and repairs."
+       },
+       {
+        "k": "THE COST TO THE TENANT",
+        "v": "Standard rate VAT must then be charged on the premium and the rents. That hurts a tenant who makes wholly or partly exempt supplies, because they cannot recover it."
+       },
+       {
+        "k": "AND IT IS HARD TO UNDO",
+        "v": "HMRC will revoke the option within 6 MONTHS if the owner changes their mind and has not yet acted on it, for example by charging rent inclusive of VAT. Otherwise it can only be revoked after 20 YEARS, with HMRC's consent."
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "label": "How each kind of supply is treated",
+    "type": "grid",
+    "cols": [
+     "TREATMENT",
+     "RATE",
+     "OUTPUT TAX",
+     "INPUT TAX RECOVERABLE?"
+    ],
+    "rows": [
+     [
+      "Standard rated — most goods and services",
+      "20%",
+      "Charged to the customer at 20%",
+      "Yes, in full"
+     ],
+     [
+      "Reduced rated — domestic fuel, energy-saving materials, child car seats",
+      "5%",
+      "Charged to the customer at 5%",
+      "Yes, in full"
+     ],
+     [
+      "Zero rated — food other than catering, books and newspapers, water and sewerage, transport, residential construction",
+      "0%",
+      "Charged at 0%, but it is still a taxable supply",
+      "Yes, in full — this is why zero rating is better than exemption"
+     ],
+     [
+      "Exempt — insurance, financial services, education, and normally commercial land and buildings",
+      "None",
+      "None",
+      "No. A person making only exempt supplies cannot register at all"
+     ],
+     [
+      "Outside the scope — a private sale, an MOT fee, a sale of shares, a business sold as a going concern",
+      "None",
+      "None",
+      "No"
+     ]
+    ]
+   },
+   {
+    "label": "Tax point, returns and records",
+    "type": "grid",
+    "cols": [
+     "ITEM",
+     "THE RULE"
+    ],
+    "rows": [
+     [
+      "The basic tax point for goods",
+      "The time the goods are removed, or the time they are made available to the person supplied."
+     ],
+     [
+      "The basic tax point for services",
+      "When the services are performed."
+     ],
+     [
+      "Payment or invoice first",
+      "If the supplier issues a VAT invoice or receives payment BEFORE the goods are delivered or made available, the tax point is brought forward to that earlier date."
+     ],
+     [
+      "Invoice within 14 days after",
+      "If a VAT invoice is issued within 14 days after the basic tax point, the invoice date becomes the new tax point."
+     ],
+     [
+      "The return",
+      "An electronic return each quarter, due 1 month and 7 days after the end of the VAT period. Payment is due on the same deadline, by direct debit."
+     ],
+     [
+      "Why the quarters differ",
+      "Businesses are allocated four different VAT periods across the year so that HMRC receives an even distribution of VAT during the year."
+     ],
+     [
+      "The invoice",
+      "A taxable person supplying another taxable person must give a tax invoice showing the VAT number, the tax point, the value of the supply and the rate charged. Invoices are issued to all customers regardless of their VAT status."
+     ],
+     [
+      "The records",
+      "Records of all taxable goods and services received or supplied, including exempt supplies made — annual accounts, bank statements, purchase and sale invoices, daily takings and relevant correspondence — plus a VAT account summarising input and output VAT for each period. No prescribed format, but HMRC must be able to check the return from it."
+     ]
+    ]
+   },
+   {
+    "label": "The figures to memorise, and the penalties",
+    "type": "grid",
+    "cols": [
+     "ITEM",
+     "THE POSITION FOR 6 APRIL 2026 TO 5 APRIL 2027"
+    ],
+    "rows": [
+     [
+      "Compulsory registration threshold",
+      "£90,000 of taxable supplies. The same as the previous tax year."
+     ],
+     [
+      "Deregistration threshold",
+      "£88,000. The same as the previous tax year."
+     ],
+     [
+      "The rates",
+      "Standard 20%, reduced 5%, zero 0%. The same as the previous tax year."
+     ],
+     [
+      "The VAT fraction",
+      "For a standard rated supply the VAT element of a VAT-inclusive figure is 1/6, so £120 inclusive contains £20 of VAT. For a reduced rate supply the fraction is 1/21, so £105 inclusive contains £5."
+     ],
+     [
+      "Failure to register",
+      "A penalty of a percentage of the VAT due from the date registration should have happened. The percentage rises the longer the delay."
+     ],
+     [
+      "Late return or late payment",
+      "A percentage surcharge on the VAT due, rising to a maximum of 15% for consistent defaults."
+     ],
+     [
+      "Under-declaring the VAT due",
+      "A penalty as a percentage of the tax that should have been paid, where the under-declaration is due to significant or repeated lack of care."
+     ],
+     [
+      "Dishonest evasion",
+      "A penalty of up to the amount of VAT evaded, and evasion can also lead to an unlimited fine and imprisonment for up to 7 years."
+     ]
+    ]
+   }
+  ],
+  "notes": [
+   {
+    "head": "7.19.2 What counts as a supply",
+    "body": [
+     "Any transfer of the whole property in goods is a supply of GOODS. That covers consumer goods, but also the supply of power or heat, the grant of an interest in land, and a GIFT of goods.",
+     "Anything that is not a supply of goods is a supply of SERVICES if it is provided for consideration — including a lawyer's services for a fee.",
+     "The value of the supply is defined widely, to prevent VAT avoidance.",
+     "HMRC issues each registering person a VAT number, which is used for all the businesses that person operates."
+    ]
+   },
+   {
+    "head": "7.19.3 Registration, and why a new business might volunteer",
+    "body": [
+     "Registration is compulsory once the previous 12 months' taxable supplies exceed the threshold, tested at the end of each month, or once there are reasonable grounds to believe the next 30 days alone will exceed it.",
+     "Voluntary registration lets a business recover input tax before it is anywhere near the threshold. A new consultancy charging £10,000 of output tax while paying £20,000 of input tax reclaims £10,000 from HMRC.",
+     "The price is that it must charge output tax on everything it supplies, which is a real additional cost to a customer who is not registered and cannot recover it."
+    ]
+   },
+   {
+    "head": "7.19.5 The option to tax, in practice",
+    "body": [
+     "The option is available for COMMERCIAL land and buildings only.",
+     "Once exercised it applies to all future supplies of that land or building, including selling it and letting it to a tenant.",
+     "It relates to that individual property, not to everything the person owns — but within that property it applies to the WHOLE building, which is a problem where several tenants occupy it and some make exempt supplies.",
+     "It is made by the owner and does not transfer with the land on a future disposal.",
+     "Where the freehold of a commercial building less than 3 years old is sold, the supply is standard rated in any event, without any option."
+    ]
+   },
+   {
+    "head": "7.19.6 Why the compliance burden matters",
+    "body": [
+     "The administrative requirements are themselves a disadvantage of being registered, and the SRA specification tests returns, payment and record keeping as well as the charge itself.",
+     "The tax point decides which accounting period a supply falls into, which is what makes it worth memorising the four tax point rules.",
+     "The penalties are all percentage-based except dishonest evasion, which can reach the whole amount evaded, an unlimited fine and 7 years' imprisonment."
+    ]
+   },
+   {
+    "head": "CURRENCY",
+    "body": [
+     "The 2026 manual moved the thresholds and rates out of the chapter into the separate Tax Checker, and the March 2026 business update confirms the Tax Checker governs for 7.16 to 7.19. The figures here come from the Tax Checker of 24 July 2026.",
+     "The 3-year rule for a new commercial building is kept although the 2026 chapter does not spell it out, because it is accurate law and the chapter's own example — a landlord buying a new commercial building and paying standard rate VAT on it — only makes sense with it."
+    ]
+   }
+  ],
+  "statutes": [
+   {
+    "ref": "Value Added Tax Act 1994, s 4",
+    "text": "VAT is charged on any supply of goods or services made in the United Kingdom where it is a taxable supply made by a taxable person in the course or furtherance of any business carried on by them. A taxable supply is any supply other than an exempt supply."
+   },
+   {
+    "ref": "VATA 1994, Sch 8",
+    "text": "Lists the zero-rated groups, including food other than that supplied in the course of catering, water and sewerage services, books and newspapers, transport and the construction of residential buildings."
+   },
+   {
+    "ref": "VATA 1994, Sch 9",
+    "text": "Lists the exempt groups, including land, insurance, financial services, postal services, education, health and welfare, and burial and cremation."
+   },
+   {
+    "ref": "VATA 1994, Sch 10",
+    "text": "Contains the option to tax. It permits the owner of an interest in commercial land or buildings to elect to waive the exemption, and sets out the conditions for revoking that option."
+   }
+  ],
+  "cases": [],
+  "tip": "⚡ SQE: The four treatments are STANDARD 20%, REDUCED 5%, ZERO 0% and EXEMPT — and zero rated is a TAXABLE supply, so input tax is recoverable, while exempt is not, so it is not. Outside the scope: private sale, MOT fee, sale of shares, business sold as a going concern. Register when the previous 12 months exceed £90,000 (rolling monthly test) or the next 30 days alone will; deregister below £88,000. Land is normally exempt; the owner of COMMERCIAL property may opt to tax to unlock input tax recovery, and that option covers the whole building, binds all future supplies, and can only be revoked within 6 months or after 20 years. Returns quarterly, 1 month and 7 days after the period end. Input tax on cars and on business entertaining is blocked."
+ },
+ "7.20": {
+  "id": "7.20",
+  "title": "Inheritance Tax",
+  "visuals": [
+   {
+    "label": "Mind map — the whole of 7.20",
+    "type": "map",
+    "centre": "7.20 INHERITANCE TAX — BUSINESS RELIEF",
+    "branches": [
+     {
+      "label": "WHAT BUSINESS RELIEF DOES",
+      "leaves": [
+       "Business relief reduces the taxable VALUE of business property, whether it is given away in the donor's lifetime or passes on death",
+       "It is given AUTOMATICALLY once the conditions are met — there is no formal claim to make",
+       "The relief is either 100% or 50%, depending on the asset and on how much tax-free giving the donor has already used",
+       "The 2026 manual renamed it: what used to be called BUSINESS PROPERTY RELIEF (BPR) is now simply BUSINESS RELIEF (BR)"
+      ]
+     },
+     {
+      "label": "WHAT GETS 100% RELIEF",
+      "leaves": [
+       "A SOLE TRADER BUSINESS",
+       "An INTEREST IN A PARTNERSHIP",
+       "UNQUOTED SHARES — shares in a company not listed on a recognised stock exchange",
+       "The 100% rate applies only up to £2.5m of qualifying transfers in any rolling 7-year period. Anything above that threshold drops to 50%"
+      ]
+     },
+     {
+      "label": "WHAT GETS ONLY 50% RELIEF",
+      "leaves": [
+       "Shares listed on the ALTERNATIVE INVESTMENT MARKET, however small their value",
+       "Shares in a QUOTED company where the donor has VOTING CONTROL",
+       "LAND, BUILDINGS, PLANT OR MACHINERY owned personally by the donor but used by a partnership they belong to, or by a company they control",
+       "Any qualifying transfer above the £2.5m rolling threshold",
+       "Quoted company shares where the donor does NOT have voting control are not qualifying assets at all and get nothing"
+      ]
+     },
+     {
+      "label": "THE THREE CONDITIONS",
+      "leaves": [
+       "The business must be TRADING — a business that holds or makes investments, or deals in land and property, is excluded",
+       "The donor must have OWNED the business property for at least 2 YEARS before the transfer",
+       "The company must not be stuffed with EXCEPTED ASSETS, or the relief is cut proportionately",
+       "Shares in an OVERSEAS trading company do qualify — the trading test, not the location, is what matters"
+      ]
+     },
+     {
+      "label": "WHAT HAPPENS AFTERWARDS",
+      "leaves": [
+       "On a gift into a TRUST, a chargeable lifetime transfer, the relief bites immediately and reduces the lifetime tax",
+       "On a gift to an INDIVIDUAL, a potentially exempt transfer, there is no immediate tax, so the relief has nothing to reduce yet",
+       "If the donor dies within 7 years, the donee must have KEPT the property, or have reinvested ALL the net sale proceeds in other business property",
+       "Withdrawal of the relief only affects the tax on DEATH; the original lifetime calculation on a chargeable lifetime transfer is left undisturbed"
+      ]
+     }
+    ]
+   },
+   {
+    "label": "Decision tree — does Business Relief apply, and at what rate?",
+    "type": "branch",
+    "nodes": [
+     {
+      "q": "1. Is this a qualifying business asset, and at what rate?",
+      "a": [
+       {
+        "k": "A SOLE TRADER BUSINESS, A PARTNERSHIP INTEREST, OR UNQUOTED SHARES",
+        "v": "100% relief, provided the £2.5m rolling threshold has not been exceeded."
+       },
+       {
+        "k": "SHARES ON THE ALTERNATIVE INVESTMENT MARKET",
+        "v": "Alternative investment market shares get 50% relief only, even where the value is well below the threshold. The other 50% is treated as a potentially exempt transfer that may later become taxable."
+       },
+       {
+        "k": "QUOTED SHARES WHERE THE DONOR HAS VOTING CONTROL",
+        "v": "Quoted shares carrying voting control get 50% relief only."
+       },
+       {
+        "k": "LAND, BUILDINGS, PLANT OR MACHINERY OWNED PERSONALLY AND USED BY THE DONOR'S PARTNERSHIP OR CONTROLLED COMPANY",
+        "v": "Land, buildings, plant and machinery owned personally get 50% relief only, because the asset belongs to the individual rather than to the business."
+       },
+       {
+        "k": "QUOTED SHARES WITHOUT VOTING CONTROL",
+        "v": "Not a qualifying asset. No relief at all."
+       }
+      ]
+     },
+     {
+      "q": "2. Is the business a trading business?",
+      "a": [
+       {
+        "k": "YES — IT TRADES",
+        "v": "The condition is met. Trading overseas is fine: shares in overseas trading companies are eligible."
+       },
+       {
+        "k": "NO — IT HOLDS OR MAKES INVESTMENTS",
+        "v": "Excluded. No relief."
+       },
+       {
+        "k": "NO — IT DEALS IN LAND OR PROPERTY",
+        "v": "Excluded. A company buying land and property for rental income, or to sell on once it has appreciated, is dealing in land and gets nothing."
+       }
+      ]
+     },
+     {
+      "q": "3. Has the donor owned the property for 2 years?",
+      "a": [
+       {
+        "k": "YES",
+        "v": "The ownership condition is met."
+       },
+       {
+        "k": "NO, BUT IT REPLACED AN EARLIER BUSINESS ASSET",
+        "v": "Still eligible, so long as the two periods of ownership together come to 2 years."
+       },
+       {
+        "k": "NO, BUT IT WAS INHERITED FROM A SPOUSE OR CIVIL PARTNER ON DEATH",
+        "v": "Still eligible. The survivor is automatically credited with the deceased's ownership period, so the property is treated as acquired on the date the deceased first acquired it."
+       },
+       {
+        "k": "NO, AND NEITHER EXCEPTION APPLIES",
+        "v": "No relief, however plainly the asset qualifies in every other respect."
+       }
+      ]
+     },
+     {
+      "q": "4. Does the company hold excepted assets?",
+      "a": [
+       {
+        "k": "WHAT AN EXCEPTED ASSET IS",
+        "v": "One that was neither used for business purposes throughout the 2 years before the transfer, nor is required for future use in the business."
+       },
+       {
+        "k": "TYPICAL EXAMPLES",
+        "v": "Shares or securities held for investment, assets held for the personal use of the transferor or someone connected with them, and large cash deposits not needed in the business."
+       },
+       {
+        "k": "THE EFFECT",
+        "v": "The relief is cut in proportion. If 30% of the company's net assets are excepted, only 70% relief is given and 30% of the transfer is taxable."
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "label": "Decision tree — does the relief survive the donor's death?",
+    "type": "branch",
+    "nodes": [
+     {
+      "q": "Was the gift into a trust, or to an individual?",
+      "a": [
+       {
+        "k": "INTO A TRUST — A CHARGEABLE LIFETIME TRANSFER",
+        "v": "The relief reduced the transfer of value when the lifetime tax was worked out. That calculation stands. Even if the donor dies within 7 years, no further tax is levied on that transfer."
+       },
+       {
+        "k": "TO AN INDIVIDUAL — A POTENTIALLY EXEMPT TRANSFER",
+        "v": "Nothing was chargeable at the time, so the relief had nothing to reduce. Whether it is available on death depends on what the donee did with the property."
+       }
+      ]
+     },
+     {
+      "q": "The gift was to an individual and the donor has died within 7 years. What did the donee do with it?",
+      "a": [
+       {
+        "k": "KEPT THE BUSINESS PROPERTY UNTIL THE DONOR'S DEATH",
+        "v": "The relief is available."
+       },
+       {
+        "k": "SOLD IT AND REINVESTED THE WHOLE OF THE NET PROCEEDS IN OTHER BUSINESS PROPERTY",
+        "v": "The relief is available. The replacement need not be the same kind of business property as the original."
+       },
+       {
+        "k": "REINVESTED ONLY PART OF THE PROCEEDS",
+        "v": "No relief. This is an all-or-nothing provision — there is no partial relief for a partial reinvestment."
+       },
+       {
+        "k": "SOLD IT AND KEPT THE MONEY",
+        "v": "The relief is withdrawn and the transfer is 100% taxable, subject to any other exemption, relief or the nil rate band."
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "label": "The rates side by side",
+    "type": "grid",
+    "cols": [
+     "ASSET",
+     "RATE",
+     "THE CATCH"
+    ],
+    "rows": [
+     [
+      "A sole trader business",
+      "100%",
+      "Only up to £2.5m of qualifying transfers in a rolling 7-year period. Above that, 50%."
+     ],
+     [
+      "An interest in a partnership",
+      "100%",
+      "Same threshold. Agricultural disposals count towards the same total."
+     ],
+     [
+      "Unquoted shares in a trading company",
+      "100%",
+      "Same threshold, and the relief is cut proportionately for excepted assets."
+     ],
+     [
+      "Shares on the alternative investment market",
+      "50%",
+      "50% regardless of value. The unrelieved half is a potentially exempt transfer."
+     ],
+     [
+      "Quoted shares where the donor has voting control",
+      "50%",
+      "Voting control is what brings them in at all."
+     ],
+     [
+      "Quoted shares without voting control",
+      "Nothing",
+      "Not a qualifying asset."
+     ],
+     [
+      "Land, buildings, plant or machinery owned personally and used by the donor's partnership or controlled company",
+      "50%",
+      "The asset is owned by the individual, not the business — that is why it is halved."
+     ]
+    ]
+   },
+   {
+    "label": "The inheritance tax framework this relief sits inside",
+    "type": "map",
+    "centre": "HOW IHT IS CHARGED",
+    "branches": [
+     {
+      "label": "THE NIL RATE BANDS",
+      "leaves": [
+       "The NIL RATE BAND is £325,000. Value within it is taxed at 0%, and value above it at 40%",
+       "The RESIDENCE NIL RATE BAND adds £175,000 where a qualifying residential interest passes to DIRECT DESCENDANTS — children and grandchildren, not siblings or parents",
+       "Both are frozen until APRIL 2031, along with the £2m residence nil rate band taper threshold",
+       "Unused nil rate band and residence nil rate band pass to a surviving spouse or civil partner, so a couple can shelter up to £1,000,000",
+       "The rate drops from 40% to 36% where at least 10% of the net estate goes to charity"
+      ]
+     },
+     {
+      "label": "LIFETIME GIFTS",
+      "leaves": [
+       "A POTENTIALLY EXEMPT TRANSFER is a gift to an individual. It is fully exempt if the donor survives 7 years, and chargeable if they do not",
+       "A CHARGEABLE LIFETIME TRANSFER is a gift into a trust. It is charged at 20% straight away, and topped up towards 40% if the donor dies within 7 years",
+       "CUMULATION: chargeable transfers in the 7 years before death eat into the nil rate band available to the death estate"
+      ]
+     },
+     {
+      "label": "TAPER RELIEF",
+      "leaves": [
+       "Taper relief reduces the TAX PAYABLE on a failed potentially exempt transfer, not the value of the transfer and not the nil rate band it used",
+       "Death within 3 years of the gift: the full tax is payable",
+       "Between 3 and 4 years: 80% of the tax. Between 4 and 5 years: 60%",
+       "Between 5 and 6 years: 40%. Between 6 and 7 years: 20%"
+      ]
+     }
+    ]
+   }
+  ],
+  "notes": [
+   {
+    "head": "7.20.1 What business relief is for",
+    "body": [
+     "Inheritance tax is payable on transfers that reduce the value of the donor's estate and are not otherwise exempted or relieved, whether the transfer is made in the donor's lifetime or on death.",
+     "Business relief reduces the taxable value of business property given away in lifetime or transferred on death.",
+     "It is given automatically once the conditions are satisfied. There is no requirement to make a formal claim.",
+     "The chapter is deliberately narrow: the SRA specification tests business relief, and the manual sends you to the Wills manual for the rest of the inheritance tax system."
+    ]
+   },
+   {
+    "head": "7.20.2 The rates, and the rolling threshold",
+    "body": [
+     "Business relief gives 100% for most qualifying business assets, up to £2.5m in any rolling 7-year period.",
+     "Any transfer of qualifying business assets above that threshold receives only 50% relief.",
+     "Disposals of qualifying AGRICULTURAL assets also count towards the same total when you are checking whether the threshold has been reached.",
+     "Alternative investment market shares and quoted shares carrying voting control are capped at 50% however low their value.",
+     "Other quoted company shares are not qualifying assets at all and get no relief."
+    ]
+   },
+   {
+    "head": "7.20.2.2 Trading businesses only",
+    "body": [
+     "Relief is given only if the business carried on by the sole trader, the partnership or the company is TRADING.",
+     "A business that holds or makes investments, or that deals in property, is not eligible.",
+     "A company that acquires land and property to earn rental income, or to sell on after it appreciates, is dealing in land and is excluded.",
+     "Shares in overseas trading companies ARE eligible."
+    ]
+   },
+   {
+    "head": "7.20.2.3 The 2-year ownership rule",
+    "body": [
+     "The general rule is that the donor must have owned the business property for at least 2 years before the transfer.",
+     "Replacing one business asset with another is an exception, provided the overall period of ownership comes to 2 years.",
+     "Inheriting business property from a spouse or civil partner on death is the other exception: the survivor is automatically credited with the deceased's period of ownership.",
+     "Four surveyors set up a partnership 6 months ago from an office one of them bought a month before it began. She dies. Both the business and the office are qualifying assets at 100% and 50%, and both fall within the threshold — but neither gets any relief, because neither was owned for 2 years."
+    ]
+   },
+   {
+    "head": "7.20.2.4 Excepted assets",
+    "body": [
+     "Relief on a transfer of shares is proportional where the company holds excepted assets.",
+     "An excepted asset is one that is neither used for business purposes throughout the 2 years immediately before the transfer, nor required for future use in the business.",
+     "Typical examples are shares or securities held for investment, assets held for the personal use of the transferor or a connected person, and large cash deposits not required in the business.",
+     "Jacob transfers unquoted trading company shares worth £600,000 to a trust. The company has £1m of net assets, of which £300,000 is cash agreed with HMRC to be an excepted asset. Because 30% of the assets are excepted, Jacob gets 70% relief and £180,000 is taxable."
+    ]
+   },
+   {
+    "head": "7.20.3 and 7.20.4 Lifetime transfers and death",
+    "body": [
+     "For calculating lifetime tax, business relief has immediate effect only for gifts into trusts, because potentially exempt transfers are not immediately chargeable and may never become so.",
+     "For relief to be available when tax is calculated on the donor's death, the donee must either have retained the business property until the donor died, or have sold it and replaced it with other business property.",
+     "On a replacement, the donee must have reinvested the WHOLE of the net proceeds of sale. There is no partial relief for a partial reinvestment.",
+     "A withdrawal of relief affects only the tax payable on death. It does not disturb the original lifetime calculation on a chargeable lifetime transfer."
+    ]
+   },
+   {
+    "head": "CURRENCY",
+    "body": [
+     "The March 2026 business update confirms that business property relief is now known simply as BUSINESS RELIEF, and directs you to the Tax Checker for current rates.",
+     "The £2.5m rolling 7-year threshold and the 50% treatment of alternative investment market shares are new in the 2026 manual. The earlier version of this section wrongly gave alternative investment market shares 100% relief and did not mention the threshold at all.",
+     "The nil rate band and residence nil rate band are frozen until APRIL 2031, not 2028 as this section previously said.",
+     "From April 2027, an unused discretionary private pension pot will be added to the estate for inheritance tax. Pension pots currently sit outside inheritance tax."
+    ]
+   }
+  ],
+  "statutes": [
+   {
+    "ref": "Inheritance Tax Act 1984, s 7",
+    "text": "Sets the rates. Nil on the amount within the nil rate band, 40% on the excess, and a reduced rate of 36% where at least 10% of the net estate is given to charity."
+   },
+   {
+    "ref": "Inheritance Tax Act 1984, s 104",
+    "text": "Business relief. Reduces the value transferred by 100% or 50% where the transfer is of relevant business property."
+   },
+   {
+    "ref": "Inheritance Tax Act 1984, s 105",
+    "text": "Defines relevant business property, and excludes a business consisting wholly or mainly of dealing in securities, stocks or shares, dealing in land or buildings, or making or holding investments."
+   },
+   {
+    "ref": "Inheritance Tax Act 1984, s 106",
+    "text": "The minimum period of ownership. The property must have been owned by the transferor throughout the 2 years immediately before the transfer."
+   },
+   {
+    "ref": "Inheritance Tax Act 1984, s 112",
+    "text": "Excepted assets. The value attributable to an asset neither used wholly or mainly for business purposes throughout the 2 years before the transfer, nor required for future use in the business, is left out of the relief."
+   },
+   {
+    "ref": "Inheritance Tax Act 1984, s 113A",
+    "text": "Transfers within 7 years before death. Relief is only available if the donee retained the original property, or replaced it with qualifying replacement property, until the donor's death."
+   }
+  ],
+  "cases": [],
+  "tip": "⚡ SQE: Business relief (no longer called business property relief) is AUTOMATIC — there is no claim to make. 100% covers a sole trader business, a partnership interest and UNQUOTED shares, up to £2.5m of qualifying transfers in a rolling 7 years, and 50% above that. 50% covers AIM shares, quoted shares where the donor has VOTING CONTROL, and land, buildings, plant or machinery owned personally but used by the donor's partnership or controlled company. Quoted shares without control get NOTHING. Three conditions must all hold: the business must TRADE, the donor must have OWNED it for 2 years, and excepted assets cut the relief proportionately. On death within 7 years of a lifetime gift, the donee must still HOLD the property or have reinvested ALL the net proceeds — partial reinvestment gets nothing."
+ },
+ "13.8": {
+  "id": "13.8",
+  "title": "Inheritance Tax and Income Tax and Capital Gains Tax for an Estate",
+  "visuals": [
+   {
+    "label": "Mind map — the whole of 13.8",
+    "type": "map",
+    "centre": "13.8 IHT, INCOME TAX AND CGT FOR AN ESTATE",
+    "branches": [
+     {
+      "label": "13.8.2.1-.4 THE BASICS",
+      "leaves": [
+       "IHT is charged on the value transferred by a CHARGEABLE TRANSFER — transfers on death, and certain lifetime transfers.",
+       "NIL RATE BAND £325,000 and RESIDENCE NIL RATE BAND £175,000, both FROZEN to April 2031 with the £2m taper threshold. Above that, 40%.",
+       "For deaths from 6 April 2025 the test is LONG-TERM UK RESIDENCE — 10 of the last 20 tax years — not domicile.",
+       "A long-term resident is chargeable on WORLDWIDE assets. Anyone else is chargeable on UK assets only.",
+       "Value every transfer by the LOSS TO THE DONOR, not by the gain to the recipient."
+      ]
+     },
+     {
+      "label": "13.8.2.5-.8 LIFETIME TRANSFERS",
+      "leaves": [
+       "EXEMPT — within one of the exemptions, so never chargeable at all.",
+       "POTENTIALLY EXEMPT TRANSFER — a gift to another individual. No lifetime charge, chargeable only if the donor dies within 7 YEARS.",
+       "CHARGEABLE LIFETIME TRANSFER — anything else. Gifts to trusts and companies, charged at 20% if trustees pay or 25% if the donor pays.",
+       "Gifts to CHARITABLE trusts are exempt; gifts to BARE trusts are PETs.",
+       "IHT is CUMULATIVE: look back 7 years FROM THE GIFT at GROSS earlier transfers. Only CLTs use up the nil rate band."
+      ]
+     },
+     {
+      "label": "13.8.2.10 THE TWO BIG RELIEFS",
+      "leaves": [
+       "BUSINESS RELIEF, formerly business property relief, and AGRICULTURAL RELIEF reduce the value transferred, and are given BEFORE the annual exemption.",
+       "From 6 April 2026 a COMBINED £2.5m CAP applies to 100% relief across both, with 50% above it. Unused allowance is transferable between spouses.",
+       "100% BUSINESS RELIEF: a sole trade business, a partnership share, and shares in an UNLISTED trading company with no minimum holding.",
+       "50% BUSINESS RELIEF: quoted shares where the donor has voting CONTROL, and personally-owned land, buildings, plant or machinery used by the business.",
+       "The business must be TRADING — investment or property dealing is excluded. Ownership 2 years, or 7 YEARS' occupation for TENANTED agricultural land."
+      ]
+     },
+     {
+      "label": "13.8.2.11-.12 THE DEATH ESTATE",
+      "leaves": [
+       "The deceased is treated as making a chargeable transfer of the NET estate. The ANNUAL EXEMPTION is not available against it.",
+       "Reduce the NRB by chargeable transfers in the 7 years before death. Those often use the whole band, so the estate is taxed at 40% throughout.",
+       "The rate falls to 36% where 10% OR MORE of the net estate goes to charity, measured on a baseline that IGNORES the residence NRB.",
+       "TRANSFERABLE NRB: the unused PERCENTAGE passes to a surviving spouse, claimed by the second executors, capped at one extra band.",
+       "RESIDENCE NRB needs a residence CLOSELY INHERITED by lineal descendants, is tapered £1 for every £2 over £2m, and applies to the DEATH ESTATE only."
+      ]
+     },
+     {
+      "label": "13.8.2.13-.14 ANTI-AVOIDANCE AND PAYMENT",
+      "leaves": [
+       "GIFTS WITH RESERVATION OF BENEFIT: an asset given away but still enjoyed is treated as still owned at death, at its DEATH value.",
+       "No reservation if the donor pays MARKET RENT, or RELEASES the benefit — but a release is itself a PET at that date.",
+       "PRE-OWNED ASSET TAX imposes an INCOME TAX charge where the former owner still benefits and the reservation rules do not catch it.",
+       "IHT on death is due 6 MONTHS after the end of the month of death. The personal representatives are liable for the free estate.",
+       "An INSTALMENT OPTION covers certain land and business interests: 10 equal annual payments, the first on the normal due date."
+      ]
+     },
+     {
+      "label": "13.8.3 THE ADMINISTRATION PERIOD",
+      "leaves": [
+       "Finalise the DECEASED'S own income tax to the date of death FIRST, because tax owed at death is a liability of the estate.",
+       "PRs pay INCOME TAX at 20% on non-savings income and interest, and 10.75% on dividends from 2026/2027. NO allowances of any kind.",
+       "PRs pay CGT at 24% for ALL assets from 6 April 2026, and 32% on carried interest gains.",
+       "The ANNUAL EXEMPT AMOUNT runs for the year of death AND THE NEXT TWO TAX YEARS ONLY.",
+       "A distribution is NOT a disposal. The beneficiary takes at PROBATE VALUE, whatever the asset is worth on the day of transfer."
+      ]
+     }
+    ]
+   },
+   {
+    "label": "Decision tree — 13.8.2.5 classify the lifetime transfer",
+    "type": "branch",
+    "nodes": [
+     {
+      "q": "1. Is it a transfer of value at all?",
+      "a": [
+       {
+        "k": "NOT IF IT IS AT ARM'S LENGTH",
+        "v": "No gratuitous intent, and made in an arm's length transaction between unconnected persons, or as might be expected in one [IHTA 1984 s 10]."
+       },
+       {
+        "k": "NOT IF IT IS FAMILY MAINTENANCE",
+        "v": "Expenditure on maintaining the donor's family, such as a child's school fees [IHTA 1984 s 11]."
+       },
+       {
+        "k": "OTHERWISE VALUE BY LOSS TO THE DONOR",
+        "v": "By how much the donor's estate was diminished, not what the recipient gained. Losing control of a company can transfer far more than the shares given away."
+       }
+      ]
+     },
+     {
+      "q": "2. Who or what is the recipient?",
+      "a": [
+       {
+        "k": "SPOUSE OR CIVIL PARTNER — EXEMPT",
+        "v": "Unlimited, in lifetime and on death. Only the first £325,000 is exempt where the donor is UK domiciled and the recipient spouse is not."
+       },
+       {
+        "k": "A UK CHARITY — EXEMPT",
+        "v": "Exempt without limit. From April 2024 gifts on death to European Economic Area charities are no longer exempt."
+       },
+       {
+        "k": "ANOTHER INDIVIDUAL — A PET",
+        "v": "No lifetime charge. Chargeable only if the donor dies within 7 years, and the RECIPIENT pays the tax."
+       },
+       {
+        "k": "A TRUST OR A COMPANY — A CLT",
+        "v": "Immediately chargeable. But charitable trusts are exempt and bare trusts are PETs, and a transfer to a company for shares or loan stock has no IHT consequence."
+       }
+      ]
+     },
+     {
+      "q": "3. CLT only — how much lifetime tax, and who pays?",
+      "a": [
+       {
+        "k": "DEDUCT THE ANNUAL EXEMPTIONS FIRST",
+        "v": "Then identify the NRB for the year of transfer."
+       },
+       {
+        "k": "THEN THE NIL RATE BAND",
+        "v": "Deduct GROSS chargeable transfers made in the 7 years BEFORE the gift to find the band remaining. Tax only the excess."
+       },
+       {
+        "k": "TRUSTEES PAY — 20%",
+        "v": "The lifetime rate where the tax comes out of the trust fund."
+       },
+       {
+        "k": "DONOR PAYS — 25%",
+        "v": "Higher because the transfer is GROSSED UP: what leaves the donor's estate is the gift plus the tax paid to HMRC."
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "label": "Decision tree — 13.8.2.9 the donor dies within 7 years",
+    "type": "branch",
+    "nodes": [
+     {
+      "q": "1. Was the transfer a PET or a CLT?",
+      "a": [
+       {
+        "k": "A FAILED PET",
+        "v": "It becomes chargeable. Use the NRB and rates in force AT THE DATE OF DEATH. The recipient is liable."
+       },
+       {
+        "k": "A CLT",
+        "v": "Additional tax at the 40% death rate, charged on the TRUSTEES. Same calculation, with one difference at the end."
+       }
+      ]
+     },
+     {
+      "q": "2. How much nil rate band is left for this transfer?",
+      "a": [
+       {
+        "k": "LOOK BACK FROM THE GIFT, NOT FROM DEATH",
+        "v": "Deduct gross chargeable transfers made in the 7 years BEFORE the transfer in question."
+       },
+       {
+        "k": "SO OLD GIFTS STILL MATTER",
+        "v": "A transfer made more than 7 years before death still reduces the band available to a later gift, even though it is not itself taxed on the death."
+       }
+      ]
+     },
+     {
+      "q": "3. Is TAPER RELIEF available?",
+      "a": [
+       {
+        "k": "IT REDUCES THE TAX, NOT THE TRANSFER",
+        "v": "It does not reduce the value transferred and it does not restore any nil rate band [IHTA 1984 s 7(4)]."
+       },
+       {
+        "k": "NOTHING IN THE FIRST 3 YEARS",
+        "v": "0 to 3 years: no relief, so the full tax is payable."
+       },
+       {
+        "k": "THEN IT CLIMBS IN STEPS",
+        "v": "3 to 4 years: 20% relief. 4 to 5: 40%. 5 to 6: 60%. 6 to 7: 80%. So a gift 6 and a half years before death bears only 20% of the tax."
+       }
+      ]
+     },
+     {
+      "q": "4. CLT only — credit for the lifetime tax already paid",
+      "a": [
+       {
+        "k": "DEDUCT WHAT WAS PAID",
+        "v": "The trustees get credit for the lifetime tax, whoever paid it. The difference is the additional tax payable."
+       },
+       {
+        "k": "NO REFUND IF IT OVERSHOOTS",
+        "v": "Where the lifetime tax exceeds the death tax, the difference is NOT repaid. The additional IHT is simply reduced to zero."
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "label": "13.8.2.6 Exemptions and the figures to memorise",
+    "type": "grid",
+    "cols": [
+     "EXEMPTION",
+     "THE RULE AND THE FIGURE"
+    ],
+    "rows": [
+     [
+      "Spouse or civil partner",
+      "Unlimited, in lifetime and on death. Restricted to the first £325,000 where the donor is UK domiciled and the recipient spouse is not."
+     ],
+     [
+      "UK charities",
+      "Exempt without any monetary limit. From April 2024 gifts on death to EEA charities are no longer exempt."
+     ],
+     [
+      "Small gifts",
+      "Up to £250 to any one donee in a tax year, with no limit on the number of donees. ALL OR NOTHING: a £300 birthday gift is a transfer of value of the whole £300, not just the £50 excess."
+     ],
+     [
+      "Marriage or civil partnership",
+      "£5,000 from a parent, £2,500 from a grandparent, £2,500 between the parties themselves, £1,000 from anyone else. NOT all or nothing, so only the excess is a transfer of value. One exemption per marriage per donor — a father who gives his daughter £5,000 cannot also claim £1,000 for a gift to his son-in-law."
+     ],
+     [
+      "Normal expenditure out of income",
+      "No monetary limit. NORMAL means habitual or regular, happening year after year, and the donor must be left with sufficient income to maintain their normal standard of living. Covers regular cash gifts and life assurance or pension premiums paid for another person."
+     ],
+     [
+      "Annual exemption",
+      "£3,000 a year, to one person or shared. Set against gifts in CHRONOLOGICAL order within the tax year. Unused exemption carries forward ONE tax year only, and the current year's must be used before the brought-forward one."
+     ]
+    ]
+   },
+   {
+    "label": "13.8.2.11 Valuing the death estate",
+    "type": "grid",
+    "cols": [
+     "ASSET OR ISSUE",
+     "HOW IT IS VALUED"
+    ],
+    "rows": [
+     [
+      "General rule",
+      "Open market value at the date of death — the price the asset might reasonably be expected to fetch if sold on the open market at that point."
+     ],
+     [
+      "Quoted shares",
+      "Do TWO calculations and take the LOWER. The QUARTER-UP rule takes the lowest of the day's spread and adds a quarter of the difference between lowest and highest. The alternative averages the highest and lowest marked bargains of the day, ignoring special prices."
+     ],
+     [
+      "Quoted shares — worked example",
+      "Quoted at 150p to 158p, so the spread is 8p and a quarter of it is 2p, giving a quarter-up price of 152p. Bargains at 148p, 151p and 158p average to 153p. Take the lower: 152p."
+     ],
+     [
+      "Related property",
+      "Broadly, similar property owned by a spouse or civil partner. If the asset is worth more taking that into account than on a stand-alone basis, it is valued at the higher amount. A building jointly owned by husband and wife and worth £400,000 gives a half share valued at £200,000."
+     ],
+     [
+      "Jointly owned, not spouses",
+      "The related property rules do not apply. A brother's half share is valued stand-alone and is worth less than half the whole, because a buyer would not pay 50% for a share with another co-owner. A discount of between 5% and 15% is usual, negotiated with HMRC."
+     ],
+     [
+      "Excluded property",
+      "Outside the estate altogether. As well as non-UK assets of a non-long-term resident, this covers reversionary interests under a life interest trust and interests in a discretionary trust."
+     ],
+     [
+      "Liabilities",
+      "Deductible from the assets. Mortgages, income tax owed by the deceased and reasonable funeral expenses are allowable. PROBATE COSTS are not deductible, with a limited exception for overseas probate costs."
+     ]
+    ]
+   },
+   {
+    "label": "13.8.2.11 Nil rate band and residence nil rate band",
+    "type": "grid",
+    "cols": [
+     "POINT",
+     "THE RULE"
+    ],
+    "rows": [
+     [
+      "The two bands",
+      "NRB £325,000 and residence NRB £175,000, both frozen until April 2031, along with the £2m residence NRB taper threshold."
+     ],
+     [
+      "Order of deduction",
+      "The residence NRB is not set specifically against the house. Like the general NRB it applies to the net estate generally, and it is deducted BEFORE the general NRB."
+     ],
+     [
+      "Transferable NRB — mechanics",
+      "A claim is made by the SECOND spouse's executors, not on the first death. The uplift is a PERCENTAGE: 90% unused when the band was £300,000 gives £292,500 against a £325,000 band, not £270,000."
+     ],
+     [
+      "Transferable NRB — limits",
+      "The uplifted NRB is used against all IHT arising on death, including tax on PETs and CLTs, but NOT against lifetime tax on CLTs. Where the taxpayer has survived more than one spouse the total additional band is capped at one full NRB, so the maximum anyone can have is twice the band for the year of death."
+     ],
+     [
+      "Residence NRB — three conditions",
+      "The estate contains a QUALIFYING RESIDENTIAL INTEREST, a dwelling house used at some point as the deceased's private residence; it is CLOSELY INHERITED by lineal descendants such as children, grandchildren or their spouses; and it passes under a will or on intestacy."
+     ],
+     [
+      "Residence NRB — who counts",
+      "Children include stepchildren, adopted children and foster children. The relief is not available to a person or couple without children. There is NO requirement for the descendants to occupy afterwards, so a sale and distribution of the proceeds does not lose it."
+     ],
+     [
+      "Residence NRB — amount and taper",
+      "The LOWER of the net value of the qualifying residence after deducting a mortgage, and the residential enhancement of £175,000. Tapered away at £1 for every £2 by which the net estate exceeds £2m, net value here meaning assets less liabilities but BEFORE reliefs and exemptions."
+     ],
+     [
+      "Residence NRB — transfer and downsizing",
+      "The unused percentage transfers between spouses as a brought-forward allowance, capped at 100%, whenever the first spouse died provided the second death was on or after 6 April 2017, and itself tapered if the first estate exceeded £2m. A DOWNSIZING addition restores the lost allowance where the deceased downsized, sold or gave away their home on or after 8 July 2015."
+     ]
+    ]
+   },
+   {
+    "label": "13.8.2.12 The other death-estate reliefs",
+    "type": "grid",
+    "cols": [
+     "RELIEF",
+     "WHEN IT APPLIES"
+    ],
+    "rows": [
+     [
+      "Quick-succession relief",
+      "Where the deceased's estate had been increased by a chargeable transfer made to them in the 5 YEARS before their death, on which IHT was paid. The percentage starts at 100% and falls by 20% for each full year between the two deaths, and the relief is deducted from the IHT owed AFTER the NRB and residence NRB have been applied. The gifted property need not still be owned at death."
+     ],
+     [
+      "Quick-succession relief — the formula",
+      "IHT paid on the first transfer × the QSR percentage × (increase in the donee's estate ÷ that increase plus the IHT paid). So £50,000 tax, 60% and a £200,000 increase gives £50,000 × 60% × (200,000 ÷ 250,000) = £24,000."
+     ],
+     [
+      "Post-mortem relief — quoted shares",
+      "Where the PRs sell quoted shares, unit trust units or OEIC shares at a loss within 12 MONTHS of death, a lower value can be substituted. All sales of such investments in the 12-month period are aggregated, profits against losses. It usually produces a repayment of IHT already paid."
+     ],
+     [
+      "Post-mortem relief — land and buildings",
+      "The same idea over 3 YEARS from death. Aggregate all profits and losses in the period and deduct any resulting loss from the estate value. Losses on sales in the FOURTH year can also be counted, while profits in the fourth year are ignored."
+     ],
+     [
+      "Woodlands relief",
+      "Where the estate includes UK land carrying growing trees and underwood that is not eligible for agricultural or business relief, and the deceased was beneficially entitled for 5 years before death or inherited it on another's death. The value of the woodlands is excluded and the IHT is DEFERRED until they are disposed of. It does not apply to the value of the land itself."
+     ]
+    ]
+   },
+   {
+    "label": "13.8.2.14 Payment — due date, liability and burden",
+    "type": "grid",
+    "cols": [
+     "TRANSFER",
+     "DUE DATE",
+     "WHO IS LIABLE AND WHO BEARS IT"
+    ],
+    "rows": [
+     [
+      "Chargeable lifetime transfer, lifetime tax",
+      "The LATER of 6 months from the end of the month in which the transfer was made, and 30 April after the tax year in which it was made.",
+      "Primary liability on the TRANSFEROR. The transferor may want the trustees to pay out of the trust fund. If the transferor is liable but does not pay, HMRC can pursue the recipients, or in extreme cases the beneficiaries."
+     ],
+     [
+      "CLT, additional tax on death",
+      "6 months after the end of the month in which death occurred.",
+      "The TRUSTEES are liable, the transferor being dead. The burden falls on the trust fund and so on the beneficiaries. If it is still unpaid 12 months after the end of the month of death, the PRs may become liable."
+     ],
+     [
+      "PET that fails",
+      "6 months from the end of the month of the transferor's death.",
+      "The RECIPIENT is liable and bears the burden. If unpaid 12 months after the end of the month of death, the PRs become liable."
+     ],
+     [
+      "Death — free estate",
+      "6 months after the end of the month in which death occurs.",
+      "The PERSONAL REPRESENTATIVES are liable. If the will is silent as to burden it falls on the RESIDUE. Foreign property suffers the IHT attributable to it."
+     ],
+     [
+      "Death — settled property the deceased had an interest in",
+      "Same as the death estate.",
+      "The TRUSTEES are liable and the burden falls on the trust assets, depleting them for the remaining beneficiaries."
+     ],
+     [
+      "Death — gift with reservation of benefit",
+      "Same as the death estate.",
+      "The DONEE of the gift is primarily liable for the IHT attributable to the property. If unpaid 12 months after the end of the month of death, the PRs become liable."
+     ],
+     [
+      "Death — property passing outside the will or intestacy",
+      "Same as the death estate.",
+      "Liability falls on the PRs but the burden is borne by the BENEFICIARY, for example the surviving joint tenant of co-owned property."
+     ],
+     [
+      "Instalment option",
+      "First payment on the normal due date, then 10 equal annual amounts.",
+      "Claimed with HMRC for certain land and business interests."
+     ]
+    ]
+   },
+   {
+    "label": "13.8.3 Income tax and CGT during the administration period",
+    "type": "grid",
+    "cols": [
+     "POINT",
+     "THE RULE"
+    ],
+    "rows": [
+     [
+      "The deceased's own tax first",
+      "The PRs complete the deceased's income tax return from 6 April to the date of death and settle any income tax owed for that year and any earlier years. This must be finalised BEFORE the IHT liability can be calculated correctly, because tax owed at death is a liability of the estate. The return also includes capital gains in the year of death."
+     ],
+     [
+      "Whose income is it",
+      "Income produced by estate assets belongs legally to the PRs until the assets are distributed, so the PRs pay income tax on it. If the PRs sell those assets at a profit, they are liable for CGT instead."
+     ],
+     [
+      "Income tax rates",
+      "Non-savings income — trading, rental, employment and pension income — and interest at the basic rate of 20%. From 2026/2027 dividends at the dividend ordinary rate of 10.75%. The personal allowance, personal savings allowance and dividend allowance are NOT available."
+     ],
+     [
+      "Deduction",
+      "Where the PRs took out a loan to pay the IHT, interest on that loan is a deductible payment against income."
+     ],
+     [
+      "CGT base cost",
+      "PRs are deemed to acquire the deceased's assets at the date of death at market value, the PROBATE VALUE. If a post-mortem relief claim has adjusted the value of quoted shares or land for IHT, that adjusted value becomes the CGT base cost."
+     ],
+     [
+      "CGT rates",
+      "From 6 April 2026, 24% for ALL assets, and 32% for carried interest gains. Normal CGT rules apply in computing the gain, and capital losses are set against gains in the same year with any excess carried forward."
+     ],
+     [
+      "Annual exempt amount",
+      "Available to PRs for the YEAR OF DEATH AND THE NEXT TWO TAX YEARS ONLY, at the same figure as for individuals — £3,000 for 2024/2025, 2025/2026 and 2026/2027."
+     ],
+     [
+      "Distribution to a beneficiary",
+      "Transferring an asset to a beneficiary in satisfaction of a legacy is NOT a disposal for CGT. The beneficiary is deemed to acquire it at the date of death for its probate value, and the value on the day it is actually transferred is irrelevant. The beneficiary's own later disposal compares the proceeds with that probate value."
+     ]
+    ]
+   },
+   {
+    "label": "13.8.3.3 When the estate need not be reported to HMRC",
+    "type": "grid",
+    "cols": [
+     "SITUATION",
+     "THE THRESHOLD"
+    ],
+    "rows": [
+     [
+      "Income received from 6 April 2024",
+      "No need to report if the estate's income from any source is £500 or less. The £500 applies for each tax year of the administration period and cannot be carried over between years, and it covers all types of income except ISAs. If income exceeds £500 you must report ALL of it and cannot deduct the £500."
+     ],
+     [
+      "ISAs",
+      "Continue to be exempt from income tax and CGT until the estate is closed, or for up to 3 years after the death."
+     ],
+     [
+      "Income received up to 5 April 2024",
+      "No need to report if the only income was bank account interest AND the total tax due on it was £100 or less over the period."
+     ],
+     [
+      "Informal arrangements for a simple estate",
+      "Report by writing to HMRC where the estate was valued at less than £2.5 million at the death, the total income tax and CGT due is less than £10,000, and no more than £500,000 of assets was sold in any single tax year of the administration."
+     ],
+     [
+      "Otherwise",
+      "Separate returns are required where the administration period spans more than one tax year, and the interest and penalty provisions are the same as for individuals."
+     ]
+    ]
+   },
+   {
+    "label": "13.8.2.10 Will the relief survive to the donor's death?",
+    "type": "grid",
+    "cols": [
+     "CONDITION",
+     "THE RULE"
+    ],
+    "rows": [
+     [
+      "The donee retained the property",
+      "For business or agricultural relief to be available when calculating tax on the donor's death, the donee must still hold the original property at that date."
+     ],
+     [
+      "Or replaced it within 3 years",
+      "Sold and replaced within 3 years with other business or agricultural property, in an ARM'S LENGTH transaction, reinvesting the WHOLE of the net proceeds. All or nothing — there is no partial relief for a partial reinvestment."
+     ],
+     [
+      "No mixing and matching",
+      "Business property must be replaced with property qualifying for business relief, and agricultural property with property qualifying for agricultural relief. Within business property the kind may change, so unlisted shares can be replaced by a partnership interest."
+     ],
+     [
+      "Replacement agricultural property",
+      "It may still qualify if the original and replacement were occupied by the owner for agriculture for at least 2 years in the 5 years before the death, or owned and occupied for agriculture for at least 7 years in the 10 years before it. Relief is limited to what would have been available before the replacement."
+     ],
+     [
+      "The lifetime calculation is undisturbed",
+      "A withdrawal of the relief affects only the tax payable on the donor's death. It does not reopen the original lifetime tax calculation."
+     ]
+    ]
+   }
+  ],
+  "notes": [
+   {
+    "head": "13.8.1 How to work any IHT question",
+    "body": [
+     "Take the transfers in order and classify each one: EXEMPT, PET or CLT. Only then think about tax.",
+     "For every chargeable transfer, find the nil rate band available by looking back 7 years FROM THAT TRANSFER, using gross figures.",
+     "If the donor has died, ask whether any PET has failed, whether taper applies, and whether the reliefs claimed in lifetime survive to the death.",
+     "Then do the DEATH ESTATE separately: net assets, no annual exemption, residence NRB before the general NRB, and 40% or 36% on the balance.",
+     "Finally, treat the ADMINISTRATION PERIOD as its own tax year or years, with the PRs paying income tax and CGT on what they receive and sell.",
+     "The figures, the reliefs, the valuation rules and the payment table are in the collapsed grids above."
+    ]
+   },
+   {
+    "head": "13.8.1–13.8.2.4 The shape of inheritance tax",
+    "body": [
+     "Few estates actually pay IHT, because most fall within the nil rate band.",
+     "CURRENCY: the NRB and the residence NRB are frozen at £325,000 and £175,000 until APRIL 2031, along with the £2m residence NRB taper threshold. An older note saying the freeze runs to 2028 is out of date.",
+     "CURRENCY: leftover private pension pots currently sit OUTSIDE IHT and can pass to beneficiaries tax-free. From APRIL 2027 the unused value of a discretionary private pension will be added to the estate for IHT. That, and the freeze to 2031, will pull more estates over the threshold.",
+     "The general rule is that there is no tax on lifetime gifts. IHT is imposed on some of them to stop people transferring property shortly before death and negating the tax altogether.",
+     "Transfers to TRUSTS and COMPANIES are always chargeable when made, and may suffer additional tax if the transferor dies within 7 years. Transfers to INDIVIDUALS are not immediately chargeable but become so if the donor dies within 7 years.",
+     "CURRENCY: for deaths from 6 APRIL 2025 the connecting factor is LONG-TERM UK RESIDENCE, not domicile. An individual is long-term resident if resident in the UK for at least 10 of the last 20 tax years immediately before the tax year of the chargeable event.",
+     "A long-term resident who becomes non-resident stays within scope for a minimum of 3 and a maximum of 10 years, depending on how long they had lived in the UK.",
+     "Foreign UNSETTLED property, meaning property owned absolutely rather than on trust, is chargeable if the deceased was a long-term UK resident immediately before the death or transfer, and is EXCLUDED PROPERTY if they were not.",
+     "For deaths before 6 April 2025 the old rules applied: deemed UK domicile after residence for 15 of the previous 20 tax years, worldwide assets for the UK domiciled and UK assets only for others.",
+     "VALUING a transfer is straightforward for cash, but not for something like stock in a small company, where the value per share depends on the percentage of ownership and so on the control it carries.",
+     "Because IHT taxes what the donor gave away, value by the LOSS TO THE DONOR. The worked example is in the decision tree above.",
+     "RELATED PROPERTY rules can raise the value: broadly, similar property owned by a spouse or civil partner is taken into account where doing so produces a higher figure. In an assessment the relative stand-alone and related values will be given to you."
+    ]
+   },
+   {
+    "head": "13.8.2.5–13.8.2.9 Lifetime transfers, the 7-year rule and taper",
+    "body": [
+     "The three-way classification — exempt, PET or CLT — is worked through in the first decision tree above, and what happens when the donor dies within 7 years is in the second.",
+     "The exemptions and their figures are in the collapsed exemptions grid.",
+     "IHT is a CUMULATIVE tax. To find the nil rate band available for any chargeable transfer, look back 7 years FROM THAT TRANSFER and deduct the GROSS amounts of earlier chargeable transfers.",
+     "Only CLTs use up the nil rate band. PETs are ignored while the donor is alive, and the only reason to think about them at that stage is that they can use up available annual exemptions.",
+     "The procedure for lifetime tax on a CLT, in order: identify the value transferred using the loss to donor principle; deduct the annual exemptions to arrive at the CLT; identify the NRB for the year of transfer; deduct other chargeable transfers made in the 7 years before the gift to find the NRB remaining; and charge the excess at 20% or 25%.",
+     "TAPER RELIEF reduces the TAX PAYABLE by a percentage. It does not reduce the value of the transfer and it does not give back any nil rate band.",
+     "The taper steps are in the second decision tree. Nothing in the first 3 years, then 20%, 40%, 60% and 80% relief across the remaining four."
+    ]
+   },
+   {
+    "head": "13.8.2.10 Business relief and agricultural relief",
+    "body": [
+     "CURRENCY: business property relief is now called BUSINESS RELIEF. The Business examinable-law update confirms the change of name at 7.20.",
+     "CURRENCY: from 6 APRIL 2026 a COMBINED £2.5m cap applies to 100% relief across business and agricultural property. Value above the cap attracts 50% relief.",
+     "Any unused allowance is transferable between spouses, so a couple can pass on up to £5m of business or agricultural assets, on top of the NRB and residence NRB.",
+     "Both reliefs reduce the value transferred and are given BEFORE any annual exemption.",
+     "The rates and the qualifying assets are in the mind map above. The two conditions that decide most questions are the TRADING requirement and the OWNERSHIP period.",
+     "TRADING: relief is given only if the business is trading. A business that holds or makes investments, or deals in property, is excluded. A company acquiring land for rental income or to sell on after it appreciates is dealing in land and gets nothing.",
+     "Shares in OVERSEAS trading companies are eligible for business relief.",
+     "OWNERSHIP: the donor must generally have owned the business property for at least 2 years before the transfer. Exceptions include replacing one business asset with another within a 3-year period, and inheriting business property from a spouse.",
+     "EXCEPTED ASSETS make the relief proportional. An excepted asset is one neither used wholly or mainly for the purposes of the business throughout the 2 years before the transfer, nor required for future use in it [IHTA 1984 s 112(2)].",
+     "Typical examples are investments, assets held for the transferor's personal use, and large cash deposits not needed by the business. If 30% of the company's assets are excepted, relief drops to 70%.",
+     "AGRICULTURAL PROPERTY means agricultural land or buildings used for agriculture and situated in the UK. Relief is available both to a farmer who owns and uses the land, and to a landowner letting it to a farmer — there is no requirement to farm it yourself.",
+     "EXCLUDED from agriculture: grazing horses, except in connection with a stud farm, and land used for fishing, shooting and other sporting rights.",
+     "AGRICULTURAL VALUE, not market or development value, is what the relief covers — the value assuming the land can be used only for farming and any development is prohibited.",
+     "AGRICULTURAL OCCUPATION: 2 years' occupation by the transferor for the purposes of agriculture, extended to 7 YEARS where the land is TENANTED, that is let to someone else who occupies it for agriculture.",
+     "The two reliefs can apply to the SAME transfer. Agricultural relief is given first, on the farmland and buildings.",
+     "Business relief then covers the assets used in the farming business that are not agricultural land or buildings, such as plant, machinery and goodwill — and can also pick up DEVELOPMENT VALUE within the land that agricultural relief cannot reach.",
+     "On a lifetime transfer the reliefs have immediate effect only for CLTs, because PETs are not immediately chargeable. Whether they survive to be used on the death is the last node of the second decision tree above."
+    ]
+   },
+   {
+    "head": "13.8.2.11–13.8.2.12 The death estate",
+    "body": [
+     "At death the deceased is treated as having made a chargeable transfer equal to the NET value of their assets — total value less debts and liabilities owed at the date of death. The personal representatives pay the tax on it.",
+     "The calculation mirrors death tax on lifetime transfers, with one difference: the ANNUAL EXEMPTION is not available to reduce the chargeable death estate.",
+     "Start with the NRB for the year of death and reduce it by chargeable transfers — failed PETs and CLTs — made in the 7 years before death. The remainder is deducted from the estate and the balance is taxed at 40%.",
+     "In practice PETs and CLTs in the 7 years before death often use the whole band, so the entire death estate is charged at 40%.",
+     "Gifts on death to a SPOUSE or civil partner and to a CHARITY are exempt, with the same £325,000 restriction where the deceased was UK domiciled and the recipient spouse was not.",
+     "CURRENCY: from April 2024, gifts on death to European Economic Area charities are no longer exempt.",
+     "The REDUCED RATE of 36% applies where 10% or more of the deceased's NET estate is left to charity. The baseline amount is the estate charged to IHT after all reliefs, exemptions and the available NRB, but EXCLUDING the charitable legacy itself, and IGNORING the residence NRB.",
+     "The ESTATE RATE is the average rate of tax applicable to each item of property in the estate. Where the NRB was completely used by lifetime transfers the estate rate is 40%, unless the 36% rate applies.",
+     "Valuation rules, the two nil rate bands, and the further reliefs — quick succession, post-mortem and woodlands — are in the collapsed grids above."
+    ]
+   },
+   {
+    "head": "13.8.2.13–13.8.2.15 Anti-avoidance and tax planning",
+    "body": [
+     "GIFTS WITH RESERVATION OF BENEFIT stop a donor giving an asset away while continuing to derive benefit from it. If they do, the asset is treated as still forming part of their estate at death. The classic case is giving away the house and continuing to live in it rent-free.",
+     "The asset is brought back in at its value AT DEATH, not its value when given. A house given away at £400,000 and worth £600,000 at the death comes back in at £600,000.",
+     "The rules do NOT apply where the donor pays MARKET RENT for continued occupation, or in situations where HMRC guidance treats the remaining benefit as insignificant.",
+     "RELEASING the reservation before death avoids the rules, because the asset is only brought back if a benefit is retained AT the date of death. But to stop death-bed releases, HMRC treats the release as a PET at the date of release, valued at the asset's value then.",
+     "DOUBLE CHARGES RELIEF prevents a double charge, for instance where the original gift was a PET, the donor died within 7 years, and they were still living in the house.",
+     "HMRC computes the tax on the PET alone and on the gift with reservation alone, and charges whichever produces the higher figure — usually taxing the house in the death estate and ignoring the PET.",
+     "PRE-OWNED ASSET TAX catches what the reservation rules miss, for example selling a house, giving the cash proceeds away, and living rent-free in the property the donee then buys. It imposes an INCOME TAX charge where the former owner benefits directly or indirectly from an asset they previously owned and the transfer is not within the gifts with reservation rules.",
+     "TAX PLANNING: make lifetime gifts, because a PET where the donor survives 7 years escapes IHT entirely, and even a failed PET is tapered. APPRECIATING assets are the ones to give away, because it is the value at the DATE OF TRANSFER that counts, not the value at death.",
+     "Also: use the £3,000 annual exemption every year and the other exemptions where relevant; use any transferable NRBs from a previous marriage, which are otherwise wasted; invest in business or agricultural property, which attract relief of up to 100% while still being passed on; and make sure the will itself is tax efficient."
+    ]
+   },
+   {
+    "head": "13.8.3 Taxation of the estate in administration",
+    "body": [
+     "The PRs must deal with HMRC and settle all tax liabilities arising from the death, and on the income and gains made during the administration period.",
+     "The order matters: finalise the DECEASED'S income tax and capital gains to the date of death FIRST, because any tax owed at death is a liability of the estate and so affects the IHT calculation.",
+     "The PRs' own income tax and CGT during the administration, the rates, the annual exempt amount and the treatment of distributions to beneficiaries are in the collapsed grid above.",
+     "CURRENCY: the PR CGT rate is 24% for ALL assets from 6 April 2026, with 32% for carried interest gains. The old split between 20% for general assets and a higher rate for residential property no longer applies.",
+     "CURRENCY: the annual exempt amount is available to PRs for the year of death AND THE NEXT TWO TAX YEARS. A note saying it is nil in every year after death is wrong.",
+     "CURRENCY: from 2026/2027 dividends received by PRs are charged at the dividend ordinary rate of 10.75%.",
+     "There is no CGT on the death itself. CGT arises only on the PRs' own disposals, and later on a beneficiary's disposal of what they inherited.",
+     "The reporting thresholds, including the £500 de minimis and the informal arrangements for simple estates, are in the collapsed grid above."
+    ]
+   }
+  ],
+  "statutes": [
+   {
+    "ref": "IHTA 1984 s 10",
+    "text": "A disposition is not a transfer of value if it is shown that it was not intended, and was not made in a transaction intended, to confer any gratuitous benefit on any person, and either it was made in a transaction at arm's length between persons not connected with each other, or it was such as might be expected to be made in such a transaction."
+   },
+   {
+    "ref": "IHTA 1984 s 11",
+    "text": "Expenditure on the maintenance of an individual's family, such as paying a child's school fees, is not treated as a transfer of value for IHT, even though the donor's estate is reduced by it."
+   },
+   {
+    "ref": "IHTA 1984 s 3A",
+    "text": "Defines the POTENTIALLY EXEMPT TRANSFER: a lifetime transfer of value by an individual to another individual which is neither exempt nor immediately chargeable. It is treated as exempt while the donor lives and becomes a chargeable transfer only if the donor dies within 7 years."
+   },
+   {
+    "ref": "IHTA 1984 s 7(4)",
+    "text": "TAPER RELIEF. Where a chargeable transfer was made more than 3 years before the death, the tax charged on it is reduced: by 20% for 3 to 4 years, 40% for 4 to 5, 60% for 5 to 6 and 80% for 6 to 7. It reduces the TAX, not the value of the transfer, and does not restore nil rate band."
+   },
+   {
+    "ref": "IHTA 1984 s 8A",
+    "text": "TRANSFERABLE NIL RATE BAND. Where a person dies leaving all or part of their nil rate band unused, a claim may be made on the death of their surviving spouse or civil partner to increase that survivor's band by the unused PERCENTAGE, applied to the band in force at the second death. The maximum uplift is 100%, so the survivor can have at most two full bands."
+   },
+   {
+    "ref": "IHTA 1984 s 8D and following",
+    "text": "RESIDENCE NIL RATE BAND. An additional band, currently £175,000, where the estate includes a qualifying residential interest closely inherited by lineal descendants. It applies to the death estate only, is deducted before the general nil rate band, and is tapered away at £1 for every £2 by which the net estate exceeds £2m."
+   },
+   {
+    "ref": "IHTA 1984 s 105",
+    "text": "Defines RELEVANT BUSINESS PROPERTY for business relief, and the categories attracting 100% and 50% relief. Relief is given only where the business is TRADING; a business consisting wholly or mainly of dealing in securities, stocks or shares, land or buildings, or of making or holding investments, does not qualify."
+   },
+   {
+    "ref": "IHTA 1984 s 112(2)",
+    "text": "EXCEPTED ASSETS. An asset is excepted, and so excluded from business relief, if it was neither used wholly or mainly for the purposes of the business throughout the 2 years immediately preceding the transfer, nor required at the time of the transfer for future use in the business. Relief is then given proportionally."
+   },
+   {
+    "ref": "IHTA 1984 ss 115-116",
+    "text": "AGRICULTURAL RELIEF. Reduces the AGRICULTURAL VALUE of agricultural property in the UK. The property must have been occupied by the transferor for the purposes of agriculture throughout the 2 years before the transfer, or owned by them and occupied for agriculture throughout the 7 years before it where the land is tenanted."
+   },
+   {
+    "ref": "IHTA 1984 s 141",
+    "text": "QUICK-SUCCESSION RELIEF. Where the value of a person's estate was increased by a chargeable transfer made to them within the 5 years before their death, the tax on their death is reduced. The percentage is 100% falling by 20% for each full year between the two events."
+   },
+   {
+    "ref": "IHTA 1984 s 160 and s 161",
+    "text": "Section 160 sets the general valuation rule: the price the property might reasonably be expected to fetch if sold in the open market at that time. Section 161 contains the RELATED PROPERTY rules, under which property owned by a spouse or civil partner is taken into account where that produces a higher value."
+   },
+   {
+    "ref": "IHTA 1984 s 227",
+    "text": "THE INSTALMENT OPTION. Tax attributable to certain property, including land and business interests, may on election be paid in 10 equal yearly instalments, the first falling due on the normal due date."
+   },
+   {
+    "ref": "Finance Act 1986 s 102",
+    "text": "GIFTS WITH RESERVATION OF BENEFIT. Where an individual disposes of property by gift but possession and enjoyment is not bona fide assumed by the donee, or the property is not enjoyed to the entire exclusion of the donor, the property is treated as still forming part of the donor's estate on death, valued at that date."
+   },
+   {
+    "ref": "Finance Act 2004 Sch 15",
+    "text": "PRE-OWNED ASSET TAX. Imposes an INCOME TAX charge on the benefit received by the former owner of property where they continue to benefit directly or indirectly from an asset they previously owned and the gifts with reservation rules do not apply."
+   },
+   {
+    "ref": "TCGA 1992 s 62",
+    "text": "On a death, the assets of which the deceased was competent to dispose are deemed to be acquired by the personal representatives at their market value at the date of death, but are NOT deemed to be disposed of by the deceased. So there is no CGT on death itself, and the PROBATE VALUE becomes the base cost. A transfer to a legatee is likewise not a disposal by the PRs."
+   }
+  ],
+  "cases": [],
+  "tip": "⚡ 13.8 SPINE — three taxes, taken in turn. For IHT, classify every lifetime gift as EXEMPT, PET or CLT, cumulate seven years back FROM THE GIFT on gross figures, then value the death estate by LOSS TO THE DONOR. Take the reliefs before the bands: business and agricultural relief first, then the RNRB, then the NRB. Taper reduces the TAX and never the transfer. Deaths from 6 April 2025 turn on LONG-TERM UK RESIDENCE rather than domicile, and the bands are frozen to April 2031. Then deal with the estate's own income tax and CGT: settle the deceased's tax first, remember the PRs get no allowances, and note that death itself is not a disposal."
+ }
+}

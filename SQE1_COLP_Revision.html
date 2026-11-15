@@ -453,19 +453,21 @@ function loadFlashLog(){
 }
 // Ticking a flashcard slot records THAT slot's date (not today), so a slot done
 // early stays ticked where it sits.
-// doneBy: the completion date that made this slot done (a session finished in
-// the revision guide is logged for the day it was done, which may be earlier
-// than the slot); unticking removes that one.
+// Ticking a slot means "I did this deck" — recorded for TODAY, whichever day
+// the slot was on. The plan is then rebuilt: the deck moves to the back of the
+// rotation and the following slots go to other decks. doneBy: the completion
+// date that made a slot done; unticking removes that one.
 function toggleFlash(prefix, date, doneBy){
   const c = flashCode(prefix), arr = flashLog[c] || [];
-  const hit = doneBy && arr.includes(doneBy) ? doneBy : (arr.includes(date) ? date : null);
+  const hit = doneBy && arr.includes(doneBy) ? doneBy : null;
   if (hit) {
     flashLog[c] = arr.filter(d => d !== hit);
     if (!flashLog[c].length) delete flashLog[c];
     queueOp({ unrevisit: [{ code: c, date: hit }] });
   } else {
-    flashLog[c] = [...arr, date].sort();
-    queueOp({ revisits: { [c]: [date] } });
+    const t = todayYMD();
+    flashLog[c] = [...new Set([...arr, t])].sort();
+    queueOp({ revisits: { [c]: [t] } });
   }
   saveFlashLocal();
   render();
@@ -622,6 +624,7 @@ async function syncFromServer(){
     Object.keys(doneDates).forEach(c => { if (!done.has(c)) delete doneDates[c]; });
     try { localStorage.setItem(DONE_DATES_KEY, JSON.stringify(doneDates)); } catch {}
     flashLog = takeFlash(revisitLog);   // server copy (+ queued ticks) is authoritative
+    fixFutureFlashTicks();
     mergeFlashSummary(data.flash_summary);
     saveFlashLocal();
     saveRevisitLogLocal();
@@ -633,6 +636,25 @@ let done = loadDone();
 let doneDates = loadDoneDates();
 let revisitLog = loadRevisitLog();
 let flashLog = Object.assign(loadFlashLog(), takeFlash(revisitLog));
+
+// Older versions recorded a ticked flashcard slot under the SLOT's date, so a
+// deck done today and ticked on Thursday's slot sat there as "done" and the
+// plan never moved. A future date can only be such a tick: move it to today.
+function fixFutureFlashTicks(){
+  const t = todayYMD(), un = [], add = {};
+  Object.keys(flashLog).forEach(c => {
+    const fut = flashLog[c].filter(d => d > t);
+    if (!fut.length) return;
+    fut.forEach(d => un.push({ code: c, date: d }));
+    flashLog[c] = [...new Set([...flashLog[c].filter(d => d <= t), t])].sort();
+    add[c] = [t];
+  });
+  if (!un.length) return;
+  saveFlashLocal();
+  queueOp({ revisits: add });
+  queueOp({ unrevisit: un });
+}
+fixFutureFlashTicks();
 
 // ── Core: build spread schedule ────────────────────────────────────────────
 // Returns {code: revDate | null}
@@ -1079,6 +1101,13 @@ function mergeFlashSummary(srv){
 }
 // A slot is done when its deck was done on that day (buildFlashDays has
 // already put any deck done today or ticked ahead onto its day).
+// Decks done today that did not get today's slot (no slot today, or a second
+// deck): listed under Today as done, so the tick is visible somewhere.
+function flashDoneToday(flashDays){
+  const t = todayYMD();
+  return Object.keys(FLASH_DECK_OF).filter(p =>
+    (flashLog[flashCode(p)] || []).includes(t) && flashDays[t] !== p);
+}
 function flashSlotStatus(flashDays){
   const out = {};
   Object.entries(flashDays).forEach(([d, p]) => {
@@ -1135,7 +1164,7 @@ function buildFlashDays() {
       let idx;
       if (d >= T) {
         const at = days.indexOf(d);
-        if (at >= 0 && !fromGuide) { if (!doneOn[d]) doneOn[d] = p; return; }
+        if (at >= 0 && !fromGuide && !doneOn[d]) { doneOn[d] = p; return; }
         // done on a day with no slot (e.g. today is a teaching day): it came
         // up just before the next slot day
         const nxt = days.findIndex(x => x > d);
@@ -1369,6 +1398,8 @@ function render() {
         bucketFor(date).flash = p;
         bucketFor(date).flashSlot = flashDone[date] || null;
       });
+      const extra = flashDoneToday(flashDays);
+      if (extra.length) bucketFor(TODAY).flashExtra = extra;
     }
 
     // Revisit-only days need a group of their own, or they vanish entirely.
@@ -1398,6 +1429,7 @@ function render() {
       (bucket.revisitsDone || []).forEach(c => cardsEl.appendChild(makeRevisitRow(c, 'done', date)));
       bucket.revisits.forEach(c => cardsEl.appendChild(makeRevisitRow(c, st, date)));
       if (bucket.flash) cardsEl.appendChild(makeFlashRow(bucket.flash, st, date, bucket.flashSlot));
+      (bucket.flashExtra || []).forEach(p => cardsEl.appendChild(makeFlashRow(p, st, date, { by: date })));
       section.appendChild(cardsEl);
       root.appendChild(section);
     });

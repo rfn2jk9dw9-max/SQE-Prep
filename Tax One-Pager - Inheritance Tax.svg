@@ -1,0 +1,202 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2000" height="1414" viewBox="0 0 2000 1414" font-family="Inter, Helvetica, Arial, sans-serif" xmlns:c2pa="http://c2pa.org/manifest">
+<rect width="2000" height="1414" fill="white"/>
+<rect x="0" y="0" width="2000" height="10" fill="#1E7A5A"/>
+<text x="40" y="78" font-size="50" font-weight="800" fill="#1F2328">INHERITANCE TAX</text>
+<text x="40" y="116" font-size="21" font-weight="500" fill="#5A6068">SQE1 Wills 13.8 and Business 7.20 · lifetime gifts first, in date order, then the death estate</text>
+<rect x="840" y="56" width="26" height="26" rx="6" fill="#E8F5EF" stroke="#1E7A5A" stroke-width="2"/>
+<text x="876" y="76" font-size="19" font-weight="600" fill="#1F2328">THE PRINCIPLE</text>
+<rect x="1050" y="58" width="62" height="24" rx="12" fill="#C9711F"/>
+<text x="1081" y="76" font-size="15" font-weight="800" fill="white" text-anchor="middle">BUT</text>
+<text x="1124" y="76" font-size="19" font-weight="600" fill="#1F2328">what must be taken into account</text>
+<rect x="40" y="150.0" width="720" height="261.5" rx="16" fill="#E8F5EF" stroke="#1E7A5A" stroke-width="2"/>
+<circle cx="102" cy="280.74879999999996" r="40" fill="#1E7A5A"/>
+<rect x="84.4" y="275.9" width="35.2" height="24.0" stroke="white" stroke-width="3.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="82.0" y="269.5" width="40.0" height="7.2" stroke="white" stroke-width="3.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="102.0" y1="269.5" x2="102.0" y2="299.9" stroke="white" stroke-width="3.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M102.0,269.5 Q89.2,256.7 92.4,267.9 Z" stroke="white" stroke-width="3.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M102.0,269.5 Q114.8,256.7 111.6,267.9 Z" stroke="white" stroke-width="3.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="168" y="246.3" font-size="16.3" font-weight="800" fill="#1E7A5A" letter-spacing="0.6">STEP 1 · CLASSIFY EACH LIFETIME GIFT</text>
+<text x="168.0" y="282.3" font-size="19.0" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan font-weight="700" fill="#1F2328">EXEMPT</tspan><tspan>, or a </tspan><tspan font-weight="700" fill="#1F2328">PET </tspan><tspan>(gift to an individual: taxed only if the donor</tspan></text>
+<text x="168.0" y="306.6" font-size="19.0" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>dies within 7 years), or a </tspan><tspan font-weight="700" fill="#1F2328">CLT </tspan><tspan>(gift to a trust or company: taxed</tspan></text>
+<text x="168.0" y="331.0" font-size="19.0" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>now).</tspan></text>
+<line x1="760" y1="280.7" x2="840" y2="280.7" stroke="#C9711F" stroke-width="3" stroke-dasharray="7 5"/>
+<path d="M828,272.7 L840,280.7 L828,288.7" fill="#C9711F"/>
+<rect x="772.0" y="266.7" width="56" height="28" rx="14" fill="#C9711F"/>
+<text x="800.0" y="286.7" font-size="15" font-weight="800" fill="white" text-anchor="middle">BUT</text>
+<rect x="840" y="150.0" width="610" height="261.5" rx="16" fill="#FFF5E6" stroke="#E8B266" stroke-width="2"/>
+<circle cx="864" cy="178.9" r="4.5" fill="#C9711F"/>
+<text x="880.0" y="184.7" font-size="17.5" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>Not a transfer of value at all: an </tspan><tspan font-weight="700" fill="#8A3E00">arm's length </tspan><tspan>deal, or </tspan><tspan font-weight="700" fill="#8A3E00">family</tspan></text>
+<text x="880.0" y="207.0" font-size="17.5" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan font-weight="700" fill="#8A3E00">maintenance </tspan><tspan>such as school fees.</tspan></text>
+<circle cx="864" cy="231.7" r="4.5" fill="#C9711F"/>
+<text x="880.0" y="237.4" font-size="17.5" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>Exempt: </tspan><tspan font-weight="700" fill="#8A3E00">spouse </tspan><tspan>(only £325,000 if the spouse is not UK domiciled),</tspan></text>
+<text x="880.0" y="259.8" font-size="17.5" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan font-weight="700" fill="#8A3E00">charity</tspan><tspan>, gifts up to </tspan><tspan font-weight="700" fill="#8A3E00">£250 </tspan><tspan>a person (all or nothing), </tspan><tspan font-weight="700" fill="#8A3E00">marriage </tspan><tspan>£5,000</tspan></text>
+<text x="880.0" y="282.2" font-size="17.5" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>parent / £2,500 grandparent / £1,000 anyone (only the excess</tspan></text>
+<text x="880.0" y="304.5" font-size="17.5" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>counts), </tspan><tspan font-weight="700" fill="#8A3E00">normal expenditure out of income</tspan><tspan>.</tspan></text>
+<circle cx="864" cy="329.1" r="4.5" fill="#C9711F"/>
+<text x="880.0" y="334.9" font-size="17.5" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan font-weight="700" fill="#8A3E00">Annual £3,000</tspan><tspan>: date order; unused carries forward ONE year, this</tspan></text>
+<text x="880.0" y="357.3" font-size="17.5" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>year's used first.</tspan></text>
+<circle cx="864" cy="381.9" r="4.5" fill="#C9711F"/>
+<text x="880.0" y="387.7" font-size="17.5" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>Bare trust: PET. Charitable trust: exempt.</tspan></text>
+<path d="M90,413.5 L102,423.5 L114,413.5" fill="none" stroke="#1E7A5A" stroke-width="3" stroke-linecap="round"/>
+<rect x="40" y="425.5" width="720" height="186.4" rx="16" fill="#E8F5EF" stroke="#1E7A5A" stroke-width="2"/>
+<circle cx="102" cy="518.6848" r="40" fill="#1E7A5A"/>
+<circle cx="97.2" cy="513.9" r="12.8" stroke="white" stroke-width="3.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="106.8" y1="523.5" x2="119.6" y2="536.3" stroke="white" stroke-width="6.4" stroke-linecap="round"/>
+<text x="97.2" y="518.7" font-size="12.0" font-weight="800" fill="white" text-anchor="middle">£</text>
+<text x="168" y="508.5" font-size="16.3" font-weight="800" fill="#1E7A5A" letter-spacing="0.6">STEP 2 · VALUE IT</text>
+<text x="168.0" y="544.6" font-size="19.0" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>Value = the </tspan><tspan font-weight="700" fill="#1F2328">LOSS TO THE DONOR</tspan><tspan>, not what the recipient gets.</tspan></text>
+<line x1="760" y1="518.7" x2="840" y2="518.7" stroke="#C9711F" stroke-width="3" stroke-dasharray="7 5"/>
+<path d="M828,510.7 L840,518.7 L828,526.7" fill="#C9711F"/>
+<rect x="772.0" y="504.7" width="56" height="28" rx="14" fill="#C9711F"/>
+<text x="800.0" y="524.7" font-size="15" font-weight="800" fill="white" text-anchor="middle">BUT</text>
+<rect x="840" y="425.5" width="610" height="186.4" rx="16" fill="#FFF5E6" stroke="#E8B266" stroke-width="2"/>
+<circle cx="864" cy="454.4" r="4.5" fill="#C9711F"/>
+<text x="880.0" y="460.2" font-size="17.5" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>Losing </tspan><tspan font-weight="700" fill="#8A3E00">control </tspan><tspan>of a company can cost the donor far more than the</tspan></text>
+<text x="880.0" y="482.5" font-size="17.5" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>shares given.</tspan></text>
+<circle cx="864" cy="507.1" r="4.5" fill="#C9711F"/>
+<text x="880.0" y="512.9" font-size="17.5" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan font-weight="700" fill="#8A3E00">Related property</tspan><tspan>: a spouse's matching holding is counted if that</tspan></text>
+<text x="880.0" y="535.3" font-size="17.5" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>gives a higher value.</tspan></text>
+<circle cx="864" cy="559.9" r="4.5" fill="#C9711F"/>
+<text x="880.0" y="565.7" font-size="17.5" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan font-weight="700" fill="#8A3E00">Business and agricultural relief </tspan><tspan>come off the value FIRST, before</tspan></text>
+<text x="880.0" y="588.0" font-size="17.5" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>the annual exemptions.</tspan></text>
+<path d="M90,613.9 L102,623.9 L114,613.9" fill="none" stroke="#1E7A5A" stroke-width="3" stroke-linecap="round"/>
+<rect x="40" y="625.9" width="720" height="114.1" rx="16" fill="#E8F5EF" stroke="#1E7A5A" stroke-width="2"/>
+<circle cx="102" cy="682.9359999999999" r="40" fill="#1E7A5A"/>
+<rect x="86.0" y="679.7" width="32.0" height="22.4" rx="3.2" stroke="white" stroke-width="3.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M92.4,679.7 L92.4,671.7 Q92.4,662.1 102.0,662.1 Q111.6,662.1 111.6,671.7 L111.6,679.7" stroke="white" stroke-width="3.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="102.0" cy="689.3" r="2.4" fill="white"/>
+<text x="168" y="660.6" font-size="16.3" font-weight="800" fill="#1E7A5A" letter-spacing="0.6">STEP 3 · LIFETIME TAX: CLTs ONLY</text>
+<text x="168.0" y="696.7" font-size="19.0" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>Look back </tspan><tspan font-weight="700" fill="#1F2328">7 years FROM THE GIFT</tspan><tspan>. Take earlier gross CLTs</tspan></text>
+<text x="168.0" y="721.0" font-size="19.0" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>off the £325,000 nil rate band. Tax the excess at </tspan><tspan font-weight="700" fill="#1F2328">20%</tspan><tspan>.</tspan></text>
+<line x1="760" y1="682.9" x2="840" y2="682.9" stroke="#C9711F" stroke-width="3" stroke-dasharray="7 5"/>
+<path d="M828,674.9 L840,682.9 L828,690.9" fill="#C9711F"/>
+<rect x="772.0" y="668.9" width="56" height="28" rx="14" fill="#C9711F"/>
+<text x="800.0" y="688.9" font-size="15" font-weight="800" fill="white" text-anchor="middle">BUT</text>
+<rect x="840" y="625.9" width="610" height="114.1" rx="16" fill="#FFF5E6" stroke="#E8B266" stroke-width="2"/>
+<circle cx="864" cy="667.4" r="4.5" fill="#C9711F"/>
+<text x="880.0" y="673.2" font-size="17.5" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>If the </tspan><tspan font-weight="700" fill="#8A3E00">donor </tspan><tspan>pays: </tspan><tspan font-weight="700" fill="#8A3E00">25%</tspan><tspan>, because the gift is grossed up.</tspan></text>
+<circle cx="864" cy="697.8" r="4.5" fill="#C9711F"/>
+<text x="880.0" y="703.5" font-size="17.5" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>PETs are </tspan><tspan font-weight="700" fill="#8A3E00">ignored </tspan><tspan>in lifetime. They only use up annual exemptions.</tspan></text>
+<path d="M90,742.0 L102,752.0 L114,742.0" fill="none" stroke="#1E7A5A" stroke-width="3" stroke-linecap="round"/>
+<rect x="40" y="754.0" width="720" height="186.4" rx="16" fill="#E8F5EF" stroke="#1E7A5A" stroke-width="2"/>
+<circle cx="102" cy="847.1872" r="40" fill="#1E7A5A"/>
+<line x1="87.6" y1="826.4" x2="116.4" y2="826.4" stroke="white" stroke-width="3.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="87.6" y1="868.0" x2="116.4" y2="868.0" stroke="white" stroke-width="3.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M90.8,826.4 L90.8,832.8 L102.0,847.2 L90.8,861.6 L90.8,868.0 M113.2,826.4 L113.2,832.8 L102.0,847.2 L113.2,861.6 L113.2,868.0" stroke="white" stroke-width="3.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M95.6,868.0 L102.0,860.0 L108.4,868.0 Z" fill="white"/>
+<text x="168" y="812.7" font-size="16.3" font-weight="800" fill="#1E7A5A" letter-spacing="0.6">STEP 4 · DONOR DIES WITHIN 7 YEARS</text>
+<text x="168.0" y="848.8" font-size="19.0" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>Failed PETs become chargeable and CLTs get a top-up, at</tspan></text>
+<text x="168.0" y="873.1" font-size="19.0" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan font-weight="700" fill="#1F2328">40%</tspan><tspan>, using the nil rate band at the date of death. Still look</tspan></text>
+<text x="168.0" y="897.4" font-size="19.0" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>back 7 years from </tspan><tspan font-weight="700" fill="#1F2328">each gift</tspan><tspan>.</tspan></text>
+<line x1="760" y1="847.2" x2="840" y2="847.2" stroke="#C9711F" stroke-width="3" stroke-dasharray="7 5"/>
+<path d="M828,839.2 L840,847.2 L828,855.2" fill="#C9711F"/>
+<rect x="772.0" y="833.2" width="56" height="28" rx="14" fill="#C9711F"/>
+<text x="800.0" y="853.2" font-size="15" font-weight="800" fill="white" text-anchor="middle">BUT</text>
+<rect x="840" y="754.0" width="610" height="186.4" rx="16" fill="#FFF5E6" stroke="#E8B266" stroke-width="2"/>
+<circle cx="864" cy="782.9" r="4.5" fill="#C9711F"/>
+<text x="880.0" y="788.7" font-size="17.5" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan font-weight="700" fill="#8A3E00">TAPER </tspan><tspan>cuts the TAX, never the value: 3-4 years 20% off · 4-5 years</tspan></text>
+<text x="880.0" y="811.0" font-size="17.5" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>40% · 5-6 years 60% · 6-7 years 80%.</tspan></text>
+<circle cx="864" cy="835.7" r="4.5" fill="#C9711F"/>
+<text x="880.0" y="841.4" font-size="17.5" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>CLT: credit for lifetime tax paid, but </tspan><tspan font-weight="700" fill="#8A3E00">no refund </tspan><tspan>if it exceeds the death</tspan></text>
+<text x="880.0" y="863.8" font-size="17.5" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>tax.</tspan></text>
+<circle cx="864" cy="888.4" r="4.5" fill="#C9711F"/>
+<text x="880.0" y="894.2" font-size="17.5" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>Business or agricultural relief survives only if the donee </tspan><tspan font-weight="700" fill="#8A3E00">still holds</tspan></text>
+<text x="880.0" y="916.5" font-size="17.5" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>the asset, or reinvested </tspan><tspan font-weight="700" fill="#8A3E00">ALL </tspan><tspan>the proceeds.</tspan></text>
+<path d="M90,942.4 L102,952.4 L114,942.4" fill="none" stroke="#1E7A5A" stroke-width="3" stroke-linecap="round"/>
+<rect x="40" y="954.4" width="720" height="269.5" rx="16" fill="#E8F5EF" stroke="#1E7A5A" stroke-width="2"/>
+<circle cx="102" cy="1089.1232" r="40" fill="#1E7A5A"/>
+<path d="M87.6,1108.3 L87.6,1081.1 Q87.6,1066.7 102.0,1066.7 Q116.4,1066.7 116.4,1081.1 L116.4,1108.3" stroke="white" stroke-width="3.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="81.2" y1="1108.3" x2="122.8" y2="1108.3" stroke="white" stroke-width="3.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="102.0" y="1092.3" font-size="9.6" font-weight="800" fill="white" text-anchor="middle">RIP</text>
+<text x="168" y="1054.6" font-size="16.3" font-weight="800" fill="#1E7A5A" letter-spacing="0.6">STEP 5 · THE DEATH ESTATE</text>
+<text x="168.0" y="1090.7" font-size="19.0" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan font-weight="700" fill="#1F2328">Net </tspan><tspan>estate (less debts and funeral costs, not probate costs).</tspan></text>
+<text x="168.0" y="1115.0" font-size="19.0" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>Deduct the </tspan><tspan font-weight="700" fill="#1F2328">RNRB £175,000</tspan><tspan>, then the </tspan><tspan font-weight="700" fill="#1F2328">NRB £325,000 </tspan><tspan>less</tspan></text>
+<text x="168.0" y="1139.3" font-size="19.0" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>chargeable gifts in the 7 years before death. Balance at </tspan><tspan font-weight="700" fill="#1F2328">40%</tspan><tspan>.</tspan></text>
+<line x1="760" y1="1089.1" x2="840" y2="1089.1" stroke="#C9711F" stroke-width="3" stroke-dasharray="7 5"/>
+<path d="M828,1081.1 L840,1089.1 L828,1097.1" fill="#C9711F"/>
+<rect x="772.0" y="1075.1" width="56" height="28" rx="14" fill="#C9711F"/>
+<text x="800.0" y="1095.1" font-size="15" font-weight="800" fill="white" text-anchor="middle">BUT</text>
+<rect x="840" y="954.4" width="610" height="269.5" rx="16" fill="#FFF5E6" stroke="#E8B266" stroke-width="2"/>
+<circle cx="864" cy="983.3" r="4.5" fill="#C9711F"/>
+<text x="880.0" y="989.0" font-size="17.5" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan font-weight="700" fill="#8A3E00">No annual exemption </tspan><tspan>on death.</tspan></text>
+<circle cx="864" cy="1013.7" r="4.5" fill="#C9711F"/>
+<text x="880.0" y="1019.4" font-size="17.5" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan font-weight="700" fill="#8A3E00">RNRB</tspan><tspan>: the home must be </tspan><tspan font-weight="700" fill="#8A3E00">closely inherited </tspan><tspan>(children, grandchildren,</tspan></text>
+<text x="880.0" y="1041.8" font-size="17.5" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>step, adopted or foster). Tapered £1 for every £2 the estate exceeds</tspan></text>
+<text x="880.0" y="1064.2" font-size="17.5" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>£2m.</tspan></text>
+<circle cx="864" cy="1088.8" r="4.5" fill="#C9711F"/>
+<text x="880.0" y="1094.5" font-size="17.5" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>Unused NRB and RNRB pass to the surviving spouse as a</tspan></text>
+<text x="880.0" y="1116.9" font-size="17.5" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan font-weight="700" fill="#8A3E00">PERCENTAGE</tspan><tspan>.</tspan></text>
+<circle cx="864" cy="1141.5" r="4.5" fill="#C9711F"/>
+<text x="880.0" y="1147.3" font-size="17.5" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan font-weight="700" fill="#8A3E00">36% </tspan><tspan>where 10% or more of the net estate goes to charity.</tspan></text>
+<circle cx="864" cy="1171.9" r="4.5" fill="#C9711F"/>
+<text x="880.0" y="1177.7" font-size="17.5" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan font-weight="700" fill="#8A3E00">Gift with reservation</tspan><tspan>: home given away but still lived in rent-free is</tspan></text>
+<text x="880.0" y="1200.0" font-size="17.5" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>taxed at its </tspan><tspan font-weight="700" fill="#8A3E00">DEATH </tspan><tspan>value. Paying market rent avoids it.</tspan></text>
+<path d="M90,1225.9 L102,1235.9 L114,1225.9" fill="none" stroke="#1E7A5A" stroke-width="3" stroke-linecap="round"/>
+<rect x="40" y="1237.9" width="720" height="114.1" rx="16" fill="#E8F5EF" stroke="#1E7A5A" stroke-width="2"/>
+<circle cx="102" cy="1294.9360000000001" r="40" fill="#1E7A5A"/>
+<rect x="84.4" y="1280.5" width="35.2" height="32.0" rx="3.2" stroke="white" stroke-width="3.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="84.4" y1="1290.1" x2="119.6" y2="1290.1" stroke="white" stroke-width="3.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="93.2" y1="1275.7" x2="93.2" y2="1284.5" stroke="white" stroke-width="3.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="110.8" y1="1275.7" x2="110.8" y2="1284.5" stroke="white" stroke-width="3.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="102.0" y="1307.7" font-size="12.0" font-weight="800" fill="white" text-anchor="middle">31</text>
+<text x="168" y="1272.6" font-size="16.3" font-weight="800" fill="#1E7A5A" letter-spacing="0.6">STEP 6 · WHO PAYS, AND WHEN</text>
+<text x="168.0" y="1308.7" font-size="19.0" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>PRs pay on the estate </tspan><tspan font-weight="700" fill="#1F2328">6 months after the end of the month of</tspan></text>
+<text x="168.0" y="1333.0" font-size="19.0" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan font-weight="700" fill="#1F2328">death</tspan><tspan>.</tspan></text>
+<line x1="760" y1="1294.9" x2="840" y2="1294.9" stroke="#C9711F" stroke-width="3" stroke-dasharray="7 5"/>
+<path d="M828,1286.9 L840,1294.9 L828,1302.9" fill="#C9711F"/>
+<rect x="772.0" y="1280.9" width="56" height="28" rx="14" fill="#C9711F"/>
+<text x="800.0" y="1300.9" font-size="15" font-weight="800" fill="white" text-anchor="middle">BUT</text>
+<rect x="840" y="1237.9" width="610" height="114.1" rx="16" fill="#FFF5E6" stroke="#E8B266" stroke-width="2"/>
+<circle cx="864" cy="1279.4" r="4.5" fill="#C9711F"/>
+<text x="880.0" y="1285.2" font-size="17.5" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>Failed PET: the </tspan><tspan font-weight="700" fill="#8A3E00">recipient </tspan><tspan>pays. CLT top-up: the </tspan><tspan font-weight="700" fill="#8A3E00">trustees</tspan><tspan>.</tspan></text>
+<circle cx="864" cy="1309.8" r="4.5" fill="#C9711F"/>
+<text x="880.0" y="1315.5" font-size="17.5" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>Land and business interests: </tspan><tspan font-weight="700" fill="#8A3E00">10 annual instalments</tspan><tspan>.</tspan></text>
+<rect x="1480" y="150.0" width="480" height="296.2" rx="16" fill="#F5F5F2" stroke="#D3D3CD" stroke-width="2"/>
+<text x="1498" y="178.0" font-size="15.5" font-weight="800" fill="#1E7A5A" letter-spacing="0.6">BUSINESS RELIEF · AUTOMATIC</text>
+<rect x="1498" y="214.5" width="7" height="7" rx="1.5" fill="#1E7A5A"/>
+<text x="1514.0" y="223.5" font-size="16.3" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan font-weight="700" fill="#1F2328">100%</tspan><tspan>: sole trade · partnership share · UNQUOTED</tspan></text>
+<text x="1514.0" y="244.4" font-size="16.3" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>trading company shares, any size of holding</tspan></text>
+<rect x="1498" y="262.4" width="7" height="7" rx="1.5" fill="#1E7A5A"/>
+<text x="1514.0" y="271.4" font-size="16.3" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan font-weight="700" fill="#1F2328">50%</tspan><tspan>: quoted shares with CONTROL · AIM shares · land,</tspan></text>
+<text x="1514.0" y="292.3" font-size="16.3" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>buildings or machinery owned personally and used by</tspan></text>
+<text x="1514.0" y="313.2" font-size="16.3" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>your company or partnership</tspan></text>
+<rect x="1498" y="331.1" width="7" height="7" rx="1.5" fill="#1E7A5A"/>
+<text x="1514.0" y="340.1" font-size="16.3" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan font-weight="700" fill="#1F2328">Nothing</tspan><tspan>: quoted shares without control</tspan></text>
+<rect x="1498" y="358.0" width="7" height="7" rx="1.5" fill="#1E7A5A"/>
+<text x="1514.0" y="367.0" font-size="16.3" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>100% only up to </tspan><tspan font-weight="700" fill="#1F2328">£2.5m </tspan><tspan>per rolling 7 years, business and</tspan></text>
+<text x="1514.0" y="387.9" font-size="16.3" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>agricultural relief combined. 50% above. Unused cap</tspan></text>
+<text x="1514.0" y="408.8" font-size="16.3" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>passes to a spouse.</tspan></text>
+<rect x="1480" y="458.2" width="480" height="227.5" rx="16" fill="#FFF5E6" stroke="#E8B266" stroke-width="2"/>
+<text x="1498" y="486.2" font-size="15.5" font-weight="800" fill="#C9711F" letter-spacing="0.6">BUT ALL THREE MUST HOLD</text>
+<rect x="1498" y="522.8" width="7" height="7" rx="1.5" fill="#C9711F"/>
+<text x="1514.0" y="531.8" font-size="16.3" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan font-weight="700" fill="#1F2328">TRADING </tspan><tspan>business: investment or dealing in land gets</tspan></text>
+<text x="1514.0" y="552.7" font-size="16.3" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>nothing</tspan></text>
+<rect x="1498" y="570.6" width="7" height="7" rx="1.5" fill="#C9711F"/>
+<text x="1514.0" y="579.6" font-size="16.3" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>Owned for </tspan><tspan font-weight="700" fill="#1F2328">2 years </tspan><tspan>(spouse's ownership on death</tspan></text>
+<text x="1514.0" y="600.5" font-size="16.3" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>counts)</tspan></text>
+<rect x="1498" y="618.4" width="7" height="7" rx="1.5" fill="#C9711F"/>
+<text x="1514.0" y="627.4" font-size="16.3" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan font-weight="700" fill="#1F2328">Excepted assets </tspan><tspan>(idle cash, investments) cut the relief</tspan></text>
+<text x="1514.0" y="648.3" font-size="16.3" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>pro rata: 30% excepted = 70% relief</tspan></text>
+<rect x="1480" y="697.7" width="480" height="185.7" rx="16" fill="#F5F5F2" stroke="#D3D3CD" stroke-width="2"/>
+<text x="1498" y="725.7" font-size="15.5" font-weight="800" fill="#1E7A5A" letter-spacing="0.6">FIGURES</text>
+<rect x="1498" y="762.3" width="7" height="7" rx="1.5" fill="#1E7A5A"/>
+<text x="1514.0" y="771.3" font-size="16.3" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>NRB </tspan><tspan font-weight="700" fill="#1F2328">£325,000 </tspan><tspan>· RNRB </tspan><tspan font-weight="700" fill="#1F2328">£175,000</tspan><tspan>, frozen to April 2031</tspan></text>
+<rect x="1498" y="789.2" width="7" height="7" rx="1.5" fill="#1E7A5A"/>
+<text x="1514.0" y="798.2" font-size="16.3" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>Lifetime </tspan><tspan font-weight="700" fill="#1F2328">20% / 25% </tspan><tspan>· death </tspan><tspan font-weight="700" fill="#1F2328">40% / 36%</tspan></text>
+<rect x="1498" y="816.1" width="7" height="7" rx="1.5" fill="#1E7A5A"/>
+<text x="1514.0" y="825.1" font-size="16.3" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>Long-term UK resident (10 of the last 20 tax years):</tspan></text>
+<text x="1514.0" y="846.0" font-size="16.3" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan font-weight="700" fill="#1F2328">worldwide </tspan><tspan>assets. Others: UK assets only</tspan></text>
+<rect x="1480" y="895.4" width="480" height="248.4" rx="16" fill="#F5F5F2" stroke="#D3D3CD" stroke-width="2"/>
+<text x="1498" y="923.4" font-size="15.5" font-weight="800" fill="#1E7A5A" letter-spacing="0.6">THEN THE ESTATE'S OWN TAX</text>
+<rect x="1498" y="959.9" width="7" height="7" rx="1.5" fill="#1E7A5A"/>
+<text x="1514.0" y="968.9" font-size="16.3" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>Settle the deceased's income tax to death FIRST: it is a</tspan></text>
+<text x="1514.0" y="989.8" font-size="16.3" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>debt of the estate</tspan></text>
+<rect x="1498" y="1007.8" width="7" height="7" rx="1.5" fill="#1E7A5A"/>
+<text x="1514.0" y="1016.7" font-size="16.3" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>PRs: income tax 20% (dividends 10.75%), </tspan><tspan font-weight="700" fill="#1F2328">no</tspan></text>
+<text x="1514.0" y="1037.7" font-size="16.3" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan font-weight="700" fill="#1F2328">allowances</tspan><tspan>. CGT 24%, AEA for the year of death and</tspan></text>
+<text x="1514.0" y="1058.6" font-size="16.3" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>the next 2 years</tspan></text>
+<rect x="1498" y="1076.5" width="7" height="7" rx="1.5" fill="#1E7A5A"/>
+<text x="1514.0" y="1085.5" font-size="16.3" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>Passing an asset to a beneficiary is </tspan><tspan font-weight="700" fill="#1F2328">not a disposal</tspan><tspan>: they</tspan></text>
+<text x="1514.0" y="1106.4" font-size="16.3" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>take probate value</tspan></text>
+<text x="1000.0" y="1390" font-size="20" font-weight="700" fill="#1E7A5A" text-anchor="middle" letter-spacing="0.8">CLASSIFY  ›  VALUE  ›  LIFETIME TAX  ›  DEATH WITHIN 7 YEARS  ›  DEATH ESTATE  ›  WHO PAYS</text>
+<metadata><c2pa:manifest>AAAWgmp1bWIAAAAeanVtZGMycGEAEQAQgAAAqgA4m3EDYzJwYQAAABZcanVtYgAAAEdqdW1kYzJtYQARABCAAACqADibcQN1cm46YzJwYTo4YzY2MWNkMC03YWJiLTQ5ZWEtOWM4OC1jZWI4MWJmNzQ3NGIAAAADl2p1bWIAAAApanVtZGMyYXMAEQAQgAAAqgA4m3EDYzJwYS5hc3NlcnRpb25zAAAAALxqdW1iAAAARGp1bWRjYm9yABEAEIAAAKoAOJtxE2MycGEuaW5ncmVkaWVudC52MwAAAAAYYzJzaPzufU8DwV8fIS2KN7sCte4AAABwY2JvcqNpZGM6Zm9ybWF0bWltYWdlL3N2Zyt4bWxqaW5zdGFuY2VJRHgseG1wOmlpZDo4YzRmNDI0Yy1kZmRhLTQ0ZjctYTRiYi0zMmExZDQ0M2ZmNDhscmVsYXRpb25zaGlwaHBhcmVudE9mAAAB4mp1bWIAAABBanVtZGNib3IAEQAQgAAAqgA4m3ETYzJwYS5hY3Rpb25zLnYyAAAAABhjMnNosGlpXXeP3+IYLF/COTOtxwAAAZljYm9yomdhY3Rpb25zgqJmYWN0aW9ua2MycGEub3BlbmVkanBhcmFtZXRlcnOha2luZ3JlZGllbnRzgaJjdXJseC1zZWxmI2p1bWJmPWMycGEuYXNzZXJ0aW9ucy9jMnBhLmluZ3JlZGllbnQudjNkaGFzaFggX9lQ+jy2gEF6VNX4SSZGu8hSTJRxV3s9O/rTvNn7XW+kZmFjdGlvbngdY29tLmFudGhyb3BpYy5jbGF1ZGUucHJvdmlkZWRqcGFyYW1ldGVyc6F4H2NvbS5hbnRocm9waWMub3JpZ2luLWNvbmZpZGVuY2VndW5rbm93bmtkZXNjcmlwdGlvbnhmQ2xhdWRlIHByb3ZpZGVkIHRoaXMgZmlsZSBhdCB0aGUgcmVxdWVzdCBvZiBhIHVzZXIgYW5kIG1heSBoYXZlIGNyZWF0ZWQgb3IgbW9kaWZpZWQgdGhlIGZpbGUgY29udGVudHMubXNvZnR3YXJlQWdlbnShZG5hbWVmQ2xhdWRlcmFsbEFjdGlvbnNJbmNsdWRlZPUAAADIanVtYgAAAEBqdW1kY2JvcgARABCAAACqADibcRNjMnBhLmhhc2guZGF0YQAAAAAYYzJzaNbhFaDvq52L8VLy7REawXIAAACAY2JvcqVjYWxnZnNoYTI1NmNwYWRMAAAAAAAAAAAAAAAAZGhhc2hYICnilbTtwieWvcO/IZF5pS3WYafni6pw/RGHSE5sq4mwZG5hbWVuanVtYmYgbWFuaWZlc3RqZXhjbHVzaW9uc4GiZXN0YXJ0GW14Zmxlbmd0aBkeBAAAAj5qdW1iAAAAJ2p1bWRjMmNsABEAEIAAAKoAOJtxA2MycGEuY2xhaW0udjIAAAACD2Nib3KlY2FsZ2ZzaGEyNTZpc2lnbmF0dXJleE1zZWxmI2p1bWJmPS9jMnBhL3VybjpjMnBhOjhjNjYxY2QwLTdhYmItNDllYS05Yzg4LWNlYjgxYmY3NDc0Yi9jMnBhLnNpZ25hdHVyZWppbnN0YW5jZUlEeCx4bXA6aWlkOjUxYTg0ZmMzLTNhMWItNGRiNy05YmI2LTExODZhYzc2MDk1ZHJjcmVhdGVkX2Fzc2VydGlvbnODomN1cmx4LXNlbGYjanVtYmY9YzJwYS5hc3NlcnRpb25zL2MycGEuaW5ncmVkaWVudC52M2RoYXNoWCBf2VD6PLaAQXpU1fhJJka7yFJMlHFXez07+tO82ftdb6JjdXJseCpzZWxmI2p1bWJmPWMycGEuYXNzZXJ0aW9ucy9jMnBhLmFjdGlvbnMudjJkaGFzaFggvoYe0BFh/n6K7fFHiMtA2bweuF9CJdbZo0EFee3XNiaiY3VybHgpc2VsZiNqdW1iZj1jMnBhLmFzc2VydGlvbnMvYzJwYS5oYXNoLmRhdGFkaGFzaFggVir7hJ7TSmlP4IifhJIBBym/PcrDoGlTq86N2Q6yikR0Y2xhaW1fZ2VuZXJhdG9yX2luZm+jZG5hbWVvQW50aHJvcGljIEZpbGVzZ3ZlcnNpb25lMS4wLjBrc3BlY1ZlcnNpb25lMi40LjAAABA4anVtYgAAAChqdW1kYzJjcwARABCAAACqADibcQNjMnBhLnNpZ25hdHVyZQAAABAIY2JvctKEWQISogEmGCFZAgowggIGMIIBjaADAgECAhRA5aAK7sI50L64g/oGQgU9Z1UTADAKBggqhkjOPQQDAzBJMRcwFQYDVQQKEw5BbnRocm9waWMsIFBCQzEuMCwGA1UEAxMlQW50aHJvcGljIENvbnRlbnQgQ3JlZGVudGlhbHMgUm9vdCBDQTAeFw0yNjA4MDcxODQzNTZaFw0yODA4MDYxOTQzNTZaMEQxFzAVBgNVBAoTDkFudGhyb3BpYywgUEJDMSkwJwYDVQQDEyBBbnRocm9waWMgQ2xhdWRlIENvbnRlbnQgU2lnbmluZzBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABJh6CmvLUBgFFNU0vUKlOVtE6djd17L5SuwX0LemFisBM3dkd/3cyjxFA3Qo5S46fX0/ihY0VZ7mfb9KF703t5OjWDBWMA4GA1UdDwEB/wQEAwIHgDAVBgNVHSUEDjAMBgorBgEEAYPoXgIBMAwGA1UdEwEB/wQCMAAwHwYDVR0jBBgwFoAUzlHiBIFOZFsj+OPEz5o+nMHXXMIwCgYIKoZIzj0EAwMDZwAwZAIwMXMdFJ4BetLLVY7ORuE9noqbbAZOZn/aArXyTwFAZfKrPzxF2vPoJNf1+UCdg1XGAjBwX1zd9WGqYkqmL5SFqw1QySjr1zJfpJM9+1rdDwSPLMOPOjKuiXjoU/pUUeG9RwmhY3BhZFkNngAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPZYQH179gmMF01/6sHDRmhn4CdfAIdsojqYpgIyjqakvlkmCI+DKgiQlSJ/SwYIfi65JbeXmHjyCzSuuxuXAVU2HMA=</c2pa:manifest></metadata></svg>
