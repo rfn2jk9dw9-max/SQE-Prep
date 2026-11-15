@@ -453,12 +453,16 @@ function loadFlashLog(){
 }
 // Ticking a flashcard slot records THAT slot's date (not today), so a slot done
 // early stays ticked where it sits.
-function toggleFlash(prefix, date){
+// doneBy: the completion date that made this slot done (a session finished in
+// the revision guide is logged for the day it was done, which may be earlier
+// than the slot); unticking removes that one.
+function toggleFlash(prefix, date, doneBy){
   const c = flashCode(prefix), arr = flashLog[c] || [];
-  if (arr.includes(date)) {
-    flashLog[c] = arr.filter(d => d !== date);
+  const hit = doneBy && arr.includes(doneBy) ? doneBy : (arr.includes(date) ? date : null);
+  if (hit) {
+    flashLog[c] = arr.filter(d => d !== hit);
     if (!flashLog[c].length) delete flashLog[c];
-    queueOp({ unrevisit: [{ code: c, date: date }] });
+    queueOp({ unrevisit: [{ code: c, date: hit }] });
   } else {
     flashLog[c] = [...arr, date].sort();
     queueOp({ revisits: { [c]: [date] } });
@@ -618,6 +622,7 @@ async function syncFromServer(){
     Object.keys(doneDates).forEach(c => { if (!done.has(c)) delete doneDates[c]; });
     try { localStorage.setItem(DONE_DATES_KEY, JSON.stringify(doneDates)); } catch {}
     flashLog = takeFlash(revisitLog);   // server copy (+ queued ticks) is authoritative
+    mergeFlashSummary(data.flash_summary);
     saveFlashLocal();
     saveRevisitLogLocal();
     render();
@@ -1061,6 +1066,41 @@ const FLASH_SUBJECT = { CONT:'Contract', TORT:'Tort', COND:'Ethics and professio
   PROP:'Property practice', WILL:'Wills and administration of estates' };
 const FLASH_BATCH = 15;     // cards per slot; the deck remembers where you stopped
 const FLASH_SUMMARY_KEY = 'sqe1_flash_summary_v1';   // written by the revision guide (same origin)
+// The guide also stores the summary on the server, so the slot shows the
+// right count on any device, not only on the origin the guide was opened from.
+function mergeFlashSummary(srv){
+  if (!srv || typeof srv !== 'object') return;
+  let loc = {};
+  try { loc = JSON.parse(localStorage.getItem(FLASH_SUMMARY_KEY)) || {}; } catch {}
+  Object.entries(srv).forEach(([k, v]) => {
+    if (v && (!loc[k] || (v.d || '') >= (loc[k].d || ''))) loc[k] = v;   // same day: server is the later write
+  });
+  try { localStorage.setItem(FLASH_SUMMARY_KEY, JSON.stringify(loc)); } catch {}
+}
+// Which upcoming slots are done. Completions logged today or later (a slot
+// ticked here, or a session finished in the guide) are matched, earliest
+// first, to that deck's first slot on or after them — so a deck done early
+// covers its next slot instead of leaving it as to-do. A deck whose mistake
+// cards are all mastered counts as done until the first card comes back.
+function flashSlotStatus(flashDays){
+  const T = todayYMD(), byPrefix = {}, out = {};
+  Object.entries(flashDays).sort(([a], [b]) => a.localeCompare(b))
+    .forEach(([d, p]) => { (byPrefix[p] = byPrefix[p] || []).push(d); });
+  Object.entries(byPrefix).forEach(([p, slots]) => {
+    const comps = (flashLog[flashCode(p)] || []).filter(d => d >= T).sort();
+    const taken = new Set();
+    // exact-date ticks first, so a manual tick stays on the slot it was made on
+    comps.forEach(c => { if (slots.includes(c) && !taken.has(c)) { taken.add(c); out[c] = { by: c }; } });
+    comps.filter(c => !out[c] || out[c].by !== c).forEach(c => {
+      const s = slots.find(d => d >= c && !taken.has(d));
+      if (s) { taken.add(s); out[s] = { by: c }; }
+    });
+    const sum = flashSummary(p);
+    if (sum && sum.total && !sum.left)
+      slots.forEach(d => { if (!out[d] && (!sum.next || d < sum.next)) out[d] = { mastered: true }; });
+  });
+  return out;
+}
 function flashSummary(prefix){
   try { return (JSON.parse(localStorage.getItem(FLASH_SUMMARY_KEY)) || {})[FLASH_DECK_OF[prefix]] || null; }
   catch { return null; }
@@ -1107,21 +1147,23 @@ function buildFlashDays() {
 // Tickable, but NOT into the done set: a ticked slot is stored as a FLASH<n>.0
 // pseudo-revisit for that slot's date (see toggleFlash). The link opens the
 // guide on that deck, mistake cards only, at the card where she stopped.
-function makeFlashRow(prefix, status, date) {
+function makeFlashRow(prefix, status, date, slot) {
   const weakest = MODULES
     .filter(m => prefixOf(m.code) === prefix && SEED_DATES[m.code]
       && weakness[m.code] && weakness[m.code].answered)
     .sort((a, b) => weakness[b.code].score - weakness[a.code].score)
     .slice(0, 2)
     .map(m => m.code + ' (' + weakLabel(m.code) + ')');
-  const ticked = (flashLog[flashCode(prefix)] || []).includes(date);
+  slot = slot || {};
+  const ticked = !!(slot.by || slot.mastered);
   const sum = flashSummary(prefix);
   const el = document.createElement('div');
   el.className = 'card s-' + (ticked ? 'done' : status);
   el.style.cssText = 'cursor:pointer;opacity:.9;border-left:3px solid #8b5cf6;background:rgba(139,92,246,.06)';
   el.addEventListener('click', e => {
     if (e.target.closest('a')) return;   // let the deck link through
-    toggleFlash(prefix, date);
+    if (slot.mastered && !slot.by) return;   // done because every card is mastered: nothing to untick
+    toggleFlash(prefix, date, slot.by);
   });
   const progress = sum
     ? (sum.left ? sum.left + ' of ' + sum.total + ' cards still to master' : 'all ' + sum.total + ' mastered for now')
@@ -1136,7 +1178,10 @@ function makeFlashRow(prefix, status, date) {
     '<div class="card-sub">'+
       '<span style="opacity:.75">'+
         (ticked
-          ? 'Done · tap to undo' + (progress ? ' · ' + progress : '')
+          ? (slot.by
+              ? 'Done' + (slot.by !== date ? ' early, on ' + fmtShort(slot.by) : '') + ' · tap to undo'
+              : 'All mistake cards mastered — nothing due')
+            + (progress ? ' · ' + progress : '')
           : 'Next '+FLASH_BATCH+' of your mistake cards — the deck picks up where you stopped'+
             (progress ? ' · ' + progress : '')+
             (weakest.length ? ' · weakest: ' + weakest.join(' · ') : ''))+
@@ -1294,9 +1339,12 @@ function render() {
 
     // Weak-spot flashcards: the short third slot on each free day.
     if (['all','today','upcoming'].includes(activeFilter)) {
-      Object.entries(buildFlashDays()).forEach(([date, p]) => {
+      const flashDays = buildFlashDays();
+      const flashDone = flashSlotStatus(flashDays);
+      Object.entries(flashDays).forEach(([date, p]) => {
         if (activeFilter === 'today' && date !== TODAY) return;
         bucketFor(date).flash = p;
+        bucketFor(date).flashSlot = flashDone[date] || null;
       });
     }
 
@@ -1326,7 +1374,7 @@ function render() {
       bucket.modules.forEach(i => cardsEl.appendChild(makeCard(i)));
       (bucket.revisitsDone || []).forEach(c => cardsEl.appendChild(makeRevisitRow(c, 'done', date)));
       bucket.revisits.forEach(c => cardsEl.appendChild(makeRevisitRow(c, st, date)));
-      if (bucket.flash) cardsEl.appendChild(makeFlashRow(bucket.flash, st, date));
+      if (bucket.flash) cardsEl.appendChild(makeFlashRow(bucket.flash, st, date, bucket.flashSlot));
       section.appendChild(cardsEl);
       root.appendChild(section);
     });

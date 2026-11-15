@@ -2511,10 +2511,125 @@ function flSaveSummary(){
   FLASH_DATA.forEach(fd => {
     const mine = (fd.cards||[]).filter(c => c && c.auto && !del[flCardKey(c)]);
     if (!mine.length) return;
-    const rested = mine.filter(c => flRested(prog[flCardKey(c)])).length;
-    out[fd.key] = { total: mine.length, left: mine.length - rested, d: flYMD() };
+    let rested = 0, next = null;
+    mine.forEach(c => {
+      const r = prog[flCardKey(c)];
+      if (!flRested(r)) return;
+      rested++;
+      const due = flPlusDays(r.d, FL_REST_DAYS);
+      if (!next || due < next) next = due;
+    });
+    // next: the day the first rested card comes back, so the calendar knows
+    // how long an "all mastered" deck stays done.
+    out[fd.key] = { total: mine.length, left: mine.length - rested, d: flYMD(), next: next };
   });
-  try{ localStorage.setItem(FL_SUM_KEY, JSON.stringify(out)); }catch(e){}
+  let prev = null;
+  try{ prev = localStorage.getItem(FL_SUM_KEY); }catch(e){}
+  const json = JSON.stringify(out);
+  try{ localStorage.setItem(FL_SUM_KEY, json); }catch(e){}
+  if (json !== prev && typeof flPendAdd === 'function') flPendAdd({ flash_summary: out });
+}
+
+// ── Sync with the server ───────────────────────────────────────────
+// Card results used to live only in this browser, so a deck done on the
+// phone (or on the local copy) still showed as to-do everywhere else, and the
+// calendar never heard about it. Every result now also goes to
+// colp_progress.php — the same store the revision calendar reads — and the
+// later-dated result wins when two devices disagree. Changes are batched and
+// kept in localStorage until the server accepts them, so nothing is lost
+// offline.
+const FL_API = 'https://bidouillecode.dev/solicitor/colp_progress.php';
+const FL_PEND_KEY = 'sqe1_flash_pending_v1';
+// Same FLASH<n>.0 pseudo-codes the calendar uses for its flashcard slot.
+const FL_DECK_NUM = { CONT:1, TORT:2, COND:3, LAND:4, CRML:5, TRUS:6, BUS7:7, DISP:8,
+  CRMP:9, SERV:10, SYS:11, PROP:12, WILL:13 };
+const FL_CAL_FLASH_KEY = 'sqe1_colp_rev_v3_flash';   // the calendar's local copy (same origin only)
+let flPend = (() => { try{ const o = JSON.parse(localStorage.getItem(FL_PEND_KEY)); return (o && typeof o === 'object' && !Array.isArray(o)) ? o : {}; }catch(e){ return {}; } })();
+let flFlushing = false, flPendTimer = null;
+function flPendSave(){ try{ localStorage.setItem(FL_PEND_KEY, JSON.stringify(flPend)); }catch(e){} }
+function flPendMerge(into, part){
+  if (part.flash) {
+    into.flash = Object.assign(into.flash || {}, part.flash);
+    if (into.flash_unset) into.flash_unset = into.flash_unset.filter(k => !(k in part.flash));
+  }
+  if (part.flash_unset && part.flash_unset.length) {
+    into.flash_unset = [...new Set([...(into.flash_unset || []), ...part.flash_unset])];
+    if (into.flash) part.flash_unset.forEach(k => { delete into.flash[k]; });
+  }
+  if (part.flash_summary) into.flash_summary = Object.assign(into.flash_summary || {}, part.flash_summary);
+  if (part.revisits) {
+    into.revisits = into.revisits || {};
+    Object.entries(part.revisits).forEach(([c, a]) => {
+      into.revisits[c] = [...new Set([...(into.revisits[c] || []), ...a])].sort();
+    });
+  }
+  return into;
+}
+function flPendAdd(part){
+  flPendMerge(flPend, part); flPendSave();
+  clearTimeout(flPendTimer); flPendTimer = setTimeout(flFlush, 1200);
+}
+async function flFlush(){
+  if (flFlushing || !Object.keys(flPend).length) return;
+  flFlushing = true;
+  const sent = flPend; flPend = {}; flPendSave();
+  try{
+    const r = await fetch(FL_API, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(sent) });
+    if (r.status >= 500) throw new Error('server ' + r.status);   // 4xx: refused, retrying never helps
+  }catch(e){
+    const newer = flPend; flPend = flPendMerge(flPendMerge({}, sent), newer); flPendSave();
+  }
+  flFlushing = false;
+  if (Object.keys(flPend).length) { clearTimeout(flPendTimer); flPendTimer = setTimeout(flFlush, 1200); }
+}
+// Leaving the page: send what is queued without waiting (text/plain keeps it
+// a simple CORS request; the PHP reads the body whatever its type). The queue
+// is kept until a normal POST succeeds — the server merge is idempotent.
+document.addEventListener('visibilitychange', () => {
+  if (document.visibilityState !== 'hidden' || !Object.keys(flPend).length) return;
+  try{ navigator.sendBeacon && navigator.sendBeacon(FL_API, new Blob([JSON.stringify(flPend)], {type:'text/plain'})); }catch(e){}
+});
+// Pull every device's results and merge (later date wins), push what only
+// this browser knew.
+async function flSync(){
+  await flFlush();
+  try{
+    const r = await fetch(FL_API, { cache:'no-store' });
+    if (!r.ok) return;
+    const data = await r.json();
+    if (!data || typeof data.flash !== 'object' || data.flash === null) return;  // server not updated yet
+    const prog = flGetProg(), up = {};
+    let changed = false;
+    Object.entries(data.flash).forEach(([k, v]) => {
+      if (!v || !v.d) return;
+      const l = prog[k];
+      if (!l || v.d > l.d || (v.d === l.d && v.r !== l.r && !(flPend.flash && flPend.flash[k]))) { prog[k] = { r: v.r, d: v.d }; changed = true; }
+    });
+    Object.entries(prog).forEach(([k, l]) => {
+      const v = data.flash[k];
+      if (!v || l.d > v.d) up[k] = l;
+    });
+    if (changed) flSetProg(prog);
+    if (Object.keys(up).length) flPendAdd({ flash: up });
+    flSaveSummary();
+    // Refresh an open deck only if nothing has been marked yet in this sitting.
+    const fv = document.getElementById('flash-view');
+    if (changed && fv && fv.classList.contains('visible') && !FL.marked && !FL.idx) { buildFlashDeck(FL.subj); renderFlash(); }
+  }catch(e){}
+}
+// A finished calendar slot: 15 cards marked, the deck run to the end, or the
+// whole deck marked done. Recorded for today under the deck's FLASH<n>.0 code,
+// which the calendar counts against that deck's next slot.
+function flLogSession(){
+  const fd = FLASH_DATA[FL.subj]; if (!fd) return;
+  const n = FL_DECK_NUM[fd.key]; if (!n) return;
+  const code = 'FLASH' + n + '.0', t = flYMD();
+  flPendAdd({ revisits: { [code]: [t] } });
+  try{
+    const log = JSON.parse(localStorage.getItem(FL_CAL_FLASH_KEY)) || {};
+    log[code] = [...new Set([...(Array.isArray(log[code]) ? log[code] : []), t])].sort();
+    localStorage.setItem(FL_CAL_FLASH_KEY, JSON.stringify(log));
+  }catch(e){}
 }
 function flResetDeck(btn){
   if(!btn.dataset.armed){
@@ -2522,9 +2637,10 @@ function flResetDeck(btn){
     setTimeout(()=>{ if(btn.isConnected){ delete btn.dataset.armed; btn.textContent = '↺ Reset my progress in this deck'; } }, 3000);
     return;
   }
-  const prog = flGetProg();
-  (FLASH_DATA[FL.subj].cards||[]).forEach(c => { if (c) delete prog[flCardKey(c)]; });
-  flSetProg(prog); FL.showAll = false; buildFlashDeck(FL.subj); renderFlash();
+  const prog = flGetProg(), gone = [];
+  (FLASH_DATA[FL.subj].cards||[]).forEach(c => { if (c) { const k = flCardKey(c); if (prog[k]) gone.push(k); delete prog[k]; } });
+  flSetProg(prog);
+  if (gone.length) flPendAdd({ flash_unset: gone }); FL.showAll = false; buildFlashDeck(FL.subj); renderFlash();
 }
 // For a deck gone through elsewhere (paper, another device, before tracking
 // existed): every card in the current view counts as got today and rests.
@@ -2534,13 +2650,17 @@ function flMarkDeckDone(btn){
     setTimeout(()=>{ if(btn.isConnected){ delete btn.dataset.armed; btn.textContent = '✓ I did this whole deck today'; } }, 3000);
     return;
   }
-  const prog = flGetProg(), t = flYMD();
-  (FL.pool||[]).forEach(c => { prog[flCardKey(c)] = { r: 'got', d: t }; });
-  flSetProg(prog); FL.showAll = false; buildFlashDeck(FL.subj); renderFlash();
+  const prog = flGetProg(), t = flYMD(), up = {};
+  (FL.pool||[]).forEach(c => { const k = flCardKey(c); prog[k] = up[k] = { r: 'got', d: t }; });
+  flSetProg(prog);
+  flPendAdd({ flash: up });
+  flLogSession(); FL.showAll = false; buildFlashDeck(FL.subj); renderFlash();
 }
 function flReviewAll(){ FL.showAll = true; buildFlashDeck(FL.subj); renderFlash(); }
 function flKeepGoing(){ FL.paused = false; FL.batchGot = 0; FL.batchAgain = 0; renderFlash(); }
 setTimeout(flSaveSummary, 800);
+setTimeout(flSync, 1000);
+setInterval(() => { if (document.visibilityState === 'visible') flSync(); }, 5 * 60 * 1000);
 
 function deleteCard(btn){
   if(!btn.dataset.armed){
@@ -2730,13 +2850,17 @@ function markCard(knew){
   const deck = FL.deck, card = deck[FL.idx];
   if(card){
     const prog = flGetProg();
-    prog[flCardKey(card)] = { r: knew ? 'got' : 'again', d: flYMD() };
+    const k = flCardKey(card), rec = { r: knew ? 'got' : 'again', d: flYMD() };
+    prog[k] = rec;
     flSetProg(prog);
+    flPendAdd({ flash: { [k]: rec } });
   }
   if(knew){ FL.known++; FL.batchGot++; }
   else { FL.again.push(card); FL.batchAgain++; }
   FL.idx++; FL.marked++;
   if (FL.marked % FL_BATCH === 0 && FL.idx < deck.length) FL.paused = true;
+  // A full slot's worth, or the end of the deck, ticks the calendar slot.
+  if (FL.marked % FL_BATCH === 0 || FL.idx >= deck.length) flLogSession();
   flSaveSummary();
   renderFlash();
 }
