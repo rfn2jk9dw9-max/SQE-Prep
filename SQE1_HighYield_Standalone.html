@@ -2511,9 +2511,10 @@ function flSaveSummary(){
   FLASH_DATA.forEach(fd => {
     const mine = (fd.cards||[]).filter(c => c && c.auto && !del[flCardKey(c)]);
     if (!mine.length) return;
-    let rested = 0, next = null;
+    let rested = 0, next = null, last = null;
     mine.forEach(c => {
       const r = prog[flCardKey(c)];
+      if (r && r.d && (!last || r.d > last)) last = r.d;   // last day any card here was marked
       if (!flRested(r)) return;
       rested++;
       const due = flPlusDays(r.d, FL_REST_DAYS);
@@ -2521,7 +2522,7 @@ function flSaveSummary(){
     });
     // next: the day the first rested card comes back, so the calendar knows
     // how long an "all mastered" deck stays done.
-    out[fd.key] = { total: mine.length, left: mine.length - rested, d: flYMD(), next: next };
+    out[fd.key] = { total: mine.length, left: mine.length - rested, d: flYMD(), next: next, last: last };
   });
   let prev = null;
   try{ prev = localStorage.getItem(FL_SUM_KEY); }catch(e){}

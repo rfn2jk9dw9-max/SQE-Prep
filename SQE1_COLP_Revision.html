@@ -1124,11 +1124,18 @@ function buildFlashDays() {
   const last = {};   // prefix -> index of the day its deck last came up
   const doneOn = {}; // date -> prefix done that day (today or later)
   Object.keys(FLASH_DECK_OF).forEach(p => {
-    (flashLog[flashCode(p)] || []).forEach(d => {
+    // The guide also reports the last day any card in the deck was marked, so
+    // work done before slots were logged (or a part-session) still counts.
+    const sumLast = (flashSummary(p) || {}).last;
+    const log = (flashLog[flashCode(p)] || []).slice();
+    if (sumLast && !log.includes(sumLast)) log.push('~' + sumLast);
+    log.forEach(d => {
+      const fromGuide = d[0] === '~';
+      if (fromGuide) d = d.slice(1);
       let idx;
       if (d >= T) {
         const at = days.indexOf(d);
-        if (at >= 0) { if (!doneOn[d]) doneOn[d] = p; return; }
+        if (at >= 0 && !fromGuide) { if (!doneOn[d]) doneOn[d] = p; return; }
         // done on a day with no slot (e.g. today is a teaching day): it came
         // up just before the next slot day
         const nxt = days.findIndex(x => x > d);
