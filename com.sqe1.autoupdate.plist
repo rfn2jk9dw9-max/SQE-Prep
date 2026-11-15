@@ -28,6 +28,17 @@
         <string>/Users/ghitab/Library/Mobile Documents/com~apple~CloudDocs/GB LEX/Formation Solicitor/Tests</string>
     </array>
 
+    <!-- And every morning at 07:00, so changes made during the day are always
+         committed and pushed. If the Mac is asleep at 07:00, launchd runs it
+         as soon as it wakes. -->
+    <key>StartCalendarInterval</key>
+    <dict>
+        <key>Hour</key>
+        <integer>7</integer>
+        <key>Minute</key>
+        <integer>0</integer>
+    </dict>
+
     <key>StandardOutPath</key>
     <string>/Users/ghitab/Documents/Claude/Projects/Mission solicitor/autoupdate.log</string>
     <key>StandardErrorPath</key>

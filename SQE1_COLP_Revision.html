@@ -1077,27 +1077,12 @@ function mergeFlashSummary(srv){
   });
   try { localStorage.setItem(FLASH_SUMMARY_KEY, JSON.stringify(loc)); } catch {}
 }
-// Which upcoming slots are done. Completions logged today or later (a slot
-// ticked here, or a session finished in the guide) are matched, earliest
-// first, to that deck's first slot on or after them — so a deck done early
-// covers its next slot instead of leaving it as to-do. A deck whose mistake
-// cards are all mastered counts as done until the first card comes back.
+// A slot is done when its deck was done on that day (buildFlashDays has
+// already put any deck done today or ticked ahead onto its day).
 function flashSlotStatus(flashDays){
-  const T = todayYMD(), byPrefix = {}, out = {};
-  Object.entries(flashDays).sort(([a], [b]) => a.localeCompare(b))
-    .forEach(([d, p]) => { (byPrefix[p] = byPrefix[p] || []).push(d); });
-  Object.entries(byPrefix).forEach(([p, slots]) => {
-    const comps = (flashLog[flashCode(p)] || []).filter(d => d >= T).sort();
-    const taken = new Set();
-    // exact-date ticks first, so a manual tick stays on the slot it was made on
-    comps.forEach(c => { if (slots.includes(c) && !taken.has(c)) { taken.add(c); out[c] = { by: c }; } });
-    comps.filter(c => !out[c] || out[c].by !== c).forEach(c => {
-      const s = slots.find(d => d >= c && !taken.has(d));
-      if (s) { taken.add(s); out[s] = { by: c }; }
-    });
-    const sum = flashSummary(p);
-    if (sum && sum.total && !sum.left)
-      slots.forEach(d => { if (!out[d] && (!sum.next || d < sum.next)) out[d] = { mastered: true }; });
+  const out = {};
+  Object.entries(flashDays).forEach(([d, p]) => {
+    if ((flashLog[flashCode(p)] || []).includes(d)) out[d] = { by: d };
   });
   return out;
 }
@@ -1128,13 +1113,44 @@ function buildFlashDays() {
     const p = prefixOf(c);
     if (!firstTaught[p] || d < firstTaught[p]) firstTaught[p] = d;
   });
+  // What has actually been done reshapes the plan instead of sitting beside it:
+  //  · a deck worked through before today counts as having come up that day,
+  //    so it drops back in the rotation and the other decks move up;
+  //  · a deck done on a given day (today, or a slot ticked ahead) takes that
+  //    day's slot, shown done — whatever was planned there moves along;
+  //  · a deck whose mistake cards are all mastered is left out until the
+  //    first card comes back, and its slots go to other decks.
+  const T = todayYMD(), dayMs = 864e5;
   const last = {};   // prefix -> index of the day its deck last came up
+  const doneOn = {}; // date -> prefix done that day (today or later)
+  Object.keys(FLASH_DECK_OF).forEach(p => {
+    (flashLog[flashCode(p)] || []).forEach(d => {
+      let idx;
+      if (d >= T) {
+        const at = days.indexOf(d);
+        if (at >= 0) { if (!doneOn[d]) doneOn[d] = p; return; }
+        // done on a day with no slot (e.g. today is a teaching day): it came
+        // up just before the next slot day
+        const nxt = days.findIndex(x => x > d);
+        idx = (nxt < 0 ? days.length : nxt) - 1;
+      } else {
+        idx = -Math.round((parseDate(T) - parseDate(d)) / dayMs);
+      }
+      if (!(p in last) || idx > last[p]) last[p] = idx;
+    });
+  });
+  const restingUntil = p => {
+    const sum = flashSummary(p);
+    return sum && sum.total && !sum.left ? (sum.next || '9999-12-31') : null;
+  };
   const out = {};
   days.forEach((day, i) => {
+    if (doneOn[day]) { out[day] = doneOn[day]; last[doneOn[day]] = i; return; }
     const flk2Only = day > FLK1_EXAM;
     const cands = Object.keys(w).filter(p => FLASH_DECK_OF[p]
       && firstTaught[p] && firstTaught[p] <= day
-      && !(flk2Only && paperOf(p) === 'FLK1'));
+      && !(flk2Only && paperOf(p) === 'FLK1')
+      && !(restingUntil(p) && day < restingUntil(p)));
     if (!cands.length) return;
     const pri = p => w[p] * (i - (p in last ? last[p] : -7));
     cands.sort((a, b) => pri(b) - pri(a) || a.localeCompare(b));
