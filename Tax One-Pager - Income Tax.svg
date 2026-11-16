@@ -8,174 +8,176 @@
 <rect x="1050" y="58" width="62" height="24" rx="12" fill="#C9711F"/>
 <text x="1081" y="76" font-size="15" font-weight="800" fill="white" text-anchor="middle">BUT</text>
 <text x="1124" y="76" font-size="19" font-weight="600" fill="#1F2328">what must be taken into account</text>
-<rect x="40" y="150.0" width="720" height="231.1" rx="16" fill="#EAF2FB" stroke="#1F5FA8" stroke-width="2"/>
-<circle cx="102" cy="265.5472" r="40" fill="#1F5FA8"/>
-<ellipse cx="97.2" cy="276.7" rx="16.0" ry="5.6" stroke="white" stroke-width="3.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-<ellipse cx="97.2" cy="267.1" rx="16.0" ry="5.6" stroke="white" stroke-width="3.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-<ellipse cx="97.2" cy="257.5" rx="16.0" ry="5.6" stroke="white" stroke-width="3.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-<line x1="81.2" y1="257.5" x2="81.2" y2="276.7" stroke="white" stroke-width="3.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-<line x1="113.2" y1="257.5" x2="113.2" y2="276.7" stroke="white" stroke-width="3.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-<circle cx="118.0" cy="251.1" r="8.0" stroke="white" stroke-width="3.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-<text x="118.0" y="254.3" font-size="9.6" font-weight="700" fill="white" text-anchor="middle">£</text>
-<text x="168" y="240.7" font-size="18.1" font-weight="800" fill="#1F5FA8" letter-spacing="0.6">STEP 1 · TOTAL INCOME</text>
-<text x="168.0" y="278.6" font-size="21.0" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>Add up </tspan><tspan font-weight="700" fill="#1F2328">every source</tspan><tspan>: salary, trading profits, rent, bank</tspan></text>
-<text x="168.0" y="305.5" font-size="21.0" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>interest, dividends.</tspan></text>
-<line x1="760" y1="265.5" x2="840" y2="265.5" stroke="#C9711F" stroke-width="3" stroke-dasharray="7 5"/>
-<path d="M828,257.5 L840,265.5 L828,273.5" fill="#C9711F"/>
-<rect x="772.0" y="251.5" width="56" height="28" rx="14" fill="#C9711F"/>
-<text x="800.0" y="271.5" font-size="15" font-weight="800" fill="white" text-anchor="middle">BUT</text>
-<rect x="840" y="150.0" width="610" height="231.1" rx="16" fill="#FFF5E6" stroke="#E8B266" stroke-width="2"/>
-<circle cx="864" cy="183.0" r="4.5" fill="#C9711F"/>
-<text x="880.0" y="189.3" font-size="19.3" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan font-weight="700" fill="#8A3E00">ISA </tspan><tspan>interest is exempt: leave it out.</tspan></text>
-<circle cx="864" cy="215.7" r="4.5" fill="#C9711F"/>
-<text x="880.0" y="222.1" font-size="19.3" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>A </tspan><tspan font-weight="700" fill="#8A3E00">partner </tspan><tspan>is taxed on their SHARE of profit, drawn or not:</tspan></text>
-<text x="880.0" y="246.8" font-size="19.3" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>preferential salary or interest on capital first, then the</tspan></text>
-<text x="880.0" y="271.5" font-size="19.3" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>balance in the agreed ratio (equal if none).</tspan></text>
-<circle cx="864" cy="297.9" r="4.5" fill="#C9711F"/>
-<text x="880.0" y="304.3" font-size="19.3" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>A trading expense is deductible only if it is </tspan><tspan font-weight="700" fill="#8A3E00">INCOME </tspan><tspan>(not</tspan></text>
-<text x="880.0" y="329.0" font-size="19.3" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>capital) and </tspan><tspan font-weight="700" fill="#8A3E00">WHOLLY AND EXCLUSIVELY </tspan><tspan>for the business.</tspan></text>
-<text x="880.0" y="353.7" font-size="19.3" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>Any material personal purpose: the whole expense goes.</tspan></text>
-<path d="M90,383.1 L102,393.1 L114,383.1" fill="none" stroke="#1F5FA8" stroke-width="3" stroke-linecap="round"/>
-<rect x="40" y="395.1" width="720" height="173.6" rx="16" fill="#EAF2FB" stroke="#1F5FA8" stroke-width="2"/>
-<circle cx="102" cy="481.91200000000003" r="40" fill="#1F5FA8"/>
-<circle cx="89.2" cy="494.7" r="6.4" stroke="white" stroke-width="3.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-<circle cx="114.8" cy="494.7" r="6.4" stroke="white" stroke-width="3.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-<line x1="94.0" y1="489.9" x2="113.2" y2="462.7" stroke="white" stroke-width="3.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-<line x1="110.0" y1="489.9" x2="90.8" y2="462.7" stroke="white" stroke-width="3.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-<text x="168" y="457.0" font-size="18.1" font-weight="800" fill="#1F5FA8" letter-spacing="0.6">STEP 2 · NET INCOME</text>
-<text x="168.0" y="495.0" font-size="21.0" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>Total income </tspan><tspan font-weight="700" fill="#1F2328">minus deductions</tspan><tspan>: personal pension</tspan></text>
-<text x="168.0" y="521.9" font-size="21.0" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>contributions, trading loss relief.</tspan></text>
-<line x1="760" y1="481.9" x2="840" y2="481.9" stroke="#C9711F" stroke-width="3" stroke-dasharray="7 5"/>
-<path d="M828,473.9 L840,481.9 L828,489.9" fill="#C9711F"/>
-<rect x="772.0" y="467.9" width="56" height="28" rx="14" fill="#C9711F"/>
-<text x="800.0" y="487.9" font-size="15" font-weight="800" fill="white" text-anchor="middle">BUT</text>
-<rect x="840" y="395.1" width="610" height="173.6" rx="16" fill="#FFF5E6" stroke="#E8B266" stroke-width="2"/>
-<circle cx="864" cy="428.1" r="4.5" fill="#C9711F"/>
-<text x="880.0" y="434.4" font-size="19.3" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>Loss relief must be </tspan><tspan font-weight="700" fill="#8A3E00">CLAIMED </tspan><tspan>and there is </tspan><tspan font-weight="700" fill="#8A3E00">NO PARTIAL</tspan></text>
-<text x="880.0" y="459.2" font-size="19.3" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan font-weight="700" fill="#8A3E00">CLAIM</tspan><tspan>: it absorbs all the income that year, even income the</tspan></text>
-<text x="880.0" y="483.9" font-size="19.3" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>personal allowance would have covered.</tspan></text>
-<circle cx="864" cy="510.3" r="4.5" fill="#C9711F"/>
-<text x="880.0" y="516.6" font-size="19.3" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>Loss in an </tspan><tspan font-weight="700" fill="#8A3E00">opening year</tspan><tspan>: carry back against the </tspan><tspan font-weight="700" fill="#8A3E00">3 previous</tspan></text>
-<text x="880.0" y="541.4" font-size="19.3" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan font-weight="700" fill="#8A3E00">years</tspan><tspan>, earliest first.</tspan></text>
-<path d="M90,570.7 L102,580.7 L114,570.7" fill="none" stroke="#1F5FA8" stroke-width="3" stroke-linecap="round"/>
-<rect x="40" y="582.7" width="720" height="206.4" rx="16" fill="#EAF2FB" stroke="#1F5FA8" stroke-width="2"/>
-<circle cx="102" cy="685.912" r="40" fill="#1F5FA8"/>
-<path d="M102.0,665.1 L119.6,671.5 L118.0,690.7 Q113.2,701.9 102.0,708.3 Q90.8,701.9 86.0,690.7 L84.4,671.5 Z" stroke="white" stroke-width="3.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-<text x="102.0" y="691.5" font-size="16.0" font-weight="800" fill="white" text-anchor="middle">PA</text>
-<text x="168" y="674.5" font-size="18.1" font-weight="800" fill="#1F5FA8" letter-spacing="0.6">STEP 3 · TAXABLE INCOME</text>
-<text x="168.0" y="712.4" font-size="21.0" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>Net income </tspan><tspan font-weight="700" fill="#1F2328">minus the personal allowance </tspan><tspan>of £12,570.</tspan></text>
-<line x1="760" y1="685.9" x2="840" y2="685.9" stroke="#C9711F" stroke-width="3" stroke-dasharray="7 5"/>
-<path d="M828,677.9 L840,685.9 L828,693.9" fill="#C9711F"/>
-<rect x="772.0" y="671.9" width="56" height="28" rx="14" fill="#C9711F"/>
-<text x="800.0" y="691.9" font-size="15" font-weight="800" fill="white" text-anchor="middle">BUT</text>
-<rect x="840" y="582.7" width="610" height="206.4" rx="16" fill="#FFF5E6" stroke="#E8B266" stroke-width="2"/>
-<circle cx="864" cy="615.7" r="4.5" fill="#C9711F"/>
-<text x="880.0" y="622.1" font-size="19.3" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>PA falls </tspan><tspan font-weight="700" fill="#8A3E00">£1 for every £2 </tspan><tspan>of net income over £100,000. Gone</tspan></text>
-<text x="880.0" y="646.8" font-size="19.3" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>at £125,140.</tspan></text>
-<circle cx="864" cy="673.2" r="4.5" fill="#C9711F"/>
-<text x="880.0" y="679.5" font-size="19.3" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>Unused PA is </tspan><tspan font-weight="700" fill="#8A3E00">lost</tspan><tspan>: no carry forward.</tspan></text>
-<circle cx="864" cy="705.9" r="4.5" fill="#C9711F"/>
-<text x="880.0" y="712.3" font-size="19.3" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan font-weight="700" fill="#8A3E00">Marriage allowance</tspan><tspan>: a spouse under the PA transfers £1,260</tspan></text>
-<text x="880.0" y="737.0" font-size="19.3" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>to a BASIC rate spouse, whose TAX (not income) falls by</tspan></text>
-<text x="880.0" y="761.7" font-size="19.3" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>20% of it, so £252.</tspan></text>
-<path d="M90,791.1 L102,801.1 L114,791.1" fill="none" stroke="#1F5FA8" stroke-width="3" stroke-linecap="round"/>
-<rect x="40" y="803.1" width="720" height="148.9" rx="16" fill="#EAF2FB" stroke="#1F5FA8" stroke-width="2"/>
-<circle cx="102" cy="877.5472" r="40" fill="#1F5FA8"/>
-<path d="M82.8,888.7 L102.0,881.5 L121.2,888.7 L102.0,895.9 Z" stroke="white" stroke-width="3.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M82.8,877.5 L102.0,870.3 L121.2,877.5 L102.0,884.7 Z" stroke="white" stroke-width="3.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M82.8,866.3 L102.0,859.1 L121.2,866.3 L102.0,873.5 Z" stroke="white" stroke-width="3.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-<text x="168" y="852.7" font-size="18.1" font-weight="800" fill="#1F5FA8" letter-spacing="0.6">STEP 4 · SPLIT INTO THREE SLICES</text>
-<text x="168.0" y="890.6" font-size="21.0" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>Tax in this order: </tspan><tspan font-weight="700" fill="#1F2328">non-savings</tspan><tspan>, then </tspan><tspan font-weight="700" fill="#1F2328">savings</tspan><tspan>, then</tspan></text>
-<text x="168.0" y="917.5" font-size="21.0" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan font-weight="700" fill="#1F2328">dividends</tspan><tspan>. Dividends are always the TOP slice.</tspan></text>
-<line x1="760" y1="877.5" x2="840" y2="877.5" stroke="#C9711F" stroke-width="3" stroke-dasharray="7 5"/>
-<path d="M828,869.5 L840,877.5 L828,885.5" fill="#C9711F"/>
-<rect x="772.0" y="863.5" width="56" height="28" rx="14" fill="#C9711F"/>
-<text x="800.0" y="883.5" font-size="15" font-weight="800" fill="white" text-anchor="middle">BUT</text>
-<rect x="840" y="803.1" width="610" height="148.9" rx="16" fill="#FFF5E6" stroke="#E8B266" stroke-width="2"/>
-<circle cx="864" cy="836.1" r="4.5" fill="#C9711F"/>
-<text x="880.0" y="842.4" font-size="19.3" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>Each slice takes the band left by the one below. If</tspan></text>
-<text x="880.0" y="867.2" font-size="19.3" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>non-savings fills the basic rate band, savings and dividends</tspan></text>
-<text x="880.0" y="891.9" font-size="19.3" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>start at the higher rate.</tspan></text>
-<circle cx="864" cy="918.3" r="4.5" fill="#C9711F"/>
-<text x="880.0" y="924.6" font-size="19.3" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>Dividends have </tspan><tspan font-weight="700" fill="#8A3E00">their own rates</tspan><tspan>: 10.75% · 35.75% · 39.35%.</tspan></text>
-<path d="M90,954.0 L102,964.0 L114,954.0" fill="none" stroke="#1F5FA8" stroke-width="3" stroke-linecap="round"/>
-<rect x="40" y="966.0" width="720" height="173.6" rx="16" fill="#EAF2FB" stroke="#1F5FA8" stroke-width="2"/>
-<circle cx="102" cy="1052.8176" r="40" fill="#1F5FA8"/>
-<text x="102.0" y="1060.8" font-size="24.0" font-weight="800" fill="white" text-anchor="middle">0%</text>
-<text x="168" y="1027.9" font-size="18.1" font-weight="800" fill="#1F5FA8" letter-spacing="0.6">STEP 5 · THE 0% ALLOWANCES</text>
-<text x="168.0" y="1065.9" font-size="21.0" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan font-weight="700" fill="#1F2328">Dividend allowance </tspan><tspan>£500 for everyone. </tspan><tspan font-weight="700" fill="#1F2328">Personal</tspan></text>
-<text x="168.0" y="1092.8" font-size="21.0" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan font-weight="700" fill="#1F2328">savings allowance </tspan><tspan>£1,000 basic rate, £500 higher rate.</tspan></text>
-<line x1="760" y1="1052.8" x2="840" y2="1052.8" stroke="#C9711F" stroke-width="3" stroke-dasharray="7 5"/>
-<path d="M828,1044.8 L840,1052.8 L828,1060.8" fill="#C9711F"/>
-<rect x="772.0" y="1038.8" width="56" height="28" rx="14" fill="#C9711F"/>
-<text x="800.0" y="1058.8" font-size="15" font-weight="800" fill="white" text-anchor="middle">BUT</text>
-<rect x="840" y="966.0" width="610" height="173.6" rx="16" fill="#FFF5E6" stroke="#E8B266" stroke-width="2"/>
-<circle cx="864" cy="999.0" r="4.5" fill="#C9711F"/>
-<text x="880.0" y="1005.3" font-size="19.3" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>The PSA turns on the HIGHEST band ANY taxable income</tspan></text>
-<text x="880.0" y="1030.1" font-size="19.3" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>reaches. Additional rate taxpayer: </tspan><tspan font-weight="700" fill="#8A3E00">no PSA</tspan><tspan>.</tspan></text>
-<circle cx="864" cy="1056.4" r="4.5" fill="#C9711F"/>
-<text x="880.0" y="1062.8" font-size="19.3" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan font-weight="700" fill="#8A3E00">Starting rate for savings </tspan><tspan>(£5,000 at 0%) only where taxable</tspan></text>
-<text x="880.0" y="1087.5" font-size="19.3" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>non-savings income is under £5,000. Each £1 of it cuts the</tspan></text>
-<text x="880.0" y="1112.3" font-size="19.3" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>£5,000 by £1.</tspan></text>
-<path d="M90,1141.6 L102,1151.6 L114,1141.6" fill="none" stroke="#1F5FA8" stroke-width="3" stroke-linecap="round"/>
-<rect x="40" y="1153.6" width="720" height="198.4" rx="16" fill="#EAF2FB" stroke="#1F5FA8" stroke-width="2"/>
-<circle cx="102" cy="1252.8175999999999" r="40" fill="#1F5FA8"/>
-<path d="M89.2,1233.6 L114.8,1233.6 L114.8,1272.0 L110.0,1268.0 L105.2,1272.0 L100.4,1268.0 L95.6,1272.0 L89.2,1268.0 Z" stroke="white" stroke-width="3.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-<line x1="94.8" y1="1243.2" x2="109.2" y2="1243.2" stroke="white" stroke-width="3.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-<line x1="94.8" y1="1250.4" x2="109.2" y2="1250.4" stroke="white" stroke-width="3.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-<line x1="94.8" y1="1257.6" x2="109.2" y2="1257.6" stroke="white" stroke-width="3.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-<text x="168" y="1227.9" font-size="18.1" font-weight="800" fill="#1F5FA8" letter-spacing="0.6">STEP 6 · TAX STILL DUE</text>
-<text x="168.0" y="1265.9" font-size="21.0" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>Add the tax on each slice to get the liability, then </tspan><tspan font-weight="700" fill="#1F2328">deduct</tspan></text>
-<text x="168.0" y="1292.8" font-size="21.0" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan font-weight="700" fill="#1F2328">tax paid at source </tspan><tspan>(PAYE).</tspan></text>
-<line x1="760" y1="1252.8" x2="840" y2="1252.8" stroke="#C9711F" stroke-width="3" stroke-dasharray="7 5"/>
-<path d="M828,1244.8 L840,1252.8 L828,1260.8" fill="#C9711F"/>
-<rect x="772.0" y="1238.8" width="56" height="28" rx="14" fill="#C9711F"/>
-<text x="800.0" y="1258.8" font-size="15" font-weight="800" fill="white" text-anchor="middle">BUT</text>
-<rect x="840" y="1153.6" width="610" height="198.4" rx="16" fill="#FFF5E6" stroke="#E8B266" stroke-width="2"/>
-<circle cx="864" cy="1186.6" r="4.5" fill="#C9711F"/>
-<text x="880.0" y="1193.0" font-size="19.3" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan font-weight="700" fill="#8A3E00">EIS</tspan><tspan>: 30% of new shares in an unquoted trading company</tspan></text>
-<text x="880.0" y="1217.7" font-size="19.3" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>comes off the LIABILITY (up to £1m invested). It cannot</tspan></text>
-<text x="880.0" y="1242.4" font-size="19.3" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>create a repayment.</tspan></text>
-<circle cx="864" cy="1268.8" r="4.5" fill="#C9711F"/>
-<text x="880.0" y="1275.2" font-size="19.3" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>EIS is </tspan><tspan font-weight="700" fill="#8A3E00">clawed back </tspan><tspan>if the shares go within 3 years, or the</tspan></text>
-<text x="880.0" y="1299.9" font-size="19.3" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>investor becomes CONNECTED: over 30% of the shares, or</tspan></text>
-<text x="880.0" y="1324.6" font-size="19.3" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>an employee.</tspan></text>
-<rect x="1480" y="150.0" width="480" height="223.6" rx="16" fill="#F5F5F2" stroke="#D3D3CD" stroke-width="2"/>
-<text x="1498" y="178.0" font-size="17.2" font-weight="800" fill="#1F5FA8" letter-spacing="0.6">BANDS 2026/27 (normally given)</text>
-<rect x="1498" y="215.2" width="7" height="7" rx="1.5" fill="#1F5FA8"/>
-<text x="1514.0" y="225.2" font-size="18.1" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan font-weight="700" fill="#1F2328">20% </tspan><tspan>on the first £37,700 of taxable income</tspan></text>
-<rect x="1498" y="244.3" width="7" height="7" rx="1.5" fill="#1F5FA8"/>
-<text x="1514.0" y="254.3" font-size="18.1" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan font-weight="700" fill="#1F2328">40% </tspan><tspan>up to £125,140</tspan></text>
-<rect x="1498" y="273.5" width="7" height="7" rx="1.5" fill="#1F5FA8"/>
-<text x="1514.0" y="283.4" font-size="18.1" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan font-weight="700" fill="#1F2328">45% </tspan><tspan>above £125,140</tspan></text>
-<rect x="1498" y="302.6" width="7" height="7" rx="1.5" fill="#1F5FA8"/>
-<text x="1514.0" y="312.5" font-size="18.1" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan font-weight="700" fill="#1F2328">Wales</tspan><tspan>: same totals. The UK rate drops by 10</tspan></text>
-<text x="1514.0" y="335.6" font-size="18.1" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>points and the Welsh rate of 10% is added.</tspan></text>
-<rect x="1480" y="385.6" width="480" height="263.8" rx="16" fill="#F5F5F2" stroke="#D3D3CD" stroke-width="2"/>
-<text x="1498" y="413.6" font-size="17.2" font-weight="800" fill="#1F5FA8" letter-spacing="0.6">PAYMENT</text>
-<rect x="1498" y="450.8" width="7" height="7" rx="1.5" fill="#1F5FA8"/>
-<text x="1514.0" y="460.7" font-size="18.1" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>Employees: </tspan><tspan font-weight="700" fill="#1F2328">PAYE</tspan><tspan>, deducted at source.</tspan></text>
-<rect x="1498" y="479.9" width="7" height="7" rx="1.5" fill="#1F5FA8"/>
-<text x="1514.0" y="489.9" font-size="18.1" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>Self-employed: payments on account on </tspan><tspan font-weight="700" fill="#1F2328">31</tspan></text>
-<text x="1514.0" y="513.0" font-size="18.1" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan font-weight="700" fill="#1F2328">January </tspan><tspan>in the year and </tspan><tspan font-weight="700" fill="#1F2328">31 July </tspan><tspan>after it, each</tspan></text>
-<text x="1514.0" y="536.1" font-size="18.1" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>50% of last year's bill. Balance on 31 January</tspan></text>
-<text x="1514.0" y="559.2" font-size="18.1" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>with the return.</tspan></text>
-<rect x="1498" y="578.4" width="7" height="7" rx="1.5" fill="#1F5FA8"/>
-<text x="1514.0" y="588.3" font-size="18.1" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>Payments on account apply if the bill is £1,000+</tspan></text>
-<text x="1514.0" y="611.4" font-size="18.1" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>and 80% or less was taxed at source.</tspan></text>
-<rect x="1480" y="661.4" width="480" height="292.9" rx="16" fill="#F5F5F2" stroke="#D3D3CD" stroke-width="2"/>
-<text x="1498" y="689.4" font-size="17.2" font-weight="800" fill="#1F5FA8" letter-spacing="0.6">PLANNING · AVOIDANCE · EVASION</text>
-<rect x="1498" y="726.6" width="7" height="7" rx="1.5" fill="#1F5FA8"/>
-<text x="1514.0" y="736.6" font-size="18.1" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan font-weight="700" fill="#1F2328">Planning</tspan><tspan>: lawful.</tspan></text>
-<rect x="1498" y="755.7" width="7" height="7" rx="1.5" fill="#1F5FA8"/>
-<text x="1514.0" y="765.7" font-size="18.1" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan font-weight="700" fill="#1F2328">Avoidance</tspan><tspan>: lawful but artificial. Attacked by</tspan></text>
-<text x="1514.0" y="788.8" font-size="18.1" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>targeted rules and the </tspan><tspan font-weight="700" fill="#1F2328">GAAR</tspan><tspan>: double</tspan></text>
-<text x="1514.0" y="811.9" font-size="18.1" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>reasonableness test, independent advisory panel.</tspan></text>
-<rect x="1498" y="831.1" width="7" height="7" rx="1.5" fill="#1F5FA8"/>
-<text x="1514.0" y="841.0" font-size="18.1" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan font-weight="700" fill="#1F2328">Evasion</tspan><tspan>: a crime.</tspan></text>
-<rect x="1498" y="860.2" width="7" height="7" rx="1.5" fill="#1F5FA8"/>
-<text x="1514.0" y="870.1" font-size="18.1" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>Parent's gift to their own </tspan><tspan font-weight="700" fill="#1F2328">minor unmarried child</tspan></text>
-<text x="1514.0" y="893.3" font-size="18.1" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>producing over £100 of income: ALL of it taxed as</tspan></text>
-<text x="1514.0" y="916.4" font-size="18.1" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>the parent's. Grandparents are not caught.</tspan></text>
+<rect x="40" y="150.0" width="720" height="271.4" rx="16" fill="#EAF2FB" stroke="#1F5FA8" stroke-width="2"/>
+<circle cx="102" cy="285.6890666666667" r="40" fill="#1F5FA8"/>
+<ellipse cx="97.2" cy="296.9" rx="16.0" ry="5.6" stroke="white" stroke-width="3.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<ellipse cx="97.2" cy="287.3" rx="16.0" ry="5.6" stroke="white" stroke-width="3.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<ellipse cx="97.2" cy="277.7" rx="16.0" ry="5.6" stroke="white" stroke-width="3.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="81.2" y1="277.7" x2="81.2" y2="296.9" stroke="white" stroke-width="3.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="113.2" y1="277.7" x2="113.2" y2="296.9" stroke="white" stroke-width="3.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="118.0" cy="271.3" r="8.0" stroke="white" stroke-width="3.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="118.0" y="274.5" font-size="9.6" font-weight="700" fill="white" text-anchor="middle">£</text>
+<text x="168" y="261.1" font-size="17.8" font-weight="800" fill="#1F5FA8" letter-spacing="0.6">STEP 1 · TOTAL INCOME</text>
+<text x="168.0" y="298.8" font-size="20.75" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>Add up </tspan><tspan font-weight="700" fill="#1F2328">every source</tspan><tspan>: salary, trading profits, rent, bank</tspan></text>
+<text x="168.0" y="325.4" font-size="20.75" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>interest, dividends.</tspan></text>
+<line x1="760" y1="285.7" x2="840" y2="285.7" stroke="#C9711F" stroke-width="3" stroke-dasharray="7 5"/>
+<path d="M828,277.7 L840,285.7 L828,293.7" fill="#C9711F"/>
+<rect x="772.0" y="271.7" width="56" height="28" rx="14" fill="#C9711F"/>
+<text x="800.0" y="291.7" font-size="15" font-weight="800" fill="white" text-anchor="middle">BUT</text>
+<rect x="840" y="150.0" width="610" height="271.4" rx="16" fill="#FFF5E6" stroke="#E8B266" stroke-width="2"/>
+<circle cx="864" cy="179.6" r="4.5" fill="#C9711F"/>
+<text x="880.0" y="185.9" font-size="19.1" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>Exempt, leave out: </tspan><tspan font-weight="700" fill="#8A3E00">ISA </tspan><tspan>income and interest on </tspan><tspan font-weight="700" fill="#8A3E00">national</tspan></text>
+<text x="880.0" y="210.3" font-size="19.1" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan font-weight="700" fill="#8A3E00">savings certificates</tspan><tspan>. Gilt interest IS taxable: gilts are exempt</tspan></text>
+<text x="880.0" y="234.7" font-size="19.1" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>only from CGT.</tspan></text>
+<circle cx="864" cy="260.9" r="4.5" fill="#C9711F"/>
+<text x="880.0" y="267.2" font-size="19.1" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>A </tspan><tspan font-weight="700" fill="#8A3E00">partner </tspan><tspan>is taxed on their SHARE of profit, drawn or not:</tspan></text>
+<text x="880.0" y="291.6" font-size="19.1" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>preferential salary or interest on capital first, then the</tspan></text>
+<text x="880.0" y="316.0" font-size="19.1" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>balance in the agreed ratio (equal if none).</tspan></text>
+<circle cx="864" cy="342.2" r="4.5" fill="#C9711F"/>
+<text x="880.0" y="348.5" font-size="19.1" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>A trading expense is deductible only if it is </tspan><tspan font-weight="700" fill="#8A3E00">INCOME </tspan><tspan>(not</tspan></text>
+<text x="880.0" y="372.9" font-size="19.1" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>capital) and </tspan><tspan font-weight="700" fill="#8A3E00">WHOLLY AND EXCLUSIVELY </tspan><tspan>for the business.</tspan></text>
+<text x="880.0" y="397.3" font-size="19.1" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>Any material personal purpose: the whole expense goes.</tspan></text>
+<path d="M90,423.4 L102,433.4 L114,423.4" fill="none" stroke="#1F5FA8" stroke-width="3" stroke-linecap="round"/>
+<rect x="40" y="435.4" width="720" height="165.6" rx="16" fill="#EAF2FB" stroke="#1F5FA8" stroke-width="2"/>
+<circle cx="102" cy="518.1967999999999" r="40" fill="#1F5FA8"/>
+<circle cx="89.2" cy="531.0" r="6.4" stroke="white" stroke-width="3.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="114.8" cy="531.0" r="6.4" stroke="white" stroke-width="3.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="94.0" y1="526.2" x2="113.2" y2="499.0" stroke="white" stroke-width="3.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="110.0" y1="526.2" x2="90.8" y2="499.0" stroke="white" stroke-width="3.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="168" y="493.6" font-size="17.8" font-weight="800" fill="#1F5FA8" letter-spacing="0.6">STEP 2 · NET INCOME</text>
+<text x="168.0" y="531.3" font-size="20.75" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>Total income </tspan><tspan font-weight="700" fill="#1F2328">minus deductions</tspan><tspan>: personal pension</tspan></text>
+<text x="168.0" y="557.9" font-size="20.75" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>contributions, trading loss relief.</tspan></text>
+<line x1="760" y1="518.2" x2="840" y2="518.2" stroke="#C9711F" stroke-width="3" stroke-dasharray="7 5"/>
+<path d="M828,510.2 L840,518.2 L828,526.2" fill="#C9711F"/>
+<rect x="772.0" y="504.2" width="56" height="28" rx="14" fill="#C9711F"/>
+<text x="800.0" y="524.2" font-size="15" font-weight="800" fill="white" text-anchor="middle">BUT</text>
+<rect x="840" y="435.4" width="610" height="165.6" rx="16" fill="#FFF5E6" stroke="#E8B266" stroke-width="2"/>
+<circle cx="864" cy="464.9" r="4.5" fill="#C9711F"/>
+<text x="880.0" y="471.2" font-size="19.1" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>Loss relief must be </tspan><tspan font-weight="700" fill="#8A3E00">CLAIMED </tspan><tspan>and there is </tspan><tspan font-weight="700" fill="#8A3E00">NO PARTIAL</tspan></text>
+<text x="880.0" y="495.7" font-size="19.1" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan font-weight="700" fill="#8A3E00">CLAIM</tspan><tspan>: it absorbs all the income that year, even income the</tspan></text>
+<text x="880.0" y="520.1" font-size="19.1" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>personal allowance would have covered.</tspan></text>
+<circle cx="864" cy="546.3" r="4.5" fill="#C9711F"/>
+<text x="880.0" y="552.5" font-size="19.1" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>Loss in an </tspan><tspan font-weight="700" fill="#8A3E00">opening year</tspan><tspan>: carry back against the </tspan><tspan font-weight="700" fill="#8A3E00">3 previous</tspan></text>
+<text x="880.0" y="577.0" font-size="19.1" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan font-weight="700" fill="#8A3E00">years</tspan><tspan>, earliest first.</tspan></text>
+<path d="M90,603.0 L102,613.0 L114,603.0" fill="none" stroke="#1F5FA8" stroke-width="3" stroke-linecap="round"/>
+<rect x="40" y="615.0" width="720" height="198.1" rx="16" fill="#EAF2FB" stroke="#1F5FA8" stroke-width="2"/>
+<circle cx="102" cy="714.0517333333332" r="40" fill="#1F5FA8"/>
+<path d="M102.0,693.3 L119.6,699.7 L118.0,718.9 Q113.2,730.1 102.0,736.5 Q90.8,730.1 86.0,718.9 L84.4,699.7 Z" stroke="white" stroke-width="3.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="102.0" y="719.7" font-size="16.0" font-weight="800" fill="white" text-anchor="middle">PA</text>
+<text x="168" y="702.8" font-size="17.8" font-weight="800" fill="#1F5FA8" letter-spacing="0.6">STEP 3 · TAXABLE INCOME</text>
+<text x="168.0" y="740.5" font-size="20.75" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>Net income </tspan><tspan font-weight="700" fill="#1F2328">minus the personal allowance </tspan><tspan>of £12,570.</tspan></text>
+<line x1="760" y1="714.1" x2="840" y2="714.1" stroke="#C9711F" stroke-width="3" stroke-dasharray="7 5"/>
+<path d="M828,706.1 L840,714.1 L828,722.1" fill="#C9711F"/>
+<rect x="772.0" y="700.1" width="56" height="28" rx="14" fill="#C9711F"/>
+<text x="800.0" y="720.1" font-size="15" font-weight="800" fill="white" text-anchor="middle">BUT</text>
+<rect x="840" y="615.0" width="610" height="198.1" rx="16" fill="#FFF5E6" stroke="#E8B266" stroke-width="2"/>
+<circle cx="864" cy="644.6" r="4.5" fill="#C9711F"/>
+<text x="880.0" y="650.9" font-size="19.1" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>PA falls </tspan><tspan font-weight="700" fill="#8A3E00">£1 for every £2 </tspan><tspan>of net income over £100,000. Gone</tspan></text>
+<text x="880.0" y="675.3" font-size="19.1" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>at £125,140.</tspan></text>
+<circle cx="864" cy="701.5" r="4.5" fill="#C9711F"/>
+<text x="880.0" y="707.8" font-size="19.1" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>Unused PA is </tspan><tspan font-weight="700" fill="#8A3E00">lost</tspan><tspan>: no carry forward.</tspan></text>
+<circle cx="864" cy="733.9" r="4.5" fill="#C9711F"/>
+<text x="880.0" y="740.2" font-size="19.1" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan font-weight="700" fill="#8A3E00">Marriage allowance</tspan><tspan>: a spouse under the PA transfers £1,260</tspan></text>
+<text x="880.0" y="764.6" font-size="19.1" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>to a BASIC rate spouse, whose TAX (not income) falls by</tspan></text>
+<text x="880.0" y="789.1" font-size="19.1" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>20% of it, so £252.</tspan></text>
+<path d="M90,815.1 L102,825.1 L114,815.1" fill="none" stroke="#1F5FA8" stroke-width="3" stroke-linecap="round"/>
+<rect x="40" y="827.1" width="720" height="141.2" rx="16" fill="#EAF2FB" stroke="#1F5FA8" stroke-width="2"/>
+<circle cx="102" cy="897.6890666666666" r="40" fill="#1F5FA8"/>
+<path d="M82.8,908.9 L102.0,901.7 L121.2,908.9 L102.0,916.1 Z" stroke="white" stroke-width="3.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M82.8,897.7 L102.0,890.5 L121.2,897.7 L102.0,904.9 Z" stroke="white" stroke-width="3.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M82.8,886.5 L102.0,879.3 L121.2,886.5 L102.0,893.7 Z" stroke="white" stroke-width="3.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="168" y="873.1" font-size="17.8" font-weight="800" fill="#1F5FA8" letter-spacing="0.6">STEP 4 · SPLIT INTO THREE SLICES</text>
+<text x="168.0" y="910.8" font-size="20.75" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>Tax in this order: </tspan><tspan font-weight="700" fill="#1F2328">non-savings</tspan><tspan>, then </tspan><tspan font-weight="700" fill="#1F2328">savings</tspan><tspan>, then</tspan></text>
+<text x="168.0" y="937.4" font-size="20.75" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan font-weight="700" fill="#1F2328">dividends</tspan><tspan>. Dividends are always the TOP slice.</tspan></text>
+<line x1="760" y1="897.7" x2="840" y2="897.7" stroke="#C9711F" stroke-width="3" stroke-dasharray="7 5"/>
+<path d="M828,889.7 L840,897.7 L828,905.7" fill="#C9711F"/>
+<rect x="772.0" y="883.7" width="56" height="28" rx="14" fill="#C9711F"/>
+<text x="800.0" y="903.7" font-size="15" font-weight="800" fill="white" text-anchor="middle">BUT</text>
+<rect x="840" y="827.1" width="610" height="141.2" rx="16" fill="#FFF5E6" stroke="#E8B266" stroke-width="2"/>
+<circle cx="864" cy="856.7" r="4.5" fill="#C9711F"/>
+<text x="880.0" y="863.0" font-size="19.1" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>Each slice takes the band left by the one below. If</tspan></text>
+<text x="880.0" y="887.4" font-size="19.1" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>non-savings fills the basic rate band, savings and dividends</tspan></text>
+<text x="880.0" y="911.8" font-size="19.1" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>start at the higher rate.</tspan></text>
+<circle cx="864" cy="938.0" r="4.5" fill="#C9711F"/>
+<text x="880.0" y="944.3" font-size="19.1" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>Dividends have </tspan><tspan font-weight="700" fill="#8A3E00">their own rates</tspan><tspan>: 10.75% · 35.75% · 39.35%.</tspan></text>
+<path d="M90,970.3 L102,980.3 L114,970.3" fill="none" stroke="#1F5FA8" stroke-width="3" stroke-linecap="round"/>
+<rect x="40" y="982.3" width="720" height="165.6" rx="16" fill="#EAF2FB" stroke="#1F5FA8" stroke-width="2"/>
+<circle cx="102" cy="1065.1088" r="40" fill="#1F5FA8"/>
+<text x="102.0" y="1073.1" font-size="24.0" font-weight="800" fill="white" text-anchor="middle">0%</text>
+<text x="168" y="1040.5" font-size="17.8" font-weight="800" fill="#1F5FA8" letter-spacing="0.6">STEP 5 · THE 0% ALLOWANCES</text>
+<text x="168.0" y="1078.3" font-size="20.75" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan font-weight="700" fill="#1F2328">Dividend allowance </tspan><tspan>£500 for everyone. </tspan><tspan font-weight="700" fill="#1F2328">Personal</tspan></text>
+<text x="168.0" y="1104.8" font-size="20.75" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan font-weight="700" fill="#1F2328">savings allowance </tspan><tspan>£1,000 basic rate, £500 higher rate.</tspan></text>
+<line x1="760" y1="1065.1" x2="840" y2="1065.1" stroke="#C9711F" stroke-width="3" stroke-dasharray="7 5"/>
+<path d="M828,1057.1 L840,1065.1 L828,1073.1" fill="#C9711F"/>
+<rect x="772.0" y="1051.1" width="56" height="28" rx="14" fill="#C9711F"/>
+<text x="800.0" y="1071.1" font-size="15" font-weight="800" fill="white" text-anchor="middle">BUT</text>
+<rect x="840" y="982.3" width="610" height="165.6" rx="16" fill="#FFF5E6" stroke="#E8B266" stroke-width="2"/>
+<circle cx="864" cy="1011.9" r="4.5" fill="#C9711F"/>
+<text x="880.0" y="1018.2" font-size="19.1" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>The PSA turns on the HIGHEST band ANY taxable income</tspan></text>
+<text x="880.0" y="1042.6" font-size="19.1" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>reaches. Additional rate taxpayer: </tspan><tspan font-weight="700" fill="#8A3E00">no PSA</tspan><tspan>.</tspan></text>
+<circle cx="864" cy="1068.7" r="4.5" fill="#C9711F"/>
+<text x="880.0" y="1075.0" font-size="19.1" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan font-weight="700" fill="#8A3E00">Starting rate for savings </tspan><tspan>(£5,000 at 0%) only where taxable</tspan></text>
+<text x="880.0" y="1099.5" font-size="19.1" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>non-savings income is under £5,000. Each £1 of it cuts the</tspan></text>
+<text x="880.0" y="1123.9" font-size="19.1" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>£5,000 by £1.</tspan></text>
+<path d="M90,1149.9 L102,1159.9 L114,1149.9" fill="none" stroke="#1F5FA8" stroke-width="3" stroke-linecap="round"/>
+<rect x="40" y="1161.9" width="720" height="190.1" rx="16" fill="#EAF2FB" stroke="#1F5FA8" stroke-width="2"/>
+<circle cx="102" cy="1256.9637333333333" r="40" fill="#1F5FA8"/>
+<path d="M89.2,1237.8 L114.8,1237.8 L114.8,1276.2 L110.0,1272.2 L105.2,1276.2 L100.4,1272.2 L95.6,1276.2 L89.2,1272.2 Z" stroke="white" stroke-width="3.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="94.8" y1="1247.4" x2="109.2" y2="1247.4" stroke="white" stroke-width="3.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="94.8" y1="1254.6" x2="109.2" y2="1254.6" stroke="white" stroke-width="3.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="94.8" y1="1261.8" x2="109.2" y2="1261.8" stroke="white" stroke-width="3.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="168" y="1232.4" font-size="17.8" font-weight="800" fill="#1F5FA8" letter-spacing="0.6">STEP 6 · TAX STILL DUE</text>
+<text x="168.0" y="1270.1" font-size="20.75" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>Add the tax on each slice to get the liability, then </tspan><tspan font-weight="700" fill="#1F2328">deduct</tspan></text>
+<text x="168.0" y="1296.7" font-size="20.75" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan font-weight="700" fill="#1F2328">tax paid at source </tspan><tspan>(PAYE).</tspan></text>
+<line x1="760" y1="1257.0" x2="840" y2="1257.0" stroke="#C9711F" stroke-width="3" stroke-dasharray="7 5"/>
+<path d="M828,1249.0 L840,1257.0 L828,1265.0" fill="#C9711F"/>
+<rect x="772.0" y="1243.0" width="56" height="28" rx="14" fill="#C9711F"/>
+<text x="800.0" y="1263.0" font-size="15" font-weight="800" fill="white" text-anchor="middle">BUT</text>
+<rect x="840" y="1161.9" width="610" height="190.1" rx="16" fill="#FFF5E6" stroke="#E8B266" stroke-width="2"/>
+<circle cx="864" cy="1191.5" r="4.5" fill="#C9711F"/>
+<text x="880.0" y="1197.8" font-size="19.1" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan font-weight="700" fill="#8A3E00">EIS</tspan><tspan>: 30% of new shares in an unquoted trading company</tspan></text>
+<text x="880.0" y="1222.2" font-size="19.1" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>comes off the LIABILITY (up to £1m invested). It cannot</tspan></text>
+<text x="880.0" y="1246.7" font-size="19.1" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>create a repayment.</tspan></text>
+<circle cx="864" cy="1272.8" r="4.5" fill="#C9711F"/>
+<text x="880.0" y="1279.1" font-size="19.1" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>EIS is </tspan><tspan font-weight="700" fill="#8A3E00">clawed back </tspan><tspan>if the shares go within 3 years, or the</tspan></text>
+<text x="880.0" y="1303.5" font-size="19.1" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>investor becomes CONNECTED: over 30% of the shares, or</tspan></text>
+<text x="880.0" y="1328.0" font-size="19.1" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>an employee.</tspan></text>
+<rect x="1480" y="150.0" width="480" height="222.2" rx="16" fill="#F5F5F2" stroke="#D3D3CD" stroke-width="2"/>
+<text x="1498" y="178.0" font-size="17.0" font-weight="800" fill="#1F5FA8" letter-spacing="0.6">BANDS 2026/27 (normally given)</text>
+<rect x="1498" y="215.1" width="7" height="7" rx="1.5" fill="#1F5FA8"/>
+<text x="1514.0" y="225.0" font-size="17.8" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan font-weight="700" fill="#1F2328">20% </tspan><tspan>on the first £37,700 of taxable income</tspan></text>
+<rect x="1498" y="244.0" width="7" height="7" rx="1.5" fill="#1F5FA8"/>
+<text x="1514.0" y="253.8" font-size="17.8" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan font-weight="700" fill="#1F2328">40% </tspan><tspan>up to £125,140</tspan></text>
+<rect x="1498" y="272.8" width="7" height="7" rx="1.5" fill="#1F5FA8"/>
+<text x="1514.0" y="282.6" font-size="17.8" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan font-weight="700" fill="#1F2328">45% </tspan><tspan>above £125,140</tspan></text>
+<rect x="1498" y="301.7" width="7" height="7" rx="1.5" fill="#1F5FA8"/>
+<text x="1514.0" y="311.5" font-size="17.8" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan font-weight="700" fill="#1F2328">Wales</tspan><tspan>: same totals. The UK rate drops by 10</tspan></text>
+<text x="1514.0" y="334.3" font-size="17.8" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>points and the Welsh rate of 10% is added.</tspan></text>
+<rect x="1480" y="384.2" width="480" height="261.9" rx="16" fill="#F5F5F2" stroke="#D3D3CD" stroke-width="2"/>
+<text x="1498" y="412.2" font-size="17.0" font-weight="800" fill="#1F5FA8" letter-spacing="0.6">PAYMENT</text>
+<rect x="1498" y="449.3" width="7" height="7" rx="1.5" fill="#1F5FA8"/>
+<text x="1514.0" y="459.2" font-size="17.8" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>Employees: </tspan><tspan font-weight="700" fill="#1F2328">PAYE</tspan><tspan>, deducted at source.</tspan></text>
+<rect x="1498" y="478.2" width="7" height="7" rx="1.5" fill="#1F5FA8"/>
+<text x="1514.0" y="488.0" font-size="17.8" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>Self-employed: payments on account on </tspan><tspan font-weight="700" fill="#1F2328">31</tspan></text>
+<text x="1514.0" y="510.8" font-size="17.8" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan font-weight="700" fill="#1F2328">January </tspan><tspan>in the year and </tspan><tspan font-weight="700" fill="#1F2328">31 July </tspan><tspan>after it, each</tspan></text>
+<text x="1514.0" y="533.7" font-size="17.8" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>50% of last year's bill. Balance on 31 January</tspan></text>
+<text x="1514.0" y="556.5" font-size="17.8" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>with the return.</tspan></text>
+<rect x="1498" y="575.6" width="7" height="7" rx="1.5" fill="#1F5FA8"/>
+<text x="1514.0" y="585.4" font-size="17.8" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>Payments on account apply if the bill is £1,000+</tspan></text>
+<text x="1514.0" y="608.2" font-size="17.8" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>and 80% or less was taxed at source.</tspan></text>
+<rect x="1480" y="658.1" width="480" height="290.7" rx="16" fill="#F5F5F2" stroke="#D3D3CD" stroke-width="2"/>
+<text x="1498" y="686.1" font-size="17.0" font-weight="800" fill="#1F5FA8" letter-spacing="0.6">PLANNING · AVOIDANCE · EVASION</text>
+<rect x="1498" y="723.2" width="7" height="7" rx="1.5" fill="#1F5FA8"/>
+<text x="1514.0" y="733.1" font-size="17.8" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan font-weight="700" fill="#1F2328">Planning</tspan><tspan>: lawful.</tspan></text>
+<rect x="1498" y="752.1" width="7" height="7" rx="1.5" fill="#1F5FA8"/>
+<text x="1514.0" y="761.9" font-size="17.8" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan font-weight="700" fill="#1F2328">Avoidance</tspan><tspan>: lawful but artificial. Attacked by</tspan></text>
+<text x="1514.0" y="784.7" font-size="17.8" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>targeted rules and the </tspan><tspan font-weight="700" fill="#1F2328">GAAR</tspan><tspan>: double</tspan></text>
+<text x="1514.0" y="807.6" font-size="17.8" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>reasonableness test, independent advisory panel.</tspan></text>
+<rect x="1498" y="826.6" width="7" height="7" rx="1.5" fill="#1F5FA8"/>
+<text x="1514.0" y="836.4" font-size="17.8" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan font-weight="700" fill="#1F2328">Evasion</tspan><tspan>: a crime.</tspan></text>
+<rect x="1498" y="855.4" width="7" height="7" rx="1.5" fill="#1F5FA8"/>
+<text x="1514.0" y="865.3" font-size="17.8" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>Parent's gift to their own </tspan><tspan font-weight="700" fill="#1F2328">minor unmarried child</tspan></text>
+<text x="1514.0" y="888.1" font-size="17.8" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>producing over £100 of income: ALL of it taxed as</tspan></text>
+<text x="1514.0" y="910.9" font-size="17.8" font-weight="400" fill="#1F2328" xml:space="preserve"><tspan>the parent's. Grandparents are not caught.</tspan></text>
 <text x="1000.0" y="1390" font-size="20" font-weight="700" fill="#1F5FA8" text-anchor="middle" letter-spacing="0.8">TOTAL  ›  NET  ›  TAXABLE  ›  SLICE  ›  0% ALLOWANCES  ›  TAX DUE</text>
-<metadata><c2pa:manifest>AAAWgmp1bWIAAAAeanVtZGMycGEAEQAQgAAAqgA4m3EDYzJwYQAAABZcanVtYgAAAEdqdW1kYzJtYQARABCAAACqADibcQN1cm46YzJwYTo3NWViYzg4Ny1kZTgwLTQ4YmEtYWI4Mi1mN2JmNjRkNjJjMjkAAAADl2p1bWIAAAApanVtZGMyYXMAEQAQgAAAqgA4m3EDYzJwYS5hc3NlcnRpb25zAAAAALxqdW1iAAAARGp1bWRjYm9yABEAEIAAAKoAOJtxE2MycGEuaW5ncmVkaWVudC52MwAAAAAYYzJzaPM6d0z6UHxzIMzHFK9Z2qoAAABwY2JvcqNpZGM6Zm9ybWF0bWltYWdlL3N2Zyt4bWxqaW5zdGFuY2VJRHgseG1wOmlpZDo2ZmQ4YTZmNS05NmI5LTRjNzEtYjA2Mi04YWI0OTgxZDU4YTdscmVsYXRpb25zaGlwaHBhcmVudE9mAAAB4mp1bWIAAABBanVtZGNib3IAEQAQgAAAqgA4m3ETYzJwYS5hY3Rpb25zLnYyAAAAABhjMnNo/hd8fX807uou9AAfRUAtegAAAZljYm9yomdhY3Rpb25zgqJmYWN0aW9ua2MycGEub3BlbmVkanBhcmFtZXRlcnOha2luZ3JlZGllbnRzgaJjdXJseC1zZWxmI2p1bWJmPWMycGEuYXNzZXJ0aW9ucy9jMnBhLmluZ3JlZGllbnQudjNkaGFzaFggtxFpbFVNhITn84ndbFTIJd5eGL+7sffSPEa7q7x5GeWkZmFjdGlvbngdY29tLmFudGhyb3BpYy5jbGF1ZGUucHJvdmlkZWRqcGFyYW1ldGVyc6F4H2NvbS5hbnRocm9waWMub3JpZ2luLWNvbmZpZGVuY2VndW5rbm93bmtkZXNjcmlwdGlvbnhmQ2xhdWRlIHByb3ZpZGVkIHRoaXMgZmlsZSBhdCB0aGUgcmVxdWVzdCBvZiBhIHVzZXIgYW5kIG1heSBoYXZlIGNyZWF0ZWQgb3IgbW9kaWZpZWQgdGhlIGZpbGUgY29udGVudHMubXNvZnR3YXJlQWdlbnShZG5hbWVmQ2xhdWRlcmFsbEFjdGlvbnNJbmNsdWRlZPUAAADIanVtYgAAAEBqdW1kY2JvcgARABCAAACqADibcRNjMnBhLmhhc2guZGF0YQAAAAAYYzJzaAuJFetsLIXBoR0CVh9pnQ0AAACAY2JvcqVjYWxnZnNoYTI1NmNwYWRMAAAAAAAAAAAAAAAAZGhhc2hYIDvIk5cLnOGnRbnkaq6oVgyYCUBGD+zsus/q9EGeX3wOZG5hbWVuanVtYmYgbWFuaWZlc3RqZXhjbHVzaW9uc4GiZXN0YXJ0GV8kZmxlbmd0aBkeBAAAAj5qdW1iAAAAJ2p1bWRjMmNsABEAEIAAAKoAOJtxA2MycGEuY2xhaW0udjIAAAACD2Nib3KlY2FsZ2ZzaGEyNTZpc2lnbmF0dXJleE1zZWxmI2p1bWJmPS9jMnBhL3VybjpjMnBhOjc1ZWJjODg3LWRlODAtNDhiYS1hYjgyLWY3YmY2NGQ2MmMyOS9jMnBhLnNpZ25hdHVyZWppbnN0YW5jZUlEeCx4bXA6aWlkOjI4MTY2Y2I3LWNjODQtNDlkMy1iMzg0LTZlYTk3NTVjY2EwZnJjcmVhdGVkX2Fzc2VydGlvbnODomN1cmx4LXNlbGYjanVtYmY9YzJwYS5hc3NlcnRpb25zL2MycGEuaW5ncmVkaWVudC52M2RoYXNoWCC3EWlsVU2EhOfzid1sVMgl3l4Yv7ux99I8RrurvHkZ5aJjdXJseCpzZWxmI2p1bWJmPWMycGEuYXNzZXJ0aW9ucy9jMnBhLmFjdGlvbnMudjJkaGFzaFgg4WdKhCrjSiNLRZipdGgih1E6otJSg/eHLmC24C6LRK2iY3VybHgpc2VsZiNqdW1iZj1jMnBhLmFzc2VydGlvbnMvYzJwYS5oYXNoLmRhdGFkaGFzaFggG3zhe6UazQiLmvLkBi7Y51kO2s+tiDnKX4vjKaNJDLV0Y2xhaW1fZ2VuZXJhdG9yX2luZm+jZG5hbWVvQW50aHJvcGljIEZpbGVzZ3ZlcnNpb25lMS4wLjBrc3BlY1ZlcnNpb25lMi40LjAAABA4anVtYgAAAChqdW1kYzJjcwARABCAAACqADibcQNjMnBhLnNpZ25hdHVyZQAAABAIY2JvctKEWQISogEmGCFZAgowggIGMIIBjaADAgECAhRA5aAK7sI50L64g/oGQgU9Z1UTADAKBggqhkjOPQQDAzBJMRcwFQYDVQQKEw5BbnRocm9waWMsIFBCQzEuMCwGA1UEAxMlQW50aHJvcGljIENvbnRlbnQgQ3JlZGVudGlhbHMgUm9vdCBDQTAeFw0yNjA4MDcxODQzNTZaFw0yODA4MDYxOTQzNTZaMEQxFzAVBgNVBAoTDkFudGhyb3BpYywgUEJDMSkwJwYDVQQDEyBBbnRocm9waWMgQ2xhdWRlIENvbnRlbnQgU2lnbmluZzBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABJh6CmvLUBgFFNU0vUKlOVtE6djd17L5SuwX0LemFisBM3dkd/3cyjxFA3Qo5S46fX0/ihY0VZ7mfb9KF703t5OjWDBWMA4GA1UdDwEB/wQEAwIHgDAVBgNVHSUEDjAMBgorBgEEAYPoXgIBMAwGA1UdEwEB/wQCMAAwHwYDVR0jBBgwFoAUzlHiBIFOZFsj+OPEz5o+nMHXXMIwCgYIKoZIzj0EAwMDZwAwZAIwMXMdFJ4BetLLVY7ORuE9noqbbAZOZn/aArXyTwFAZfKrPzxF2vPoJNf1+UCdg1XGAjBwX1zd9WGqYkqmL5SFqw1QySjr1zJfpJM9+1rdDwSPLMOPOjKuiXjoU/pUUeG9RwmhY3BhZFkNngAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPZYQH4WpVDOlAlGCCMZhSdHmixgKoxqqVhPZxm2lKhvOzGYChoN2etGrJ3jxAQXYG8u5CVf96mBkRapuLXYJumYzn0=</c2pa:manifest></metadata></svg>
+<metadata><c2pa:manifest>AAAWgmp1bWIAAAAeanVtZGMycGEAEQAQgAAAqgA4m3EDYzJwYQAAABZcanVtYgAAAEdqdW1kYzJtYQARABCAAACqADibcQN1cm46YzJwYTowMzg0ZTEwMy03ZGJmLTRkMjQtOTlkOS1lNWIzZjJkMGJlNDEAAAADl2p1bWIAAAApanVtZGMyYXMAEQAQgAAAqgA4m3EDYzJwYS5hc3NlcnRpb25zAAAAALxqdW1iAAAARGp1bWRjYm9yABEAEIAAAKoAOJtxE2MycGEuaW5ncmVkaWVudC52MwAAAAAYYzJzaDqwWz3Az3WGp6l0ULVdyKMAAABwY2JvcqNpZGM6Zm9ybWF0bWltYWdlL3N2Zyt4bWxqaW5zdGFuY2VJRHgseG1wOmlpZDoyNjM0MGQwYS1lOGNkLTRkMjgtYjQ1Yy05MzQxNDllYjc4NmNscmVsYXRpb25zaGlwaHBhcmVudE9mAAAB4mp1bWIAAABBanVtZGNib3IAEQAQgAAAqgA4m3ETYzJwYS5hY3Rpb25zLnYyAAAAABhjMnNoo7f8RikbhLvUwV0B3IQ80gAAAZljYm9yomdhY3Rpb25zgqJmYWN0aW9ua2MycGEub3BlbmVkanBhcmFtZXRlcnOha2luZ3JlZGllbnRzgaJjdXJseC1zZWxmI2p1bWJmPWMycGEuYXNzZXJ0aW9ucy9jMnBhLmluZ3JlZGllbnQudjNkaGFzaFggJuMJXzarGkhOYKWbn8ezV92UGTg3fbyEJm7XXI1K07+kZmFjdGlvbngdY29tLmFudGhyb3BpYy5jbGF1ZGUucHJvdmlkZWRqcGFyYW1ldGVyc6F4H2NvbS5hbnRocm9waWMub3JpZ2luLWNvbmZpZGVuY2VndW5rbm93bmtkZXNjcmlwdGlvbnhmQ2xhdWRlIHByb3ZpZGVkIHRoaXMgZmlsZSBhdCB0aGUgcmVxdWVzdCBvZiBhIHVzZXIgYW5kIG1heSBoYXZlIGNyZWF0ZWQgb3IgbW9kaWZpZWQgdGhlIGZpbGUgY29udGVudHMubXNvZnR3YXJlQWdlbnShZG5hbWVmQ2xhdWRlcmFsbEFjdGlvbnNJbmNsdWRlZPUAAADIanVtYgAAAEBqdW1kY2JvcgARABCAAACqADibcRNjMnBhLmhhc2guZGF0YQAAAAAYYzJzaFD388te5xWJU9887JtCoUcAAACAY2JvcqVjYWxnZnNoYTI1NmNwYWRMAAAAAAAAAAAAAAAAZGhhc2hYIHxasqrc/63IEUuFt8Rlo/7DLAuhW04K4SmZEjvKqGG8ZG5hbWVuanVtYmYgbWFuaWZlc3RqZXhjbHVzaW9uc4GiZXN0YXJ0GWEJZmxlbmd0aBkeBAAAAj5qdW1iAAAAJ2p1bWRjMmNsABEAEIAAAKoAOJtxA2MycGEuY2xhaW0udjIAAAACD2Nib3KlY2FsZ2ZzaGEyNTZpc2lnbmF0dXJleE1zZWxmI2p1bWJmPS9jMnBhL3VybjpjMnBhOjAzODRlMTAzLTdkYmYtNGQyNC05OWQ5LWU1YjNmMmQwYmU0MS9jMnBhLnNpZ25hdHVyZWppbnN0YW5jZUlEeCx4bXA6aWlkOmE3NzU1NDUwLWY0ZjUtNDNjZS05MzI3LTU2OTZmYTU4ZTY4M3JjcmVhdGVkX2Fzc2VydGlvbnODomN1cmx4LXNlbGYjanVtYmY9YzJwYS5hc3NlcnRpb25zL2MycGEuaW5ncmVkaWVudC52M2RoYXNoWCAm4wlfNqsaSE5gpZufx7NX3ZQZODd9vIQmbtdcjUrTv6JjdXJseCpzZWxmI2p1bWJmPWMycGEuYXNzZXJ0aW9ucy9jMnBhLmFjdGlvbnMudjJkaGFzaFggEwsaIxR5qwOChCHpogZK1koTV95wqZ6qP56hR5LwP7SiY3VybHgpc2VsZiNqdW1iZj1jMnBhLmFzc2VydGlvbnMvYzJwYS5oYXNoLmRhdGFkaGFzaFggg/K+c+U3cBMB+Yeotvyvc866GOO4ojZ+K4Jvv5X+pP90Y2xhaW1fZ2VuZXJhdG9yX2luZm+jZG5hbWVvQW50aHJvcGljIEZpbGVzZ3ZlcnNpb25lMS4wLjBrc3BlY1ZlcnNpb25lMi40LjAAABA4anVtYgAAAChqdW1kYzJjcwARABCAAACqADibcQNjMnBhLnNpZ25hdHVyZQAAABAIY2JvctKEWQISogEmGCFZAgowggIGMIIBjaADAgECAhRA5aAK7sI50L64g/oGQgU9Z1UTADAKBggqhkjOPQQDAzBJMRcwFQYDVQQKEw5BbnRocm9waWMsIFBCQzEuMCwGA1UEAxMlQW50aHJvcGljIENvbnRlbnQgQ3JlZGVudGlhbHMgUm9vdCBDQTAeFw0yNjA4MDcxODQzNTZaFw0yODA4MDYxOTQzNTZaMEQxFzAVBgNVBAoTDkFudGhyb3BpYywgUEJDMSkwJwYDVQQDEyBBbnRocm9waWMgQ2xhdWRlIENvbnRlbnQgU2lnbmluZzBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABJh6CmvLUBgFFNU0vUKlOVtE6djd17L5SuwX0LemFisBM3dkd/3cyjxFA3Qo5S46fX0/ihY0VZ7mfb9KF703t5OjWDBWMA4GA1UdDwEB/wQEAwIHgDAVBgNVHSUEDjAMBgorBgEEAYPoXgIBMAwGA1UdEwEB/wQCMAAwHwYDVR0jBBgwFoAUzlHiBIFOZFsj+OPEz5o+nMHXXMIwCgYIKoZIzj0EAwMDZwAwZAIwMXMdFJ4BetLLVY7ORuE9noqbbAZOZn/aArXyTwFAZfKrPzxF2vPoJNf1+UCdg1XGAjBwX1zd9WGqYkqmL5SFqw1QySjr1zJfpJM9+1rdDwSPLMOPOjKuiXjoU/pUUeG9RwmhY3BhZFkNngAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPZYQByUK6VDPjlJo/4x9hd7TkkiZnjJMiWQzojQQup7SPOvpsKMjK99egNYQoswAaKZORPQc9zukALkahRDK48Irl4=</c2pa:manifest></metadata></svg>
