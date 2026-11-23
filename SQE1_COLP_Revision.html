@@ -86,7 +86,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-seri
 
 <div class="header">
   <h1>COLP Revision <em>Programme</em></h1>
-  <p>One new chapter + one revisit a day · Revisits ≥21 days apart · No Saturdays · No COLP days · Ends 13 Jan 2027</p>
+  <p>New chapters done by 27 Dec · one revisit, flashcards and a Law Drills set a day · Unseen Revise papers 28 &amp; 30 Dec, SRA 7 &amp; 8 Jan · No Saturdays · No COLP days · Ends 13 Jan 2027</p>
 </div>
 
 <div class="stats" id="stats"></div>
@@ -195,6 +195,32 @@ const COLP_BUSY = new Set([...Object.values(SEED_DATES), ...EXTRA_BUSY]);
 // of term could never be fitted at all. The COLP exam is a rehearsal, not the
 // deadline: the first pass now runs to the day before FLK1.
 const SCHED_END = '2027-01-13';   // day before FLK1 (official date 14 Jan 2027)
+// The FIRST pass (one new chapter a day) must be over before the unseen papers
+// are sat: Ghita's rule is to finish every chapter first, then sit the SRA and
+// Revise SQE papers cold. At one chapter a free day the pass ran to 6 Jan, which
+// left no time to act on the results, so it now ends on Sun 27 Dec and the
+// greedy spread puts the extra chapters on a handful of two-chapter days from
+// today. Revisits, flashcards and drills still run to SCHED_END / the exams.
+const FIRST_PASS_END = '2026-12-27';
+// Unseen papers, sat once all chapters are covered and after the COLP mock
+// (15 Dec). Revise first (two 90-question sessions = a full-day rehearsal, then
+// a day to review the explanations), SRA last as the final calibration a week
+// before FLK1, with five days left to patch what it shows. These days are not
+// free days: no chapter, revisit, flashcards or drill on them.
+const MOCK_TOOL = 'https://rfn2jk9dw9-max.github.io/SQE-Prep/SQE1_MockExam_Standalone.html';
+const UNSEEN_PAPERS = {
+  '2026-12-28': { flk:'FLK1', src:'Revise SQE FLK1 practice assessment', qs:180,
+    how:'Mock tool, paper FLK1: "Revise SQE Sample, Session 1" (90 q, 2h42), break, then "Session 2" (90 q). No checking answers in between.' },
+  '2026-12-30': { flk:'FLK2', src:'Revise SQE FLK2 practice assessment', qs:180,
+    how:'Mock tool, paper FLK2: "Revise SQE Sample, Session 1" (90 q, 2h42), break, then "Session 2" (90 q).' },
+  '2027-01-07': { flk:'FLK1', src:'SRA sample questions FLK1', qs:110,
+    how:'Mock tool, paper FLK1: "SRA Official Samples" (all 110 FLK1 questions, about 3h20 at 1.8 min a question). One break at the halfway point.' },
+  '2027-01-08': { flk:'FLK2', src:'SRA sample questions FLK2', qs:110,
+    how:'Mock tool, paper FLK2: "SRA Official Samples" (all 110 FLK2 questions, about 3h20). One break at the halfway point.' },
+};
+// The day after each Revise paper is a free day, but its drill slot is given
+// over to reviewing that paper's explanations (the drill would compete with it).
+const REVIEW_DAYS = { '2026-12-29': '2026-12-28', '2026-12-31': '2026-12-30' };
 // Modules taught after this date can't get a slot before Dec 14
 const DEFAULT_DONE = ['CONT1.1','CONT1.2','CONT1.3'];
 
@@ -368,7 +394,8 @@ function isFreeDay(s){
   const d = parseDate(s);
   // Full-paper Sundays are not free: 170 questions across two 2h33m sittings
   // plus a break is most of the day, so nothing else is scheduled on them.
-  return d.getDay() !== 6 && !COLP_BUSY.has(s) && !FULL_PAPER_DAYS[s];
+  return d.getDay() !== 6 && !COLP_BUSY.has(s) && !FULL_PAPER_DAYS[s]
+    && !(typeof UNSEEN_PAPERS !== 'undefined' && UNSEEN_PAPERS[s]);
 }
 
 // ── Subject accent colours ─────────────────────────────────────────────────
@@ -441,7 +468,7 @@ const flashCode = p => 'FLASH' + FLASH_NUM[p] + '.0';
 const FLASH_LOG_KEY = STORE_KEY + '_flash';
 function takeFlash(log){
   const out = {};
-  Object.keys(log).forEach(c => { if (/^FLASH/.test(c)) { out[c] = log[c]; delete log[c]; } });
+  Object.keys(log).forEach(c => { if (/^(FLASH|DRILL)/.test(c)) { out[c] = log[c]; delete log[c]; } });
   return out;
 }
 function saveFlashLocal(){
@@ -661,12 +688,12 @@ fixFutureFlashTicks();
 function buildSchedule(doneSet) {
   const TODAY = todayYMD();
 
-  // All free days from today to SCHED_END
+  // All free days from today to FIRST_PASS_END
   const freeDays = [];
   {
     let d = parseDate(TODAY);
-    const end = parseDate(SCHED_END);
-    while(toYMD(d) <= SCHED_END) {
+    const end = parseDate(FIRST_PASS_END);
+    while(toYMD(d) <= FIRST_PASS_END) {
       if(isFreeDay(toYMD(d))) freeDays.push(toYMD(d));
       d.setDate(d.getDate() + 1);
     }
@@ -688,11 +715,11 @@ function buildSchedule(doneSet) {
     // snap to next free day
     let safety = 0;
     while(safety++ < 120) {
-      if(toYMD(e) > SCHED_END) { nodateMap[m.code] = null; return; }
+      if(toYMD(e) > FIRST_PASS_END) { nodateMap[m.code] = null; return; }
       if(isFreeDay(toYMD(e))) break;
       e.setDate(e.getDate() + 1);
     }
-    if(toYMD(e) > SCHED_END) { nodateMap[m.code] = null; return; }
+    if(toYMD(e) > FIRST_PASS_END) { nodateMap[m.code] = null; return; }
     pending.push({ code: m.code, earliest: toYMD(e) });
   });
 
@@ -1243,6 +1270,130 @@ function makeFlashRow(prefix, status, date, slot) {
   return el;
 }
 
+// ── Law Drills question sets ───────────────────────────────────────────────
+// A fourth slot on each free day up to FLK1: one of the timed 20-question sets
+// built in Law Drills (Practice Works) on the weak areas, at exam pace
+// (1.8 min a question). Which set comes up follows the same rule as the
+// flashcards: the weakness of the set's subjects, multiplied by the days since
+// the set last came up, so the criminal liability sets recur most often and no
+// set is starved. Ticking records the set as done TODAY under a DRILL<n>.0
+// pseudo-revisit (colp_progress.php only accepts chapter-shaped codes); like
+// FLASH codes these are split out of revisitLog and never count as revisits.
+// Each set is a fixed draw of 20 questions: the second time a set comes up,
+// use Duplicate on it in Law Drills to get a fresh draw on the same topics.
+// Nothing runs between the papers (14-18 Jan): that window is for rest.
+const DRILL_APP = 'https://app.practice.works/practice/set/';
+const DRILL_SETS = [
+  { n:1, subj:['CRML'], paper:'FLK2', id:'9d9afbee-74a3-44ff-8f1c-13286f4bff39',
+    title:'Crim liability: homicide, OAPs, defences',
+    focus:'mens rea thresholds, loss of control triggers, UAM causation' },
+  { n:2, subj:['CRML'], paper:'FLK2', id:'8d2b731b-a235-42c6-8b9b-48ee8515b734',
+    title:'Crim liability: theft, fraud, parties',
+    focus:'s 9(1)(a) vs (b), s 10 timing, robbery force "in order to steal"' },
+  { n:3, subj:['CONT'], paper:'FLK1', id:'8c1d3bda-7fad-4113-8de1-ae5e0cf21a82',
+    title:'Contract: terms, breach, remedies, acceptance',
+    focus:'class of term first, then what is payable; postal rule' },
+  { n:4, subj:['SERV'], paper:'FLK1', id:'49cc009a-cb51-4ac4-b67f-7cbbf4179dd5',
+    title:'Legal services', focus:'whole subject' },
+  { n:5, subj:['DISP','SYS'], paper:'FLK1', id:'8fcbaca1-1fd8-4760-a690-1961f9e53e4b',
+    title:'DR jurisdiction & limitation + legal system',
+    focus:'Rome I, where to issue, limitation start dates, court hierarchy' },
+  { n:6, subj:['CRMP'], paper:'FLK2', id:'a3f624bf-486b-4e8a-ae0a-0521dde8a665',
+    title:'Criminal law & practice (25 q)', focus:'whole subject' },
+];
+const DRILL_QS = { 6: 25 };
+const drillCode = n => 'DRILL' + n + '.0';
+
+function buildDrillDays() {
+  const T = todayYMD(), dayMs = 864e5;
+  const days = freeDaysBetween(T, FLK1_EXAM).filter(d => !REVIEW_DAYS[d]);
+  const w = subjectWeakness();
+  const avg = Object.values(w).reduce((a, b) => a + b, 0) / Math.max(Object.keys(w).length, 1) || 0.2;
+  const weight = s => {
+    const v = s.subj.map(p => w[p]).filter(x => x !== undefined);
+    return v.length ? v.reduce((a, b) => a + b, 0) / v.length : avg;
+  };
+  const last = {}, doneOn = {};
+  DRILL_SETS.forEach(s => {
+    (flashLog[drillCode(s.n)] || []).forEach(d => {
+      let idx;
+      if (d >= T) {
+        const at = days.indexOf(d);
+        if (at >= 0 && !doneOn[d]) { doneOn[d] = s.n; return; }
+        const nxt = days.findIndex(x => x > d);
+        idx = (nxt < 0 ? days.length : nxt) - 1;
+      } else {
+        idx = -Math.round((parseDate(T) - parseDate(d)) / dayMs);
+      }
+      if (!(s.n in last) || idx > last[s.n]) last[s.n] = idx;
+    });
+  });
+  const out = {};
+  days.forEach((day, i) => {
+    if (doneOn[day]) { out[day] = doneOn[day]; last[doneOn[day]] = i; return; }
+    const pri = s => weight(s) * (i - (s.n in last ? last[s.n] : -7));
+    const pick = DRILL_SETS.slice().sort((a, b) => pri(b) - pri(a) || a.n - b.n)[0];
+    out[day] = pick.n;
+    last[pick.n] = i;
+  });
+  return out;
+}
+// Sets ticked today that did not get today's slot: shown under Today as done.
+function drillDoneToday(drillDays){
+  const t = todayYMD();
+  return DRILL_SETS.map(s => s.n).filter(n =>
+    (flashLog[drillCode(n)] || []).includes(t) && drillDays[t] !== n);
+}
+// How many times a set has been sat, for the "duplicate it" hint.
+const drillTimes = n => (flashLog[drillCode(n)] || []).length;
+
+function toggleDrill(n, doneBy){
+  const c = drillCode(n), arr = flashLog[c] || [];
+  const hit = doneBy && arr.includes(doneBy) ? doneBy : null;
+  if (hit) {
+    flashLog[c] = arr.filter(d => d !== hit);
+    if (!flashLog[c].length) delete flashLog[c];
+    queueOp({ unrevisit: [{ code: c, date: hit }] });
+  } else {
+    const t = todayYMD();
+    flashLog[c] = [...new Set([...arr, t])].sort();
+    queueOp({ revisits: { [c]: [t] } });
+  }
+  saveFlashLocal();
+  render();
+}
+
+function makeDrillRow(n, status, date, doneBy) {
+  const s = DRILL_SETS.find(x => x.n === n);
+  const ticked = !!doneBy;
+  const qs = DRILL_QS[n] || 20;
+  const sat = drillTimes(n) - (ticked ? 1 : 0);
+  const el = document.createElement('div');
+  el.className = 'card s-' + (ticked ? 'done' : status);
+  el.style.cssText = 'cursor:pointer;opacity:.9;border-left:3px solid #14b8a6;background:rgba(20,184,166,.06)';
+  el.addEventListener('click', e => {
+    if (e.target.closest('a')) return;
+    toggleDrill(n, doneBy);
+  });
+  el.innerHTML =
+    '<div class="card-head">'+
+      '<span class="card-code" style="color:#2dd4bf">🎯 '+s.paper+'</span>'+
+      '<span class="card-title">Law Drills: '+s.title+'</span>'+
+      '<span class="card-check">'+(ticked ? '✓' : '')+'</span>'+
+      '<span class="badge">'+(ticked ? '✓ Done' : qs+' q · '+Math.round(qs*1.8)+' min')+'</span>'+
+    '</div>'+
+    '<div class="card-sub">'+
+      '<span style="opacity:.75">'+
+        (ticked
+          ? 'Done' + (doneBy !== date ? ' early, on ' + fmtShort(doneBy) : '') + ' · tap to undo'
+          : 'Timed set, exam pace · watch: ' + s.focus +
+            (sat > 0 ? ' · sat ' + sat + '× already: Duplicate it in Law Drills for a fresh draw' : ''))+
+      '</span>'+
+      '<a class="card-link" href="'+DRILL_APP+s.id+'" target="_blank" rel="noopener">↗ Open set</a>'+
+    '</div>';
+  return el;
+}
+
 // ── Render ─────────────────────────────────────────────────────────────────
 let activeFilter = 'all';
 
@@ -1389,6 +1540,20 @@ function render() {
       });
     }
 
+    // Unseen SRA / Revise papers and the review day after each Revise paper.
+    if (['all','today','upcoming'].includes(activeFilter)) {
+      Object.keys(UNSEEN_PAPERS).forEach(date => {
+        if (date < TODAY) return;
+        if (activeFilter === 'today' && date !== TODAY) return;
+        bucketFor(date).unseen = date;
+      });
+      Object.keys(REVIEW_DAYS).forEach(date => {
+        if (date < TODAY) return;
+        if (activeFilter === 'today' && date !== TODAY) return;
+        bucketFor(date).review = REVIEW_DAYS[date];
+      });
+    }
+
     // Weak-spot flashcards: the short third slot on each free day.
     if (['all','today','upcoming'].includes(activeFilter)) {
       const flashDays = buildFlashDays();
@@ -1400,6 +1565,18 @@ function render() {
       });
       const extra = flashDoneToday(flashDays);
       if (extra.length) bucketFor(TODAY).flashExtra = extra;
+    }
+
+    // Law Drills: the timed MCQ set on each free day up to FLK1.
+    if (['all','today','upcoming'].includes(activeFilter)) {
+      const drillDays = buildDrillDays();
+      Object.entries(drillDays).forEach(([date, n]) => {
+        if (activeFilter === 'today' && date !== TODAY) return;
+        bucketFor(date).drill = n;
+        bucketFor(date).drillBy = (flashLog[drillCode(n)] || []).includes(date) ? date : null;
+      });
+      const extraD = drillDoneToday(drillDays);
+      if (extraD.length) bucketFor(TODAY).drillExtra = extraD;
     }
 
     // Revisit-only days need a group of their own, or they vanish entirely.
@@ -1425,11 +1602,15 @@ function render() {
       const cardsEl = document.createElement('div');
       cardsEl.className = 'cards';
       if (bucket.fullPaper) cardsEl.appendChild(makeFullPaperRow(bucket.fullPaper, st));
+      if (bucket.unseen) cardsEl.appendChild(makeUnseenRow(bucket.unseen, st));
+      if (bucket.review) cardsEl.appendChild(makeReviewRow(bucket.review, st));
       bucket.modules.forEach(i => cardsEl.appendChild(makeCard(i)));
       (bucket.revisitsDone || []).forEach(c => cardsEl.appendChild(makeRevisitRow(c, 'done', date)));
       bucket.revisits.forEach(c => cardsEl.appendChild(makeRevisitRow(c, st, date)));
       if (bucket.flash) cardsEl.appendChild(makeFlashRow(bucket.flash, st, date, bucket.flashSlot));
       (bucket.flashExtra || []).forEach(p => cardsEl.appendChild(makeFlashRow(p, st, date, { by: date })));
+      if (bucket.drill) cardsEl.appendChild(makeDrillRow(bucket.drill, st, date, bucket.drillBy));
+      (bucket.drillExtra || []).forEach(n => cardsEl.appendChild(makeDrillRow(n, st, date, date)));
       section.appendChild(cardsEl);
       root.appendChild(section);
     });
@@ -1507,6 +1688,42 @@ function makeFullPaperRow(flk, status) {
     '<div class="card-sub"><span style="opacity:.8">Session 1: 85 questions in 2h33m, '
       + 'break, then session 2: 85 more on the other half of the subjects. '
       + 'No answer-checking in between — the endurance is the point.</span></div>';
+  return el;
+}
+
+function makeUnseenRow(date, status) {
+  const u = UNSEEN_PAPERS[date];
+  const el = document.createElement('div');
+  el.className = 'card s-' + status;
+  el.style.cssText = 'border-left:3px solid #ef4444;background:rgba(239,68,68,.07)';
+  el.innerHTML =
+    '<div class="card-head">'+
+      '<span class="card-code" style="color:#f87171">📝 '+u.flk+'</span>'+
+      '<span class="card-title">Unseen paper: '+u.src+' ('+u.qs+' q)</span>'+
+      '<span class="card-check"></span>'+
+      '<span class="badge">Exam conditions</span>'+
+    '</div>'+
+    '<div class="card-sub"><span style="opacity:.8">'+u.how+' Nothing else today.</span>'+
+      '<a class="card-link" href="'+MOCK_TOOL+'" target="_blank" rel="noopener">↗ Mock tool</a></div>';
+  return el;
+}
+
+function makeReviewRow(paperDate, status) {
+  const u = UNSEEN_PAPERS[paperDate];
+  const el = document.createElement('div');
+  el.className = 'card s-' + status;
+  el.style.cssText = 'border-left:3px solid #ef4444;opacity:.9';
+  el.innerHTML =
+    '<div class="card-head">'+
+      '<span class="card-code" style="color:#f87171">🔍 '+u.flk+'</span>'+
+      '<span class="card-title">Review yesterday\'s '+u.src+'</span>'+
+      '<span class="card-check"></span>'+
+      '<span class="badge">Replaces the drill</span>'+
+    '</div>'+
+    '<div class="card-sub"><span style="opacity:.8">Read every explanation, right or wrong (book numbering). '
+      + 'Note which chapters the errors cluster in. The weak-spot ranking counts the session as soon as it is saved; '
+      + 'the mistakes become flashcards at the next update_site.py run.</span>'+
+      '<a class="card-link" href="'+MOCK_TOOL+'" target="_blank" rel="noopener">↗ Mock tool</a></div>';
   return el;
 }
 
