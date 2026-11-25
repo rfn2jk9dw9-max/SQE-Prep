@@ -9,7 +9,7 @@
     <array>
         <string>/bin/bash</string>
         <string>-c</string>
-        <string>cd "/Users/ghitab/Documents/Claude/Projects/Mission solicitor" &amp;&amp; /usr/bin/python3 update_site.py</string>
+        <string>"/Users/ghitab/Documents/Claude/Projects/Mission solicitor/_autoupdate.sh"</string>
     </array>
 
     <key>EnvironmentVariables</key>
