@@ -688,6 +688,18 @@ function fixFutureFlashTicks(){
 }
 fixFutureFlashTicks();
 
+// How heavy each chapter is to revise: 1 light, 2 medium (default), 3 heavy.
+// Only the chapters still in the first pass (Nov 2026) are rated; used so two
+// heavy chapters never land on the same day.
+const CHAPTER_WEIGHT = {
+  'SYS11.5':1, 'SERV10.5':1, 'PROP12.13':1, 'PROP12.14':1, 'CRMP9.11':1, 'SYS11.8':1, 'CRMP9.12':1,
+  'CRMP9.9':2, 'BUS7.14':2, 'PROP12.11':2, 'DISP8.14':2, 'SYS11.6':2, 'DISP8.15':2, 'DISP8.16':2,
+  'SYS11.7':2, 'DISP8.17':2, 'BUS7.19':2, 'WILL13.10':2,
+  'PROP12.12':3, 'WILL13.8':3, 'BUS7.15':3, 'CRMP9.10':3, 'BUS7.16':3, 'WILL13.9':3, 'BUS7.17':3,
+  'BUS7.18':3, 'PROP12.15':3, 'BUS7.20':3,
+};
+const chapterWeight = c => CHAPTER_WEIGHT[c] || 2;
+
 // ── Core: build spread schedule ────────────────────────────────────────────
 // Returns {code: revDate | null}
 function buildSchedule(doneSet) {
@@ -761,8 +773,19 @@ function buildSchedule(doneSet) {
     }
     const toAssign = Math.min(perDay, queue.length);
 
+    // Two chapters on one day: pair a heavy one with a light one (combined
+    // weight at most 4), taking the earliest chapter that fits; if none does,
+    // the lightest one waiting.
+    let load = 0;
     for(let i = 0; i < toAssign; i++) {
-      assignment[queue.shift().code] = day;
+      let k = 0;
+      if (i > 0) {
+        k = queue.findIndex(q => load + chapterWeight(q.code) <= 4);
+        if (k < 0) k = queue.reduce((b, q, j) => chapterWeight(q.code) < chapterWeight(queue[b].code) ? j : b, 0);
+      }
+      const m = queue.splice(k, 1)[0];
+      load += chapterWeight(m.code);
+      assignment[m.code] = day;
     }
   }
 
