@@ -1319,30 +1319,54 @@ function makeFlashRow(prefix, status, date, slot) {
 // set is starved. Ticking records the set as done TODAY under a DRILL<n>.0
 // pseudo-revisit (colp_progress.php only accepts chapter-shaped codes); like
 // FLASH codes these are split out of revisitLog and never count as revisits.
-// Each set is a fixed draw of 20 questions: the second time a set comes up,
-// use Duplicate on it in Law Drills to get a fresh draw on the same topics.
+// Each set is a fixed draw of 20 questions, and Duplicate in Law Drills only
+// reshuffles the same 20. So every set has fresh draws built in advance on the
+// same topics (draws[], made 25 Nov 2026): the k-th sitting of a set opens
+// draw k, counting ticked sittings plus earlier scheduled ones. Enough draws
+// were made for the schedule as it stood on 25 Nov, plus one spare per set.
 // Nothing runs between the papers (14-18 Jan): that window is for rest.
 const DRILL_APP = 'https://app.practice.works/practice/set/';
 const DRILL_SETS = [
   { n:1, subj:['CRML'], paper:'FLK2', id:'9d9afbee-74a3-44ff-8f1c-13286f4bff39',
+    draws:['63f45c23-2002-4e11-bd52-ba552486295b', '0b277b35-9631-4e0f-8909-d26498a46d61', '4a8370f9-1e8f-45a5-acba-204e6459e78d', 'f91770b0-8a67-464b-8e2c-7cc2bc5e38bd', '3c45ba11-c969-4404-9228-031705701df1', '48b4aa90-84d6-4c62-9b15-73635a7e46f2', 'ab51f2c7-2ac6-4501-8924-e7ae5e337320'],
     title:'Crim liability: homicide, OAPs, defences',
     focus:'mens rea thresholds, loss of control triggers, UAM causation' },
   { n:2, subj:['CRML'], paper:'FLK2', id:'8d2b731b-a235-42c6-8b9b-48ee8515b734',
+    draws:['9d2e35ff-0a08-4268-99ba-de1479c99e64', '525c17af-f3af-4218-870b-95befb755817', '5c1393e4-91ad-456c-96e3-42a01e880dac', 'e0213026-851a-4e43-a34d-0b1b00e26e5e', 'cf934aed-65c9-4ca1-b767-0c6f62905fe8', '5c34b6be-577c-401f-b6a2-252b0dcd6fca', '4142dd7d-ce5e-49b5-96fc-287af24fb06b'],
     title:'Crim liability: theft, fraud, parties',
     focus:'s 9(1)(a) vs (b), s 10 timing, robbery force "in order to steal"' },
   { n:3, subj:['CONT'], paper:'FLK1', id:'8c1d3bda-7fad-4113-8de1-ae5e0cf21a82',
+    draws:['c003ca3c-a2a1-430d-9460-381704282b58', '4234e5ba-183b-4225-ad4a-71767ed6bbfa', '312da272-f418-4022-9732-72fbe65ed29b'],
     title:'Contract: terms, breach, remedies, acceptance',
     focus:'class of term first, then what is payable; postal rule' },
   { n:4, subj:['SERV'], paper:'FLK1', id:'49cc009a-cb51-4ac4-b67f-7cbbf4179dd5',
+    draws:['5e1b3c1e-18fa-45c3-af6d-50d76c1a04f4', 'dec913c6-e742-4292-a933-35395d355da8', '1023a7ea-e695-41de-8949-716c835374fb', '573f7391-9e45-4932-b252-b6336a995994'],
     title:'Legal services', focus:'whole subject' },
   { n:5, subj:['DISP','SYS'], paper:'FLK1', id:'8fcbaca1-1fd8-4760-a690-1961f9e53e4b',
+    draws:['99339eff-19c1-4da1-9fb9-b73bccea7d98', 'e30c99c1-5211-4e7b-8340-8c39e199473b', 'ba8ded46-9536-4e02-a5b1-44b985a699d4'],
     title:'DR jurisdiction & limitation + legal system',
     focus:'Rome I, where to issue, limitation start dates, court hierarchy' },
   { n:6, subj:['CRMP'], paper:'FLK2', id:'a3f624bf-486b-4e8a-ae0a-0521dde8a665',
+    draws:['9787d9bd-86a8-4711-912b-5a7f908a9767', '8e947636-0cbb-4a7c-9b86-1ebc751acf6d', 'f02a9037-a917-44fe-a813-e0bfa7267ea1', 'feebf40f-aa96-475a-9885-afc97d8ae9cb'],
     title:'Criminal law & practice (25 q)', focus:'whole subject' },
 ];
 const DRILL_QS = { 6: 25 };
 const drillCode = n => 'DRILL' + n + '.0';
+let lastDrillDays = {};
+// Which draw a sitting uses: 0 = the original set, k = draws[k-1].
+function drillSitting(n, date, doneBy) {
+  const arr = (flashLog[drillCode(n)] || []).slice().sort();
+  if (doneBy) return Math.max(0, arr.indexOf(doneBy));
+  const T = todayYMD();
+  const before = arr.filter(d => d < date).length;
+  const sched = Object.entries(lastDrillDays).filter(([d, m]) =>
+    m === n && d >= T && d < date && !arr.includes(d)).length;
+  return before + sched;
+}
+function drillSetId(s, k) {
+  const all = [s.id].concat(s.draws || []);
+  return k < all.length ? all[k] : null;
+}
 
 function buildDrillDays() {
   const T = todayYMD(), dayMs = 864e5;
@@ -1407,7 +1431,9 @@ function makeDrillRow(n, status, date, doneBy) {
   const s = DRILL_SETS.find(x => x.n === n);
   const ticked = !!doneBy;
   const qs = DRILL_QS[n] || 20;
-  const sat = drillTimes(n) - (ticked ? 1 : 0);
+  const k = drillSitting(n, date, doneBy);
+  const setId = drillSetId(s, k);
+  const nDraws = 1 + (s.draws || []).length;
   const el = document.createElement('div');
   el.className = 'card s-' + (ticked ? 'done' : status);
   el.style.cssText = 'cursor:pointer;opacity:.9;border-left:3px solid #14b8a6;background:rgba(20,184,166,.06)';
@@ -1426,10 +1452,12 @@ function makeDrillRow(n, status, date, doneBy) {
       '<span style="opacity:.75">'+
         (ticked
           ? 'Done' + (doneBy !== date ? ' early, on ' + fmtShort(doneBy) : '') + ' · tap to undo'
-          : 'Timed set, exam pace · watch: ' + s.focus +
-            (sat > 0 ? ' · sat ' + sat + '× already: Duplicate it in Law Drills for a fresh draw' : ''))+
+          : 'Timed set, exam pace · watch: ' + s.focus + ' · draw ' + (k + 1) + ' of ' + nDraws +
+            (setId ? '' : ' · prepared draws used up: build a new set on the same topics'))+
       '</span>'+
-      '<a class="card-link" href="'+DRILL_APP+s.id+'" target="_blank" rel="noopener">↗ Open set</a>'+
+      (setId
+        ? '<a class="card-link" href="'+DRILL_APP+setId+'" target="_blank" rel="noopener">↗ Open set</a>'
+        : '<a class="card-link" href="https://app.practice.works/practice/config?brand=lawdrills" target="_blank" rel="noopener">↗ New set</a>')+
     '</div>';
   return el;
 }
@@ -1610,6 +1638,7 @@ function render() {
     // Law Drills: the timed MCQ set on each free day up to FLK1.
     if (['all','today','upcoming'].includes(activeFilter)) {
       const drillDays = buildDrillDays();
+      lastDrillDays = drillDays;
       Object.entries(drillDays).forEach(([date, n]) => {
         if (activeFilter === 'today' && date !== TODAY) return;
         bucketFor(date).drill = n;

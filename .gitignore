@@ -17,3 +17,6 @@ progress.json
 questions.json
 autoupdate.log
 update_log.txt
+
+# Law Drills draw IDs, working record (25 Nov 2026)
+_drill_draws.txt
