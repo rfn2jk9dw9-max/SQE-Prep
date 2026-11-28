@@ -1,0 +1,226 @@
+{
+ "_about": "Wrong and unanswered questions from Law Drills (Practice Works) sets, captured by the SQE1 daily update check scheduled task with lawdrills_scrape.js. Read by extract_mistakes.load_lawdrills_wrong_answers and turned into mistake flashcards on the next update_site.py run. One entry per set, keyed by set id; a set already present is never re-captured.",
+ "sets": {
+  "9d9afbee-74a3-44ff-8f1c-13286f4bff39": {
+   "title": "WEAK 1 · Crim Liability · homicide, OAPs, defences",
+   "score": "70% 14/20",
+   "captured": "2026-11-27",
+   "mistakes": [
+    {
+     "q": 18,
+     "status": "wrong",
+     "subject": "CRIMINAL LIABILITY",
+     "stem": "In a crowded pub, a person walks over to a man seated at a table and deliberately throws the contents of a pint glass into his face. The glass slips from the person’s hand and shatters as it makes contact. Two cuts to the man’s wrist require several stitches. The person states that they intended only to throw the beer and did not realise or foresee that the glass would hit or cut the man. There is no evidence of any intention to cause injury. Which of the following statements best describes the most appropriate offence disclosed by these facts?",
+     "picked": "On these facts, either s.47 or s.20 may properly be charged at the prosecutor’s election because both are made out.",
+     "correct": "On these facts, the offence most appropriately charged is unlawful wounding contrary to s.20 OAPA 1861.",
+     "why": "The cuts amount to a wound, satisfying s.20’s actus reus, and “maliciously” requires only intention or subjective recklessness as to some physical harm (Cunningham; Mowatt). Deliberately throwing beer/glass into a face suffices even though injury was not intended or the wound foreseen.",
+     "picked_feedback": "Although both offences are technically made out, the presence of a wound makes s.20 unlawful wounding the more precise and appropriate charge; s.47 is a lesser offence typically used where harm does not amount to a wound."
+    },
+    {
+     "q": 3,
+     "status": "wrong",
+     "subject": "CRIMINAL LIABILITY",
+     "stem": "A crowded nightclub has a mezzanine level with a metal staircase leading down to the main floor. Shortly after midnight, a man who has been drinking with friends for several hours stands on the landing near the top of the stairs during a heated argument with another man. Staff have not intervened before any blows are struck. During the exchange, the first man steps forward and swings a single punch to the second man’s face. The second man reels backwards, loses balance, and falls down most of the staircase. His head strikes the edge of a step and he is found unresponsive at the bottom of the stairs. Medical staff later record a skull fracture and intracranial bleeding. He dies the following afternoon in hospital. CCTV shows one deliberate swing and no further contact. No weapon is used. Witnesses describe slurred speech and the smell of alcohol from the first man. Security staff arrive within seconds and detain him in the foyer until police attend. Which of the following statements best describes whether unlawful act manslaughter is made out on these facts?",
+     "picked": "On these facts, unlawful act manslaughter is not made out because a single punch, unless exceptionally forceful, ordinarily risks only minor harm, making the subsequent fatal fall too remote.",
+     "correct": "On these facts, unlawful act manslaughter is made out because a deliberate punch was a battery, the setting by the staircase made it objectively dangerous, and it caused death.",
+     "why": "A deliberate punch is a battery. In the context of a metal staircase, the act carries an objective risk of some physical harm, and it caused the fatal head injury. No further intent is required.",
+     "picked_feedback": "A forceful punch near a staircase poses an obvious risk of some physical harm beyond minor injury. The fall and head injury followed directly from the punch, so causation is not too remote, regardless of the 'ordinary' risk of a single punch."
+    },
+    {
+     "q": 20,
+     "status": "unanswered",
+     "subject": "CRIMINAL LIABILITY",
+     "stem": "Inside a crowded bar during a weekend event, a person picked up a heavy glass tumbler and threw it across a busy area. The tumbler struck another patron on the head. The patron collapsed and later died from a catastrophic skull fracture. Witnesses described the throw as forceful and directed towards the crowd. The thrower stated in interview that the aim was to frighten people rather than to injure anyone. Which of the following best explains the thrower’s liability for unlawful act manslaughter on these facts?",
+     "picked": "",
+     "correct": "On these facts, the defendant is liable for unlawful act manslaughter because the intentional battery was an unlawful and objectively dangerous act causing death.",
+     "why": "Throwing a heavy glass into a crowded bar constitutes battery, is objectively dangerous under R v Church, and caused death; motive to frighten is irrelevant where the unlawful act with its mens rea and causation are present.",
+     "picked_feedback": ""
+    },
+    {
+     "q": 19,
+     "status": "unanswered",
+     "subject": "CRIMINAL LIABILITY",
+     "stem": "After drinking heavily at a bar for four hours, a man walked home with two friends. A passer‑by briefly argued with the group about loud singing. The man believed the passer‑by reached towards a pocket to draw a knife. CCTV later showed the passer‑by was unarmed and had reached for a phone. The man, unsteady and smelling strongly of alcohol, picked up a half‑full glass bottle from a nearby bin and struck the passer‑by once to the face, fracturing his jaw. He told police he honestly believed an attack was imminent. He had no injuries. There was no entry into any dwelling. Which of the following best states whether self‑defence is available on these facts?",
+     "picked": "",
+     "correct": "Self‑defence is not available because the man’s mistaken belief in the need for force was induced by voluntary intoxication.",
+     "why": "Section 76(5) CJIA 2008 bars reliance on a mistaken belief in the need for force where that mistake is attributable to voluntary intoxication; the facts show heavy drinking and a mistaken perception, so the defence fails.",
+     "picked_feedback": ""
+    },
+    {
+     "q": 4,
+     "status": "wrong",
+     "subject": "CRIMINAL LIABILITY",
+     "stem": "A person lived with a partner. One evening an argument escalated when the partner said they had been seeing someone else and made insulting remarks. Earlier in the argument, the partner took a kitchen knife, pointed it at the person, and told the person to get out. No injury occurred. The person left the flat, drove around for about three hours, returned, went into the garage, took a hammer and re‑entered the flat. The person struck the partner several times with the hammer. The person had drunk several beers earlier that evening. The person has a diagnosed depressive disorder and had stopped taking prescribed medication two weeks before. The person called emergency services afterwards. Police recovered the hammer from the kitchen floor. Which of the following best states whether the partial defence of loss of control is available on a charge of murder?",
+     "picked": "The partial defence of loss of control is available because the earlier knife threat qualifies as fear of serious violence and suddenness is not required despite the three‑hour interval.",
+     "correct": "The partial defence of loss of control is unavailable because sexual infidelity must be disregarded and the killing shows a considered desire for revenge after leaving for hours and returning armed.",
+     "why": "Under s.54(4) Coroners and Justice Act 2009, acting from a considered desire for revenge bars loss of control; the three‑hour hiatus and arming with a hammer strongly indicate revenge. Sexual infidelity is disregarded as a standalone trigger (s.55(6)(c); R v Clinton).",
+     "picked_feedback": "Although a knife threat can be a qualifying trigger (s.55(3)) and suddenness is not required (s.54(2)), the defence is defeated by the statutory bar where the killing was done in a considered desire for revenge (s.54(4)), which these facts strongly suggest."
+    },
+    {
+     "q": 12,
+     "status": "wrong",
+     "subject": "CRIMINAL LIABILITY",
+     "stem": "A person discovers a partner’s ongoing affair. Later that evening at home, the partner mocks the person about the affair, makes a humiliating remark, and slaps the person during a heated argument. The partner also says, “If you try to leave, I’ll seriously hurt you.” Within an hour, still at home, the person takes a kitchen knife from a drawer and fatally stabs the partner in the living room. There is no further contact with anyone else between the argument and the stabbing. Which statement best describes the availability of the partial defence of loss of control?",
+     "picked": "The partial defence is potentially available, but only if the defendant proves it on the balance of probabilities.",
+     "correct": "The partial defence can apply: fear of serious violence or extremely grave words or conduct may qualify. Suddenness not required. Sexual infidelity disregarded.",
+     "why": "It correctly reflects ss.54–55 CJA 2009: suddenness is not required; fear of serious violence (s.55(3)) and extremely grave things said or done (s.55(4)) may qualify; sexual infidelity must be disregarded as a trigger (s.55(6)(c), R v Clinton).",
+     "picked_feedback": "The defendant bears only an evidential burden (s.54(5)); once raised, the prosecution must disprove loss of control beyond reasonable doubt (s.54(6); Woolmington v DPP)."
+    }
+   ]
+  },
+  "8d2b731b-a235-42c6-8b9b-48ee8515b734": {
+   "title": "WEAK 2 · Crim Liability · theft, fraud, parties",
+   "score": "85% 17/20",
+   "captured": "2026-11-27",
+   "mistakes": [
+    {
+     "q": 6,
+     "status": "wrong",
+     "subject": "CRIMINAL LIABILITY",
+     "stem": "After closing time, a person forced a rear service door of a shop and stepped into the stockroom. Staff had locked the premises earlier. The person had a realistic imitation firearm tucked into a waistband. The person intended to take cash from the till. An alarm activated immediately, and the person left without taking anything. The person remained inside for less than a minute. Which of the following best describes the correct classification of the offence under the Theft Act 1968?",
+     "picked": "On these facts, the correct classification is attempted burglary because he left without taking property, so the entry with intent does not constitute a completed burglary.",
+     "correct": "On these facts, the correct classification is aggravated burglary under section 10 because he committed burglary and at the time had with him an imitation firearm.",
+     "why": "Entry as a trespasser with intent to steal completes burglary under s.9(1)(a), and possession of an imitation firearm “with him” at that time elevates it to aggravated burglary under s.10; display or use is unnecessary.",
+     "picked_feedback": "Entry as a trespasser with intent to steal constitutes a completed burglary under s.9(1)(a); the lack of completed theft does not convert it to an attempt. Possession of the imitation firearm at that time makes it aggravated burglary."
+    },
+    {
+     "q": 12,
+     "status": "wrong",
+     "subject": "CRIMINAL LIABILITY",
+     "stem": "After closing, a person enters a café through the rear door knowing he has no permission. He carries a screwdriver used earlier to lever a window and keeps it in his pocket. On entry, he intends only to sleep in the storeroom. Inside, before changing his mind and taking cash from the till, he lifts a metal cosh from a shelf and tucks it into his belt, intending to use it to disable anyone who might intervene. He then steals the cash and leaves by the rear door, still carrying the screwdriver and the cosh. Which of the following best states the correct liability under the Theft Act 1968?",
+     "picked": "On these facts, the correct liability is s.9(1)(b) burglary without aggravation because the screwdriver was merely a tool.",
+     "correct": "On these facts, the correct liability is s.9(1)(b) burglary plus s.10 aggravated burglary: he had the cosh when stealing, intending to incapacitate.",
+     "why": "He committed s.9(1)(b) burglary by stealing after trespassory entry, and at the time of the theft had a cosh intended to disable, making it a ‘weapon of offence’ under s.10; aggravated burglary is therefore made out (R v O’Leary).",
+     "picked_feedback": "He had the cosh with him during the theft and intended to use it to disable anyone who intervened, making it a weapon of offence under s.10. The screwdriver’s status does not prevent liability for aggravated burglary."
+    },
+    {
+     "q": 20,
+     "status": "wrong",
+     "subject": "CRIMINAL LIABILITY",
+     "stem": "A man entered a large supermarket during opening hours and walked through the aisles. He selected several high‑value electronic items, removed the packaging from some, and placed these items inside his coat and backpack. He approached the exit door at a brisk pace and was stopped by security staff before he left the store. The concealed items were recovered from his possession during a search on site. Which of the following statements best describes the legal position regarding the man's criminal liability for attempted theft?",
+     "picked": "The man can be liable for attempted theft because he concealed the goods with intent to permanently deprive.",
+     "correct": "The man can be liable for attempted theft as his actions went beyond mere preparation.",
+     "why": "It correctly invokes the s.1 Criminal Attempts Act 1981 test that the defendant must do an act 'more than merely preparatory' to committing the offence. Concealing goods, removing packaging and moving to the exit are factual steps that courts have treated as passing that threshold.",
+     "picked_feedback": "Concealment combined with intent to permanently deprive is relevant to mens rea, but concealment alone may still be merely preparatory; the prosecution must show the conduct passed the 'more than merely preparatory' threshold for attempt."
+    }
+   ]
+  },
+  "a3f624bf-486b-4e8a-ae0a-0521dde8a665": {
+   "title": "Criminal law & practice",
+   "score": "56% 14/25",
+   "captured": "2026-11-27",
+   "mistakes": [
+    {
+     "q": 16,
+     "status": "wrong",
+     "subject": "CRIMINAL LIABILITY",
+     "stem": "After an argument in a crowded bar, a man threw a heavy glass at another person’s head from about two metres. The glass struck the face and shattered. The complainant sustained two deep lacerations over the eyebrow and cheek, with profuse bleeding, and a fractured nose. Hospital records note the cuts penetrated the full thickness of the skin and required twelve stitches. Photographs capture multiple shards embedded around the wounds. In interview, the man (the suspect) said he wanted to “scare” the complainant and accepted that “someone might get cut” when throwing the glass. Which of the following statements best describes the most appropriate charge under the Offences Against the Person Act 1861 on these facts?",
+     "picked": "The most appropriate charge is s.18, because using a glass as a weapon and the seriousness of the injuries demonstrate an intent to cause grievous bodily harm.",
+     "correct": "The most appropriate charge is s.20 (wounding), as the lacerations broke the whole skin and he was at least reckless as to causing some harm.",
+     "why": "A wound is a break in the whole skin (JJC v Eisenhower), which the deep lacerations satisfy. For s.20, intention or subjective recklessness as to some harm suffices (R v Mowatt; Savage/Parmenter), and he foresaw cuts.",
+     "picked_feedback": "Section 18 requires specific intent to cause GBH, which may be found on an oblique-intent basis where GBH was virtually certain, barring unforeseen intervention, and the defendant appreciated that virtual certainty. His stated aim was to scare and he only foresaw cuts, making s.18 intent doubtful; s.20 is the highest provable offence."
+    },
+    {
+     "q": 18,
+     "status": "wrong",
+     "subject": "CRIMINAL LIABILITY",
+     "stem": "A person enters a retail shop during opening hours and browses among customers. A door behind the service counter is marked “Staff only”. The person opens that door, goes into the stockroom and lifts a sealed parcel from a shelf. A member of staff challenges the person inside the stockroom. The person drops the parcel and then shoves the staff member with both hands. The staff member falls against racking and sustains a displaced fracture of the wrist that requires surgery. The person runs back through the door to the public area. Security detains the person on the shop floor until police arrive. No weapon is seen or recovered. The stockroom is not accessible to the public. The parcel remains in the shop. CCTV shows the shove occurring inside the stockroom while the staff member is standing between the person and the exit. Which of the following statements best identifies the most appropriate statutory offence made out on these facts?",
+     "picked": "The most appropriate charge is burglary under s9(1)(a), on the basis that he entered as a trespasser intending to steal or cause GBH.",
+     "correct": "The most appropriate charge is burglary contrary to s9(1)(b) Theft Act 1968, for inflicting grievous bodily harm after entering the staff-only stockroom as a trespasser.",
+     "why": "He entered a part of a building as a trespasser and, having entered, inflicted GBH (a displaced wrist fracture needing surgery, which is really serious harm) on a person therein, which satisfies s9(1)(b). It captures both trespass and serious violence.",
+     "picked_feedback": "While intent to steal at entry supports s9(1)(a), the facts show GBH was actually inflicted after entry. The more accurate and complete charge is s9(1)(b), which captures the serious harm committed inside."
+    },
+    {
+     "q": 6,
+     "status": "wrong",
+     "subject": "CRIMINAL LIABILITY",
+     "stem": "A man and his neighbour had a dispute about their property boundaries. One evening the man used petrol to ignite a pile of rubbish next to the neighbour's garden shed. The fire spread, damaging the wooden fence between the properties and the external wall of the neighbour's house before firefighters extinguished it. The shed was charred but remained structurally sound. The neighbour and her family were inside their home at the time but were unaware of the fire until emergency services arrived. Forensic examination concluded that using petrol near an occupied property increased the risk to people inside. Neighbours heard glass breaking and saw flames behind the shed. Police photographed the damage. Which of the following best describes the elements required for the man to be liable for aggravated arson under s.1(2) Criminal Damage Act 1971?",
+     "picked": "There must be criminal damage caused by fire, with intent to endanger life (recklessness is insufficient)",
+     "correct": "There must be fire causing damage, and the defendant must intend or be reckless as to whether life is endangered",
+     "why": "Aggravated arson under s.1(2) requires property to be destroyed or damaged by fire and the defendant to have intended or been reckless as to whether life would be endangered by that act; actual endangerment or injury to a person is not required.",
+     "picked_feedback": "This is too narrow: the statute and case law treat recklessness as to endangering life as an alternate mens rea sufficient for aggravated arson, so intent alone is not the sole route to liability."
+    },
+    {
+     "q": 8,
+     "status": "wrong",
+     "subject": "CRIMINAL LIABILITY",
+     "stem": "A cashier employed by a supermarket processes eight refunds over three weeks to her own debit card using her supervisor’s login after he left the till. The refunds relate to items that were not returned. Internal audit finds no corresponding sales and reviews CCTV showing the cashier alone at the terminal. When questioned under caution, she states that a manager previously promised an unpaid bonus for covering additional shifts, which she believed she was still owed. She accepts that the refund process is not the approved way to obtain any payment and that she concealed the transactions to avoid queries. The store’s accounting system reversed the refunds later and no overall loss remains. Which of the following best states whether the element of dishonesty is satisfied?",
+     "picked": "Dishonesty is established because the older Ghosh test’s subjective limb is satisfied: she appreciated her conduct was dishonest when concealing it.",
+     "correct": "Dishonesty is established: determine her actual belief about being owed money, then judge by ordinary decent people’s standards; secret self-refunds using another’s login would be dishonest.",
+     "why": "Under Ivey v Genting Casinos, the tribunal first finds her actual belief (that she was owed a bonus) and then applies the objective standards of ordinary decent people; secretly self-refunding using a supervisor’s login and concealing it would plainly be dishonest.",
+     "picked_feedback": "The Ghosh subjective limb is no longer law; the correct test is Ivey’s objective standard after finding the defendant’s actual belief about the facts. Concealment supports dishonesty but the reasoning must follow Ivey."
+    },
+    {
+     "q": 24,
+     "status": "wrong",
+     "subject": "CRIMINAL LIABILITY",
+     "stem": "A woman attended a crowded house party and voluntarily consumed several alcoholic drinks over the evening. Later, an altercation occurred between the woman and a male guest in the living room. Witnesses observed the man raise his hands while speaking to the woman in a loud, confrontational manner, but did not see him move towards her. The woman suddenly struck the man in the face with a heavy glass, causing him to sustain a broken nose and require hospital treatment. The woman told police that she feared for her safety after seeing the man's sudden hand movements and said her reaction was a mistake. She displayed slurred speech when interviewed by police. After the incident, the woman left the premises once emergency services arrived. Which of the following statements best describes the woman's potential liability or defence regarding the man's injury?",
+     "picked": "Intoxication is unlikely to provide a defence given the facts",
+     "correct": "A mistaken belief due to voluntary intoxication cannot found a defence of self-defence",
+     "why": "Under English law (see s.76 Criminal Justice and Immigration Act 2008; R v O'Grady; R v Hatton), a mistaken belief arising from voluntary intoxication cannot provide the basis for self-defence; the woman's intoxication means her mistaken belief would be excluded.",
+     "picked_feedback": "While broadly true that voluntary intoxication rarely assists for basic intent offences, this option is vague and fails to identify the specific legal rule that intoxication-induced mistakes cannot found self-defence."
+    },
+    {
+     "q": 13,
+     "status": "wrong",
+     "subject": "CRIMINAL LAW AND PRACTICE",
+     "stem": "A detainee is arrested on suspicion of an indictable burglary. On arrival at a police station, the detainee asks to consult a solicitor. An officer of superintendent rank records reasons and authorises delaying access to the nominated solicitor. The officer has reasonable grounds to believe that the solicitor would, inadvertently or otherwise, pass on a message alerting an unarrested suspect and hindering recovery of stolen property. The detainee has not been charged. The custody record notes the authorisation, the grounds, and the time. Ninety minutes later, officers administer the caution and begin an interview without a solicitor. The nominated solicitor has not yet been contacted. The detainee is told that another solicitor may be chosen but does not choose one, and the duty solicitor has not been offered. Access to legal advice is arranged after the interview. Which of the following best describes whether the police could lawfully interview before the detainee received legal advice?",
+     "picked": "On these facts, interviewing before legal advice was unlawful because officers had to offer the duty solicitor before any interview and could not begin until the offer was declined, even if delay was authorised.",
+     "correct": "On these facts, interviewing before legal advice was lawful because a superintendent authorised delay under Annex B with reasonable grounds relating to an indictable offence before charge and recorded the reasons.",
+     "why": "For indictable offences, a superintendent may authorise delay of legal advice under Annex B on grounds such as alerting suspects or hindering recovery of property; once recorded, Code C 6.6(a) allows interview during the delay. Because the delay concerns a specific solicitor, Annex B para 3 also requires reasonable grounds about that solicitor and that the detainee be allowed to choose another, and both are met here.",
+     "picked_feedback": "Where a superintendent has lawfully delayed access under Annex B, there is no requirement to offer the duty solicitor before interview; Code C 6.6(a) permits interviewing during the authorised delay. Annex B requires only that the detainee be allowed to choose another solicitor, which happened here."
+    },
+    {
+     "q": 23,
+     "status": "wrong",
+     "subject": "CRIMINAL LAW AND PRACTICE",
+     "stem": "A 16-year-old is arrested on suspicion of robbery after officers note dried blood on the sleeve of his jacket. At the police station he asks to consult a solicitor; the custody record logs his request. An appropriate adult attends the station. After about an hour, officers begin an interview without any consultation with a solicitor, citing operational reasons. Following the caution, an officer gives a special warning referring to the blood and asks him to account for it. The youth remains silent throughout the interview; the appropriate adult is present. He is later charged. In a defence case statement served weeks later, the youth states that the blood on the jacket came from his own nosebleed earlier that evening. Which of the following best states whether adverse inferences may be drawn from the youth's silence?",
+     "picked": "The court may draw adverse inferences under section 36 because a special warning was given about the blood, even though no legal advice was allowed.",
+     "correct": "The court may not draw adverse inferences under sections 34 or 36 because he was questioned in detention without an opportunity to consult a solicitor.",
+     "why": "CJPOA 1994 ss.34(2A) and 36(4A), inserted by YJCEA 1999 s.58, bar adverse inferences where a detainee requested legal advice but was not allowed an opportunity to consult a solicitor before questioning. The youth asked for a solicitor and was interviewed in detention without advice, so no inference may be drawn.",
+     "picked_feedback": "A special warning cannot override the statutory bar. CJPOA 1994 s.36(4A) forbids adverse inferences where the detainee asked for legal advice but was not allowed to consult a solicitor before the request/warning."
+    },
+    {
+     "q": 1,
+     "status": "wrong",
+     "subject": "CRIMINAL LAW AND PRACTICE",
+     "stem": "An adult is charged with an either‑way domestic burglary alleged to have occurred late at night at a terraced house. He was arrested the same evening and brought before the magistrates’ court the next morning. He has a fixed address with a partner and full‑time employment. He has one failure to surrender to the magistrates’ court six months earlier in unrelated summary proceedings; no reasonable cause was recorded. The complainant lives three streets from the defendant’s address. The prosecution objects to bail citing risk of failing to surrender and risk of interference with the complainant. The defence proposes conditions: residence at his current address, nightly curfew with electronic monitoring, reporting to a police station three times a week, non‑contact with the complainant, and an exclusion zone covering the complainant’s street. No application for a remand in custody has previously been made in this case. Which of the following statements best describes the proper approach to bail at this first hearing?",
+     "picked": "The court should grant conditional bail if satisfied the proposed conditions (residence, curfew with monitoring, reporting, non-contact and exclusion) can manage the risks.",
+     "correct": "The court should grant bail with broadly tailored conditions if necessary to address the identified risks, considering the fundamental general right to bail under s.4.",
+     "why": "The court starts with the general right to bail (Bail Act 1976, s.4) and, if Schedule 1 risks are identified, should prefer necessary and proportionate conditions to manage them before considering custody (s.3(6), Sch 1 Pt I).",
+     "picked_feedback": "While conditional bail may be appropriate, the proper approach is broader than endorsing the defence’s specific package; the court must start from s.4 and consider whether any necessary, proportionate conditions would manage the risks."
+    },
+    {
+     "q": 17,
+     "status": "wrong",
+     "subject": "CRIMINAL LAW AND PRACTICE",
+     "stem": "A defendant faces a summary assault charge. At the first hearing, the magistrates set case management directions requiring the prosecution to serve CCTV and witness statements within 14 days and the defence to confirm witness availability and any expert within 10 days. The trial was fixed for four weeks from the hearing. After 14 days, the prosecution has not served the CCTV or two statements and cites workload and delayed retrieval from the venue. The defence has provided no witness availability and says it is awaiting confirmation from one witness. Seven days before trial, the prosecutor seeks a 21‑day extension and proposes keeping the trial date under review. The defence applies to adjourn the trial and opposes sanctions. The court file records no prior sanctions for non‑compliance. The CCTV is said to be available within a week if directions are prioritised. Which of the following best describes appropriate case management directions under CrimPR Part 3 on these facts?",
+     "picked": "The court should make an unless order immediately striking out the case if the prosecution does not serve within 24 hours.",
+     "correct": "The court should order both parties to comply within 7–10 days, specify tasks precisely, and indicate possible exclusion or other sanctions if deadlines are missed.",
+     "why": "It addresses both parties’ defaults with precise reciprocal tasks, sets tight realistic deadlines aligned to the CCTV’s availability, and warns of proportionate sanctions for breach (CrimPR rr.3.2, 3.5, 3.11; CPD V.5.4).",
+     "picked_feedback": "A 24‑hour unless order threatening strike‑out is disproportionate without prior warnings or persistent non‑compliance, and the material is said to be obtainable within a week. Sanctions must be proportionate (CrimPR r.3.11)."
+    },
+    {
+     "q": 3,
+     "status": "wrong",
+     "subject": "CRIMINAL LAW AND PRACTICE",
+     "stem": "A robbery occurred at a local convenience shop. The witness gave police a description of the suspect at the scene. The witness did not previously know the man. Two days later, police arrested the man, who fit that description. The witness was shown the man sitting in a police car outside the station and indicated recognition as the robber. The man has a mild learning disability. Police did not arrange any formal identification procedure such as a video identification. At the police station, the man asked for a solicitor, but he was interviewed about his activities that night before legal representation arrived. The interview was recorded. The man was charged with robbery. Which of the following best describes the legal position regarding the admissibility of the identification evidence against the man?",
+     "picked": "The identification evidence may be challenged due to failure to follow formal identification procedures required by Code D, especially given the man’s vulnerability.",
+     "correct": "The street identification is potentially admissible but remains open to exclusion depending on how the court views the police actions.",
+     "why": "Identification evidence obtained in breach of Code D is not automatically inadmissible, but a court can exclude it if admitting the evidence would adversely affect the fairness of proceedings, considering the police's actions.",
+     "picked_feedback": "This option correctly describes that a challenge can be made due to procedural failings and the man's vulnerability, but it does not clarify that such a challenge may or may not result in exclusion of the evidence; ultimate admissibility is for the court."
+    },
+    {
+     "q": 7,
+     "status": "wrong",
+     "subject": "CRIMINAL LAW AND PRACTICE",
+     "stem": "During a trial at the Crown Court, a prosecution witness is called to give evidence in examination-in-chief about events witnessed during an alleged assault in a nightclub. The witness is asked by prosecuting counsel, \"Was it the defendant who hit the complainant?\" Defence objects to the form of the question. The judge invites submissions from counsel regarding the question. During cross-examination, defence counsel asks the witness, \"Isn't it true that you saw someone else strike the complainant?\" The witness is later re-examined by the prosecution, who seeks clarification over points arising from cross-examination. The trial proceeds with both counsel referring to the evidence. Which of the following states the general restriction on leading questions in examination-in-chief that is relevant to the defence objection?",
+     "picked": "The prosecution’s initial question in chief was improperly leading",
+     "correct": "Leading questions in chief are generally prohibited on disputed matters",
+     "why": "It states the general restriction governing examination-in-chief. The prosecution’s question suggests the identity of the assailant on a disputed issue, with no exception indicated. Leading questions are normally permitted during cross-examination, while re-examination should clarify matters raised on cross and generally avoids leading questions.",
+     "picked_feedback": "This gives a conclusion about the individual question rather than stating the general restriction on leading questions in examination-in-chief requested by the question."
+    }
+   ]
+  }
+ }
+}

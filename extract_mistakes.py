@@ -8,6 +8,9 @@ Pulls wrong answers from:
   3. Canvas PDFs in the Tests folder (SLK Taster tests)
   4. H5P PDFs in the Tests folder (BUS, CONT, LAND, etc. — user's wrong
      selections marked with WRONG_CHAR U+E894)
+  5. Mock exam results PDFs (Formation Solicitor/Mock exams)
+  6. Law Drills (Practice Works) sets — lawdrills_mistakes.json, written by the
+     "SQE1 daily update check" scheduled task with lawdrills_scrape.js
 
 Maps each wrong answer to a revision guide chapter and returns
 a dict of {chapter_id: [note_strings]} for injection into the HTML.
@@ -445,6 +448,7 @@ DEFAULT_FLASHCARD_COLOR = "#475569"
 _ORIGIN_LABEL = {
     "mock_exam": "Mock Exam", "mock_exam_online": "Mock Exam",
     "mock_exam_pdf": "Mock Exam", "canvas_pdf": "Session", "h5p": "Session",
+    "law_drills": "Law Drills",
 }
 
 AUTO_MISTAKES_START = "/*AUTO_MISTAKES_START*/"
@@ -736,6 +740,11 @@ def resolve_wrong_answers(wrong: list, lookup: AnswerLookup) -> list:
     current key, the pick she made IS the correct answer."""
     out, fixed, dropped = [], 0, 0
     for w in wrong:
+        if w.get("origin") == "law_drills":
+            # Law Drills questions are not in any local bank, and the file
+            # already carries the clean correct option and its explanation.
+            out.append(w)
+            continue
         q = lookup.match(w)
         if q is None:
             out.append(w)
@@ -1433,6 +1442,90 @@ def load_h5p_wrong_answers(tests_dir: Path, cache_file: Path = None) -> list[dic
 
 # ── Public entry point ────────────────────────────────────────────────────────
 
+# ── Law Drills (Practice Works) reader ───────────────────────────────────────
+#
+# Law Drills sits behind an emailed-code sign-in, so update_site.py cannot read
+# it. The "SQE1 daily update check" scheduled task opens each finished set in
+# Chrome, runs lawdrills_scrape.js and merges the result into
+# lawdrills_mistakes.json; this reader turns that file into wrong answers.
+# Unanswered questions (timed out) count as mistakes too.
+
+LAWDRILLS_FILE = "lawdrills_mistakes.json"
+
+# Law Drills names subjects by its own top-level topic heads (upper case).
+# Map them onto the names SUBJECT_NAME_TO_KEY knows, most specific first.
+_LAWDRILLS_SUBJECT_WORDS = [
+    ("criminal liability",            "Criminal Liability"),
+    ("criminal law and practice",     "Criminal Law and Practice"),
+    ("criminal practice",             "Criminal Law and Practice"),
+    ("legal services",                "Legal Services"),
+    ("legal system",                  "Legal System"),
+    ("constitutional",                "Legal System"),
+    ("dispute",                       "Dispute Resolution"),
+    ("contract",                      "Contract Law"),
+    ("tort",                          "Tort"),
+    ("business",                      "Business Law and Practice"),
+    ("property practice",             "Property Law and Practice"),
+    ("property law and practice",     "Property Law and Practice"),
+    ("land",                          "Land Law"),
+    ("wills",                         "Wills and Administration"),
+    ("administration of estates",     "Wills and Administration"),
+    ("trust",                         "Trusts Law"),
+    ("ethics",                        "Ethics and Professional Conduct"),
+    ("conduct",                       "Ethics and Professional Conduct"),
+    ("accounts",                      "Solicitors Accounts"),
+]
+
+
+def _lawdrills_subject(topic: str) -> str:
+    t = (topic or "").lower()
+    if subject_to_key(t):
+        return t
+    for word, name in _LAWDRILLS_SUBJECT_WORDS:
+        if word in t:
+            return name
+    return ""
+
+
+def load_lawdrills_wrong_answers(path: Path = None) -> list[dict]:
+    path = Path(path or SCRIPT_DIR / LAWDRILLS_FILE)
+    if not path.exists():
+        return []
+    try:
+        data = json.loads(path.read_text(encoding="utf-8"))
+    except Exception as e:
+        print(f"  ⚠ Could not read {path.name}: {e}")
+        return []
+    wrong, unmapped = [], 0
+    for set_id, st in (data.get("sets") or {}).items():
+        title = st.get("title", "")
+        for m in st.get("mistakes", []):
+            subject = _lawdrills_subject(m.get("subject", ""))
+            if not subject:
+                unmapped += 1
+                continue
+            why = (m.get("why") or "").strip()
+            why = re.sub(r"^This is the best option\.?\s*", "", why)
+            if m.get("picked_feedback"):
+                why = (why + " Your answer: " + m["picked_feedback"].strip()).strip()
+            picked = m.get("picked") or ""
+            if m.get("status") == "unanswered" or not picked:
+                picked = "(not answered, ran out of time)"
+            wrong.append({
+                "questionText":  m.get("stem", ""),
+                "subject":       subject,
+                "source":        f"Law Drills: {title}",
+                "userAnswer":    picked,
+                "correctAnswer": m.get("correct", ""),
+                "explanation":   why,
+                "datetime":      st.get("captured", ""),
+                "origin":        "law_drills",
+            })
+    if unmapped:
+        print(f"  ⚠ Law Drills: {unmapped} mistake(s) skipped, subject not recognised")
+    return wrong
+
+
 def _gather_all_wrong_answers(tests_dir: Path, progress_file: Path, cache_file: Path = None,
                               bank: list = None) -> list[dict]:
     print("\n[Mistakes] Loading wrong answers...")
@@ -1464,6 +1557,11 @@ def _gather_all_wrong_answers(tests_dir: Path, progress_file: Path, cache_file: 
     #    dedup in map_wrong_answers_to_flashcards keeps the first entry it sees
     #    for a question, so live session data always wins and these only fill
     #    the gaps.
+    # 5. Law Drills sets (lawdrills_mistakes.json, captured from the browser)
+    drills = load_lawdrills_wrong_answers()
+    print(f"  Law Drills: {len(drills)} wrong answers")
+    wrong.extend(drills)
+
     mock_dir = Path(tests_dir).parent / "Mock exams"
     mock = load_mock_pdf_wrong_answers(mock_dir, bank=bank)
     print(f"  Mock exam PDFs: {len(mock)} wrong answers")
